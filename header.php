@@ -7,10 +7,14 @@
  * @uri        : https://github.com/Othella/waht
  */
 ?>
-<!DOCTYPE html>
-<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 8]><html class="no-js lt-ie9" <?php language_attributes(); ?>> <![endif]-->
+<!doctype html>
+<!-- TODO Add IEMobile support -->
+<!--[if lt IE 7]>
+<html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
+<!--[if IE 7]>
+<html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>> <![endif]-->
+<!--[if IE 8]>
+<html class="no-js lt-ie9" <?php language_attributes(); ?>> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
@@ -24,5 +28,13 @@
     <meta name="dcterms.creator" content="<?php echo WAHT_AUTHOR_NAME ?>">
     <meta name="dcterms.rights" content="Copyright <?php echo WAHT_AUTHOR_NAME ?> <?php date('Y'); ?>. All rights
     reserved">
+
+    <?php wp_head(); ?>
 </head>
-<body>
+<body <?php body_class(); ?>>
+<header id="page-header">
+    <hgroup>
+        <h1><a href="<?php home_url(); ?>" title="<?php bloginfo('name')?>"><?php bloginfo('name'); ?></a></h1>
+        <h2><?php bloginfo('description'); ?></h2>
+    </hgroup>
+</header>

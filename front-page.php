@@ -1,10 +1,11 @@
 <?php
 /**
- * @description: Admin panel customization
- * @name       : inc/admin.php
+ * @description: Template for the front page
+ * @name       : front-page.php
  * @package    : waht
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-
-add_filter('admin_footer_text', 'waht_credentials');
+?>
+<?php get_header(); ?>
+<?php get_footer(); ?>

@@ -7,4 +7,7 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-require_once('./inc/options.php');
+require_once('inc/options.php'); // Theme options
+require_once('inc/utils.php'); // Utilities
+require_once('inc/admin.php'); // Admin section customization
+require_once('inc/layout.php'); // Site layout customization

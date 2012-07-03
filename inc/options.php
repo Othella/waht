@@ -8,7 +8,8 @@
  */
 
 /* Theme Author Information */
-define('WAHT_AUTHOR_NAME', 'Amélie Husson'); // Put your name here
+define('WAHT_AUTHOR_NAME', 'a.h'); // Put your name here
 define('WAHT_AUTHOR_URI', 'http://ameliehusson.com'); // Put your uri here
+define('WAHT_CREATE_YEAR', 2012); // Put the theme creation's year here
 
-define('WAHT_FRAMEWORK', 'bootstrap'); // Choose your framework // TODO Many choice
+define('WAHT_FRAMEWORK', 'bootstrap'); // Choose your framework
