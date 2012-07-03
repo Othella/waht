@@ -7,11 +7,16 @@
  * @uri        : https://github.com/Othella/waht
  */
 ?>
-<footer id="page-footer">
-    <section class="copyright">
-        <?php waht_credentials(); ?>
-    </section>
-</footer>
+    <footer id="page-footer">
+        <section class="copyright">
+            <?php waht_credentials(); ?>
+        </section>
+    </footer>
+    <!-- #page-footer -->
+
+    </div>
+    <!-- /#page-container -->
+
 <?php wp_footer(); ?>
 </body>
 </html>

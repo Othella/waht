@@ -12,4 +12,7 @@ define('WAHT_AUTHOR_NAME', 'a.h'); // Put your name here
 define('WAHT_AUTHOR_URI', 'http://ameliehusson.com'); // Put your uri here
 define('WAHT_CREATE_YEAR', 2012); // Put the theme creation's year here
 
+/* Layout Options */
 define('WAHT_FRAMEWORK', 'bootstrap'); // Choose your framework
+define('WAHT_RESPONSIVE', true); // Allow responsive layout
+define('WAHT_FLUID_LAYOUT', true); // Fluid (true) ir fixed (false) layout

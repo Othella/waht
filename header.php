@@ -29,12 +29,19 @@
     <meta name="dcterms.rights" content="Copyright <?php echo WAHT_AUTHOR_NAME ?> <?php date('Y'); ?>. All rights
     reserved">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<header id="page-header">
-    <hgroup>
-        <h1><a href="<?php home_url(); ?>" title="<?php bloginfo('name')?>"><?php bloginfo('name'); ?></a></h1>
-        <h2><?php bloginfo('description'); ?></h2>
-    </hgroup>
-</header>
+<div id="page-container" class="container<?php if (WAHT_FLUID_LAYOUT) {
+    echo "-fluid";
+} ?>">
+    <header id="page-header">
+        <hgroup>
+            <h1><a href="<?php home_url(); ?>" title="<?php bloginfo('name')?>"><?php bloginfo('name'); ?></a></h1>
+
+            <h2><?php bloginfo('description'); ?></h2>
+        </hgroup>
+    </header>
+    <!-- #page-header -->
