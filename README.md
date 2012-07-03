@@ -15,6 +15,9 @@ Documentation:
 LINKS
 =====
 
+HTML5 Boilerplate
+    https://github.com/h5bp/html5-boilerplate
+
 GitHub
     http://github.com
 

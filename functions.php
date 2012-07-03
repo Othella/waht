@@ -7,3 +7,4 @@
  * @uri        : https://github.com/Othella/waht
  */
 
+require_once('./inc/options.php');
