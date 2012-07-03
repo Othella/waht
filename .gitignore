@@ -1,3 +1,4 @@
+# WordPress files
 .htaccess
 wp-*.php
 xmlrpc.php
@@ -15,3 +16,27 @@ sitemap.xml
 sitemap.xml.gz
 readme.html
 license.txt
+
+# OS or Editor folders
+.DS_Store
+._*
+Thumbs.db
+.cache
+.project
+.settings
+.tmproj
+*.esproj
+nbproject
+*.sublime-project
+*.sublime-workspace
+
+# Komodo
+*.komodoproject
+.komodotools
+
+# Folders to ignore
+.hg
+.svn
+.CVS
+.idea
+node_modules
