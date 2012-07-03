@@ -10,4 +10,7 @@
 require_once('inc/options.php'); // Theme options
 require_once('inc/utils.php'); // Utilities
 require_once('inc/admin.php'); // Admin section customization
+require_once('inc/cleanup.php'); // Cleanup auto-generated outputs
+require_once('inc/theme-support.php'); // WP Theme support
+require_once('inc/nav.php'); // Navigation and menus
 require_once('inc/layout.php'); // Site layout customization

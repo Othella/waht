@@ -66,14 +66,8 @@ if (!function_exists('waht_widgets_init')
     add_action('widgets_init', 'waht_widgets_init');
 endif;
 
-// Add support for custom backgrounds.
-add_theme_support('custom-background', array(
-                                            'default-color' => '#ffffff',
-                                            'default-image' => get_template_directory_uri() .
-                                                               "/assets/img/white_paper_texture_background_seamless_pattern.jpg"
-                                       ));
-
-if (!function_exists('waht_enqueue_scripts')):
+if (!function_exists('waht_enqueue_scripts')
+):
     /**
      * Enqueue our scripts
      */
@@ -95,4 +89,14 @@ if (!function_exists('waht_enqueue_scripts')):
     }
 
     add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
+endif;
+
+if (!function_exists('waht_container_class')) :
+    /**
+     * Get the container class name
+     */
+    function waht_container_class()
+    {
+        echo (WAHT_FLUID_LAYOUT ? 'container-fluid' : 'container');
+    }
 endif;

@@ -15,4 +15,4 @@ define('WAHT_CREATE_YEAR', 2012); // Put the theme creation's year here
 /* Layout Options */
 define('WAHT_FRAMEWORK', 'bootstrap'); // Choose your framework
 define('WAHT_RESPONSIVE', true); // Allow responsive layout
-define('WAHT_FLUID_LAYOUT', true); // Fluid (true) ir fixed (false) layout
+define('WAHT_FLUID_LAYOUT', false); // Fluid (true) ir fixed (false) layout

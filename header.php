@@ -34,14 +34,28 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
-<div id="page-container" class="container<?php if (WAHT_FLUID_LAYOUT) {
-    echo "-fluid";
-} ?>">
-    <header id="page-header">
+<header id="page-header" role="banner">
+    <div class="<?php waht_container_class(); ?>">
         <hgroup>
-            <h1><a href="<?php home_url(); ?>" title="<?php bloginfo('name')?>"><?php bloginfo('name'); ?></a></h1>
+            <h1>
+                <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name')?>">
+                    <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>">
+                    <span class="title"><?php bloginfo('name'); ?></span>
+                </a>
+            </h1>
 
-            <h2><?php bloginfo('description'); ?></h2>
+            <h2>
+                <span class="subtitle"><?php bloginfo('description'); ?></span>
+            </h2>
         </hgroup>
-    </header>
-    <!-- #page-header -->
+
+
+        <nav role="navigation">
+            <?php waht_main_nav_menu(); ?>
+        </nav>
+    </div>
+</header>
+<!-- #page-header -->
+
+<div id="page-wrap" role="document">
+    <div class="<?php waht_container_class(); ?>">
