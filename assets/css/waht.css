@@ -3,8 +3,8 @@
    ========================================================================== */
 
 /* Fixed Topbar Navigation */
-body.top-navbar { padding-top: 60px; }
-body.admin-bar .navbar-fixed-top { top: 28px; /* Equals addmin bar height */ }
+body.navbar-fixed-top { padding-top: 68px; /* More than 28+40px */ }
+body.admin-bar .navbar-fixed-top { top: 28px; /* Equals admin bar height */ }
 
 /* =============================================================================
 CONTACT

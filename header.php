@@ -49,23 +49,26 @@
             </h2>
         </hgroup>
 
-        <?php if (WAHT_TOP_NAVBAR && WAHT_BOOTSTRAP) { ?>
-        <nav role="navigation" class="navbar navbar-fixed-top">
+        <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+        <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
             <div class="navbar-inner">
                 <div class="<?php waht_container_class(); ?>">
+                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </a>
 
+                    <!-- Everything you want hidden at 940px or less, place within here -->
                     <nav id="nav-main" class="nav-collapse" role="navigation">
                         <?php waht_main_nav_menu(); ?>
+                        <!-- .nav, .navbar-search, .navbar-form, etc -->
                     </nav>
                 </div>
             </div>
         </nav>
-        <?php } else { ?>
+        <?php } else { // use a simple menu ?>
         <nav role="navigation">
             <?php waht_main_nav_menu(); ?>
         </nav>
