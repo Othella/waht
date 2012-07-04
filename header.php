@@ -49,10 +49,27 @@
             </h2>
         </hgroup>
 
+        <?php if (WAHT_TOP_NAVBAR && WAHT_BOOTSTRAP) { ?>
+        <nav role="navigation" class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="<?php waht_container_class(); ?>">
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
 
+                    <nav id="nav-main" class="nav-collapse" role="navigation">
+                        <?php waht_main_nav_menu(); ?>
+                    </nav>
+                </div>
+            </div>
+        </nav>
+        <?php } else { ?>
         <nav role="navigation">
             <?php waht_main_nav_menu(); ?>
         </nav>
+        <?php } ?>
     </div>
 </header>
 <!-- #page-header -->

@@ -73,25 +73,23 @@ if (!function_exists('waht_enqueue_scripts')
      */
     function waht_enqueue_scripts()
     {
-        switch (WAHT_FRAMEWORK) {
-            case "bootstrap":
-                wp_enqueue_style('waht_bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(),
-                                 false, 'all');
-                if (WAHT_RESPONSIVE) {
-                    wp_enqueue_style('what_bootstrap_responsive',
-                                     get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
-                                     array('waht_bootstrap'), false, 'all');
-                }
-                break;
-            default:
-                break;
+        if (WAHT_BOOTSTRAP) {
+            wp_enqueue_style('waht_bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(),
+                             false, 'all');
+            if (WAHT_RESPONSIVE) {
+                wp_enqueue_style('waht_bootstrap_responsive',
+                                 get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
+                                 array('waht_bootstrap'), false, 'all');
+            }
         }
+        wp_enqueue_style('waht', get_template_directory_uri() . '/assets/css/waht.css', array(), false, 'all');
     }
 
     add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
 endif;
 
-if (!function_exists('waht_container_class')) :
+if (!function_exists('waht_container_class')
+) :
     /**
      * Get the container class name
      */

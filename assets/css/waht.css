@@ -1,0 +1,38 @@
+/* =============================================================================
+   HEADER
+   ========================================================================== */
+
+/* Fixed Topbar Navigation */
+body.top-navbar { padding-top: 60px; }
+body.admin-bar .navbar-fixed-top { top: 28px; /* Equals addmin bar height */ }
+
+/* =============================================================================
+CONTACT
+========================================================================== */
+
+/* =============================================================================
+FOOTER
+========================================================================== */
+
+/* =============================================================================
+WordPress Generated Classes
+See: http://codex.wordpress.org/CSS#WordPress_Generated_Classes
+========================================================================== */
+
+.alignnone { }
+.aligncenter, div.aligncenter { }
+.alignright { }
+.alignleft { }
+.aligncenter { }
+
+a img.alignright { }
+a img.alignnone { }
+a img.alignleft { }
+a img.aligncenter { }
+
+.wp-caption { }
+.wp-caption.alignnone { }
+.wp-caption.alignleft { }
+.wp-caption.alignright { }
+.wp-caption img { }
+.wp-caption p.wp-caption-text { }

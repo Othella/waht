@@ -13,6 +13,7 @@ define('WAHT_AUTHOR_URI', 'http://ameliehusson.com'); // Put your uri here
 define('WAHT_CREATE_YEAR', 2012); // Put the theme creation's year here
 
 /* Layout Options */
-define('WAHT_FRAMEWORK', 'bootstrap'); // Choose your framework
+define('WAHT_BOOTSTRAP', true); // Allow use of the Twitter Bootstrap framework
 define('WAHT_RESPONSIVE', true); // Allow responsive layout
 define('WAHT_FLUID_LAYOUT', false); // Fluid (true) ir fixed (false) layout
+define('WAHT_TOP_NAVBAR', true); // Use a top-placed navbar for the main navigation
