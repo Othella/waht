@@ -8,6 +8,16 @@
 // --------------------------------------------------
 
 
+// waht Colors
+// -------------------------
+
+@waht_blue:      #007aa0; // rgb(0, 122, 160)
+@waht_lblue:     #95a8a0; // rgb(149, 168, 160)
+@waht_beige:     #cfcab4; // rgb(207, 202, 180)
+@waht_lbeige:    #efdfce; // rgb(239, 223, 206)
+@waht_orange:    #e56045; // rgb(229, 96, 69)
+
+
 // Grays
 // -------------------------
 @black:                 #000;
@@ -39,8 +49,8 @@
 
 // Links
 // -------------------------
-@linkColor:             #08c;
-@linkColorHover:        darken(@linkColor, 15%);
+@linkColor:             @waht_blue;
+@linkColorHover:        @waht_orange;
 
 
 // Typography
@@ -146,11 +156,11 @@
 // Navbar
 // -------------------------
 @navbarHeight:                    40px;
-@navbarBackground:                @grayDarker;
-@navbarBackgroundHighlight:       @grayDark;
+@navbarBackground:                @waht_blue;
+@navbarBackgroundHighlight:       lighten(@waht_blue, 10%);
 
-@navbarText:                      @grayLight;
-@navbarLinkColor:                 @grayLight;
+@navbarText:                      @waht_lbeige;
+@navbarLinkColor:                 @waht_lbeige;
 @navbarLinkColorHover:            @white;
 @navbarLinkColorActive:           @navbarLinkColorHover;
 @navbarLinkBackgroundHover:       transparent;
