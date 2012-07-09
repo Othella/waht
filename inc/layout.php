@@ -87,14 +87,3 @@ if (!function_exists('waht_enqueue_scripts')
 
     add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
 endif;
-
-if (!function_exists('waht_container_class')
-) :
-    /**
-     * Get the container class name
-     */
-    function waht_container_class()
-    {
-        echo (WAHT_FLUID_LAYOUT ? 'container-fluid' : 'container');
-    }
-endif;
