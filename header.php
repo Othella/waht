@@ -9,12 +9,9 @@
 ?>
 <!doctype html>
 <!-- TODO Add IEMobile support -->
-<!--[if lt IE 7]>
-<html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 7]>
-<html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>> <![endif]-->
-<!--[if IE 8]>
-<html class="no-js lt-ie9" <?php language_attributes(); ?>> <![endif]-->
+<!--[if lt IE 7]><html class="no-js lt-ie9 lt-ie8 lt-ie7" <?php language_attributes(); ?>> <![endif]-->
+<!--[if IE 7]><html class="no-js lt-ie9 lt-ie8" <?php language_attributes(); ?>> <![endif]-->
+<!--[if IE 8]><html class="no-js lt-ie9" <?php language_attributes(); ?>> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
@@ -31,9 +28,19 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <?php waht_head(); ?>
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+
+<!--[if lt IE 7]>
+<div class="alert">
+    <p><a href="http://www.whatbrowser.org/" title="Meet your browser" target="_blank">Your browser</a> is
+        <em>ancient!</em> <a href="http://browsehappy.com/" title="Upgrade your browser" target="_blank">Upgrade to a
+            modern browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true"
+                                     title="Install Google Chrome Frame" target="_blank">install Google Chrome Frame</a>
+        to experience this site.</p>
+</div><![endif]-->
 
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
@@ -76,8 +83,7 @@
         </nav>
         <?php } ?>
     </div>
-</header>
-<!-- #page-header -->
+</header><!-- #page-header -->
 <?php waht_page_header_after(); ?>
 
 <?php waht_page_wrap_before(); ?>

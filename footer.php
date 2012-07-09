@@ -9,8 +9,7 @@
 ?>
 
 </div>
-</div>
-<!-- /#page-wrap -->
+</div><!-- /#page-wrap -->
 <?php waht_page_wrap_after(); ?>
 
 <?php waht_page_footer_before(); ?>
@@ -24,8 +23,7 @@
             <?php waht_footer_nav_menu(); ?>
         </nav>
     </div>
-</footer>
-<!-- #page-footer -->
+</footer><!-- #page-footer -->
 <?php waht_page_footer_after(); ?>
 
 <?php waht_footer(); ?>
