@@ -18,7 +18,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <link rel="shortcut icon" href="<?php get_template_directory_uri() ?>/favicon.ico">
+    <link rel="shortcut icon" href="<?php get_template_directory_uri(); ?>/favicon.ico">
 
     <title><?php wp_title('|', true, 'left'); bloginfo('name'); ?></title>
 
@@ -34,11 +34,13 @@
     <?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
+
+<?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
     <div class="<?php waht_container_class(); ?>">
         <hgroup>
             <h1>
-                <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name')?>">
+                <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
                     <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>">
                     <span class="title"><?php bloginfo('name'); ?></span>
                 </a>
@@ -76,6 +78,8 @@
     </div>
 </header>
 <!-- #page-header -->
+<?php waht_page_header_after(); ?>
 
+<?php waht_page_wrap_before(); ?>
 <div id="page-wrap" role="document">
     <div class="<?php waht_container_class(); ?>">

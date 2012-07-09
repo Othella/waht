@@ -11,7 +11,9 @@
 </div>
 </div>
 <!-- /#page-wrap -->
+<?php waht_page_wrap_after(); ?>
 
+<?php waht_page_footer_before(); ?>
 <footer id="page-footer">
     <div class="<?php waht_container_class(); ?>">
         <section class="copyright">
@@ -24,7 +26,9 @@
     </div>
 </footer>
 <!-- #page-footer -->
+<?php waht_page_footer_after(); ?>
 
+<?php waht_footer(); ?>
 <?php wp_footer(); ?>
 </body>
 </html>
