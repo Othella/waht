@@ -22,10 +22,12 @@ if (!defined('waht_body_class')
             $classes[] = 'navbar-fixed-top';
         return $classes;
     }
-endif;
-add_filter('body_class', 'waht_body_class');
 
-if (!defined('waht_clean_head')):
+    add_filter('body_class', 'waht_body_class');
+endif;
+
+if (!defined('waht_clean_head')
+):
     /**
      * Clean the head : remove unused links and tags
      * @see http://wpengineer.com/1438/wordpress-header/
@@ -42,5 +44,6 @@ if (!defined('waht_clean_head')):
         remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0); // Display relational links for the posts adjacent to the current post.
         remove_action('wp_head', 'wp_generator'); // Display the XHTML generator that is generated on the wp_head hook, WP version
     }
+
+    add_filter('init', 'waht_clean_head');
 endif;
-add_filter('init', 'waht_clean_head');

@@ -6,6 +6,6 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-?>
-<?php get_header(); ?>
-<?php get_footer(); ?>
+
+get_header();
+get_footer();
