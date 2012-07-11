@@ -17,7 +17,7 @@
     <meta charset="utf-8">
     <link rel="shortcut icon" href="<?php get_template_directory_uri(); ?>/favicon.ico">
 
-    <title><?php wp_title('|', true, 'left'); bloginfo('name'); ?></title>
+    <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
 
     <!-- Dublin Core Metadata : http://dublincore.org/ -->
     <meta name="dcterms.title" content="<?php bloginfo('name'); ?> ?>">
