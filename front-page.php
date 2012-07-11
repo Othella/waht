@@ -7,5 +7,14 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-get_header();
-get_footer();
+get_header(); ?>
+<div id="content">
+    <section id="main" role="main">
+        <?php get_template_part('loop'); ?>
+    </section><!-- /#main -->
+    <aside id="complementary">
+
+    </aside><!-- /#compementary -->
+</div><!-- /#content -->
+
+<?php get_footer();
