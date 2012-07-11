@@ -7,3 +7,5 @@
  * @uri        : https://github.com/Othella/waht
  */
 
+get_header();
+get_footer();
