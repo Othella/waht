@@ -32,6 +32,38 @@ function waht_page_header_after() { do_action('waht_page_header_after'); }
 function waht_page_wrap_before() { do_action('waht_page_wrap_before'); }
 
 /**
+ * Main section before hook
+ */
+function waht_main_before() { do_action('waht_main_before'); }
+
+/**
+ * Main section after hook
+ */
+function waht_main_after() { do_action('waht_main_after'); }
+
+/**
+ * Loop before hook
+ * @used in loop.php
+ */
+function waht_loop_before() { do_action('waht_loop_before'); }
+
+/**
+ * Loop after hook
+ * @used in loop.php
+ */
+function waht_loop_after() { do_action('waht_loop_after'); }
+
+/**
+ * Sidebar aside before hook
+ */
+function waht_sidebar_before() { do_action('waht_sidebar_before'); }
+
+/**
+ * Sidebar aside after hook
+ */
+function waht_sidebar_after() { do_action('waht_sidebar_after'); }
+
+/**
  * Page wrap after hook
  * @used in footer.php
  */
