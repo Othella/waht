@@ -1,4 +1,4 @@
-body.navbar-fixed-top{padding-top:68px;}
+body.navbar-fixed-top{padding-top:68px;position:relative;}
 body.admin-bar .navbar-fixed-top{top:28px;}
 #page-header .title{color:#000;text-shadow:0 -2px 0 #dddddd,0 2px 3px #ffffff;}
 #page-header .subtitle{text-shadow:0 -1px 0 #dddddd,0 1px 0 #ffffff;}

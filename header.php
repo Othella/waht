@@ -14,7 +14,7 @@
 <!--[if IE 8]><html class="no-js lt-ie9" <?php language_attributes(); ?>> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
+    <meta charset="<?php bloginfo('charset'); ?>">
     <link rel="shortcut icon" href="<?php get_template_directory_uri(); ?>/favicon.ico">
 
     <title><?php wp_title('|', true, 'right'); bloginfo('name'); ?></title>
@@ -27,6 +27,10 @@
     reserved">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="profile" href="http://gmpg.org/xfn/11"/>
+    <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
+    <?php if (is_singular() && get_option('thread_comments')) wp_enqueue_script('comment-reply'); ?>
 
     <?php waht_head(); ?>
     <?php wp_head(); ?>
