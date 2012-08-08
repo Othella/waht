@@ -1,10 +1,10 @@
 <?php
 /**
- * @description: The page template. Used when an individual Page is queried.
- * @name       : page.php
+ * @description: The term template. Used when a term in a custom taxonomy is queried.
+ * @name       : taxonomy.php
  * @package    : waht
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
 
-// TODO Code page.php
+// TODO Code taxonomy.php

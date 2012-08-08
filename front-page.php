@@ -1,6 +1,6 @@
 <?php
 /**
- * @description: Template for the front page
+ * @description: The front page template, it is only used if you use a static front page.
  * @name       : front-page.php
  * @package    : waht
  * @author     : Amélie Husson (http://ameliehusson.com)

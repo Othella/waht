@@ -1,10 +1,10 @@
 <?php
 /**
- * @description: The page template. Used when an individual Page is queried.
- * @name       : page.php
+ * @description: The author template. Used when an author is queried.
+ * @name       : author.php
  * @package    : waht
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
 
-// TODO Code page.php
+// TODO Code author.php
