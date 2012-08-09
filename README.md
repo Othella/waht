@@ -41,6 +41,11 @@ Twitter Bootstrap:
 Marcelle:
     http://www.dafont.com/marcelle.font
 
+# Testing
+
+WordPress:
+    http://codex.wordpress.org/Theme_Unit_Test
+
 # HISTORY
 
 * v.0 (03/07/2012)

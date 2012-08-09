@@ -7,5 +7,4 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-// TODO Code sidebar.php
 dynamic_sidebar('sidebar-main');

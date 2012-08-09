@@ -1,4 +1,5 @@
 #page-header,#page-wrap,#page-footer{padding:1em 0;}
+.form-search label.hide-text{display:none;}
 body.navbar-fixed-top{padding-top:40px;position:relative;}
 body.admin-bar .navbar-fixed-top{top:28px;}
 #page-header .title a{color:#000;text-shadow:0 -2px 0 #dddddd,0 2px 3px #ffffff;}#page-header .title a:hover{color:#000;text-decoration:none;}
