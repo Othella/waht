@@ -9,7 +9,7 @@
 waht_loop_before();
 if (have_posts()) :
     while (have_posts()) : the_post(); ?>
-    <article class="post-<?php the_ID(); ?>">
+    <article id="post-<?php the_ID(); ?>" class="post">
         <header>
             <h1><?php the_title(); ?></h1>
         </header>

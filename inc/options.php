@@ -18,12 +18,13 @@ define('WAHT_RESPONSIVE', true); // Allow responsive layout
 define('WAHT_FLUID_LAYOUT', false); // Fluid (true) ir fixed (false) layout
 
 /* Classes */
-define('WRAP_CLASSES',              'container');
-define('CONTAINER_CLASSES',         'row');
-define('MAIN_CLASSES',              'span8');
-define('SIDEBAR_CLASSES',           'span4');
-define('FULLWIDTH_CLASSES',         'span12');
-define('GOOGLE_ANALYTICS_ID',       '');
+define('WRAP_CLASSES', 'container');
+define('CONTAINER_CLASSES', 'row-fluid');
+define('MAIN_CLASSES', 'span8');
+define('SIDEBAR_CLASSES', 'span4');
+define('FULLWIDTH_CLASSES', 'span12');
+define('GOOGLE_ANALYTICS_ID', '');
+define('SIDEBAR_POS', 'right'); // the content sidebar position
 
 /* Navigation and menus */
 define('WAHT_NAVBAR', true); // Use a navbar for the main navigation

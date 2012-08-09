@@ -18,7 +18,7 @@ if (!defined('waht_register_nav_menus')
         register_nav_menus(
             array(
                  'main_nav_menu'   => __('Main Navigation Menu', 'waht'),
-                 'footer_nav_menu' => __('Footer Navigation Menu', 'waht')
+                 'additional_nav_menu' => __('Additional Navigation Menu', 'waht')
             )
         );
     }
@@ -52,21 +52,21 @@ if (!defined('waht_main_nav_menu')
     }
 endif;
 
-if (!defined('waht_main_nav_menu')
+if (!defined('waht_additional_nav_menu')
 ):
     /**
-     * Footer Nav Menu
+     * Additional Nav Menu
      */
-    function waht_footer_nav_menu()
+    function waht_additional_nav_menu()
     {
         $walker = WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu();
         wp_nav_menu(
             array(
                  'container'       => false, // remove nav container
-                 'container_class' => 'footer-nav-menu clearfix', // class of container (should you choose to use it)
-                 'menu'            => 'footer_nav_menu', // nav name
-                 'menu_class'      => 'nav footer-nav clearfix', // adding custom nav class
-                 'theme_location'  => 'footer_nav_menu', // where it's located in the theme
+                 'container_class' => 'additional-nav-menu clearfix', // class of container (should you choose to use it)
+                 'menu'            => 'additional_nav_menu', // nav name
+                 'menu_class'      => 'nav additional-nav clearfix', // adding custom nav class
+                 'theme_location'  => 'additional_nav_menu', // where it's located in the theme
                  'walker'          => $walker, // our cleaner walker
                  'before'          => '', // before the menu
                  'after'           => '', // after the menu
@@ -89,12 +89,12 @@ if (!defined('waht_main_nav_menu_fallback')
     }
 endif;
 
-if (!defined('waht_footer_nav_menu_fallback')
+if (!defined('waht_additional_nav_menu_fallback')
 ):
     /**
      * Fallback for the Footer Nav Menu
      */
-    function waht_footer_nav_menu_fallback()
+    function waht_additional_nav_menu_fallback()
     {
         wp_page_menu();
     }

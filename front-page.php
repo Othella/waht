@@ -17,7 +17,7 @@ get_header(); ?>
     <?php waht_main_after(); ?>
     <?php waht_sidebar_before(); ?>
     <aside id="complementary" class="<?php echo SIDEBAR_CLASSES; ?>">
-
+        <?php get_sidebar(); ?>
     </aside>
     <!-- /#compementary -->
     <?php waht_sidebar_after(); ?>

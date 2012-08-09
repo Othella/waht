@@ -1,18 +1,41 @@
 /*  =============================================================================
+    COMMON
+    ========================================================================== */
+#page-header,
+#page-wrap,
+#page-footer {
+    padding: 1em 0;
+}
+/*  =============================================================================
     HEADER
     ========================================================================== */
 
 /* Fixed Topbar Navigation */
-body.navbar-fixed-top { padding-top: 68px; /* More than 28+40px */ position: relative; }
-body.admin-bar .navbar-fixed-top { top: 28px; /* Equals admin bar height */ }
+body.navbar-fixed-top {
+    padding-top: 40px; /* More than 40px (navbar height */
+    position:    relative;
+}
+
+body.admin-bar .navbar-fixed-top {
+    top: 28px; /* Equals admin bar height */
+}
 
 #page-header {
     .title {
-        color: #000;
-        text-shadow: 0 -2px 0 #ddd, 0 2px 3px #fff;
+        a {
+            color:       #000;
+            text-shadow: 0 -2px 0 #ddd, 0 2px 3px #fff; // Letterpress effect
+            &:hover {
+                color:           #000;
+                text-decoration: none;
+            }
+            img { display: block; }
+        }
     }
     .subtitle {
-        text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff;
+        span {
+            text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff;  // Letterpress effect
+        }
     }
 }
 
@@ -34,12 +57,10 @@ body.admin-bar .navbar-fixed-top { top: 28px; /* Equals admin bar height */ }
 .alignright { }
 .alignleft { }
 .aligncenter { }
-
 a img.alignright { }
 a img.alignnone { }
 a img.alignleft { }
 a img.aligncenter { }
-
 .wp-caption { }
 .wp-caption.alignnone { }
 .wp-caption.alignleft { }

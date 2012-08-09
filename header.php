@@ -49,16 +49,16 @@
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
     <div class="<?php waht_container_class(); ?>">
-        <hgroup>
-            <h1>
+        <hgroup class="row-fluid">
+            <h1 class="title span4">
                 <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
                     <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>">
-                    <span class="title"><?php bloginfo('name'); ?></span>
+                    <span><?php bloginfo('name'); ?></span>
                 </a>
             </h1>
 
-            <h2>
-                <span class="subtitle"><?php bloginfo('description'); ?></span>
+            <h2 class="subtitle span8">
+                <span><?php bloginfo('description'); ?></span>
             </h2>
         </hgroup>
 
@@ -81,9 +81,19 @@
                 </div>
             </div>
         </nav>
+        <nav role="navigation" class="navbar">
+            <div class="navbar-inner">
+                <div class="<?php waht_container_class(); ?>">
+                    <?php waht_additional_nav_menu(); ?>
+                </div>
+            </div>
+        </nav>
         <?php } else { // use a simple menu ?>
-        <nav role="navigation">
+        <nav role="navigation" class="main-navigation">
             <?php waht_main_nav_menu(); ?>
+        </nav>
+        <nav role="navigation" class="additional-navigation">
+            <?php waht_additional_nav_menu(); ?>
         </nav>
         <?php } ?>
     </div>

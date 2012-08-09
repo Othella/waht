@@ -15,13 +15,14 @@
 <?php waht_page_footer_before(); ?>
 <footer id="page-footer">
     <div class="<?php waht_container_class(); ?>">
+        <section class="footer-sidebars row-fluid">
+            <?php dynamic_sidebar('sidebar-footer-left'); ?>
+            <?php dynamic_sidebar('sidebar-footer-center'); ?>
+            <?php dynamic_sidebar('sidebar-footer-right'); ?>
+        </section>
         <section class="copyright">
             <?php waht_credentials(); ?>
         </section>
-
-        <nav role="navigation">
-            <?php waht_footer_nav_menu(); ?>
-        </nav>
     </div>
 </footer><!-- #page-footer -->
 <?php waht_page_footer_after(); ?>

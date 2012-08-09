@@ -15,41 +15,41 @@ if (!function_exists('waht_register_sidebars')
     function waht_register_sidebars()
     {
         register_sidebar(array(
-                              'id'            => 'sidebar-main',
-                              'name'          => __('Main Sidebar', 'waht'),
-                              'description'   => __('The main sidebar', 'waht'),
-                              'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-                              'after_widget'  => '</aside>',
-                              'before_title'  => '<h3 class="widgettitle">',
-                              'after_title'   => '</h3>',
-                         ));
+            'id'            => 'sidebar-main',
+            'name'          => __('Main Sidebar', 'waht'),
+            'description'   => __('The main sidebar', 'waht'),
+            'before_widget' => '<aside id="%1$s" class="widget %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title'  => '<h3 class="widgettitle">',
+            'after_title'   => '</h3>',
+        ));
         register_sidebar(array(
-                              'id'            => 'sidebar-left',
-                              'name'          => __('Left Sidebar', 'waht'),
-                              'description'   => __('The left sidebar', 'waht'),
-                              'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-                              'after_widget'  => '</aside>',
-                              'before_title'  => '<h3 class="widgettitle">',
-                              'after_title'   => '</h3>',
-                         ));
+            'id'            => 'sidebar-footer-left',
+            'name'          => __('Left Footer Sidebar', 'waht'),
+            'description'   => __('The left footer sidebar', 'waht'),
+            'before_widget' => '<aside id="%1$s" class="widget span4 %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title'  => '<h3 class="widgettitle">',
+            'after_title'   => '</h3>',
+        ));
         register_sidebar(array(
-                              'id'            => 'sidebar-right',
-                              'name'          => __('Right Sidebar', 'waht'),
-                              'description'   => __('The right sidebar', 'waht'),
-                              'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-                              'after_widget'  => '</aside>',
-                              'before_title'  => '<h3 class="widgettitle">',
-                              'after_title'   => '</h3>',
-                         ));
+            'id'            => 'sidebar-footer-center',
+            'name'          => __('Center Footer Sidebar', 'waht'),
+            'description'   => __('The center footer sidebar', 'waht'),
+            'before_widget' => '<aside id="%1$s" class="widget span4 %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title'  => '<h3 class="widgettitle">',
+            'after_title'   => '</h3>',
+        ));
         register_sidebar(array(
-                              'id'            => 'sidebar-footer',
-                              'name'          => __('Footer Sidebar', 'waht'),
-                              'description'   => __('The footer sidebar', 'waht'),
-                              'before_widget' => '<aside id="%1$s" class="widget %2$s">',
-                              'after_widget'  => '</aside>',
-                              'before_title'  => '<h3 class="widgettitle">',
-                              'after_title'   => '</h3>',
-                         ));
+            'id'            => 'sidebar-footer-right',
+            'name'          => __('Right Footer Sidebar', 'waht'),
+            'description'   => __('The right footer sidebar', 'waht'),
+            'before_widget' => '<aside id="%1$s" class="widget span4 %2$s">',
+            'after_widget'  => '</aside>',
+            'before_title'  => '<h3 class="widgettitle">',
+            'after_title'   => '</h3>',
+        ));
     }
 endif;
 
@@ -73,16 +73,28 @@ if (!function_exists('waht_enqueue_scripts')
      */
     function waht_enqueue_scripts()
     {
+        $theme = wp_get_theme();
         if (WAHT_BOOTSTRAP) {
             wp_enqueue_style('waht_bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(),
-                             false, 'all');
+                $theme['Version'], 'all');
             if (WAHT_RESPONSIVE) {
                 wp_enqueue_style('waht_bootstrap_responsive',
-                                 get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
-                                 array('waht_bootstrap'), false, 'all');
+                    get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
+                    array('waht_bootstrap'), $theme['Version'], 'all');
             }
+            wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js',
+                array('jquery', 'prototype'), $theme['Version'], true);
         }
-        wp_enqueue_style('waht', get_template_directory_uri() . '/assets/css/waht.css', array(), false, 'all');
+        wp_enqueue_style('waht', get_template_directory_uri() . '/assets/css/waht.css', array(), $theme['Version'], 'all');
+
+        // Only for IE < 9
+        wp_register_style('waht-ie', get_template_directory_uri() . 'assets/css/ie.css', false, $theme['Version'],
+            'all');
+        $GLOBALS['wp_styles']->add_data('waht-ie', 'conditional', 'lte IE 9');
+        wp_enqueue_style('waht-ie');
+        wp_register_style('waht-html5', 'http://html5shiv.googlecode.com/svn/trunk/html5.js', false, null, 'all');
+        $GLOBALS['wp_styles']->add_data('waht-html5', 'conditional', 'lte IE 9');
+        wp_enqueue_style('waht-html5');
     }
 
     add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
