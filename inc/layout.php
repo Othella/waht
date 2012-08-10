@@ -82,34 +82,61 @@ if (!function_exists('waht_enqueue_scripts')
             'all');
         $GLOBALS['wp_styles']->add_data('waht-ie', 'conditional', 'lte IE 9');
         wp_enqueue_style('waht-ie');
+
         wp_register_script('waht-html5', 'http://html5shiv.googlecode.com/svn/trunk/html5.js', false, null, 'all');
         $GLOBALS['wp_styles']->add_data('waht-html5', 'conditional', 'lte IE 9');
         wp_enqueue_script('waht-html5');
 
-        // Bootstrap style and scripts
-        if (WAHT_BOOTSTRAP) {
-            wp_enqueue_style('waht_bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(),
-                $theme['Version'], 'all');
-            if (WAHT_RESPONSIVE) {
-                wp_enqueue_style('waht_bootstrap_responsive',
-                    get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
-                    array('waht_bootstrap'), $theme['Version'], 'all');
-            }
-            wp_enqueue_script('bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js',
-                array('jquery'), $theme['Version'], true);
+        // ToDo debug
+        // jQuery is loaded in header.php using the same method from HTML5 Boilerplate:
+        // Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline
+        // It's kept in the header instead of footer to avoid conflicts with plugins.
+        /*if (!is_admin()) {
+            wp_deregister_script('jquery');
+            wp_register_script('jquery', '', '', '', false);
         }
-
-        // Custom script and style
-        wp_enqueue_style('waht', get_template_directory_uri() . '/assets/css/waht.css', array(), $theme['Version'], 'all');
-        if (WAHT_DEV_MODE)
-            wp_enqueue_script('waht-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), $theme['Version'], true);
-        else
-            wp_enqueue_script('waht-scripts', get_template_directory_uri() . '/assets/js/scripts.min.js', array('jquery'), $theme['Version'], true);
+        */
 
         // Comments
-        // TODO check this
-        if (is_singular() && get_option('thread_comments'))
+        if (is_single() && comments_open() && get_option('thread_comments')) {
             wp_enqueue_script('comment-reply');
+        }
+
+        // Bootstrap style and scripts
+        if (WAHT_BOOTSTRAP) {
+            wp_register_style('waht-bootstrap', get_template_directory_uri() . '/assets/css/bootstrap.css', array(),
+                null, 'all');
+            wp_enqueue_style('waht-bootstrap');
+
+            if (WAHT_RESPONSIVE) {
+                wp_register_style('waht-bootstrap-responsive',
+                    get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
+                    array('waht_bootstrap'), null, 'all');
+                wp_enqueue_style('waht-bootstrap-responsive');
+            }
+
+            wp_register_script('waht-bootstrap', get_template_directory_uri() . '/assets/js/bootstrap.min.js', array('jquery'), null, true);
+            wp_enqueue_script('waht-bootstrap');
+        }
+
+        // Custom style
+        wp_register_style('waht', get_template_directory_uri() . '/assets/css/waht.css', array(), $theme['Version'], 'all');
+        wp_enqueue_style('waht');
+
+        // Custom scripts
+        if (WAHT_DEV_MODE) {
+            wp_register_script('waht-scripts', get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), $theme['Version'], true);
+
+        } else {
+            wp_register_script('waht-scripts', get_template_directory_uri() . '/assets/js/scripts.min.js', array('jquery'), $theme['Version'], true);
+
+        }
+        wp_enqueue_script('waht-scripts');
+
+        // Add To Home Screen
+        if (WAHT_USE_ADD2HOME)
+            wp_register_script('add2home', get_template_directory_uri() . '/assets/js/lib/add2home.min.js', array(), null, true);
+        wp_enqueue_script('add2home');
     }
 
     add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);

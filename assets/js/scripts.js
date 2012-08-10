@@ -13,4 +13,12 @@ jQuery('document').ready(function ($) {
     widgets.find('.widgettitle').addClass('nav-header');
     widgets.find('ul').addClass('nav nav-list');
 
+    var addToHomeConfig = {
+        animationIn: 'bubble',
+        animationOut:'drop',
+        lifespan:    10000,
+        expire:      2,
+        touchIcon:   true
+    };
+
 });

@@ -35,3 +35,23 @@ if (!function_exists('waht_container_class')
         echo (WAHT_FLUID_LAYOUT ? 'container-fluid' : 'container');
     }
 endif;
+
+if (!function_exists('waht_google_analytics')) {
+    /**
+     * Print JavaScript for Google Analytics
+     */
+    function waht_google_analytics()
+    {
+        $waht_google_analytics_id = GOOGLE_ANALYTICS_ID;
+        if ($waht_google_analytics_id !== '') {
+            echo "\n\t<script>\n";
+            echo "\t\tvar _gaq=[['_setAccount','$waht_google_analytics_id'],['_trackPageview']];\n";
+            echo "\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\n";
+            echo "\t\tg.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';\n";
+            echo "\t\ts.parentNode.insertBefore(g,s)}(document,'script'));\n";
+            echo "\t</script>\n";
+        }
+    }
+
+    add_action('waht_footer', 'waht_google_analytics');
+}

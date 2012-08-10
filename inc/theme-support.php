@@ -74,6 +74,38 @@ if (!function_exists('waht_theme_support')
         if (version_compare($wp_version, '3.0', '>='))
             // add support for automatic feed links
             add_theme_support('automatic-feed-links');
+
+        // TODO Code OG theme support
+        add_theme_support('og-facebook'); // OpenGraph Facebook
+
+        if (WAHT_APPLE_ICONS)
+            add_theme_support('apple-touch-icon', array(
+                'default'     => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon.png',
+                'precomposed' => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-precomposed.png',
+                '57x57'       => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-57x57-precomposed.png',
+                '72x72'       => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-72x72-precomposed.png',
+                '114x114'     => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-114x114-precomposed.png'
+            )); // Apple Touch Icons
+        else
+            remove_theme_support('apple-touche-screen');
     }
+    waht_theme_support();
 endif;
-add_action('after_setup_theme', 'waht_theme_support');
+
+
+if (current_theme_supports('apple-touch-icon')) {
+    if (!function_exists('waht_print_apple_icons')) {
+        function waht_print_apple_icons()
+        {
+            $apple_icons     = get_theme_support('apple-touch-icon');
+            $apple_icons_str = "";
+            $apple_icons_str .= "\n\t<link rel=\"apple-touch-icon\" href=\"" . $apple_icons[0]['default'] . "\">";
+            $apple_icons_str .= "\n\t<link rel=\"apple-touch-icon\" sizes=\"72x72\" href=\"" . $apple_icons[0]['72x72'] . "\">";
+            $apple_icons_str .= "\n\t<link rel=\"apple-touch-icon\" sizes=\"114x114\" href=\"" .
+            $apple_icons[0]['114x114'] . "\">";
+            echo $apple_icons_str;
+        }
+
+        add_action('waht_head', 'waht_print_apple_icons');
+    }
+}
