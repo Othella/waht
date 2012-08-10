@@ -27,6 +27,6 @@ define('GOOGLE_ANALYTICS_ID', '');
 define('SIDEBAR_POS', 'right'); // the content sidebar position
 
 /* Navigation and menus */
-define('WAHT_NAVBAR', true); // Use a navbar for the main navigation
-define('WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR', true); // Use the top-fixed Bootstrap's navbar. Only relevant if WAHT_BOOTSTRAP and WAHT_NAVBAR set to true.
-define('WAHT_CLEANED_MENU', false); // Use cleanup functions menu's walkers
+define('WAHT_NAVBAR', true); // Use a navbar for the navigation menus
+define('WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR', true); // Use the top-fixed Bootstrap's navbar for the main navbar. Only relevant if WAHT_BOOTSTRAP and WAHT_NAVBAR set to true.
+define('WAHT_CLEANED_MENU', true); // Use cleanup functions menu's walkers

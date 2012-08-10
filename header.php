@@ -48,6 +48,7 @@
 
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
+
     <div class="<?php waht_container_class(); ?>">
         <hgroup class="row-fluid">
             <h1 class="title span4">
@@ -61,11 +62,10 @@
                 <span><?php bloginfo('description'); ?></span>
             </h2>
         </hgroup>
-
         <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
             <div class="navbar-inner">
-                <div class="<?php waht_container_class(); ?>">
+                <div class="<?php echo CONTAINER_CLASSES; ?>">
                     <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
                     <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                         <span class="icon-bar"></span>
@@ -83,7 +83,7 @@
         </nav>
         <nav role="navigation" class="navbar">
             <div class="navbar-inner">
-                <div class="<?php waht_container_class(); ?>">
+                <div class="<?php echo CONTAINER_CLASSES; ?>">
                     <?php waht_additional_nav_menu(); ?>
                 </div>
             </div>

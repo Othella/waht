@@ -15,8 +15,8 @@
     ========================================================================== */
 
 /* Fixed Topbar Navigation */
-body.navbar-fixed-top {
-    padding-top: 40px; /* More than 40px (navbar height */
+body.waht-navbar-fixed-top {
+    padding-top: 40px; /* More than 40px (navbar height) */
     position:    relative;
 }
 
@@ -243,3 +243,20 @@ a img.aligncenter { }
 .textwidget { }
 .widget_text { }
 .textwidget p { }
+
+/*  =============================================================================
+    Media Queries
+    ========================================================================== */
+@media (max-width: 979px) {
+/* Fixed Topbar Navigation */
+    body.waht-navbar-fixed-top {
+        padding-top: 50px;
+        .navbar-fixed-top {
+            position:     fixed;
+            margin-left:  0;
+            margin-right: 0;
+        }
+    }
+}
+@media (max-width: 767px) {
+}
