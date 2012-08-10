@@ -19,9 +19,6 @@ GitHub:
 LESS:
     http://lesscss.org/
 
-LESS.app (for MacOSX):
-    http://incident57.com/less/
-
 CodeKit:
     http://incident57.com/codekit/
 

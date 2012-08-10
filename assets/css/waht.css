@@ -2,6 +2,7 @@
 .form-search label.hide-text{display:none;}
 body.waht-navbar-fixed-top{padding-top:40px;position:relative;}
 body.admin-bar .navbar-fixed-top{top:28px;}
+#page-header .navbar .brand{float:right;color:#efdfce;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);}
 #page-header .title a{color:#000;text-shadow:0 -2px 0 #dddddd,0 2px 3px #ffffff;}#page-header .title a:hover{color:#000;text-decoration:none;}
 #page-header .title a img{display:block;}
 #page-header .subtitle span{text-shadow:0 -1px 0 #dddddd,0 1px 0 #ffffff;}

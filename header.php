@@ -47,8 +47,8 @@
 
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
-
     <div class="<?php waht_container_class(); ?>">
+
         <hgroup class="row-fluid">
             <h1 class="title span4">
                 <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
@@ -61,7 +61,9 @@
                 <span><?php bloginfo('description'); ?></span>
             </h2>
         </hgroup>
+
         <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+
         <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
             <div class="navbar-inner">
                 <div class="<?php echo CONTAINER_CLASSES; ?>">
@@ -70,6 +72,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="<?php echo home_url(); ?>/">
+                        <?php bloginfo('name'); ?>
                     </a>
 
                     <!-- Everything you want hidden at 940px or less, place within here -->
@@ -80,6 +85,7 @@
                 </div>
             </div>
         </nav>
+
         <nav role="navigation" class="navbar">
             <div class="navbar-inner">
                 <div class="<?php echo CONTAINER_CLASSES; ?>">
@@ -87,15 +93,19 @@
                 </div>
             </div>
         </nav>
+
         <?php } else { // use a simple menu ?>
+
         <nav role="navigation" class="main-navigation">
             <?php waht_main_nav_menu(); ?>
         </nav>
+
         <nav role="navigation" class="additional-navigation">
             <?php waht_additional_nav_menu(); ?>
         </nav>
         <?php } ?>
     </div>
+
 </header><!-- #page-header -->
 <?php waht_page_header_after(); ?>
 
