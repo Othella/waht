@@ -59,20 +59,20 @@ if (!defined('waht_additional_nav_menu')
      */
     function waht_additional_nav_menu()
     {
-        $walker = WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu();
+        $walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() : (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
         wp_nav_menu(
             array(
                  'container'       => false, // remove nav container
                  'container_class' => 'additional-nav-menu clearfix', // class of container (should you choose to use it)
                  'menu'            => 'additional_nav_menu', // nav name
-                 'menu_class'      => 'nav additional-nav clearfix', // adding custom nav class
+                 'menu_class'      => 'nav nav-pills additional-nav clearfix', // adding custom nav class
                  'theme_location'  => 'additional_nav_menu', // where it's located in the theme
                  'walker'          => $walker, // our cleaner walker
                  'before'          => '', // before the menu
                  'after'           => '', // after the menu
                  'link_before'     => '', // before each link
                  'link_after'      => '', // after each link
-                 'depth'           => 1, // limit the depth of the nav
+                 'depth'           => 0, // limit the depth of the nav
                  'fallback_cb'     => 'waht_footer_nav_menu_fallback' // fallback function
             ));
     }
@@ -240,7 +240,7 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
      * @param string       $output       Passed by reference. Used to append additional content.
      * @param object       $item         Menu item data object.
      * @param int          $depth        Depth of menu item. Used for padding.
-     * @param array|object $args
+     * @param array        $args         Arguments
      * @param int          $id
      *
      * @return void

@@ -26,7 +26,8 @@
     <meta name="dcterms.rights" content="Copyright <?php echo WAHT_AUTHOR_NAME ?> <?php date('Y'); ?>. All rights
     reserved">
 
-    <?php if (WAHT_RESPONSIVE) { ?><meta name="viewport" content="width=device-width, initial-scale=1.0"><?php } ?>
+    <?php if (WAHT_RESPONSIVE) { ?>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"><?php } ?>
 
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
@@ -86,11 +87,9 @@
             </div>
         </nav>
 
-        <nav role="navigation" class="navbar">
-            <div class="navbar-inner">
-                <div class="<?php echo CONTAINER_CLASSES; ?>">
-                    <?php waht_additional_nav_menu(); ?>
-                </div>
+        <nav role="navigation" class="subnav">
+            <div class="<?php echo CONTAINER_CLASSES; ?>">
+                <?php waht_additional_nav_menu(); ?>
             </div>
         </nav>
 
