@@ -33,7 +33,7 @@ define('WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR', true); // Use the top-fixed Bootst
 define('WAHT_CLEANED_MENU', true); // Use cleanup functions menu's walkers
 
 /* Development to use non minified-script (easier for debugging) */
-define('WAHT_DEV_MODE', false);
+define('WAHT_DEV_MODE', true);
 
 /* JavaScript plugins */
 define('WAHT_USE_ADD2HOME', true); // Add To Home Screen. See http://cubiq.org/add-to-home-screen
