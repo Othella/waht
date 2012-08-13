@@ -69,21 +69,21 @@ if (!function_exists('waht_dynamic_title')) {
             echo '&quot; - ';
         } elseif (is_archive()) {
             wp_title('');
-            echo ' ' . __('Archive', 'waht') . ' - ';
+            echo ' ' . __('Archive', 'waht') . ' | ';
         }
         elseif (is_search()) {
             echo __('Search for', 'waht') . ' &quot;' . esc_html($s) . '&quot; - ';
         }
-        elseif (!(is_404()) && (is_single()) || (is_page())) {
+        elseif (!is_404() && !is_front_page() && (is_single() || is_page() || is_home())) {
             wp_title('');
-            echo ' - ';
+            echo ' | ';
         }
         elseif (is_404()) {
-            echo __('Not Found', 'waht') . ' - ';
+            echo __('Not Found', 'waht') . ' | ';
         }
-        if (is_home()) {
+        if (is_front_page()) {
             bloginfo('name');
-            echo ' - ';
+            echo ' | ';
             bloginfo('description');
         } else {
             bloginfo('name');
