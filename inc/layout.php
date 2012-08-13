@@ -78,6 +78,7 @@ if (!function_exists('waht_enqueue_scripts')
         $theme = wp_get_theme();
 
         // Only for IE < 9
+        // See http://kuttler.eu/post/wordpress-style-version-conditional-comments/
         wp_register_style('waht-ie', get_template_directory_uri() . 'assets/css/ie.css', false, $theme['Version'],
             'all');
         $GLOBALS['wp_styles']->add_data('waht-ie', 'conditional', 'lte IE 9');
@@ -87,15 +88,15 @@ if (!function_exists('waht_enqueue_scripts')
         $GLOBALS['wp_styles']->add_data('waht-html5', 'conditional', 'lte IE 9');
         wp_enqueue_script('waht-html5');
 
-        // ToDo debug
         // jQuery is loaded in header.php using the same method from HTML5 Boilerplate:
         // Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline
         // It's kept in the header instead of footer to avoid conflicts with plugins.
-        /*if (!is_admin()) {
+        // See http://css-tricks.com/snippets/wordpress/include-jquery-in-wordpress-theme/
+        if (!is_admin()) {
             wp_deregister_script('jquery');
-            wp_register_script('jquery', '', '', '', false);
+            wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") . "://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false, null);
+            wp_enqueue_script('jquery');
         }
-        */
 
         // Comments
         if (is_single() && comments_open() && get_option('thread_comments')) {
@@ -111,7 +112,7 @@ if (!function_exists('waht_enqueue_scripts')
             if (WAHT_RESPONSIVE) {
                 wp_register_style('waht-bootstrap-responsive',
                     get_template_directory_uri() . '/assets/css/bootstrap-responsive.css',
-                    array('waht_bootstrap'), null, 'all');
+                    array('waht-bootstrap'), null, 'all');
                 wp_enqueue_style('waht-bootstrap-responsive');
             }
 

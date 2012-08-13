@@ -16,6 +16,7 @@ define('WAHT_CREATE_YEAR', 2012); // Put the theme creation's year here
 define('WAHT_BOOTSTRAP', true); // Allow use of the Twitter Bootstrap framework
 define('WAHT_RESPONSIVE', true); // Allow responsive layout
 define('WAHT_FLUID_LAYOUT', false); // Fluid (true) ir fixed (false) layout
+define('WAHT_GRID', false); // TODO Use a grid framework
 
 /* Classes */
 define('WRAP_CLASSES', 'container'); // Class(es) for the wrapper
