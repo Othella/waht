@@ -15,10 +15,23 @@
 <?php waht_page_footer_before(); ?>
 <footer id="page-footer">
     <div class="<?php waht_container_class(); ?>">
+        <?php waht_page_footer_inside(); ?>
         <section class="footer-sidebars row-fluid">
-            <?php dynamic_sidebar('sidebar-footer-left'); ?>
-            <?php dynamic_sidebar('sidebar-footer-center'); ?>
-            <?php dynamic_sidebar('sidebar-footer-right'); ?>
+            <section class="sidebar-footer-left span4">
+                <?php if (is_dynamic_sidebar('sidebar-footer-left')) : ?>
+                <?php dynamic_sidebar('sidebar-footer-left'); ?>
+                <?php endif; ?>
+            </section>
+            <section class="sidebar-footer-center span4">
+                <?php if (is_dynamic_sidebar('sidebar-footer-center')) : ?>
+                <?php dynamic_sidebar('sidebar-footer-center'); ?>
+                <?php endif; ?>
+            </section>
+            <section class="sidebar-footer-right span4">
+                <?php if (is_dynamic_sidebar('sidebar-footer-right')) : ?>
+                <?php dynamic_sidebar('sidebar-footer-right'); ?>
+                <?php endif; ?>
+            </section>
         </section>
         <section class="copyright">
             <?php waht_credentials(); ?>
