@@ -13,16 +13,11 @@
 <div id="content" class="<?php echo CONTAINER_CLASSES; ?>">
     <?php waht_main_before(); ?>
     <section id="main" role="main" class="<?php echo MAIN_CLASSES; ?>">
-        <?php get_template_part('loop'); ?>
+        <?php get_template_part('loop', 'single'); ?>
     </section>
     <!-- /#main -->
     <?php waht_main_after(); ?>
-    <?php waht_sidebar_before(); ?>
-    <aside id="complementary" class="<?php echo SIDEBAR_CLASSES; ?>">
-
-    </aside>
-    <!-- /#compementary -->
-    <?php waht_sidebar_after(); ?>
+    <?php get_sidebar(); ?>
 </div><!-- /#content -->
 
 <?php get_footer();

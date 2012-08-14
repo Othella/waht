@@ -6,5 +6,16 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-
-dynamic_sidebar('sidebar-main');
+?>
+<?php waht_sidebar_before(); ?>
+<aside id="complementary" class="<?php echo SIDEBAR_CLASSES; ?>">
+    <?php if (is_active_sidebar('sidebar-main')) : ?>
+    <?php dynamic_sidebar('sidebar-main'); ?>
+    <?php else : ?>
+    <p class="help">
+        <?php _e('Activate some widgets!', 'waht'); ?>
+    </p>
+    <?php endif; ?>
+</aside>
+<!-- /#compementary -->
+<?php waht_sidebar_after(); ?>

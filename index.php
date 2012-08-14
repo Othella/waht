@@ -17,12 +17,7 @@
     </section>
     <!-- /#main -->
     <?php waht_main_after(); ?>
-    <?php waht_sidebar_before(); ?>
-    <aside id="complementary" class="<?php echo SIDEBAR_CLASSES; ?>">
-
-    </aside>
-    <!-- /#compementary -->
-    <?php waht_sidebar_after(); ?>
+    <?php get_sidebar(); ?>
 </div><!-- /#content -->
 
 <?php get_footer();
