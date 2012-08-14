@@ -7,8 +7,7 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-if (!defined('waht_credentials')
-):
+if (!defined('waht_credentials')) {
     /**
      * Outputs a credential string
      */
@@ -23,10 +22,9 @@ if (!defined('waht_credentials')
         $credentials .= "</a> &copy; " . $date;
         echo $credentials;
     }
-endif;
+}
 
-if (!function_exists('waht_container_class')
-) :
+if (!function_exists('waht_container_class')) {
     /**
      * Get the container class name
      */
@@ -34,7 +32,7 @@ if (!function_exists('waht_container_class')
     {
         echo (WAHT_FLUID_LAYOUT ? 'container-fluid' : 'container');
     }
-endif;
+}
 
 if (!function_exists('waht_google_analytics')) {
     /**
