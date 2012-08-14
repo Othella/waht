@@ -48,11 +48,11 @@ jQuery(function ($) {
             touchIcon:   true
         };
 
-        wahtPositionBody();
+        //wahtPositionBody();
     });
 
     $win.load(function () {
-        $win.resize(wahtPositionBody);
+        //$win.resize(wahtPositionBody);
     });
     $win.on('scroll', wahtSubNavScroll);
 

@@ -23,11 +23,6 @@
 /*  =============================================================================
     COMMON
     ========================================================================== */
-#page-header,
-#page-wrap,
-#page-footer {
-    padding: 1em 0;
-}
 
 .form-search {
     label.hide-text { display: none; }
@@ -97,14 +92,8 @@
 }
 
 /*  =============================================================================
-HEADER
-========================================================================== */
-
-/* Fixed Topbar Navigation */
-body.waht-navbar-fixed-top {
-    padding-top: 40px; /* More than 40px (navbar height) */
-    position:    relative;
-}
+    HEADER
+    ========================================================================== */
 
 body.admin-bar .navbar-fixed-top {
     top: 28px; /* Equals admin bar height */
@@ -139,10 +128,21 @@ body.admin-bar .navbar-fixed-top {
 /*  =============================================================================
     CONTENT
     ========================================================================== */
+#page-content { padding: 1em auto; }
 
+/* Posts */
+.post-header { }
+.post.content { }
+.post-footer { }
+.post-nav {
+    .prev-link { }
+    .next-link { }
+}
 /*  =============================================================================
     FOOTER
     ========================================================================== */
+
+#page-footer { margin: 1em auto; }
 
 /*  =============================================================================
     WordPress Generated Classes
@@ -376,16 +376,18 @@ a img.aligncenter { }
 @media (max-width: 979px) {
 /* Fixed Topbar Navigation */
     body.waht-navbar-fixed-top {
-        padding-top: 50px;
         .navbar-fixed-top {
-            position:     fixed;
-            margin-left:  0;
-            margin-right: 0;
         }
     }
 }
 
 @media (min-width: 980px) {
+
+/* Fixed Topbar Navigation */
+    body.waht-navbar-fixed-top {
+        padding-top: 58px; /* More than 40px (navbar height) */
+        position:    relative;
+    }
 /* Fixed subnav on scroll, but only for 980px and up (sorry IE!) */
     .subnav-fixed {
         margin:                0;

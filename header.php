@@ -48,66 +48,67 @@
 
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
-    <div class="<?php waht_container_class(); ?>">
 
-        <hgroup class="row-fluid">
-            <h1 class="title span4">
-                <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
-                    <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>">
-                    <span><?php bloginfo('name'); ?></span>
-                </a>
-            </h1>
-
-            <h2 class="subtitle span8">
-                <span><?php bloginfo('description'); ?></span>
-            </h2>
-        </hgroup>
-
-        <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
-
-        <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
-            <div class="navbar-inner">
-                <div class="<?php echo CONTAINER_CLASSES; ?>">
-                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </a>
-                    <a class="brand" href="<?php echo home_url(); ?>/">
-                        <?php bloginfo('name'); ?>
-                    </a>
-
-                    <!-- Everything you want hidden at 940px or less, place within here -->
-                    <nav id="nav-main" class="nav-collapse" role="navigation">
-                        <?php waht_main_nav_menu(); ?>
-                        <!-- .nav, .navbar-search, .navbar-form, etc -->
-                    </nav>
-                </div>
-            </div>
-        </nav>
-
-        <nav role="navigation" class="subnav">
+    <!-- Main navigation -->
+    <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+    <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
+        <div class="navbar-inner">
             <div class="<?php echo CONTAINER_CLASSES; ?>">
-                <?php waht_additional_nav_menu(); ?>
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="<?php echo home_url(); ?>/">
+                    <?php bloginfo('name'); ?>
+                </a>
+
+                <!-- Everything you want hidden at 940px or less, place within here -->
+                <nav id="nav-main" class="nav-collapse" role="navigation">
+                    <?php waht_main_nav_menu(); ?>
+                    <!-- .nav, .navbar-search, .navbar-form, etc -->
+                </nav>
             </div>
-        </nav>
+        </div>
+    </nav>
+    <?php } else { // use a simple menu ?>
+    <nav role="navigation" class="main-navigation <?php waht_container_class(); ?>">
+        <?php waht_main_nav_menu(); ?>
+    </nav>
+    <?php } ?>
 
-        <?php } else { // use a simple menu ?>
+    <!-- Site logo, name, description, etc. -->
+    <hgroup class="<?php waht_container_class(); ?>">
+        <h1 class="title span4">
+            <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
+                <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>">
+                <span><?php bloginfo('name'); ?></span>
+            </a>
+        </h1>
 
-        <nav role="navigation" class="main-navigation">
-            <?php waht_main_nav_menu(); ?>
-        </nav>
+        <h2 class="subtitle span8">
+            <span><?php bloginfo('description'); ?></span>
+        </h2>
+    </hgroup>
 
-        <nav role="navigation" class="additional-navigation">
+    <!-- Second navigation -->
+    <div class="<?php waht_container_class(); ?>">
+    <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+    <nav role="navigation" class="subnav">
+        <div class="<?php echo CONTAINER_CLASSES; ?>">
             <?php waht_additional_nav_menu(); ?>
-        </nav>
-        <?php } ?>
+        </div>
+    </nav>
+    <?php } else { // use a simple menu ?>
+    <nav role="navigation" class="additional-navigation">
+        <?php waht_additional_nav_menu(); ?>
+    </nav>
+    <?php } ?>
     </div>
 
 </header><!-- #page-header -->
 <?php waht_page_header_after(); ?>
 
 <?php waht_page_wrap_before(); ?>
-<div id="page-wrap" role="document">
-    <div class="<?php waht_container_class(); ?>">
+<div id="page-wrap" role="document" class="<?php waht_container_class(); ?>">
