@@ -8,15 +8,15 @@
  */
 
 /* Theme Author Information */
-define('WAHT_AUTHOR_NAME', 'a.h'); // Put your name here
-define('WAHT_AUTHOR_URI', 'http://ameliehusson.com'); // Put your uri here
-define('WAHT_CREATE_YEAR', 2012); // Put the theme creation's year here
+define('WAHT_AUTHOR_NAME', 'a.h'); // TODO Put your name here
+define('WAHT_AUTHOR_URI', 'http://ameliehusson.com'); // TODO Put your uri here
+define('WAHT_CREATE_YEAR', 2012); // TODO Put the theme creation's year here
 
 /* Layout Options */
 define('WAHT_BOOTSTRAP', true); // Allow use of the Twitter Bootstrap framework
 define('WAHT_RESPONSIVE', true); // Allow responsive layout
 define('WAHT_FLUID_LAYOUT', false); // Fluid (true) ir fixed (false) layout
-define('WAHT_GRID', false); // TODO Use a grid framework
+define('WAHT_GRID', false); // TODO (a.h) Use a grid framework
 
 /* Classes */
 define('WRAP_CLASSES', 'container'); // Class(es) for the wrapper

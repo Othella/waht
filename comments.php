@@ -7,4 +7,5 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-// TODO Code comments.php
+// TODO (a.h) Code comments.php
+_e('comments here!');

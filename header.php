@@ -97,6 +97,7 @@
         </hgroup>
 
         <!-- Second navigation -->
+        <!-- TODO: Find a way to collapse too long items! -->
         <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="subnav">
             <div class="<?php echo CONTAINER_CLASSES; ?>">

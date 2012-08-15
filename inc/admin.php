@@ -9,6 +9,6 @@
 
 add_filter('admin_footer_text', 'waht_credentials');
 
-// TODO Create admin panels for theme customization
+// TODO (a.h) Create admin panels for theme customization
 // - Apple links paths
 // - Google Analytics ID

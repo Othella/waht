@@ -5,8 +5,6 @@
  * @package    : waht
  * @author     : Amélie Husson
  * @uri        : https://github.com/Othella/waht
- *
- * TODO Code index.php
  */
 ?>
 <?php get_header(); ?>

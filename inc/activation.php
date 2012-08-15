@@ -7,6 +7,6 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-// TODO Code .htaccess creation
+// TODO (a.h) Code .htaccess creation
 
-// TODO Code bootstrap images copying from /frameworks/bootstrap/img/* to /assets/img/*
+// TODO (a.h) Code bootstrap images copying from /frameworks/bootstrap/img/* to /assets/img/*

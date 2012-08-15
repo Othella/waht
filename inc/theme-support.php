@@ -40,9 +40,9 @@ function waht_theme_support()
             'default-color'          => '#ffffff',
             'default-image'          => get_template_directory_uri() .
                 "/assets/img/white_paper_texture_background_seamless_pattern.jpg",
-            'wp_head_callback'       => 'custom_background_cb', // todo
-            'admin-head-callback'    => '', // todo
-            'admin-preview-callback' => '' // todo
+            'wp_head_callback'       => 'custom_background_cb', // TODO (a.h)
+            'admin-head-callback'    => '', // TODO (a.h)
+            'admin-preview-callback' => '' // TODO (a.h)
         ));
 
     // Add support for WP menus
@@ -73,7 +73,7 @@ function waht_theme_support()
         // add support for automatic feed links
         add_theme_support('automatic-feed-links');
 
-    // TODO Code OG theme support
+    // TODO (a.h) Code OG theme support
     add_theme_support('og-facebook'); // OpenGraph Facebook
 
     if (WAHT_APPLE_ICONS)
@@ -88,7 +88,7 @@ function waht_theme_support()
         remove_theme_support('apple-touche-screen');
 }
 
-waht_theme_support(); // TODO Call this in add_action (which one?)
+waht_theme_support(); // TODO (a.h) Call this in add_action (which one?)
 
 
 if (current_theme_supports('apple-touch-icon')) {

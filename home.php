@@ -7,8 +7,6 @@
  * @author      : Amélie Husson (http://ameliehusson.com)
  * @uri         : https://github.com/Othella/waht
  */
-
-// TODO Code home.php
 ?>
 <?php get_header(); ?>
 <div id="content" class="<?php echo CONTAINER_CLASSES; ?>">
