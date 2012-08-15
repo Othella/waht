@@ -7,8 +7,8 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-if (!function_exists('waht_register_sidebars')
-) :
+// Register our sidebars
+if (!function_exists('waht_register_sidebars')) {
     /*
     * Register our sidebars
     */
@@ -53,10 +53,10 @@ if (!function_exists('waht_register_sidebars')
             'after_title'   => '</h3>',
         ));
     }
-endif;
+}
 
-if (!function_exists('waht_widgets_init')
-) :
+// Initialize our widgets
+if (!function_exists('waht_widgets_init')) {
     /*
     * Initialize our widgets
     */
@@ -66,10 +66,10 @@ if (!function_exists('waht_widgets_init')
     }
 
     add_action('widgets_init', 'waht_widgets_init');
-endif;
+}
 
-if (!function_exists('waht_enqueue_scripts')
-):
+// Enqueue our scripts
+if (!function_exists('waht_enqueue_scripts')) {
     /**
      * Enqueue our scripts
      */
@@ -141,4 +141,4 @@ if (!function_exists('waht_enqueue_scripts')
     }
 
     add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
-endif;
+}
