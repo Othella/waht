@@ -73,8 +73,9 @@
             </div>
         </div>
     </nav>
-    <?php }
-else { // use a simple menu ?>
+    <?php
+} else { // use a simple menu
+    ?>
     <nav role="navigation" class="main-navigation <?php waht_container_class(); ?>">
         <?php waht_main_nav_menu(); ?>
     </nav>
@@ -102,8 +103,9 @@ else { // use a simple menu ?>
                 <?php waht_additional_nav_menu(); ?>
             </div>
         </nav>
-        <?php }
-    else { // use a simple menu ?>
+        <?php
+    } else { // use a simple menu
+        ?>
         <nav role="navigation" class="additional-navigation">
             <?php waht_additional_nav_menu(); ?>
         </nav>
