@@ -7,124 +7,114 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-if (!defined('waht_register_nav_menus')
-):
-    /**
-     * Register our navigation menus
-     * @require WP 3+
-     */
-    function waht_register_nav_menus()
-    {
-        register_nav_menus(
-            array(
-                 'main_nav_menu'   => __('Main Navigation Menu', 'waht'),
-                 'additional_nav_menu' => __('Additional Navigation Menu', 'waht')
-            )
-        );
-    }
-endif;
+
+/**
+ * Register our navigation menus
+ * @require WP 3+
+ */
+function waht_register_nav_menus()
+{
+    register_nav_menus(
+        array(
+            'main_nav_menu'       => __('Main Navigation Menu', 'waht'),
+            'additional_nav_menu' => __('Additional Navigation Menu', 'waht')
+        )
+    );
+}
+
 add_action('after_setup_theme', 'waht_register_nav_menus');
 
-if (!defined('waht_main_nav_menu')
-):
-    /**
-     * Main Man Menu
-     */
-    function waht_main_nav_menu()
-    {
-        // select the walker depending on framework
-        $walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() : (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
-        wp_nav_menu(
-            array(
-                 'container'       => false, // remove nav container
-                 'container_class' => 'menu clearfix', // class of container (should you choose to use it)
-                 'menu'            => 'main_nav_menu', // nav name
-                 'menu_class'      => 'nav top-nav clearfix', // adding custom nav class
-                 'theme_location'  => 'main_nav_menu', // where it's located in the theme
-                 'walker'          => $walker, // our cleaner walker
-                 'before'          => '', // before the menu
-                 'after'           => '', // after the menu
-                 'link_before'     => '', // before each link
-                 'link_after'      => '', // after each link
-                 'depth'           => 0, // limit the depth of the nav
-                 'fallback_cb'     => 'waht_main_nav_menu_fallback' // fallback function
-            ));
-    }
-endif;
 
-if (!defined('waht_additional_nav_menu')
-):
-    /**
-     * Additional Nav Menu
-     */
-    function waht_additional_nav_menu()
-    {
-        $walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() : (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
-        wp_nav_menu(
-            array(
-                 'container'       => false, // remove nav container
-                 'container_class' => 'additional-nav-menu clearfix', // class of container (should you choose to use it)
-                 'menu'            => 'additional_nav_menu', // nav name
-                 'menu_class'      => 'nav nav-pills additional-nav clearfix', // adding custom nav class
-                 'theme_location'  => 'additional_nav_menu', // where it's located in the theme
-                 'walker'          => $walker, // our cleaner walker
-                 'before'          => '', // before the menu
-                 'after'           => '', // after the menu
-                 'link_before'     => '', // before each link
-                 'link_after'      => '', // after each link
-                 'depth'           => 0, // limit the depth of the nav
-                 'fallback_cb'     => 'waht_footer_nav_menu_fallback' // fallback function
-            ));
-    }
-endif;
+/**
+ * Main Man Menu
+ */
+function waht_main_nav_menu()
+{
+    // select the walker depending on framework
+    $walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() :
+        (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+    wp_nav_menu(
+        array(
+            'container'       => false, // remove nav container
+            'container_class' => 'menu clearfix', // class of container (should you choose to use it)
+            'menu'            => 'main_nav_menu', // nav name
+            'menu_class'      => 'nav top-nav clearfix', // adding custom nav class
+            'theme_location'  => 'main_nav_menu', // where it's located in the theme
+            'walker'          => $walker, // our cleaner walker
+            'before'          => '', // before the menu
+            'after'           => '', // after the menu
+            'link_before'     => '', // before each link
+            'link_after'      => '', // after each link
+            'depth'           => 0, // limit the depth of the nav
+            'fallback_cb'     => 'waht_main_nav_menu_fallback' // fallback function
+        ));
+}
 
-if (!defined('waht_main_nav_menu_fallback')
-):
-    /**
-     * Fallback for the Main Nav Menu
-     */
-    function waht_main_nav_menu_fallback()
-    {
-        wp_page_menu(array('show_home' => __('Home', 'waht')));
-    }
-endif;
 
-if (!defined('waht_additional_nav_menu_fallback')
-):
-    /**
-     * Fallback for the Footer Nav Menu
-     */
-    function waht_additional_nav_menu_fallback()
-    {
-        wp_page_menu();
-    }
-endif;
+/**
+ * Additional Nav Menu
+ */
+function waht_additional_nav_menu()
+{
+    $walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() :
+        (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+    wp_nav_menu(
+        array(
+            'container'       => false, // remove nav container
+            'container_class' => 'additional-nav-menu clearfix', // class of container (should you choose to use it)
+            'menu'            => 'additional_nav_menu', // nav name
+            'menu_class'      => 'nav nav-pills additional-nav clearfix', // adding custom nav class
+            'theme_location'  => 'additional_nav_menu', // where it's located in the theme
+            'walker'          => $walker, // our cleaner walker
+            'before'          => '', // before the menu
+            'after'           => '', // after the menu
+            'link_before'     => '', // before each link
+            'link_after'      => '', // after each link
+            'depth'           => 0, // limit the depth of the nav
+            'fallback_cb'     => 'waht_footer_nav_menu_fallback' // fallback function
+        ));
+}
 
-if (!defined('waht_wp_nav_menu')
-):
-    /**
-     * Replace WP generated state for current nav item by "active"
-     *
-     * @param $text
-     *
-     * @return mixed
-     */
-    function waht_wp_nav_menu($text)
-    {
-        $replace = array(
-            'current-menu-item'     => 'active',
-            'current-menu-parent'   => 'active',
-            'current-menu-ancestor' => 'active',
-            'current_page_item'     => 'active',
-            'current_page_parent'   => 'active',
-            'current_page_ancestor' => 'active',
-        );
+/**
+ * Fallback for the Main Nav Menu
+ */
+function waht_main_nav_menu_fallback()
+{
+    wp_page_menu(array('show_home' => __('Home', 'waht')));
+}
 
-        $text = str_replace(array_keys($replace), $replace, $text);
-        $text = str_replace('active active', 'active', $text); // only one!
-        return $text;
-    }
-endif;
+
+/**
+ * Fallback for the Footer Nav Menu
+ */
+function waht_additional_nav_menu_fallback()
+{
+    wp_page_menu();
+}
+
+/**
+ * Replace WP generated state for current nav item by "active"
+ *
+ * @param $text
+ *
+ * @return mixed
+ */
+function waht_wp_nav_menu($text)
+{
+    $replace = array(
+        'current-menu-item'     => 'active',
+        'current-menu-parent'   => 'active',
+        'current-menu-ancestor' => 'active',
+        'current_page_item'     => 'active',
+        'current_page_parent'   => 'active',
+        'current_page_ancestor' => 'active',
+    );
+
+    $text = str_replace(array_keys($replace), $replace, $text);
+    $text = str_replace('active active', 'active', $text); // only one!
+    return $text;
+}
+
 add_filter('wp_nav_menu', 'waht_wp_nav_menu');
 
 /**
@@ -175,7 +165,8 @@ class Waht_Walker_Nav_Menu extends Walker_Nav_Menu {
         }
 
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-        $class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' : ' class="' . $menu_name . '"';
+        $class_names =
+            $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' : ' class="' . $menu_name . '"';
 
         $output .= $indent . '<li' . $class_names . '>';
 
@@ -272,7 +263,8 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
         }
 
         $class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-        $class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' : ' class="' . $menu_name . '"'; // menu name in classes
+        $class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
+            ' class="' . $menu_name . '"'; // menu name in classes
 
         $output .= $indent . '<li' . $class_names . $li_attributes . '>';
 
@@ -315,7 +307,8 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
         // add the "has_children" field (needed to display dropdown)
         if (is_array($args[0])) {
             $args[0]['has_children'] = !empty($children_elements[$element->$id_field]);
-        } elseif (is_object($args[0])) {
+        }
+        elseif (is_object($args[0])) {
             $args[0]->has_children = !empty($children_elements[$element->$id_field]);
         }
 
