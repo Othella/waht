@@ -48,7 +48,7 @@
 
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
-
+    <?php waht_page_header_inside_before(); ?>
     <!-- Main navigation -->
     <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
     <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
@@ -94,19 +94,19 @@
 
     <!-- Second navigation -->
     <div class="<?php waht_container_class(); ?>">
-    <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
-    <nav role="navigation" class="subnav">
-        <div class="<?php echo CONTAINER_CLASSES; ?>">
+        <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+        <nav role="navigation" class="subnav">
+            <div class="<?php echo CONTAINER_CLASSES; ?>">
+                <?php waht_additional_nav_menu(); ?>
+            </div>
+        </nav>
+        <?php } else { // use a simple menu ?>
+        <nav role="navigation" class="additional-navigation">
             <?php waht_additional_nav_menu(); ?>
-        </div>
-    </nav>
-    <?php } else { // use a simple menu ?>
-    <nav role="navigation" class="additional-navigation">
-        <?php waht_additional_nav_menu(); ?>
-    </nav>
-    <?php } ?>
+        </nav>
+        <?php } ?>
     </div>
-
+    <?php waht_page_header_inside_after(); ?>
 </header><!-- #page-header -->
 <?php waht_page_header_after(); ?>
 

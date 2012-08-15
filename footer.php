@@ -13,7 +13,7 @@
 
 <?php waht_page_footer_before(); ?>
 <footer id="page-footer" class="<?php waht_container_class(); ?>">
-    <?php waht_page_footer_inside(); ?>
+    <?php waht_page_footer_inside_before(); ?>
     <section class="footer-sidebars row-fluid">
         <section class="sidebar-footer-left span4">
             <?php if (is_dynamic_sidebar('sidebar-footer-left')) : ?>
@@ -34,6 +34,7 @@
     <section class="copyright">
         <?php waht_credentials(); ?>
     </section>
+    <?php waht_page_footer_inside_after(); ?>
 </footer><!-- #page-footer -->
 <?php waht_page_footer_after(); ?>
 

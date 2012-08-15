@@ -26,6 +26,18 @@ function waht_page_header_before() { do_action('waht_page_header_before'); }
 function waht_page_header_after() { do_action('waht_page_header_after'); }
 
 /**
+ * Page header inside before hook
+ * @used_in header.php
+ */
+function waht_page_header_inside_before() { do_action('waht_page_header_inside_before'); }
+
+/**
+ * Page header inside after hook
+ * @used_in header.php
+ */
+function waht_page_header_inside_after() { do_action('waht_page_header_inside_after'); }
+
+/**
  * Page wrap before hook
  * @used_in header.php
  */
@@ -102,10 +114,16 @@ function waht_page_wrap_after() { do_action('waht_page_wrap_after'); }
 function waht_page_footer_before() { do_action('waht_page_footer_before'); }
 
 /**
- * Page footer inside hook
+ * Page footer inside before hook
  * @used in footer.php
  */
-function waht_page_footer_inside() { do_action('waht_page_footer_inside'); }
+function waht_page_footer_inside_before() { do_action('waht_page_footer_inside_before'); }
+
+/**
+ * Page footer inside after hook
+ * @used in footer.php
+ */
+function waht_page_footer_inside_after() { do_action('waht_page_footer_inside_after'); }
 /**
  * Page footer after hook
  * @used in footer.php
