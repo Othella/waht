@@ -123,4 +123,5 @@
 <?php waht_page_header_after(); ?>
 
 <?php waht_page_wrap_before(); ?>
-<div id="page-wrap" role="document" class="<?php waht_container_class(); ?>">
+<div id="page-wrap" role="document">
+    <div class="<?php waht_container_class(); ?>">
