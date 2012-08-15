@@ -91,3 +91,9 @@ if (!function_exists('waht_dynamic_title')) {
         }
     }
 }
+
+if (!function_exists('waht_add_clearfix_div')) {
+    function waht_add_clearfix_div() {
+        echo '<div class="clearfix"></div>';
+    }
+}
