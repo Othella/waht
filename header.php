@@ -82,19 +82,24 @@
     <?php } ?>
 
     <div class="<?php waht_container_class(); ?>">
-        <!-- Site logo, name, description, etc. -->
-        <hgroup class="row-fluid">
-            <h1 class="title span4">
+        <div class="row-fluid">
+            <!-- Site logo, name, description, etc. -->
+            <div class="span4">
                 <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
-                    <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name'); ?>">
-                    <span><?php bloginfo('name'); ?></span>
+                    <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name');?>">
                 </a>
-            </h1>
+            </div>
 
-            <h2 class="subtitle span8">
-                <span><?php bloginfo('description'); ?></span>
-            </h2>
-        </hgroup>
+            <hgroup class="span8">
+                <h1 class="title">
+                    <span><?php bloginfo('name'); ?></span>
+                </h1>
+
+                <h2 class="subtitle">
+                    <span><?php bloginfo('description'); ?></span>
+                </h2>
+            </hgroup>
+        </div>
 
         <!-- Second navigation -->
         <!-- TODO: Find a way to collapse too long items! -->

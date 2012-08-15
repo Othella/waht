@@ -92,6 +92,9 @@ waht_theme_support(); // TODO (a.h) Call this in add_action (which one?)
 
 
 if (current_theme_supports('apple-touch-icon')) {
+    /**
+     * Add links to Apple icons
+     */
     function waht_print_apple_icons()
     {
         $apple_icons     = get_theme_support('apple-touch-icon');
