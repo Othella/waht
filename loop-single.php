@@ -22,7 +22,7 @@
     <footer class="post-footer">
         <?php wp_link_pages(array('before' => '<nav id="page-nav" class="pagination"><p>' . __('Pages:', 'waht'),
                                   'after'  => '</p></nav>')); ?>
-        <?php $tags = get_the_tags(); if ($tags) { ?><p><?php the_tags(); ?></p><?php } ?>
+        <?php waht_meta(); ?>
     </footer>
     <?php comments_template(); ?>
     <?php waht_post_inside_after(); ?>

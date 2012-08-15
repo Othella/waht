@@ -59,8 +59,7 @@ function waht_dynamic_title()
     if (function_exists('is_tag') && is_tag()) {
         single_tag_title(__("Tag Archive for &quot;", 'waht'));
         echo '&quot; - ';
-    }
-    elseif (is_archive()) {
+    } elseif (is_archive()) {
         wp_title('');
         echo ' ' . __('Archive', 'waht') . ' | ';
     }
@@ -78,8 +77,7 @@ function waht_dynamic_title()
         bloginfo('name');
         echo ' | ';
         bloginfo('description');
-    }
-    else {
+    } else {
         bloginfo('name');
     }
     if ($paged > 1) {
@@ -93,4 +91,14 @@ function waht_dynamic_title()
 function waht_add_clearfix_div()
 {
     echo '<div class="clearfix"></div>';
+}
+
+function waht_meta()
+{
+    $time       = '<time class="updated" datetime="' . get_the_time() . '" pubdate>' .
+        sprintf(__('Posted on %s at %s.', 'waht'), get_the_date(), get_the_time()) . '</time>';
+    $author     = '<p class="author vcard">' . __('Written by', 'waht') . ' <a href="' .
+        get_author_posts_url(get_the_author_meta('ID')) . '" rel="author" class="fn">' . get_the_author() . '</a></p>';
+    $categories =  '<p class="categories">' . __('Posted in', 'waht') . ' ' . get_the_category_list(' | ') . '</p>';
+    echo $time . $author . $categories;
 }
