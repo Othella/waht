@@ -13,13 +13,6 @@ jQuery(function ($) {
         isFixed = false;
 
     /**
-     * Improve page layout if using bootstrap's top navbar
-     */
-    function wahtPositionBody() {
-        $('body.waht-navbar-fixed-top').css('padding-top', $navbarFixedTop.height());
-    }
-
-    /**
      * Fix subnav on scroll
      */
     function wahtSubNavScroll() {
@@ -47,13 +40,7 @@ jQuery(function ($) {
             expire:      2,
             touchIcon:   true
         };
-
-        //wahtPositionBody();
     });
 
-    $win.load(function () {
-        //$win.resize(wahtPositionBody);
-    });
     $win.on('scroll', wahtSubNavScroll);
-
 });
