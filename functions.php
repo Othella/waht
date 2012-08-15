@@ -15,3 +15,4 @@ require_once('inc/theme-support.php'); // WP Theme support
 require_once('inc/nav.php'); // Navigation and menus
 require_once('inc/layout.php'); // Site layout customization
 require_once('inc/hooks.php'); // Hooks
+require_once('inc/custom.php'); // Custom functions
