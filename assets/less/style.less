@@ -4,13 +4,21 @@
     Description:    Main theme Stylesheet
     ========================================================================== */
 
+/*
+This is "mobile first" styling.
+We first style for mobile device and then customize for other devices!!
+*/
+
 /****** Import scripts ******/
 
 // Import WP Generated classes styling
 @import 'wp.less';
 
+// Import the base stylesheet
+@import 'base.less';
+
 // TODO This is a demo styling for the waht package. Feel free to remove it or reuse its code!
-@import 'waht.less';
+// @import 'waht.less';
 
 // Import media queries
 @import "media-queries.less";

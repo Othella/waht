@@ -28,10 +28,36 @@
     COMMON
     ========================================================================== */
 
-.form-search {
-    label.hide-text { display: none; }
-}
 
+/*  =============================================================================
+    HEADER
+    ========================================================================== */
+
+#page-header {
+    .navbar {
+        .brand {
+            float:       right;
+            color:       @waht_lbeige;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
+        }
+    }
+    .title {
+        a {
+            color:       #000;
+            text-shadow: 0 -2px 0 #ddd, 0 2px 3px #fff; // Letterpress effect
+            &:hover {
+                color:           #000;
+                text-decoration: none;
+            }
+            img { display: block; }
+        }
+    }
+    .subtitle {
+        span {
+            text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff; // Letterpress effect
+        }
+    }
+}
 /* Subnav */
 .subnav {
     width:                 100%;
@@ -96,40 +122,6 @@
 }
 
 /*  =============================================================================
-    HEADER
-    ========================================================================== */
-
-body.admin-bar .navbar-fixed-top {
-    top: 28px; /* Equals admin bar height */
-}
-
-#page-header {
-    .navbar {
-        .brand {
-            float:       right;
-            color:       @waht_lbeige;
-            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
-        }
-    }
-    .title {
-        a {
-            color:       #000;
-            text-shadow: 0 -2px 0 #ddd, 0 2px 3px #fff; // Letterpress effect
-            &:hover {
-                color:           #000;
-                text-decoration: none;
-            }
-            img { display: block; }
-        }
-    }
-    .subtitle {
-        span {
-            text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff; // Letterpress effect
-        }
-    }
-}
-
-/*  =============================================================================
     CONTENT
     ========================================================================== */
 #page-content { padding: 1em auto; }
@@ -177,14 +169,6 @@ body.admin-bar .navbar-fixed-top {
                 -moz-border-radius:    4px 4px 0 0;
                 border-radius:         4px 4px 0 0;
             }
-        }
-    }
-}
-
-@media (max-width: 979px) {
-/* Fixed Topbar Navigation */
-    body.waht-navbar-fixed-top {
-        .navbar-fixed-top {
         }
     }
 }
