@@ -4,8 +4,24 @@
     Description:    Login Page Stylesheet
     ========================================================================== */
 
-.login {
+/* TODO Add own style */
+
+body.login {
+    background:  #fff url('../img/white_paper_texture_background_seamless_pattern.jpg') top left repeat;
+    text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff; // Letterpress effect
     h1 a {
         background: transparent url('../img/logo-login.png') top center no-repeat;
+    }
+    .message {
+        text-shadow: 0 -1px 0 #eee, 0 1px 0 #fff; // Letterpress effect
+    }
+    form {
+        -moz-box-shadow:    0px 1px 0px 0px rgba(255, 255, 255, .5), inset 0px 1px 0px 0px rgba(221,221,221,.5);
+        -webkit-box-shadow: 0px 1px 0px 0px rgba(255, 255, 255, .5), inset 0px 1px 0px 0px rgba(221,221,221,.5);
+        box-shadow:         0px 1px 0px 0px rgba(255, 255, 255, .5) inset 0px 1px 0px 0px rgba(221,221,221,.5);
+        text-shadow:        0 -1px 0 #f7f7f7, 0 1px 0 #fff; // Letterpress effect
+        label {
+            color: #007aa0;
+        }
     }
 }
