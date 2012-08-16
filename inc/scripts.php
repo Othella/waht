@@ -68,6 +68,7 @@ function waht_enqueue_scripts()
     wp_register_style('waht-style', get_template_directory_uri() . '/assets/css/style.css', array(),
         $theme['Version'], 'all');
     wp_enqueue_style('waht-style');
+    // TODO (a.h) Add a minified stylesheet
 
     // Custom scripts
     if (WAHT_DEV_MODE) {
