@@ -20,8 +20,9 @@
         <?php the_content(); ?>
     </section>
     <footer class="post-footer">
-        <?php wp_link_pages(array('before' => '<nav id="page-nav" class="pagination"><p>' . __('Pages:', 'waht'),
-                                  'after'  => '</p></nav>')); ?>
+        <?php wp_link_pages(array(
+        'before'      => '<nav id="page-nav"><p>',
+        'after'       => '</p></nav>')); ?>
         <?php waht_meta(); ?>
     </footer>
     <?php comments_template(); ?>
