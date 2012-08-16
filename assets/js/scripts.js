@@ -29,17 +29,6 @@ jQuery(function ($) {
 
     $('document').ready(function () {
 
-        /**
-         * Configure Add To Homescreen plugin
-         * Documentation: http://cubiq.org/add-to-home-screen
-         */
-        var addToHomeConfig = {
-            animationIn: 'bubble',
-            animationOut:'drop',
-            lifespan:    10000,
-            expire:      2,
-            touchIcon:   true
-        };
     });
 
     $win.on('scroll', wahtSubNavScroll);

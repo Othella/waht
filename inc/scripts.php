@@ -11,8 +11,7 @@
 /**
  * Enqueue our scripts
  */
-function waht_enqueue_scripts()
-{
+function waht_enqueue_scripts() {
     $theme = wp_get_theme();
 
     // Only for IE < 9
@@ -90,3 +89,44 @@ function waht_enqueue_scripts()
 }
 
 add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
+
+
+/**
+ * Print JavaScript for Google Analytics
+ * See https://developers.google.com/analytics/devguides/collection/gajs/
+ */
+function waht_google_analytics() {
+    $waht_google_analytics_id = GOOGLE_ANALYTICS_ID;
+    if ($waht_google_analytics_id !== '') {
+        $script_str = "\n\t<script>\n";
+        $script_str .= "\t\tvar _gaq=[['_setAccount','$waht_google_analytics_id'],['_trackPageview']];\n";
+        $script_str .= "\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\n";
+        $script_str .= "\t\tg.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';\n";
+        $script_str .= "\t\ts.parentNode.insertBefore(g,s)}(document,'script'));\n";
+        $script_str .= "\t</script>\n";
+        echo $script_str;
+    }
+}
+
+add_action('waht_footer', 'waht_google_analytics');
+
+
+/**
+ * Configure Add To Homescreen plugin
+ * Documentation: http://cubiq.org/add-to-home-screen
+ */
+function waht_add_to_homescreen_options() {
+    if (!WAHT_USE_ADD2HOME) return;
+    $conf_str = "\n\t<script>\n";
+    $conf_str .= "\t\tvar addToHomeConfig = {\n";
+    $conf_str .= "\t\t\tanimationIn: 'bubble',\n";
+    $conf_str .= "\t\t\tanimationOut:'drop',\n";
+    $conf_str .= "\t\t\tlifespan:    10000,\n";
+    $conf_str .= "\t\t\texpire:      2,\n";
+    $conf_str .= "\t\t\ttouchIcon:   true\n";
+    $conf_str .= "\t\t};\n";
+    $conf_str .= "\t</script>\n";
+    echo $conf_str;
+}
+
+add_action('waht_footer', 'waht_add_to_homescreen_options');

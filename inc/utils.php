@@ -31,25 +31,6 @@ function waht_container_class()
 }
 
 /**
- * Print JavaScript for Google Analytics
- */
-function waht_google_analytics()
-{
-    $waht_google_analytics_id = GOOGLE_ANALYTICS_ID;
-    if ($waht_google_analytics_id !== '') {
-        echo "\n\t<script>\n";
-        echo "\t\tvar _gaq=[['_setAccount','$waht_google_analytics_id'],['_trackPageview']];\n";
-        echo "\t\t(function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];\n";
-        echo "\t\tg.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';\n";
-        echo "\t\ts.parentNode.insertBefore(g,s)}(document,'script'));\n";
-        echo "\t</script>\n";
-    }
-}
-
-add_action('waht_footer', 'waht_google_analytics');
-
-
-/**
  * Display a dynamic title tag
  * See http://css-tricks.com/snippets/wordpress/dynamic-title-tag/
  */
