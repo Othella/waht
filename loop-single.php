@@ -22,7 +22,7 @@
     <footer class="post-footer">
         <?php wp_link_pages(array(
         'before'      => '<nav id="page-nav"><p>',
-        'after'       => '</p></nav>')); ?>
+        'after'       => '</p></nav>')); // TODO (a.h) Pagination-oriented list ?>
         <?php waht_meta(); ?>
     </footer>
     <?php comments_template(); ?>
