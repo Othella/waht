@@ -8,6 +8,7 @@
  */
 ?>
 </div>
+<?php waht_page_wrap_inside_after(); ?>
 </div><!-- /#page-wrap -->
 <?php waht_page_wrap_after(); ?>
 
