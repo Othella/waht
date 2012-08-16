@@ -17,14 +17,18 @@ function waht_enqueue_scripts()
 
     // Only for IE < 9
     // See http://kuttler.eu/post/wordpress-style-version-conditional-comments/
-    wp_register_style('waht-ie', get_template_directory_uri() . 'assets/css/ie.css', array(), $theme['Version'],
-        'all');
-    $GLOBALS['wp_styles']->add_data('waht-ie', 'conditional', 'lte IE 9');
-    wp_enqueue_style('waht-ie');
+    // and http://css-tricks.com/snippets/wordpress/html5-shim-in-functions-php/
+    global $is_IE;
+    if ($is_IE) {
+        wp_register_style('waht-ie', get_template_directory_uri() . 'assets/css/ie.css', array(), $theme['Version'],
+            'all');
+        $GLOBALS['wp_styles']->add_data('waht-ie', 'conditional', 'lte IE 9');
+        wp_enqueue_style('waht-ie');
 
-    wp_register_script('waht-html5', 'http://html5shiv.googlecode.com/svn/trunk/html5.js', array(), null, 'all');
-    $GLOBALS['wp_styles']->add_data('waht-html5', 'conditional', 'lte IE 9');
-    wp_enqueue_script('waht-html5');
+        wp_register_script('waht-html5', 'http://html5shiv.googlecode.com/svn/trunk/html5.js', array(), null, 'all');
+        $GLOBALS['wp_styles']->add_data('waht-html5', 'conditional', 'lte IE 9');
+        wp_enqueue_script('waht-html5');
+    }
 
     // jQuery is loaded in header.php using the same method from HTML5 Boilerplate:
     // Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline
@@ -70,8 +74,7 @@ function waht_enqueue_scripts()
         wp_register_script('waht-scripts',
             get_template_directory_uri() . '/assets/js/scripts.js', array('jquery'), $theme['Version'], true);
 
-    }
-    else {
+    } else {
         wp_register_script('waht-scripts',
             get_template_directory_uri() . '/assets/js/scripts.min.js', array('jquery'), $theme['Version'], true);
 
