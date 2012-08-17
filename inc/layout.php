@@ -7,11 +7,10 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-/*
-* Register our sidebars
-*/
-function waht_register_sidebars()
-{
+/**
+ * Register our sidebars
+ */
+function waht_register_sidebars() {
     $widget_class       = 'widget';
     $widget_title_class = 'widgettitle';
     register_sidebar(array(
@@ -52,11 +51,10 @@ function waht_register_sidebars()
     ));
 }
 
-/*
-* Initialize our widgets
-*/
-function waht_widgets_init()
-{
+/**
+ * Initialize our widgets
+ */
+function waht_widgets_init() {
     waht_register_sidebars();
 }
 
