@@ -126,3 +126,4 @@
 <div id="page-wrap" role="document">
     <?php waht_page_wrap_inside_before(); ?>
     <div class="<?php waht_container_class(); ?>">
+        <!-- TODO (a.h) Add breadcrumbs -->
