@@ -76,7 +76,7 @@ function waht_add_clearfix_div()
 
 function waht_meta()
 {
-    $time       = '<time class="updated" datetime="' . get_the_time() . '" pubdate>' .
+    $time       = '<time class="updated" datetime="' . get_the_date('c') . '" pubdate>' .
         sprintf(__('Posted on %s at %s.', 'waht'), get_the_date(), get_the_time()) . '</time>';
     $author     = '<p class="author vcard">' . __('Written by', 'waht') . ' <a href="' .
         get_author_posts_url(get_the_author_meta('ID')) . '" rel="author" class="fn">' . get_the_author() . '</a></p>';
