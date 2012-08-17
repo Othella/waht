@@ -98,6 +98,30 @@ function waht_post_inside_after() { do_action('waht_post_inside_after'); }
 function waht_post_after() { do_action('waht_post_after'); }
 
 /**
+ * Comments before hook
+ * @used_in comments.php
+ */
+function waht_comments_before() { do_action('waht_comments_before'); }
+
+/**
+ * Comments after hook
+ * @used_in comments.php
+ */
+function waht_comments_after() { do_action('waht_comments_after'); }
+
+/**
+ * Comment form before hook
+ * @used_in comments.php
+ */
+function waht_comment_form_before() { do_action('waht_comment_form_before'); }
+
+/**
+ * Comment form after hook
+ * @used_in comments.php
+ */
+function waht_comment_form_after() { do_action('waht_comment_form_after'); }
+
+/**
  * Sidebar aside before hook
  * @used_in sidebar.php
  */
@@ -150,6 +174,7 @@ function waht_page_footer_inside_before() { do_action('waht_page_footer_inside_b
  * @used_in footer.php
  */
 function waht_page_footer_inside_after() { do_action('waht_page_footer_inside_after'); }
+
 /**
  * Page footer after hook
  * @used_in footer.php
