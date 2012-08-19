@@ -40,9 +40,9 @@ function waht_theme_support()
             'default-color'          => '#ffffff',
             'default-image'          => get_template_directory_uri() .
                 "/assets/img/white_paper_texture_background_seamless_pattern.jpg",
-            'wp_head_callback'       => 'custom_background_cb', // TODO (a.h)
-            'admin-head-callback'    => '', // TODO (a.h)
-            'admin-preview-callback' => '' // TODO (a.h)
+            'wp_head_callback'       => 'custom_background_cb', // TODO (a.h) Code wp_head callback
+            'admin-head-callback'    => '', // TODO (a.h) Code admin-head callback
+            'admin-preview-callback' => '' // TODO (a.h) Code admin-preview callback
         ));
 
     // Add support for WP menus
