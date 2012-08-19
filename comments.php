@@ -15,7 +15,7 @@ $req = get_option('require_name_email');
 function waht_comments($comment, $args, $depth) {
     $GLOBALS['comment'] = $comment; ?>
 <li <?php comment_class(); ?>>
-    <article id="comment-<?php comment_ID(); ?>" class="clearfix">
+    <article id="comment-<?php comment_ID(); ?>">
         <header class="comment-author vcard">
             <?php $avatar_size = ('0' != $comment->comment_parent) ? 32 : 48; ?>
             <?php echo get_avatar($comment, $avatar_size); ?>
@@ -39,9 +39,9 @@ function waht_comments($comment, $args, $depth) {
 
         <footer>
             <?php comment_reply_link(array_merge($args, array(
-            'before'     => '<span class="btn">',
+            'before'     => '<span class="btn"><i class="icon-share-alt"></i> ',
             'after'      => '</span>',
-            'reply_text' => __('<i class="icon-pencil"></i> Reply', 'waht'),
+            'reply_text' => __('Reply to ', 'waht') . get_comment_author(),
             'depth'      => $depth,
             'max_depth'  => $args['max_depth']))); ?>
         </footer>
@@ -110,7 +110,11 @@ function waht_comments($comment, $args, $depth) {
 <section id="respond" class="post-respond">
     <header>
         <h3><?php comment_form_title(__('Leave a comment', 'waht'), __('Reply to %s', 'waht')); ?></h3>
-        <p class="cancel-comment-reply"><?php cancel_comment_reply_link(__('Cancel comment', 'waht')); ?></p>
+        <p class="cancel-comment-reply">
+            <?php cancel_comment_reply_link('<span class="btn">
+                <i class="icon-remove"></i> ' . __('Cancel comment', 'waht') . '</span>'); ?>
+
+        </p>
         <?php if (get_option('comment_registration') && !is_user_logged_in()) : ?>
         <div class="alert alert-block fade in">
             <a class="close" data-dismiss="alert">&times;</a>
@@ -121,11 +125,14 @@ function waht_comments($comment, $args, $depth) {
         <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform"
               class="form-horizontal">
             <?php if (is_user_logged_in()) : ?>
-            <p class="comments-logged-in-as"><?php _e('Logged in as', 'waht')?> <a
-                    href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"
-                    title="<?php _e('Go to profile', 'waht'); ?>"><?php echo $user_identity; ?></a>. <a
-                    href="<?php echo wp_logout_url(get_permalink()); ?>"
-                    title="<?php _e('Log out', 'waht'); ?>"><?php _e('Log out', 'waht'); ?></a></p>
+            <p class="comments-logged-in-as">
+                <?php _e('Logged in as', 'waht')?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"
+                                                      title="<?php _e('Go to profile', 'waht'); ?>"><?php echo $user_identity; ?></a>.
+                <span class="btn">
+                    <i class="icon-off"></i> <a href="<?php echo wp_logout_url(get_permalink()); ?>"
+                                                title="<?php _e('Log out', 'waht'); ?>"><?php _e('Log out', 'waht'); ?></a>
+                </span>
+            </p>
             <?php else : ?>
             <fieldset>
                 <div class="control-group">
@@ -174,7 +181,7 @@ function waht_comments($comment, $args, $depth) {
                 <label class="control-label" for="comment"><?php _e('Comment', 'waht'); ?></label>
                 <div class="controls">
                     <textarea name="comment" id="comment" class="input-xlarge" tabindex="4"
-                              placeholder="<?php _e('Eg.: This post rocks!', 'waht'); ?>"></textarea><!-- TODO (a.h) max width -->
+                              placeholder="<?php _e('Eg.: This post rocks!', 'waht'); ?>"></textarea>
                 </div>
             </div>
             <div class="form-actions">
