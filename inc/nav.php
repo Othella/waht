@@ -332,12 +332,11 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 /**
  * Builds a breadcrumbs
- * TODO (a.h) Code breadcrumb
  * See http://bacsoftwareconsulting.com/blog/index.php/wordpress-cat/adding-wordpress-breadcrumbs-without-a-plugin/
  */
 function waht_breadcrumb() {
-    //Variable (symbol >> encoded) and can be styled separately.
-    //Use >> for different level categories (parent >> child >> grandchild)
+    //Variable and can be styled separately.
+    //Use / for different level categories (parent / child / grandchild)
     $delimiter = '<span class="divider"> / </span>';
     //Use bullets for same level categories ( parent . parent )
     $subdelimiter = '<span class="subdivider"> &bull; </span>';
@@ -413,9 +412,9 @@ function waht_breadcrumb() {
                 echo $delimiter . '</li>';
                 //Display partial post title, in order to save space.
                 if (strlen(get_the_title()) >= $maxLength) { //If the title is long, then don't display it all.
-                    echo '<li class="active">'.trim(substr(get_the_title(), 0, $maxLength)) . ' ...</li>';
+                    echo '<li class="active">' . trim(substr(get_the_title(), 0, $maxLength)) . ' ...</li>';
                 } else { //the title is short, display all post title.
-                    echo '<li class="active">' . get_the_title() .'</li>';
+                    echo '<li class="active">' . get_the_title() . '</li>';
                 }
             }
         } //Display breadcrumb for category and sub-category archive
@@ -432,14 +431,14 @@ function waht_breadcrumb() {
             echo '<li class="active">' . __('Posts Tagged:', 'waht') . ' "' . single_tag_title("", false) . '"</li>';
         } //Display breadcrumb for calendar (day, month, year) archive
         elseif (is_day()) { //Check if the page is a date (day) based archive page.
-            echo '<li class="active">';
-            echo '<a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . ' ';
-            echo'<a href="' . $url_month . '">' . $arc_month . '</a> ' . $delimiter . $arc_day . ' (' . $arc_day_full .
+            echo '<li><a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . '</li>';
+            echo '<li><a href="' . $url_month . '">' . $arc_month . '</a> ' . $delimiter . '</li>';
+            echo '<li class="active">' . $arc_day . ' (' . $arc_day_full .
                 ')';
             echo '</li>';
         } elseif (is_month()) { //Check if the page is a date (month) based archive page.
-            echo'<li class="active"><a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . $arc_month .
-                '</li>';
+            echo'<li><a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . '</li>';
+            echo '<li class="active">' . $arc_month . '</li>';
         } elseif (is_year()) { //Check if the page is a date (year) based archive page.
             echo '<li class="active">' . $arc_year . '</li>';
         } //Display breadcrumb for search result page
@@ -469,7 +468,7 @@ function waht_breadcrumb() {
                 echo'<li><a href="' . get_permalink($post_ids) . '">' . $title . '</a>' . $delimiter .
                     '</li>';
             }
-            echo '<li class="active">'. the_title() . '</li>'; //returns the title of the current page.
+            echo '<li class="active">' . the_title() . '</li>'; //returns the title of the current page.
         } //Display breadcrumb for author archive
         elseif (is_author()) { //Check if an Author archive page is being displayed.
             global $author;
