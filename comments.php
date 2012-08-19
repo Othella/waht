@@ -29,7 +29,7 @@ function waht_comments($comment, $args, $depth) {
         <?php if ($comment->comment_approved == '0') : ?>
         <div class="alert alert-block fade in">
             <a class="close" data-dismiss="alert">&times;</a>
-            <p><?php _e('Your comment is awaiting moderation..', 'waht'); ?></p>
+            <p><?php _e('Your comment is awaiting moderation.', 'waht'); ?></p>
         </div>
         <?php endif; ?>
 
@@ -71,6 +71,7 @@ function waht_comments($comment, $args, $depth) {
 
 <?php if (have_comments()) : ?>
 <?php waht_comments_before(); ?>
+<?php // TODO (a.h) Separate comments from pings ?>
 <section id="comments" class="posts-comments">
     <header>
         <h3><?php printf(_n('One comment on &ldquo;%2$s&rdquo;', '%1$s comments on &ldquo;%2$s&rdquo;', get_comments_number(), 'waht'), number_format_i18n(get_comments_number()), get_the_title()); ?></h3>
@@ -81,7 +82,10 @@ function waht_comments($comment, $args, $depth) {
     </header>
     <section class="comments-list">
         <ol>
-            <?php wp_list_comments(array('callback' => 'waht_comments')); // TODO (a.h) Separate comments from backlinks ?>
+            <?php wp_list_comments(array(
+            'reverse_top_level' => true,
+            'callback'          => 'waht_comments'
+        )); ?>
         </ol>
     </section>
     <footer>
