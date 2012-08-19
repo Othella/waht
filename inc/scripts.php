@@ -114,6 +114,7 @@ add_action('waht_footer', 'waht_google_analytics');
 /**
  * Configure Add To Homescreen plugin
  * Documentation: http://cubiq.org/add-to-home-screen
+ * TODO (a.h) Stylesheet doesn't load
  */
 function waht_add_to_homescreen_options() {
     if (!WAHT_USE_ADD2HOME) return;

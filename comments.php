@@ -174,7 +174,7 @@ function waht_comments($comment, $args, $depth) {
                 <label class="control-label" for="comment"><?php _e('Comment', 'waht'); ?></label>
                 <div class="controls">
                     <textarea name="comment" id="comment" class="input-xlarge" tabindex="4"
-                              placeholder="<?php _e('Eg.: This post rocks!', 'waht'); ?>"></textarea>
+                              placeholder="<?php _e('Eg.: This post rocks!', 'waht'); ?>"></textarea><!-- TODO (a.h) max width -->
                 </div>
             </div>
             <div class="form-actions">
