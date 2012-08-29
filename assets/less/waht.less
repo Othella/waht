@@ -28,8 +28,7 @@
     COMMON
     ========================================================================== */
 
-body {
-	//font-family: Verdana, Helvetica, Arial, sans-serif;
+body { //font-family: Verdana, Helvetica, Arial, sans-serif;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -50,6 +49,7 @@ HEADER
 		.brand {
 			float:       right;
 			color:       @waht_lbeige;
+			line-height: 1.2;
 			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
 		}
 	}
@@ -203,6 +203,10 @@ HEADER
     ========================================================================== */
 
 @media (max-width: 768px) {
+	.logo {
+		display:    block;
+		text-align: center;
+	}
 
 /* Subnav */
 	.subnav {

@@ -85,8 +85,8 @@
         <div class="row-fluid">
             <!-- Site logo, name, description, etc. -->
             <div class="span4">
-                <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>">
-                    <img class="logo" src="<?php header_image(); ?>" alt="<?php bloginfo('name');?>">
+                <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>" class="logo">
+                    <img src="<?php header_image(); ?>" alt="<?php bloginfo('name');?>">
                 </a>
             </div>
 

@@ -146,6 +146,7 @@ HEADER
 #page-header .navbar .brand {
   float: right;
   color: #efdfce;
+  line-height: 1.2;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 #page-header .title a {
@@ -319,6 +320,10 @@ HEADER
     Media Queries
     ========================================================================== */
 @media (max-width: 768px) {
+  .logo {
+    display: block;
+    text-align: center;
+  }
   /* Subnav */
   .subnav {
     position: static;
