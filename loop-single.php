@@ -17,7 +17,7 @@
         <h1><?php the_title(); ?></h1>
     </header>
     <section class="post-content">
-        <?php get_template_part( 'content', get_post_format() ); ?>
+        <?php the_content(); ?>
     </section>
     <footer class="post-footer">
         <?php wp_link_pages(array(
