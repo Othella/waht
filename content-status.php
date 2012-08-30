@@ -6,5 +6,6 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-
-// TODO (a.h) Code content-status.php
+?>
+<div class="avatar"><?php echo get_avatar(get_the_author_meta('ID'))?></div>
+<?php the_content(); ?>
