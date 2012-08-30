@@ -6,5 +6,5 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-
-// TODO (a.h) Code content-video.php
+?>
+<?php the_content(); ?>
