@@ -6,5 +6,4 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-
-// TODO (a.h) Code content-aside.php
+the_content();

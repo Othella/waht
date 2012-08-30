@@ -22,7 +22,7 @@
             <?php if (is_archive() || is_search()) : ?>
             <?php the_excerpt(); ?>
             <?php else : ?>
-            <?php get_template_part( 'content', get_post_format() ); ?>
+            <?php get_template_part('content', get_post_format()); ?>
             <?php endif; ?>
         </section>
         <footer class="post-footer">
