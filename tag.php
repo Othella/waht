@@ -48,8 +48,10 @@
         </footer>
 		<?php waht_post_after(); ?>
 		<?php else : ?>
-		<?php // TODO (a.h) no posts founds ?>
-		<?php _e('Sorry, no results match with your request! Maybe you could use the following search form :)', 'waht'); ?>
+        <div class="alert alert-block fade in">
+            <a class="close" data-dismiss="alert">&times;</a>
+            <p><?php _e('Sorry, no results match with your request! Maybe you could use the following search form?', 'waht'); ?></p>
+        </div>
 		<?php get_search_form(); ?>
 		<?php endif; ?>
 		<?php waht_loop_after(); ?>

@@ -59,8 +59,12 @@
 		?></div>
 </nav>
 <?php else : ?>
-<?php // TODO (a.h) no posts founds ?>
-<?php _e('Sorry, no results match with your request! Maybe you could use the following search form :)', 'waht'); ?>
-<?php get_search_form(); ?>
+<?php if (!have_posts()) { ?>
+    <div class="alert alert-block fade in">
+        <a class="close" data-dismiss="alert">&times;</a>
+        <p><?php _e('Sorry, no results match with your request! Maybe you could use the following search form?', 'waht'); ?></p>
+    </div>
+	<?php get_search_form(); ?>
+	<?php } ?>
 <?php endif; ?>
 <?php waht_loop_after();
