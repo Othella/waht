@@ -89,10 +89,14 @@
 
 /* alignment */
 .alignnone { }
-.aligncenter, div.aligncenter { }
-.alignright { }
-.alignleft { }
-.aligncenter { }
+.aligncenter {
+	clear:        both;
+	display:      block;
+	margin-left:  auto;
+	margin-right: auto;
+}
+.alignleft { display: inline; float: left; }
+.alignright { display: inline; float: right; }
 
 /* images */
 a img.alignright { }
@@ -105,6 +109,8 @@ a img.aligncenter { }
 .wp-caption.alignright { }
 .wp-caption img { }
 .wp-caption p.wp-caption-text { }
+img.size-full { }
+img.size-large { }
 
 /* links widget */
 .widget_links { }

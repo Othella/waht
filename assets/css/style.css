@@ -46,6 +46,20 @@ We first style for mobile device and then customize for other devices!!
 /* paged items like search results or archives */
 /* individual paged (i.e. body.paged-3) */
 /* alignment */
+.aligncenter {
+  clear: both;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.alignleft {
+  display: inline;
+  float: left;
+}
+.alignright {
+  display: inline;
+  float: right;
+}
 /* images */
 /* links widget */
 /* meta widget */
@@ -146,7 +160,6 @@ HEADER
 #page-header .navbar .brand {
   float: right;
   color: #efdfce;
-  line-height: 1.2;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 #page-header .title a {
@@ -304,12 +317,83 @@ HEADER
 .hentry .post-header {
   margin-bottom: 1em;
 }
+.hentry .post-content h3 {
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  line-height: 2.6em;
+  text-transform: uppercase;
+  margin: 0;
+  clear: both;
+}
 .hentry .post-footer {
+  clear: both;
   margin-top: 1em;
 }
+/* Images */
+img[class*="align"],
+img[class*="wp-image-"],
+#content .gallery .gallery-icon img {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  padding: 6px;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff, 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: inset 0 1px 0 #ffffff, 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 1px 0 #ffffff, 0 1px 3px rgba(0, 0, 0, 0.1);
+  vertical-align: baseline;
+}
+p img {
+  margin-top: .4em;
+}
+.wp-caption {
+  font-size: .9em;
+  text-align: center;
+  background: rgba(0, 0, 0, 0.1);
+  margin-bottom: 1.625em;
+  max-width: 96%;
+  padding: 9px;
+  -webkit-box-shadow: 0 1px 0 #ffffff, inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 1px 0 #ffffff, inset 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 0 #ffffff, inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.wp-caption img {
+  max-width: 95.5%;
+  border-color: rgba(0, 0, 0, 0.1);
+  display: block;
+  margin: 0 auto;
+}
+.wp-caption-text,
+.gallery-caption {
+  color: #666;
+  font-family: Georgia, "Times New Roman", serif;
+  margin: 0;
+  padding: 9px 9px 0 9px;
+}
+img {
+  max-width: 97.5%;
+}
+img[class*="align"],
+img[class*="wp-image-"],
+img[class*="attachment-"] {
+  height: auto;
+}
+img.size-full,
+img.size-large {
+  width: auto;
+}
+.alignleft {
+  margin-right: 1.625em;
+}
+.alignright {
+  margin-left: 1.625em;
+}
+.alignleft,
+.alignright,
+.aligncenter {
+  margin-bottom: 1.625em;
+}
 /*  =============================================================================
-    FOOTER
-    ========================================================================== */
+	FOOTER
+	========================================================================== */
 #page-footer {
   margin-top: 1em;
 }

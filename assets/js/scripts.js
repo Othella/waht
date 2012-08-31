@@ -27,6 +27,8 @@ jQuery(function ($) {
         }
     }
 
+    // TODO (a.h) Dynamically set padding-top of body
+
     $('document').ready(function () {
 
     });
