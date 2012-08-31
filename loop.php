@@ -15,8 +15,21 @@
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> xmlns="http://www.w3.org/1999/html">
         <?php waht_post_inside_before(); ?>
         <header class="post-header">
+            <hgroup>
+                <h2 class="post-title"><a href="<?php the_permalink()?>"
+                                          title="<?php printf(esc_attr__('Permalink to %s', 'waht'), the_title_attribute('echo=0')); ?>"
+                                          rel="bookmark"><?php the_title(); ?></a></h2>
+
+                <h3 class="post-format"><?php echo ucfirst(get_post_format()); ?></h3>
+            </hgroup>
+
             <time class="updated" datetime="<?php the_time(); ?>" pubdate><?php the_date(); ?></time>
-            <h2><a href="<?php the_permalink()?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+            <?php if (comments_open() && !post_password_required()) : ?>
+            <span class="comments-link">
+                <?php comments_popup_link('<span class="leave-comment">' . __('Commemt', 'waht') .
+                '</span>', _x('1', 'comments number', 'waht'), _x('%', 'comments number', 'waht')); ?>
+            </span>
+            <?php endif; ?>
         </header>
         <section class="post-content">
             <?php if (is_archive() || is_search()) : ?>
@@ -26,7 +39,11 @@
             <?php endif; ?>
         </section>
         <footer class="post-footer">
-            <p><?php _e('Posted in', 'waht') ?> <?php the_category(' | '); ?></p>
+            <span class="post-classes"><?php _e('Posted in', 'waht') ?> <?php the_category(' | '); ?></span>
+            <?php if ( comments_open() ) : ?>
+            <span class="comments-link"><?php comments_popup_link( '<span class="leave-comment">' . __( 'Comment', 'waht' ) . '</span>', __( '<b>1</b> Comment', 'waht' ), __( '<b>%</b> Comments', 'waht' ) ); ?></span>
+            <?php endif; ?>
+            <?php edit_post_link( __( 'Edit', 'waht' ), '<span class="edit-link">', '</span>' ); ?>
         </footer>
         <?php waht_post_inside_after(); ?>
     </article>

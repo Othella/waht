@@ -173,11 +173,27 @@ HEADER
 	filter:             progid:DXImageTransform.Microsoft.gradient(enabled = false); /* IE6-9 */
 	margin-bottom:      1em;
 	.post-header {
+		position:      relative;
 		margin-bottom: 1em;
 		.page-number {
 			color:     #666;
 			font-size: 26px;
 		}
+		.post-title { margin-top: 0; }
+		.post-format {
+			color:          #666;
+			font-size:      10px;
+			font-weight:    500;
+			letter-spacing: 0.1em;
+			line-height:    2.6em;
+			position:       absolute;
+			text-transform: uppercase;
+			top:            -5px;
+			margin:         0;
+			right:          0;
+		}
+		.updated { }
+		.comments-link { float: right; }
 	}
 	.post-content {
 		h3 {
@@ -202,6 +218,7 @@ HEADER
 			font-size: .9em;
 			a { font-weight: bold; }
 		}
+		.comments-link { float: right; }
 	}
 	.comments-list {
 		& > ol {
