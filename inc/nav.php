@@ -423,32 +423,29 @@ function waht_breadcrumb() {
         } //Display breadcrumb for category and sub-category archive
         elseif (is_category()) { //Check if Category archive page is being displayed.
             //returns the category title for the current page.
-            //If it is a subcategory, it will display the full path to the subcategory.
-            //Returns the parent categories of the current category with links separated by '»'
             echo
-                '<li class="active">' . __('Archive Category:', 'waht') . ' "' .
-                get_category_parents($cat, true, ' ' . $delimiter . ' ') . '"</li>';
+                '<li class="active">' . __('Category Archives:', 'waht') . ' ' . single_cat_title("", false) . '</li>';
         } //Display breadcrumb for tag archive
         elseif (is_tag()) { //Check if a Tag archive page is being displayed.
             //returns the current tag title for the current page.
-            echo '<li class="active">' . __('Posts Tagged:', 'waht') . ' "' . single_tag_title("", false) . '"</li>';
+            echo '<li class="active">' . __('Tag Archives:', 'waht') . ' ' . single_tag_title("", false) . '</li>';
         } //Display breadcrumb for calendar (day, month, year) archive
         elseif (is_day()) { //Check if the page is a date (day) based archive page.
-            echo '<li><a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . '</li>';
-            echo '<li><a href="' . $url_month . '">' . $arc_month . '</a> ' . $delimiter . '</li>';
+            echo '<li><a href="' . $url_year . '">' . $arc_year . '</a>' . $delimiter . '</li>';
+            echo '<li><a href="' . $url_month . '">' . $arc_month . '</a>' . $delimiter . '</li>';
             echo '<li class="active">' . $arc_day . ' (' . $arc_day_full .
                 ')';
             echo '</li>';
         }
         elseif (is_month()) { //Check if the page is a date (month) based archive page.
-            echo'<li><a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . '</li>';
+            echo'<li><a href="' . $url_year . '">' . $arc_year . '</a>' . $delimiter . '</li>';
             echo '<li class="active">' . $arc_month . '</li>';
         }
         elseif (is_year()) { //Check if the page is a date (year) based archive page.
             echo '<li class="active">' . $arc_year . '</li>';
         } //Display breadcrumb for search result page
         elseif (is_search()) { //Check if search result page archive is being displayed.
-            echo '<li class="active">' . __('Search Results for:', 'waht') . ' "' . get_search_query() . '"</li>';
+            echo '<li class="active">' . __('Search Results for:', 'waht') .  ' ' . get_search_query() . '</li>';
         } //Display breadcrumb for top-level pages (top-level menu)
         elseif (is_page() && !$post->post_parent) { //Check if this is a top Level page being displayed.
             echo '<li class="active">' . get_the_title() . '</li>';
@@ -505,7 +502,7 @@ add_action('waht_loop_before', 'waht_breadcrumb');
 function waht_link_pages($args = array()) {
     if (WAHT_BOOTSTRAP) :
         $defaults = array(
-            'before'           => '<nav class="page-nav">'.__('Pages:', 'waht'),
+            'before'           => '<nav class="page-nav">' . __('Pages:', 'waht'),
             'after'            => '</nav>',
             'text_before'      => '',
             'text_after'       => '',
