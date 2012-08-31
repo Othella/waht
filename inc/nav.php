@@ -476,7 +476,7 @@ function waht_breadcrumb() {
             global $author;
             //returns the user's data, where it can be retrieved using member variables.
             $user_info = get_userdata($author);
-            echo'<li class="active">' . __('Archived Article(s) by Author:', 'waht') . ' ' . $user_info->display_name .
+            echo'<li class="active">' . __('Author Archives:', 'waht') . ' ' . $user_info->display_name .
                 '</li>';
         } //Display breadcrumb for 404 Error
         elseif (is_404()) { //checks if 404 error is being displayed

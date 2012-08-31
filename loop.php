@@ -11,9 +11,9 @@
 <?php waht_loop_before(); ?>
 <?php if (have_posts()) : ?>
 <?php while (have_posts()) : the_post(); ?>
-    <?php waht_post_before(); ?>
+	<?php waht_post_before(); ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> xmlns="http://www.w3.org/1999/html">
-        <?php waht_post_inside_before(); ?>
+		<?php waht_post_inside_before(); ?>
         <header class="post-header">
             <hgroup>
                 <h2 class="post-title"><a href="<?php the_permalink()?>"
@@ -24,37 +24,39 @@
             </hgroup>
 
             <time class="updated" datetime="<?php the_time(); ?>" pubdate><?php the_date(); ?></time>
-            <?php if (comments_open() && !post_password_required()) : ?>
+			<?php if (comments_open() && !post_password_required()) : ?>
             <span class="comments-link">
                 <?php comments_popup_link('<span class="leave-comment">' . __('Commemt', 'waht') .
-                '</span>', _x('1', 'comments number', 'waht'), _x('%', 'comments number', 'waht')); ?>
+				'</span>', _x('1', 'comments number', 'waht'), _x('%', 'comments number', 'waht')); ?>
             </span>
-            <?php endif; ?>
+			<?php endif; ?>
         </header>
         <section class="post-content">
-            <?php if (is_archive() || is_search()) : ?>
-            <?php the_excerpt(); ?>
-            <?php else : ?>
-            <?php get_template_part('content', get_post_format()); ?>
-            <?php endif; ?>
+			<?php if (is_archive() || is_search()) : ?>
+			<?php the_excerpt(); ?>
+			<?php else : ?>
+			<?php get_template_part('content', get_post_format()); ?>
+			<?php endif; ?>
         </section>
         <footer class="post-footer">
             <span class="post-classes"><?php _e('Posted in', 'waht') ?> <?php the_category(' | '); ?></span>
-            <?php if ( comments_open() ) : ?>
-            <span class="comments-link"><?php comments_popup_link( '<span class="leave-comment">' . __( 'Comment', 'waht' ) . '</span>', __( '<b>1</b> Comment', 'waht' ), __( '<b>%</b> Comments', 'waht' ) ); ?></span>
-            <?php endif; ?>
-            <?php edit_post_link( __( 'Edit', 'waht' ), '<span class="edit-link">', '</span>' ); ?>
+			<?php if (comments_open()) : ?>
+            <span class="comments-link"><?php comments_popup_link(
+				'<span class="leave-comment">' . __('Comment', 'waht') .
+					'</span>', __('<b>1</b> Comment', 'waht'), __('<b>%</b> Comments', 'waht')); ?></span>
+			<?php endif; ?>
+			<?php edit_post_link(__('Edit', 'waht'), '<span class="edit-link">', '</span>'); ?>
         </footer>
-        <?php waht_post_inside_after(); ?>
+		<?php waht_post_inside_after(); ?>
     </article>
-    <?php waht_post_after(); ?>
-    <?php endwhile; ?>
+	<?php waht_post_after(); ?>
+	<?php endwhile; ?>
 <nav class="pager post-nav">
     <div class="previous"><?php next_posts_link(__('&larr; Older Articles',
-        'waht')); ?></div>
+		'waht')); ?></div>
     <div class="next"><?php previous_posts_link(__('Newer Articles &rarr;',
-        'waht'));
-        ?></div>
+		'waht'));
+		?></div>
 </nav>
 <?php else : ?>
 <?php // TODO (a.h) no posts founds ?>

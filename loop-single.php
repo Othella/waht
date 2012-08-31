@@ -15,7 +15,7 @@ global $multipage, $numpages, $page;
 <article id="post-<?php the_ID(); ?>" <?php post_class('single'); ?>>
     <?php waht_post_inside_before(); ?>
     <header class="post-header">
-        <h1>
+        <h1 class="post-title">
             <?php the_title(); ?>
             <?php if ($multipage) : ?>
             <span class="page-number">(<?php printf(esc_attr('Page %s of %s', 'waht'), $page, $numpages); ?>)</span>

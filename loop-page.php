@@ -14,7 +14,7 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class('page'); ?>>
     <?php waht_post_inside_before(); ?>
     <header class="post-header">
-        <h1><?php the_title(); ?></h1>
+        <h1 class="post-title"><?php the_title(); ?></h1>
     </header>
     <section class="post-content">
         <?php get_template_part( 'content', get_post_format() ); ?>
