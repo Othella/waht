@@ -295,7 +295,8 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
         // add the "has_children" field (needed to display dropdown)
         if (is_array($args[0])) {
             $args[0]['has_children'] = !empty($children_elements[$element->$id_field]);
-        } elseif (is_object($args[0])) {
+        }
+        elseif (is_object($args[0])) {
             $args[0]->has_children = !empty($children_elements[$element->$id_field]);
         }
 
@@ -331,7 +332,7 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 }
 
 /**
- * Builds a breadcrumbs
+ * Builds a breadcrumb
  * See http://bacsoftwareconsulting.com/blog/index.php/wordpress-cat/adding-wordpress-breadcrumbs-without-a-plugin/
  */
 function waht_breadcrumb() {
@@ -384,7 +385,8 @@ function waht_breadcrumb() {
                 echo $delimiter;
                 echo '</li>';
 
-            } else {
+            }
+            else {
                 echo '<li class="active">' . get_the_title(get_option('page_for_posts', true)) . '</li>';
             }
         }
@@ -413,7 +415,8 @@ function waht_breadcrumb() {
                 //Display partial post title, in order to save space.
                 if (strlen(get_the_title()) >= $maxLength) { //If the title is long, then don't display it all.
                     echo '<li class="active">' . trim(substr(get_the_title(), 0, $maxLength)) . ' ...</li>';
-                } else { //the title is short, display all post title.
+                }
+                else { //the title is short, display all post title.
                     echo '<li class="active">' . get_the_title() . '</li>';
                 }
             }
@@ -436,10 +439,12 @@ function waht_breadcrumb() {
             echo '<li class="active">' . $arc_day . ' (' . $arc_day_full .
                 ')';
             echo '</li>';
-        } elseif (is_month()) { //Check if the page is a date (month) based archive page.
+        }
+        elseif (is_month()) { //Check if the page is a date (month) based archive page.
             echo'<li><a href="' . $url_year . '">' . $arc_year . '</a> ' . $delimiter . '</li>';
             echo '<li class="active">' . $arc_month . '</li>';
-        } elseif (is_year()) { //Check if the page is a date (year) based archive page.
+        }
+        elseif (is_year()) { //Check if the page is a date (year) based archive page.
             echo '<li class="active">' . $arc_year . '</li>';
         } //Display breadcrumb for search result page
         elseif (is_search()) { //Check if search result page archive is being displayed.
@@ -479,7 +484,8 @@ function waht_breadcrumb() {
         } //Display breadcrumb for 404 Error
         elseif (is_404()) { //checks if 404 error is being displayed
             echo  '<li class="active"' > __('Error 404 - Not Found.', 'waht') . '</li>';
-        } else {
+        }
+        else {
             //All other cases that I missed. No Breadcrumb trail.
         }
         echo '</ul>';
@@ -487,3 +493,77 @@ function waht_breadcrumb() {
 }
 
 add_action('waht_loop_before', 'waht_breadcrumb');
+
+/**
+ * Build custom navigation for pages inside posts
+ * See http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
+ *
+ * @param array $args
+ *
+ * @return string
+ */
+function waht_link_pages($args = array()) {
+    if (WAHT_BOOTSTRAP) :
+        $defaults = array(
+            'before'           => '<nav class="page-nav">'.__('Pages:', 'waht'),
+            'after'            => '</nav>',
+            'text_before'      => '',
+            'text_after'       => '',
+            'next_or_number'   => 'number',
+            'nextpagelink'     => __('Next page', 'waht'),
+            'previouspagelink' => __('Previous page', 'waht'),
+            'pagelink'         => '%',
+            'echo'             => 1
+        );
+
+        $r = wp_parse_args($args, $defaults);
+        $r = apply_filters('wp_link_pages_args', $r);
+        extract($r, EXTR_SKIP);
+
+        global $page, $numpages, $multipage, $more;
+
+        $output = '';
+        if ($multipage) {
+            if ('number' == $next_or_number) {
+                $output .= $before . '<div class="pagination pagination-centered"><ul>';
+                for ($i = 1; $i < ($numpages + 1); $i = $i + 1) {
+                    $j = str_replace('%', $i, $pagelink);
+                    if ($i != $page || ((!$more) && ($page == 1))) :
+                        $output .= '<li>';
+                        $output .= _wp_link_page($i);
+                    else :
+                        $output .= '<li class="active">';
+                        $output .= '<a href="#" title="' . __('Current page', 'waht') . '">';
+                    endif;
+                    $output .= $text_before . $j . $text_after;
+                    $output .= '</a></li>';
+                }
+                $output .= '</ul>' . $after;
+            }
+            else {
+                if ($more) {
+                    $output .= $before . '<ul>';
+                    $i = $page - 1;
+                    if ($i && $more) {
+                        $output .= '<li>';
+                        $output .= _wp_link_page($i);
+                        $output .= $text_before . $previouspagelink . $text_after . '</a></li>';
+                    }
+                    $i = $page + 1;
+                    if ($i <= $numpages && $more) {
+                        $output .= '<li>';
+                        $output .= _wp_link_page($i);
+                        $output .= $text_before . $nextpagelink . $text_after . '</a></li>';
+                    }
+                    $output .= '</ul>' . $after;
+                }
+            }
+        }
+        if ($echo)
+            echo $output;
+
+        return $output;
+    else:
+        wp_link_pages($args);
+    endif;
+}
