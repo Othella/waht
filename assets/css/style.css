@@ -145,6 +145,9 @@ body.admin-bar .navbar-fixed-top {
 body {
   font-weight: 200;
 }
+a {
+  font-weight: 400;
+}
 h1,
 h2,
 h3,
@@ -154,11 +157,17 @@ h6 {
   text-shadow: 0 -1px 0 #dddddd, 0 1px 0 #ffffff;
   font-family: Baskerville, Georgia, "Times New Roman", sans-serif;
 }
+h1 a,
+h2 a,
+h3 a,
+h4 a,
+h5 a,
+h6 a {
+  color: #333;
+  font-weight: 800;
+}
 textarea {
   resize: vertical;
-}
-a {
-  font-weight: 400;
 }
 /*  =============================================================================
     HEADER
@@ -169,11 +178,11 @@ a {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
 }
 #page-header .title a {
-  color: #000;
+  color: #333;
   text-shadow: 0 -2px 0 #dddddd, 0 2px 3px #ffffff;
 }
 #page-header .title a:hover {
-  color: #000;
+  color: #333;
   text-decoration: none;
 }
 #page-header .title a img {

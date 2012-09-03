@@ -26,7 +26,7 @@
             <time class="updated" datetime="<?php the_time(); ?>" pubdate><?php the_date(); ?></time>
 			<?php if (comments_open() && !post_password_required()) : ?>
             <span class="comments-link">
-                <?php comments_popup_link('<span class="leave-comment">' . __('Commemt', 'waht') .
+                <?php comments_popup_link('<span class="leave-comment">' . __('Leave a comment', 'waht') .
 				'</span>', _x('1', 'comments number', 'waht'), _x('%', 'comments number', 'waht')); ?>
             </span>
 			<?php endif; ?>
