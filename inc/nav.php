@@ -338,9 +338,9 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 function waht_breadcrumb() {
 	//Variable and can be styled separately.
 	//Use / for different level categories (parent / child / grandchild)
-	$delimiter = '<span class="divider"> / </span>';
+	$delimiter = '<span class="divider">&nbsp;>&nbsp;</span>';
 	//Use bullets for same level categories ( parent . parent )
-	$subdelimiter = '<span class="subdivider"> &bull; </span>';
+	$subdelimiter = '<span class="subdivider">&nbsp;&bull;&nbsp;</span>';
 
 	//text link for the 'Home' page
 	$main = __('Home', 'waht');
@@ -426,11 +426,12 @@ function waht_breadcrumb() {
 		elseif (is_category()) { //Check if Category archive page is being displayed.
 			//returns the category title for the current page.
 			echo
-				'<li class="active">' . __('Category Archives:', 'waht') . ' ' . single_cat_title("", false) . '</li>';
+				'<li class="active">' . sprintf(__('<span>%s</span> Archive', 'waht'), single_cat_title('', false)) . '</li>';
 		} //Display breadcrumb for tag archive
 		elseif (is_tag()) { //Check if a Tag archive page is being displayed.
 			//returns the current tag title for the current page.
-			echo '<li class="active">' . __('Tag Archives:', 'waht') . ' ' . single_tag_title("", false) . '</li>';
+			echo'<li class="active">' . __('Tag Archive for', 'waht') . ' &laquo;' . single_tag_title("", false) .
+				'&raquo;</li>';
 		} //Display breadcrumb for calendar (day, month, year) archive
 		elseif (is_day()) { //Check if the page is a date (day) based archive page.
 			echo '<li><a href="' . $url_year . '">' . $arc_year . '</a>' . $delimiter . '</li>';
@@ -441,13 +442,14 @@ function waht_breadcrumb() {
 		}
 		elseif (is_month()) { //Check if the page is a date (month) based archive page.
 			echo'<li><a href="' . $url_year . '">' . $arc_year . '</a>' . $delimiter . '</li>';
-			echo '<li class="active">' . $arc_month . '</li>';
+			echo '<li class="active">' . $arc_month . ' ' . __('Monthly Archive', 'waht') . '</li>';
 		}
 		elseif (is_year()) { //Check if the page is a date (year) based archive page.
-			echo '<li class="active">' . $arc_year . '</li>';
+			echo '<li class="active">' . $arc_year . ' ' . __('Yearly Archive', 'waht') . '</li>';
 		} //Display breadcrumb for search result page
 		elseif (is_search()) { //Check if search result page archive is being displayed.
-			echo '<li class="active">' . __('Search Results for:', 'waht') . ' ' . get_search_query() . '</li>';
+			echo'<li class="active">' . __('Search Results for', 'waht') . ' &laquo;' . get_search_query() .
+				'&raquo;</li>';
 		} //Display breadcrumb for top-level pages (top-level menu)
 		elseif (is_page() && !$post->post_parent) { //Check if this is a top Level page being displayed.
 			echo '<li class="active">' . get_the_title() . '</li>';
@@ -478,8 +480,7 @@ function waht_breadcrumb() {
 			global $author;
 			//returns the user's data, where it can be retrieved using member variables.
 			$user_info = get_userdata($author);
-			echo'<li class="active">' . __('Author Archives:', 'waht') . ' ' . $user_info->display_name .
-				'</li>';
+			echo'<li class="active">' . $user_info->display_name . ' ' . __('Archive', 'waht') . '</li>';
 		} //Display breadcrumb for 404 Error
 		elseif (is_404()) { //checks if 404 error is being displayed
 			echo  '<li class="active"' > __('Error 404 - Not Found.', 'waht') . '</li>';

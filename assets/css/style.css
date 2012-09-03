@@ -319,6 +319,12 @@ textarea {
   padding-left: 10px;
   margin-bottom: 20px;
 }
+body.tag .page-title span:before {
+  content: "«";
+}
+body.tag .page-title span:after {
+  content: "»";
+}
 /* Posts */
 .hentry {
   background-color: rgba(255, 255, 255, 0.5);

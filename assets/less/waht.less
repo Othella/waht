@@ -38,7 +38,7 @@ h1, h2, h3, h4, h5, h6 {
 	text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff; // Letterpress effect
 	font-family: Baskerville, Georgia, "Times New Roman", sans-serif;
 	a {
-		color: #333;
+		color:       #333;
 		font-weight: 800; }
 }
 
@@ -171,6 +171,15 @@ textarea {
 .content-header {
 	padding-left:  10px;
 	margin-bottom: 20px;
+}
+
+body.tag {
+	.page-title {
+		span {
+			&:before { content: "«"; }
+			&:after { content: "»"; }
+		}
+	}
 }
 
 .content-footer { }

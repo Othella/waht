@@ -17,7 +17,7 @@
 		<?php waht_post_before(); ?>
         <header class="content-header">
             <h1 class="page-title">
-				<?php printf(__('Tag Archives: <span>%s</span>', 'waht'), single_tag_title('', false)); ?>
+				<?php printf(__('Tag Archives for <span>%s</span>', 'waht'), single_tag_title('', false)); ?>
             </h1>
         </header>
 		<?php rewind_posts(); ?>

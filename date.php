@@ -18,12 +18,12 @@
         <header class="content-header">
             <h1 class="page-title">
 				<?php if (is_day()) : ?>
-				<?php printf(__('Daily Archives: <span>%s</span>', 'waht'), get_the_date()); ?>
+				<?php printf(__('<span>%s</span> Daily Archive', 'waht'), get_the_date()); ?>
 				<?php elseif (is_month()) : ?>
-				<?php printf(__('Monthly Archives: <span>%s</span>', 'waht'), get_the_date(_x('F Y', 'monthly archives date format', 'twentyten'))); ?>
+				<?php printf(__('<span>%s</span> Monthly Archive', 'waht'), get_the_date(_x('F Y', 'monthly archives date format', 'twentyten'))); ?>
 				<?php
 			elseif (is_year()) : ?>
-				<?php printf(__('Yearly Archives: <span>%s</span>', 'waht'), get_the_date(_x('Y', 'yearly archives date format', 'waht'))); ?>
+				<?php printf(__('<span>%s</span> Yearly Archives', 'waht'), get_the_date(_x('Y', 'yearly archives date format', 'waht'))); ?>
 				<?php endif; ?>
             </h1>
         </header>

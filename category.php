@@ -18,7 +18,7 @@
 		<?php waht_post_before(); ?>
         <header class="content-header">
             <h1 class="page-title"><?php
-				printf(__('Category Archives: <span>%s</span>', 'waht'), single_cat_title('', false));
+				printf(__('<span>%s</span> Archive', 'waht'), single_cat_title('', false));
 				?></h1>
 			<?php
 			$category_description = category_description();
