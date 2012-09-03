@@ -173,11 +173,13 @@ textarea {
 	margin-bottom: 20px;
 }
 
-body.tag {
-	.page-title {
-		span {
-			&:before { content: "«"; }
-			&:after { content: "»"; }
+body {
+	&.tag, &.search {
+		.page-title {
+			span {
+				&:before { content: "«"; }
+				&:after { content: "»"; }
+			}
 		}
 	}
 }

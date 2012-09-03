@@ -7,5 +7,7 @@
  * @uri        : https://github.com/Othella/waht
  */
 ?>
-<div class="avatar"><?php echo get_avatar(get_the_author_meta('ID'))?></div>
-<?php the_content(); ?>
+<div class="content-status">
+    <div class="avatar"><?php echo get_avatar(get_the_author_meta('ID'))?></div>
+	<?php the_content(); ?>
+</div><!-- /.content-status -->

@@ -319,10 +319,12 @@ textarea {
   padding-left: 10px;
   margin-bottom: 20px;
 }
-body.tag .page-title span:before {
+body.tag .page-title span:before,
+body.search .page-title span:before {
   content: "«";
 }
-body.tag .page-title span:after {
+body.tag .page-title span:after,
+body.search .page-title span:after {
   content: "»";
 }
 /* Posts */

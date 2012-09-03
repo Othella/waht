@@ -18,7 +18,7 @@
 		<?php waht_post_before(); ?>
         <header class="content-header">
             <h1 class="page-title"><?php
-				printf(__('Search Results for: <span>%s</span>', 'waht'), esc_attr(get_search_query()));
+				printf(__('Search Results for <span>%s</span>', 'waht'), esc_attr(get_search_query()));
 				?></h1>
         </header>
 		<?php rewind_posts(); ?>

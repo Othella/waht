@@ -7,4 +7,7 @@
  * @uri        : https://github.com/Othella/waht
  */
 ?>
-<?php the_content(); ?>
+?>
+<div class="content-quote">
+	<?php the_content(); ?>
+</div><!-- /.content-quote -->
