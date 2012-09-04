@@ -3,6 +3,8 @@
  * Author:  Amélie Husson (http://ameliehusson.com)
  * Package: waht
  * URI:     https://github.com/Othella/waht
+ *
+ * TODO This is a demo scripting for the waht package. Feel free to remove it or reuse its code!
  */
 jQuery(function ($) {
     var $win = $(window),

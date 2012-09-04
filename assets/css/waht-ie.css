@@ -1,0 +1,4 @@
+.subnav{filter:progid:dximagetransform.microsoft.gradient(startColorstr='#f5f5f5', endColorstr='#eeeeee', GradientType=0);}
+#page-wrap #content{filter:progid:dximagetransform.microsoft.gradient(startColorstr='#fff', endColorstr='#F5F5F5', GradientType=0);}
+.hentry{filter:progid:dximagetransform.microsoft.gradient(enabled=false);}
+@media (min-width:980px){.subnav-fixed{filter:progid:dximagetransform.microsoft.gradient(enabled=false);}}
