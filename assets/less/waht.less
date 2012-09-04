@@ -264,17 +264,26 @@ body {
 	text-transform: uppercase;
 	margin:         0;
 	clear:          both;
-	padding-left:   15px;
 }
 .widget {
+	margin-bottom: 1em;
+	& > * { margin: 0 15px; }
 	&.widget_recent_entries ul,
 	&.widget_recent_comments ul,
 	&.widget_archive ul,
 	&.widget_links ul,
 	&.widget_nav_menu ul,
 	&.widget_meta ul {
-		list-style: none;
+		list-style:  none;
+		margin-left: 0;
+		& > li { padding: 2px 15px;
+			&:hover { background-color: #eee; }
+			& > a { display: block;
+				&:hover { text-decoration: none; }
+			}
+		}
 	}
+	&.widget_nav_menu > div { margin: 0; }
 }
 
 /* Images */
