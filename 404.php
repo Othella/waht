@@ -15,10 +15,10 @@
 		<?php waht_post_before(); ?>
 		<?php waht_post_inside_before(); ?>
         <article id="post-0" class="hentry">
-            <header class="post-header">
-                <h1 class="post-title"><?php _e('Page not found!', 'waht'); ?></h1>
+            <header class="entry-header">
+                <h1 class="entry-title"><?php _e('Page not found!', 'waht'); ?></h1>
             </header>
-            <section class="post-content">
+            <section class="entry-content">
                 <div class="alert alert-block fade in">
                     <a class="close" data-dismiss="alert">&times;</a>
                     <p><?php _e('The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.', 'waht'); ?></p>
@@ -33,7 +33,7 @@
 
 				<?php get_search_form(); ?>
             </section>
-            <footer class="post-footer">
+            <footer class="entry-footer">
             </footer>
         </article>
 		<?php waht_post_inside_after(); ?>

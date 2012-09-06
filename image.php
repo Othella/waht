@@ -16,14 +16,14 @@ global $multipage, $numpages, $page, $post; ?>
 		<?php waht_post_before(); ?>
         <article id="post-<?php the_ID(); ?>" <?php post_class('attachment'); ?>>
 			<?php waht_post_inside_before(); ?>
-            <header class="post-header">
-                <h1 class="post-title">
+            <header class="entry-header">
+                <h1 class="entry-title">
 					<?php the_title(); ?>
 					<?php if ($multipage) : ?>
                     <span class="page-number">(<?php printf(esc_attr('Page %s of %s', 'waht'), $page, $numpages); ?>)</span>
 					<?php endif ?>
-                </h1><!-- /.post-title -->
-                <div class="post-meta">
+                </h1><!-- /.entry-title -->
+                <div class="entry-meta">
 					<?php $metadata = wp_get_attachment_metadata(); ?>
 					<?php printf(__('<span class="meta-prep meta-prep-post-date">Published </span> <span class="post-date"><abbr class="published" title="%1$s">%2$s</abbr></span> at <a href="%3$s" title="Link to full-size image">%4$s &times; %5$s</a> in <a href="%6$s" title="Go back to %7$s" rel="gallery">%8$s</a>', 'waht'),
 					esc_attr(get_the_time()),
@@ -35,10 +35,10 @@ global $multipage, $numpages, $page, $post; ?>
 					esc_attr(strip_tags(get_the_title($post->post_parent))),
 					get_the_title($post->post_parent)
 				); ?>
-                </div><!-- /.post-meta -->
-            </header><!-- /.post-header -->
-            <section class="post-content">
-                <div class="post-attachment">
+                </div><!-- /.entry-meta -->
+            </header><!-- /.entry-header -->
+            <section class="entry-content">
+                <div class="entry-attachment">
                     <div class="attachment">
 						<?php
 						$attachments = array_values(get_children(array(
@@ -66,21 +66,21 @@ global $multipage, $numpages, $page, $post; ?>
                         <a href="<?php echo esc_url($next_attachment_url); ?>" title="<?php the_title_attribute(); ?>"
                            rel="attachment"><?php echo wp_get_attachment_image($post->ID, array($attachments_size, 1024)); ?></a>
 						<?php if (!empty($post->post_excerpt)) : ?>
-                        <div class="post-caption">
+                        <div class="entry-caption">
 							<?php the_excerpt(); ?>
                         </div>
 						<?php endif; ?>
                     </div><!-- /.attachment -->
-                </div><!-- /.post-attachment -->
-                <div class="post-description">
+                </div><!-- /.entry-attachment -->
+                <div class="entry-description">
 					<?php the_content(); ?>
-                </div><!-- /.post-description -->
+                </div><!-- /.entry-description -->
             </section>
-            <!-- /.post-content -->
-            <footer class="post-footer">
+            <!-- /.entry-content -->
+            <footer class="entry-footer">
 				<?php waht_link_pages(); ?>
 				<?php waht_meta(); ?>
-            </footer><!-- /.post-footer -->
+            </footer><!-- /.entry-footer -->
 			<?php comments_template(); ?>
 			<?php waht_post_inside_after(); ?>
         </article><!-- /#post-<?php the_ID(); ?> -->

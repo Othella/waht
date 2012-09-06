@@ -14,13 +14,13 @@
 	<?php waht_post_before(); ?>
     <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> xmlns="http://www.w3.org/1999/html">
 		<?php waht_post_inside_before(); ?>
-        <header class="post-header">
+        <header class="entry-header">
             <hgroup>
-                <h2 class="post-title"><a href="<?php the_permalink()?>"
-                                          title="<?php printf(esc_attr__('Permalink to %s', 'waht'), the_title_attribute('echo=0')); ?>"
-                                          rel="bookmark"><?php the_title(); ?></a></h2>
+                <h2 class="entry-title"><a href="<?php the_permalink()?>"
+                                           title="<?php printf(esc_attr__('Permalink to %s', 'waht'), the_title_attribute('echo=0')); ?>"
+                                           rel="bookmark"><?php the_title(); ?></a></h2>
 
-                <h3 class="post-format"><?php echo ucfirst(get_post_format()); ?></h3>
+                <h3 class="entry-format"><?php echo ucfirst(get_post_format()); ?></h3>
             </hgroup>
 
             <time class="updated" datetime="<?php the_time(); ?>" pubdate><?php the_date(); ?></time>
@@ -31,15 +31,15 @@
             </span>
 			<?php endif; ?>
         </header>
-        <section class="post-content">
+        <section class="entry-content">
 			<?php if (is_archive() || is_search()) : ?>
 			<?php the_excerpt(); ?>
 			<?php else : ?>
 			<?php get_template_part('content', get_post_format()); ?>
 			<?php endif; ?>
         </section>
-        <footer class="post-footer">
-            <span class="post-classes"><?php _e('Posted in', 'waht') ?> <?php the_category(' | '); ?></span>
+        <footer class="entry-footer">
+            <span class="entry-classes"><?php _e('Posted in', 'waht') ?> <?php the_category(' | '); ?></span>
 			<?php if (comments_open()) : ?>
             <span class="comments-link"><?php comments_popup_link(
 				'<span class="leave-comment">' . __('Comment', 'waht') .

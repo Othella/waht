@@ -42,16 +42,16 @@
 			<?php endif; ?>
 		<?php while (have_posts()) : the_post(); ?>
             <article id="post-<?php the_ID(); ?>" <?php post_class(); ?> xmlns="http://www.w3.org/1999/html">
-                <header class="post-header">
+                <header class="entry-header">
                     <time class="updated" datetime="<?php the_time(); ?>" pubdate><span><?php the_date(); ?></span>
                     </time>
-                    <h2 class="post-title"><a href="<?php the_permalink()?>"
+                    <h2 class="entry-title"><a href="<?php the_permalink()?>"
                                               title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
                 </header>
-                <section class="post-content">
+                <section class="entry-content">
 					<?php get_template_part('content', get_post_format()); ?>
                 </section>
-                <footer class="post-footer">
+                <footer class="entry-footer">
                 </footer>
 				<?php waht_post_inside_after(); ?>
             </article>

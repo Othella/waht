@@ -13,18 +13,18 @@ global $multipage, $numpages, $page;
 <?php waht_post_before(); ?>
 <article id="post-<?php the_ID(); ?>" <?php post_class('attachment'); ?>>
 	<?php waht_post_inside_before(); ?>
-    <header class="post-header">
-        <h1 class="post-title">
+    <header class="entry-header">
+        <h1 class="entry-title">
 			<?php the_title(); ?>
 			<?php if ($multipage) : ?>
             <span class="page-number">(<?php printf(esc_attr('Page %s of %s', 'waht'), $page, $numpages); ?>)</span>
 			<?php endif ?>
         </h1>
     </header>
-    <section class="post-content">
+    <section class="entry-content">
 		<?php get_template_part('content', get_post_type()) ?>
     </section>
-    <footer class="post-footer">
+    <footer class="entry-footer">
 		<?php waht_link_pages(); ?>
 		<?php waht_meta(); ?>
     </footer>
