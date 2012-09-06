@@ -92,7 +92,8 @@ add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
  * See https://developers.google.com/analytics/devguides/collection/gajs/
  */
 function waht_google_analytics() {
-	$waht_google_analytics_id = GOOGLE_ANALYTICS_ID;
+	$waht_options = waht_get_theme_options();
+	$waht_google_analytics_id = $waht_options['google_analytics_id'];
 	if ($waht_google_analytics_id !== '') {
 		$script_str = "\n\t<script>\n";
 		$script_str .= "\t\tvar _gaq=[['_setAccount','$waht_google_analytics_id'],['_trackPageview']];\n";
