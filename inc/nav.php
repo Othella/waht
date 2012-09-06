@@ -377,7 +377,7 @@ function waht_breadcrumb() {
 		//global WordPress variable $post. Needed to display multi-page navigations.
 		global $post, $cat;
 		//A safe way of getting values for a named option from the options database table.
-		$homeLink = get_option('home'); //same as: $homeLink = get_bloginfo('url');
+		$homeLink = home_url(); //same as: $homeLink = get_option('home')  or get_bloginfo('url');
 		echo '<li><a href="' . $homeLink . '">' . $main . '</a>' . $delimiter . '</li>';
 
 		if (!is_page()) {
