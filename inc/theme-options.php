@@ -107,7 +107,7 @@ function waht_theme_options_render_page() {
         </form>
     </div>
 </div>
-<?
+<?php
 }
 
 /**
