@@ -7,6 +7,6 @@
  * @uri        : https://github.com/Othella/waht
  */
 ?>
-<div class="content-video">
+<div class="ntry-content-asset content-video">
 	<?php the_content(); ?>
 </div><!-- /.content-video -->

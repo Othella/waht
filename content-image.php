@@ -8,6 +8,6 @@
  */
 ?>
 ?>
-<div class="content-image">
+<div class="entry-content-asset content-image">
 	<?php the_content(); ?>
 </div><!-- /.content-image -->

@@ -8,6 +8,6 @@
  */
 ?>
 ?>
-<div class="content-audio">
+<div class="ntry-content-asset content-audio">
 	<?php the_content(); ?>
 </div><!-- /.content-audio -->
