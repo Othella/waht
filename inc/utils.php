@@ -9,16 +9,18 @@
 
 /**
  * Outputs a credential string
+ *
+ * @return string
  */
 function waht_credentials() {
 	$date = WAHT_CREATE_YEAR;
-	$date .= (WAHT_CREATE_YEAR < date('Y')) ? "-" . date('Y') : '';
+	$date .= (WAHT_CREATE_YEAR < date('Y')) ? '-' . date('Y') : '';
 
-	$credentials = get_bloginfo('name') . " " . __('developed by', 'waht');
-	$credentials .= " <a href=\"" . WAHT_AUTHOR_URI . "\" title=\"" . WAHT_AUTHOR_NAME . "\">";
+	$credentials = get_bloginfo('name') . ' ' . __('developed by', 'waht');
+	$credentials .= ' <a href="' . WAHT_AUTHOR_URI . '" title="' . WAHT_AUTHOR_NAME . '" target="_blank">';
 	$credentials .= WAHT_AUTHOR_NAME;
-	$credentials .= "</a> &copy; " . $date;
-	echo $credentials;
+	$credentials .= '</a> &copy; ' . $date;
+	return $credentials;
 }
 
 /**
@@ -30,7 +32,8 @@ function waht_container_class() {
 
 /**
  * Display a dynamic title tag
- * See http://css-tricks.com/snippets/wordpress/dynamic-title-tag/
+ *
+ * @link http://css-tricks.com/snippets/wordpress/dynamic-title-tag/
  */
 function waht_dynamic_title() {
 	global $paged, $s;

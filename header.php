@@ -18,6 +18,7 @@
     <link rel="shortcut icon" href="<?php get_template_directory_uri(); ?>/favicon.ico">
 
     <title><?php waht_dynamic_title(); ?></title>
+	<!-- TODO (a.h) Add SEO friendy meta tags (description, keywords, etc -->
 
     <!-- Dublin Core Metadata : http://dublincore.org/ -->
     <meta name="dcterms.title" content="<?php bloginfo('name'); ?> ?>">
