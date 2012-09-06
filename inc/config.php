@@ -24,13 +24,12 @@ define('WAHT_BOOTSTRAP', 	true); 		// Allow use of the Twitter Bootstrap framewo
 define('WAHT_RESPONSIVE', 	true); 		// Allow responsive layout
 define('WAHT_FLUID_LAYOUT', false); 	// Fluid (true) ir fixed (false) layout
 define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework
-define('SIDEBAR_POS', 		'right'); 	// Sidebar position
 
 /* Classes */
 define('WRAP_CLASSES', 		'container'); 	// Class(es) for the wrapper
 define('CONTAINER_CLASSES', 'row-fluid'); 	// Class(es) for the container divs
 define('MAIN_CLASSES', 		'span8'); 		// Class(es) for the main content area
-define('SIDEBAR_CLASSES', 	'span4'); 		// Class(es) for the sidebar area
+define('SIDEBAR_CLASSES', 	'span4'); 		// Class(es) for the sidebar area (if allowed)
 define('FULLWIDTH_CLASSES', 'span12'); 		// Class(es) for full-width main content area
 
 /* Navigation and menus */
@@ -46,9 +45,6 @@ define('WAHT_USE_ADD2HOME', true); // Add To Home Screen. See http://cubiq.org/a
 
 /* Apple devices compatible icons */
 define('WAHT_APPLE_ICONS', true);
-
-/*  TODO: Set your own Google Analytics ID here! */
-define('GOOGLE_ANALYTICS_ID', 'UA-XXX-Y');
 
 /* Define paths */
 $get_theme_name = explode('/themes/', get_template_directory());
