@@ -68,22 +68,23 @@ if (version_compare($wp_version, '2.9', '>='))
 	add_theme_support('post-thumbnails');
 
 if (version_compare($wp_version, '3.0', '>='))
-	// add support for automatic feed links
+	// Add support for automatic feed links
 	add_theme_support('automatic-feed-links');
 
 if (WAHT_APPLE_ICONS) :
+	$waht_options = waht_get_theme_options();
 	add_theme_support('apple-touch-icons', array(
-		'default'     => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon.png',
-		'precomposed' => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-precomposed.png',
-		'57x57'       => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-57x57-precomposed.png',
-		'72x72'       => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-72x72-precomposed.png',
-		'114x114'     => get_template_directory_uri() . '/assets/img/ios/apple-touch-icon-114x114-precomposed.png'
+		'default'     => $waht_options['apple_icons_path'] . 'apple-touch-icon.png',
+		'precomposed' => $waht_options['apple_icons_path'] . 'apple-touch-icon-precomposed.png',
+		'57x57'       => $waht_options['apple_icons_path'] . 'apple-touch-icon-57x57-precomposed.png',
+		'72x72'       => $waht_options['apple_icons_path'] . 'apple-touch-icon-72x72-precomposed.png',
+		'114x114'     => $waht_options['apple_icons_path'] . 'apple-touch-icon-114x114-precomposed.png'
 	)); // Apple Touch Icons
 else :
 	remove_theme_support('apple-touch-icons');
 endif;
 
-if (current_theme_supports('apple-touch-icon')) :
+if (current_theme_supports('apple-touch-icons')) :
 	/**
 	 * Add links to Apple icons
 	 */
