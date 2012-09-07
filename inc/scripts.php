@@ -69,39 +69,71 @@ add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
  * Enqueue scripts files depending on the used framework
  */
 function waht_enqueue_framework_scripts() {
-	if (!waht_use_framework()) return;
-	if (waht_use_bootstrap_framework()) waht_enqueue_bootstrap_framework_scripts();
-	elseif (waht_use_h5bp_framework()) waht_enqueue_h5bp_framework_scripts();
-	elseif (waht_use_foundation_framework()) waht_enqueue_foundation_framework_scripts();
-
+	if (!waht_use_framework()):
+		// do not enqueue anything
+		return;
+	elseif (waht_use_bootstrap_framework()):
+		// enqueue Twitter Bootstrap's files
+		waht_enqueue_bootstrap_framework_scripts();
+	elseif (waht_use_h5bp_framework()):
+		// enqueue HTML5 Boilerplate's files
+		waht_enqueue_h5bp_framework_scripts();
+	elseif (waht_use_foundation_framework()):
+		// enqueue Foundation 3's files
+		waht_enqueue_foundation_framework_scripts();
+	endif;
 }
 
 /**
  * Enqueue all scripts needed for Twitter Bootstrap
  */
 function waht_enqueue_bootstrap_framework_scripts() {
-	wp_register_style('waht-bootstrap', waht_get_assets_uri() . '/css/bootstrap.css', array(), null, 'all');
+	wp_register_style('waht-bootstrap', get_template_directory_uri() . '/frameworks/bootstrap/css/bootstrap.min.css', array(), null, 'all');
 	wp_enqueue_style('waht-bootstrap');
 
 	if (WAHT_RESPONSIVE) :
-		wp_register_style('waht-bootstrap-responsive', waht_get_assets_uri() . '/css/bootstrap-responsive.css',
+		wp_register_style('waht-bootstrap-responsive', get_template_directory_uri() . '/frameworks/bootstrap/css/bootstrap-responsive.min.css',
 			array('waht-bootstrap'), null, 'all');
 		wp_enqueue_style('waht-bootstrap-responsive');
 	endif;
 
-	wp_register_script('waht-bootstrap', waht_get_assets_uri() . '/js/bootstrap.min.js', array('jquery'), null, true);
+	wp_register_script('waht-bootstrap', get_template_directory_uri() . '/frameworks/bootstrap/js/bootstrap.min.js', array('jquery'), null, true);
 	wp_enqueue_script('waht-bootstrap');
 }
 
 /**
  * Enqueue all scripts needed for HTML5 Boilerplate
  */
-function waht_enqueue_h5bp_framework_scripts() { }
+function waht_enqueue_h5bp_framework_scripts() {
+	wp_register_style('waht-h5bp-normalize',
+		get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/css/normalize.css', array(), null, 'all');
+	wp_enqueue_style('waht-h5bp-normalize');
+
+	wp_register_style('waht-h5bp',
+		get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/css/main.css', array('waht-h5bp-normalize'), null, 'all');
+	wp_enqueue_style('waht-h5bp');
+
+	wp_register_script('waht-h5bp-modernizr',
+		get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/js/vendor/modernizr-2.6.1.min.js', array(), '2.6.1', false);
+	wp_enqueue_script('waht-h5bp-modernizr');
+
+	wp_register_script('waht-h5bp', get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/js/plugins.js', array('waht-h5bp-modernizr',
+		'jquery'), null, true);
+	wp_enqueue_script('waht-h5bp');
+}
 
 /**
  * Enqueue all scripts needed for Foundation 3
  */
-function waht_enqueue_foundation_framework_scripts() { }
+function waht_enqueue_foundation_framework_scripts() {
+	wp_register_style('waht-foundation',
+		get_template_directory_uri() . '/frameworks/foundation-3/stylesheets/foundation.min.css', array(), null, 'all');
+	wp_enqueue_style('waht-foundation');
+
+	wp_register_script('waht-foundation',
+		get_template_directory_uri() . '/frameworks/foundation-3/javascripts/foundation.min.js', array('jquery'), null, true);
+	wp_enqueue_script('waht-foundation');
+}
 
 /**
  * Print JavaScript for Google Analytics

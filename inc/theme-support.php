@@ -146,11 +146,12 @@ if (current_theme_supports('rewrite-urls')) :
 	function waht_generate_rewrite_rules($content) {
 		global $wp_rewrite;
 		$waht_non_wp_rules        = array(
-			'css/(.*)'       => THEME_ASSETS_PATH . 'css/$1',
-			'js/(.*)'        => THEME_ASSETS_PATH . 'js/$1',
-			'img/(.*)'       => THEME_ASSETS_PATH . 'img/$1',
-			'fonts/(.*)'     => THEME_ASSETS_PATH . 'fonts/$1',
-			'plugins/(.*)'   => RELATIVE_PLUGIN_PATH . '/$1'
+			'css/(.*)'            => THEME_ASSETS_PATH . 'css/$1',
+			'js/(.*)'             => THEME_ASSETS_PATH . 'js/$1',
+			'img/(.*)'            => THEME_ASSETS_PATH . 'img/$1',
+			'fonts/(.*)'          => THEME_ASSETS_PATH . 'fonts/$1',
+			'frameworks/(.*)'     => THEME_PATH . '/frameworks/$1',
+			'plugins/(.*)'        => RELATIVE_PLUGIN_PATH . '/$1'
 		);
 		$wp_rewrite->non_wp_rules = array_merge($wp_rewrite->non_wp_rules, $waht_non_wp_rules);
 		return $content;
