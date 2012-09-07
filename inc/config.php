@@ -20,7 +20,6 @@ add_theme_support('use-relative-urls');				// Enable relative URLs
 add_theme_support('og-facebook'); 					// Enable OpenGraph Facebook
 
 /* Layout Options */
-define('WAHT_BOOTSTRAP', 	true); 		// Allow use of the Twitter Bootstrap framework
 define('WAHT_RESPONSIVE', 	true); 		// Allow responsive layout
 define('WAHT_FLUID_LAYOUT', false); 	// Fluid (true) ir fixed (false) layout
 define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework

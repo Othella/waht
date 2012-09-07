@@ -121,3 +121,56 @@ function waht_has_right_main_sidebar() {
 	$waht_options = waht_get_theme_options();
 	return ($waht_options['sidebar_position'] == 'right');
 }
+
+/**
+ * Returns true if we use a framework
+ *
+ * @return bool
+ */
+function waht_use_framework() {
+	$waht_options = waht_get_theme_options();
+	return ($waht_options['framework_name'] != 'none');
+}
+
+/**
+ * Returns true if we use the Twitter Bootstrap framework
+ *
+ * @return bool
+ */
+function waht_use_bootstrap_framework() {
+	$waht_options = waht_get_theme_options();
+	return ($waht_options['framework_name'] == 'bootstrap');
+}
+
+/**
+ * Returns true if we use theHTML5 Boilerplate framework
+ *
+ * @return bool
+ */
+function waht_use_h5bp_framework() {
+	$waht_options = waht_get_theme_options();
+	return ($waht_options['framework_name'] == 'h5bp');
+}
+
+/**
+ * Returns true if we use the Foundation 3 framework
+ *
+ * @return bool
+ */
+function waht_use_foundation_framework() {
+	$waht_options = waht_get_theme_options();
+	return ($waht_options['framework_name'] == 'foundation');
+}
+
+/**
+ * Returns the framework name (if using one)
+ * @return string
+ */
+function waht_get_framework() {
+	if (!waht_use_framework()) :
+		return '';
+	else :
+		$waht_options = waht_get_theme_options();
+		return $waht_options['framework_name'];
+	endif;
+}

@@ -52,7 +52,7 @@
     <?php waht_page_header_inside_before(); ?>
 
     <!-- Main navigation -->
-    <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+    <?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
     <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
         <div class="navbar-inner">
             <div class="<?php echo CONTAINER_CLASSES; ?>">
@@ -104,7 +104,7 @@
 
         <!-- Second navigation -->
         <!-- TODO: Find a way to collapse too long items! -->
-        <?php if (WAHT_NAVBAR && WAHT_BOOTSTRAP) { // Use a bootstrap navbar ?>
+        <?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="subnav">
             <div class="<?php echo CONTAINER_CLASSES; ?>">
                 <?php waht_additional_nav_menu(); ?>

@@ -15,9 +15,9 @@
  * @return array
  */
 function waht_body_class($classes) {
-	if (WAHT_BOOTSTRAP) {
-		// Add 'bootstrap' class to body tag if using Bootstrap
-		$classes[] = 'bootstrap';
+	if (waht_get_framework() != '') {
+		// Set the framework name as class to body tag if using one
+		$classes[] = waht_get_framework();
 		if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR)
 			// Add 'waht-navbar-fixed-top' class to body tag if using Bootstrap's top-fixed navbar
 			$classes[] = 'waht-navbar-fixed-top';

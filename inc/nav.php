@@ -503,7 +503,7 @@ add_action('waht_loop_before', 'waht_breadcrumb');
  * @return string
  */
 function waht_link_pages($args = array()) {
-	if (WAHT_BOOTSTRAP) :
+	if (waht_use_bootstrap_framework()) :
 		$defaults = array(
 			'before'           => '<nav class="page-nav">' . __('Pages:', 'waht'),
 			'after'            => '</nav>',

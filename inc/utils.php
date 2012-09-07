@@ -98,3 +98,28 @@ function waht_add_filters($tags, $function) {
 		add_filter($tag, $function);
 	}
 }
+
+function waht_get_theme_name() {
+	// TODO (a.h)
+}
+
+/**
+ * Return the current theme's version
+ * @return mixed
+ */
+function waht_get_theme_version() {
+	$theme = wp_get_theme();
+	return $theme['Version'];
+}
+
+/**
+ * Return the URI where our theme assets are located
+ * @return string
+ */
+function waht_get_assets_uri() {
+	global $is_apache;
+	$waht_assets_uri = get_template_directory_uri();
+	if (!$is_apache || is_multisite() || is_child_theme() || !get_option('permalink_structure') || !current_theme_supports('rewrite-urls'))
+		$waht_assets_uri .= '/assets';
+	return $waht_assets_uri;
+}

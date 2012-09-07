@@ -133,28 +133,45 @@ function waht_settings_section_framework() {
 }
 
 function waht_settings_field_framework_name() {
- // TODO (a.h) Code framework names field
+	$waht_options           = waht_get_theme_options();
+	$selected_framework     = $waht_options['framework_name'];
+	$framework_name_options = waht_framework_names();?>
+<select name="waht_theme_options[framework_name]" id="waht_framework_name">
+	<?php foreach ($framework_name_options as $option) :
+	$label    = $option['label'];
+	$value    = $option['value'];
+	$selected = ($selected_framework == $value) ? ' selected="selected"' : '';
+	?>
+    <option value="<?php echo $value ?>"<?php echo $selected?>><?php echo $label; ?></option>
+	<?php endforeach ?>
+</select>
+<label for="waht_framework_name" class="description"><?php _e('Select the framework you want to use', 'waht'); ?></label>
+<?php
 }
 
+/**
+ * Returns an array of framework names options registered for waht
+ *
+ * @return mixed|void
+ */
 function waht_framework_names() {
-	// TODO (a.h) Code framework names array
 	$framework_name_options = array(
-		'bootstrap' => array(
+		'bootstrap'   => array(
 			'value' => 'bootstrap',
 			'label' => __('Twitter Bootstrap', 'waht')
 		),
-		'h5bp'  => array(
+		'h5bp'        => array(
 			'value' => 'h5bp',
 			'label' => __('HTML5 Boilerplate', 'waht')
 		),
-		'foundation3'  => array(
-			'value' => 'foundation3',
+		'foundation'  => array(
+			'value' => 'foundation',
 			'label' => __('Foundation 3', 'waht')
 		),
-		'h5bp'  => array(
-			'value' => 'h5bp',
-			'label' => __('HTML5 Boilerplate', 'waht')
-		),
+		'none'  => array(
+			'value' => 'none',
+			'label' => __('Don\'t use any framework', 'waht')
+		)
 	);
 	return apply_filters('waht_framework_names', $framework_name_options);
 }
@@ -265,6 +282,10 @@ function waht_theme_options_validate($input) {
 	if (isset($input['sidebar_position']) && array_key_exists($input['sidebar_position'], waht_sidebar_positions()))
 		$output['sidebar_position'] = $input['sidebar_position'];
 
+	// The framework name must be in our array of framework option
+	if (isset($input['framework_name']) && array_key_exists($input['framework_name'], waht_framework_names()))
+		$output['framework_name'] = $input['framework_name'];
+
 	return apply_filters('waht_theme_options_validate', $output, $input, $defaults);
 }
 
@@ -277,7 +298,8 @@ function waht_get_default_theme_options() {
 	$default_theme_options = array(
 		'google_analytics_id' => '',
 		'apple_icons_path'    => get_template_directory_uri() . '/assets/img/ios/',
-		'sidebar_position'    => 'right'
+		'sidebar_position'    => 'right',
+		'framework_name'      => 'bootstrap'
 	);
 	if (is_rtl())
 		$default_theme_options['sidebar_position'] = 'left';

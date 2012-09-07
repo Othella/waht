@@ -7,24 +7,17 @@
  * @uri        : https://github.com/Othella/waht
  */
 
-
 /**
  * Enqueue our scripts
  */
 function waht_enqueue_scripts() {
-	global $is_apache;
-
-	$theme      = wp_get_theme();
-	$assets_uri = get_template_directory_uri();
-	if (!$is_apache || is_multisite() || is_child_theme() || !get_option('permalink_structure') || !current_theme_supports('rewrite-urls'))
-		$assets_uri .= '/assets';
 
 	// Only for IE < 9
 	// See http://kuttler.eu/post/wordpress-style-version-conditional-comments/
 	// and http://css-tricks.com/snippets/wordpress/html5-shim-in-functions-php/
 	global $is_IE;
 	if ($is_IE) {
-		wp_register_style('waht-ie', $assets_uri . '/css/ie.css', array(), $theme['Version'], 'all');
+		wp_register_style('waht-ie', waht_get_assets_uri() . '/css/ie.css', array(), waht_get_theme_version(), 'all');
 		$GLOBALS['wp_styles']->add_data('waht-ie', 'conditional', 'lte IE 9');
 		wp_enqueue_style('waht-ie');
 
@@ -37,62 +30,85 @@ function waht_enqueue_scripts() {
 	// Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline
 	// It's kept in the header instead of footer to avoid conflicts with plugins.
 	// See http://css-tricks.com/snippets/wordpress/include-jquery-in-wordpress-theme/
-	if (!is_admin()) {
+	if (!is_admin()) :
 		wp_deregister_script('jquery');
 		wp_register_script('jquery', "http" . ($_SERVER['SERVER_PORT'] == 443 ? "s" : "") .
 			"://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js", false, false);
 		wp_enqueue_script('jquery');
-	}
+	endif;
 
 	// Comments
-	if (is_single() && comments_open() && get_option('thread_comments')) {
+	if (is_single() && comments_open() && get_option('thread_comments'))
 		wp_enqueue_script('comment-reply');
-	}
 
-	// Bootstrap style and scripts
-	if (WAHT_BOOTSTRAP) {
-		wp_register_style('waht-bootstrap', $assets_uri . '/css/bootstrap.css', array(), null, 'all');
-		wp_enqueue_style('waht-bootstrap');
-
-		if (WAHT_RESPONSIVE) {
-			wp_register_style('waht-bootstrap-responsive', $assets_uri . '/css/bootstrap-responsive.css',
-				array('waht-bootstrap'), null, 'all');
-			wp_enqueue_style('waht-bootstrap-responsive');
-		}
-
-		wp_register_script('waht-bootstrap', $assets_uri . '/js/bootstrap.min.js', array('jquery'), null, true);
-		wp_enqueue_script('waht-bootstrap');
-	}
+	// Framework style and scripts
+	waht_enqueue_framework_scripts();
 
 	// Custom style
-	wp_register_style('waht-style', $assets_uri . '/css/style.css', array(), $theme['Version'], 'all');
+	wp_register_style('waht-style', waht_get_assets_uri() . '/css/style.css', array(), waht_get_theme_version(), 'all');
 	wp_enqueue_style('waht-style');
 	// TODO (a.h) Add a minified stylesheet
 
 	// Custom scripts
-	if (WAHT_DEV_MODE) :
-		wp_register_script('waht-scripts', $assets_uri . '/js/scripts.js', array('jquery'), $theme['Version'], true);
-	else :
-		wp_register_script('waht-scripts', $assets_uri . '/js/scripts.min.js', array('jquery'), $theme['Version'], true);
-	endif;
+	if (WAHT_DEV_MODE)
+		wp_register_script('waht-scripts', waht_get_assets_uri() . '/js/scripts.js', array('jquery'), waht_get_theme_version(), true);
+	else
+		wp_register_script('waht-scripts', waht_get_assets_uri() . '/js/scripts.min.js', array('jquery'), waht_get_theme_version(), true);
 
 	wp_enqueue_script('waht-scripts');
 
 	// Add To Home Screen
 	if (WAHT_USE_ADD2HOME)
-		wp_register_script('add2home', $assets_uri . '/js/lib/add2home.min.js', array(), null, true);
+		wp_register_script('add2home', waht_get_assets_uri() . '/js/lib/add2home.min.js', array(), null, true);
 	wp_enqueue_script('add2home');
 }
 
 add_action('wp_enqueue_scripts', 'waht_enqueue_scripts', 100);
 
+/**
+ * Enqueue scripts files depending on the used framework
+ */
+function waht_enqueue_framework_scripts() {
+	if (!waht_use_framework()) return;
+	if (waht_use_bootstrap_framework()) waht_enqueue_bootstrap_framework_scripts();
+	elseif (waht_use_h5bp_framework()) waht_enqueue_h5bp_framework_scripts();
+	elseif (waht_use_foundation_framework()) waht_enqueue_foundation_framework_scripts();
+
+}
+
+/**
+ * Enqueue all scripts needed for Twitter Bootstrap
+ */
+function waht_enqueue_bootstrap_framework_scripts() {
+	wp_register_style('waht-bootstrap', waht_get_assets_uri() . '/css/bootstrap.css', array(), null, 'all');
+	wp_enqueue_style('waht-bootstrap');
+
+	if (WAHT_RESPONSIVE) :
+		wp_register_style('waht-bootstrap-responsive', waht_get_assets_uri() . '/css/bootstrap-responsive.css',
+			array('waht-bootstrap'), null, 'all');
+		wp_enqueue_style('waht-bootstrap-responsive');
+	endif;
+
+	wp_register_script('waht-bootstrap', waht_get_assets_uri() . '/js/bootstrap.min.js', array('jquery'), null, true);
+	wp_enqueue_script('waht-bootstrap');
+}
+
+/**
+ * Enqueue all scripts needed for HTML5 Boilerplate
+ */
+function waht_enqueue_h5bp_framework_scripts() { }
+
+/**
+ * Enqueue all scripts needed for Foundation 3
+ */
+function waht_enqueue_foundation_framework_scripts() { }
 
 /**
  * Print JavaScript for Google Analytics
  * See https://developers.google.com/analytics/devguides/collection/gajs/
  */
 function waht_google_analytics() {
-	$waht_options = waht_get_theme_options();
+	$waht_options             = waht_get_theme_options();
 	$waht_google_analytics_id = $waht_options['google_analytics_id'];
 	if ($waht_google_analytics_id !== '') {
 		$script_str = "\n\t<script>\n";
