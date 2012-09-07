@@ -8,64 +8,82 @@
  */
 
 /**
- * Register the form setting for our waht_options array
+ * Register the form settings for our waht_options array
  */
 function waht_theme_options_init() {
+	// Register the waht theme options settings
 	register_setting(
-		'waht_options', // Options group
-		'waht_theme_options', // Database option
-		'waht_theme_options_validate' // sanitization callback
+		'waht_options',
+		'waht_theme_options',
+		'waht_theme_options_validate'
 	);
 
-	// Register the general options field group
+	// Register the framework options field group
 	add_settings_section(
-		'layout', // Section unique identifier
-		__('Layout', 'waht'), // Section title (none)
-		'__return_false', // Section callback (none),
-		'theme_options' // Menu slug
+		'framework',
+		__('Framework', 'waht'),
+		'waht_settings_section_framework',
+		'theme_options'
 	);
 
-	// Register the layout settings
+	// Register the sidebar position settings field
 	add_settings_field(
-		'sidebar_position', // Field unique identifier
-		__('Sidebar Position', 'waht'), // Field label
-		'waht_settings_field_sidebar_position', // Function that renders the setting field
-		'theme_options', // Menu slug
-		'layout' // Section
+		'framework_name',
+		__('Framework Name', 'waht'),
+		'waht_settings_field_framework_name',
+		'theme_options',
+		'framework'
+	);
+
+	// Register the layout options field group
+	add_settings_section(
+		'layout',
+		__('Layout', 'waht'),
+		'waht_settings_section_layout',
+		'theme_options'
+	);
+
+	// Register the sidebar position settings field
+	add_settings_field(
+		'sidebar_position',
+		__('Sidebar Position', 'waht'),
+		'waht_settings_field_sidebar_position',
+		'theme_options',
+		'layout'
 	);
 
 	// Register the SEO options field group
 	add_settings_section(
 		'seo', // Section unique identifier
-		__('SEO (Search Engines Optimization)', 'waht'), // Section title
-		'waht_settings_section_seo', // Section callback
-		'theme_options' // Menu slug
+		__('SEO (Search Engines Optimization)', 'waht'),
+		'waht_settings_section_seo',
+		'theme_options'
 	);
 
 	// Register Google Analytics settings field
 	add_settings_field(
-		'google_analytics_id', // Field unique identifier
-		__('Google Analytics ID', 'waht'), // Field label
-		'waht_settings_field_google_analytics_id', // Function that renders the setting field
-		'theme_options', // Menu slug
-		'seo' // Section
+		'google_analytics_id',
+		__('Google Analytics ID', 'waht'),
+		'waht_settings_field_google_analytics_id',
+		'theme_options',
+		'seo'
 	);
 
 	// Register the SEO options field group
 	add_settings_section(
-		'responsive', // Section unique identifier
-		__('Responsive Options', 'waht'), // Section title
-		'waht_settings_section_responsive', // Section callback
-		'theme_options' // Menu slug
+		'responsive',
+		__('Responsive Options', 'waht'),
+		'waht_settings_section_responsive',
+		'theme_options'
 	);
 
 	// Register Apple icons settings field
 	add_settings_field(
-		'apple_icons', // Field unique identifier
-		__('Apple Icons', 'waht'), // Field label
-		'waht_settings_field_apple_icons', // Function that renders the setting field
-		'theme_options', // Menu slug
-		'responsive' // Section
+		'apple_icons',
+		__('Apple Icons', 'waht'),
+		'waht_settings_field_apple_icons',
+		'theme_options',
+		'responsive'
 	);
 }
 
@@ -110,13 +128,42 @@ function waht_theme_options_render_page() {
 <?php
 }
 
+function waht_settings_section_framework() {
+	echo '<p class="description">' . __('Settings for the framework to use', 'waht') . '</p>';
+}
+
+function waht_settings_field_framework_name() {
+ // TODO (a.h) Code framework names field
+}
+
+function waht_framework_names() {
+	// TODO (a.h) Code framework names array
+	$framework_name_options = array(
+		'bootstrap' => array(
+			'value' => 'bootstrap',
+			'label' => __('Twitter Bootstrap', 'waht')
+		),
+		'h5bp'  => array(
+			'value' => 'h5bp',
+			'label' => __('HTML5 Boilerplate', 'waht')
+		),
+		'foundation3'  => array(
+			'value' => 'foundation3',
+			'label' => __('Foundation 3', 'waht')
+		),
+		'h5bp'  => array(
+			'value' => 'h5bp',
+			'label' => __('HTML5 Boilerplate', 'waht')
+		),
+	);
+	return apply_filters('waht_framework_names', $framework_name_options);
+}
+
 /**
  * Renders the layout options section
  */
 function waht_settings_section_layout() {
-	?>
-<p class="description"><?php _e('Settings for the layout', 'waht'); ?></p>
-<?php
+	echo '<p class="description">' . __('Settings for the theme layout', 'waht') . '</p>';
 }
 
 /**
@@ -166,9 +213,7 @@ function waht_sidebar_positions() {
  * Renders the SEO options section
  */
 function waht_settings_section_seo() {
-	?>
-<p class="description"><?php _e('Settings for a better SEO', 'waht'); ?></p>
-<?php
+	echo '<p class="description">' . __('Settings for a better SEO', 'waht') . '</p>';
 }
 
 /**
@@ -186,7 +231,7 @@ function waht_settings_field_google_analytics_id() {
  * Renders the responsive options section
  */
 function waht_settings_section_responsive() {
-
+	echo '<p class="description">' . __('Settings for the responsive behavior', 'waht') . '</p>';
 }
 
 /**
