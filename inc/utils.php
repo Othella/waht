@@ -99,12 +99,28 @@ function waht_add_filters($tags, $function) {
 	}
 }
 
+/**
+ * Returns the theme name
+ * Note: it is the same as the theme folder's name!
+ *
+ * @return mixed
+ */
 function waht_get_theme_name() {
-	// TODO (a.h)
+	$get_theme_name = explode('/themes/', get_template_directory());
+	return next($get_theme_name);
+}
+
+/**
+ * Return the current theme path
+ * @return string
+ */
+function waht_get_theme_path() {
+	return waht_get_relative_content_path() . '/themes/' . waht_get_theme_name();
 }
 
 /**
  * Return the current theme's version
+ *
  * @return mixed
  */
 function waht_get_theme_version() {
@@ -114,6 +130,7 @@ function waht_get_theme_version() {
 
 /**
  * Return the URI where our theme assets are located
+ *
  * @return string
  */
 function waht_get_assets_uri() {
@@ -122,4 +139,37 @@ function waht_get_assets_uri() {
 	if (!$is_apache || is_multisite() || is_child_theme() || !get_option('permalink_structure') || !current_theme_supports('rewrite-urls'))
 		$waht_assets_uri .= '/assets';
 	return $waht_assets_uri;
+}
+
+/**
+ * Return the path to the current theme assets
+ * @return string
+ */
+function waht_get_assets_path() {
+	return waht_get_theme_path() . '/assets';
+}
+
+/**
+ * Return the relative path to the plugins folder
+ * @return mixed
+ */
+function waht_get_relative_plugin_path() {
+	return  str_replace(site_url() . '/', '', plugins_url());
+}
+
+/**
+ * Return the complete relative path to the plugin folder
+ * @return string
+ */
+function waht_get_full_relative_plugin_path() {
+	// TODO (a.h) waht_get_full_relative_plugin_path completely breaks theme!
+	//return ABSPATH . '/' . waht_get_relative_plugin_path();
+}
+
+/**
+ * Return the relative path to content
+ * @return mixed
+ */
+function waht_get_relative_content_path() {
+	return str_replace(site_url() . '/', '', content_url());
 }

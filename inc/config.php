@@ -44,15 +44,6 @@ define('WAHT_USE_ADD2HOME', true); // Add To Home Screen. See http://cubiq.org/a
 /* Apple devices compatible icons */
 define('WAHT_APPLE_ICONS', true);
 
-/* Define paths */
-$get_theme_name = explode('/themes/', get_template_directory());
-define('THEME_NAME',                next($get_theme_name));
-define('RELATIVE_PLUGIN_PATH',      str_replace(site_url() . '/', '', plugins_url()));
-define('FULL_RELATIVE_PLUGIN_PATH', ABSPATH . '/' . RELATIVE_PLUGIN_PATH);
-define('RELATIVE_CONTENT_PATH',     str_replace(site_url() . '/', '', content_url()));
-define('THEME_PATH',                RELATIVE_CONTENT_PATH . '/themes/' . THEME_NAME);
-define('THEME_ASSETS_PATH',         THEME_PATH . '/assets/');
-
 /* Define excerpts length */
 define('POST_EXCERPT_LENGTH', 40);
 

@@ -103,8 +103,8 @@ add_action('admin_init', 'waht_theme_options_init');
  */
 function waht_theme_options_add_page() {
 	$theme_page = add_theme_page(
-		sprintf(__('%s Theme Options', 'waht'), THEME_NAME), // Name of the theme options' page
-		sprintf(__('%s Theme Options', 'waht'), THEME_NAME), // Label in menu
+		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // Name of the theme options' page
+		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // Label in menu
 		'edit_theme_options', // Capability required
 		'theme_options', // Menu slug
 		'waht_theme_options_render_page' // Function rendering options page
@@ -122,7 +122,7 @@ function waht_theme_options_render_page() {
 	?>
 <div class="wrap">
 	<?php screen_icon(); // Displays screen icon ?>
-    <h2><?php printf(__('%s Theme Options', 'waht'), THEME_NAME); ?></h2>
+    <h2><?php printf(__('%s Theme Options', 'waht'), waht_get_theme_name()); ?></h2>
 	<?php settings_errors(); ?>
     <div class="waht-theme-options">
         <form method="post" action="options.php">

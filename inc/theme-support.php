@@ -146,12 +146,12 @@ if (current_theme_supports('rewrite-urls')) :
 	function waht_generate_rewrite_rules($content) {
 		global $wp_rewrite;
 		$waht_non_wp_rules        = array(
-			'css/(.*)'            => THEME_ASSETS_PATH . 'css/$1',
-			'js/(.*)'             => THEME_ASSETS_PATH . 'js/$1',
-			'img/(.*)'            => THEME_ASSETS_PATH . 'img/$1',
-			'fonts/(.*)'          => THEME_ASSETS_PATH . 'fonts/$1',
-			'frameworks/(.*)'     => THEME_PATH . '/frameworks/$1',
-			'plugins/(.*)'        => RELATIVE_PLUGIN_PATH . '/$1'
+			'css/(.*)'            => waht_get_assets_path() . '/css/$1',
+			'js/(.*)'             => waht_get_assets_path() . '/js/$1',
+			'img/(.*)'            => waht_get_assets_path() . '/img/$1',
+			'fonts/(.*)'          => waht_get_assets_path() . '/fonts/$1',
+			'frameworks/(.*)'     => waht_get_theme_path() . '/frameworks/$1',
+			'plugins/(.*)'        => waht_get_relative_plugin_path() . '/$1'
 		);
 		$wp_rewrite->non_wp_rules = array_merge($wp_rewrite->non_wp_rules, $waht_non_wp_rules);
 		return $content;
@@ -168,10 +168,10 @@ if (current_theme_supports('rewrite-urls')) :
 	 * @return mixed
 	 */
 	function waht_clean_urls($content) {
-		if (strpos($content, FULL_RELATIVE_PLUGIN_PATH) === 0) :
-			return str_replace(FULL_RELATIVE_PLUGIN_PATH, WP_BASE . '/plugins', $content);
+		if (strpos($content, waht_get_full_relative_plugin_path()) === 0) :
+			return str_replace(waht_get_full_relative_plugin_path(), WP_BASE . '/plugins', $content);
 		else :
-			return str_replace('/' . THEME_PATH, '', $content);
+			return str_replace('/' . waht_get_theme_path(), '', $content);
 		endif;
 	}
 
