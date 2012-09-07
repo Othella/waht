@@ -27,7 +27,7 @@
     <meta name="dcterms.rights" content="Copyright <?php echo WAHT_AUTHOR_NAME ?> <?php date('Y'); ?>. All rights
     reserved">
 
-    <?php if (WAHT_RESPONSIVE) { ?>
+    <?php if (waht_is_responsive()) { ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><?php } ?>
 
     <link rel="profile" href="http://gmpg.org/xfn/11"/>

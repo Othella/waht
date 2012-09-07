@@ -164,6 +164,7 @@ function waht_use_foundation_framework() {
 
 /**
  * Returns the framework name (if using one)
+ *
  * @return string
  */
 function waht_get_framework() {
@@ -173,4 +174,14 @@ function waht_get_framework() {
 		$waht_options = waht_get_theme_options();
 		return $waht_options['framework_name'];
 	endif;
+}
+
+/**
+ * Returns true if the layout has to be responsive
+ *
+ * @return bool
+ */
+function waht_is_responsive() {
+	$waht_options = waht_get_theme_options();
+	return $waht_options['responsive'];
 }

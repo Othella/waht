@@ -91,7 +91,7 @@ function waht_enqueue_bootstrap_framework_scripts() {
 	wp_register_style('waht-bootstrap', get_template_directory_uri() . '/frameworks/bootstrap/css/bootstrap.min.css', array(), null, 'all');
 	wp_enqueue_style('waht-bootstrap');
 
-	if (WAHT_RESPONSIVE) :
+	if (waht_is_responsive()) :
 		wp_register_style('waht-bootstrap-responsive', get_template_directory_uri() . '/frameworks/bootstrap/css/bootstrap-responsive.min.css',
 			array('waht-bootstrap'), null, 'all');
 		wp_enqueue_style('waht-bootstrap-responsive');

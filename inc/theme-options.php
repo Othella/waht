@@ -69,12 +69,21 @@ function waht_theme_options_init() {
 		'seo'
 	);
 
-	// Register the SEO options field group
+	// Register the responsive options field group
 	add_settings_section(
 		'responsive',
 		__('Responsive Options', 'waht'),
 		'waht_settings_section_responsive',
 		'theme_options'
+	);
+
+	// Register using responsive layout settings field
+	add_settings_field(
+		'responsive',
+		__('Use Responsive', 'waht'),
+		'waht_settings_field_responsive',
+		'theme_options',
+		'responsive'
 	);
 
 	// Register Apple icons settings field
@@ -138,11 +147,8 @@ function waht_settings_field_framework_name() {
 	$framework_name_options = waht_framework_names();?>
 <select name="waht_theme_options[framework_name]" id="waht_framework_name">
 	<?php foreach ($framework_name_options as $option) :
-	$label    = $option['label'];
-	$value    = $option['value'];
-	$selected = ($selected_framework == $value) ? ' selected="selected"' : '';
 	?>
-    <option value="<?php echo $value ?>"<?php echo $selected?>><?php echo $label; ?></option>
+    <option value="<?php echo $option['value'] ?>"<?php selected($selected_framework, $option['value']); ?>><?php echo $option['label']; ?></option>
 	<?php endforeach ?>
 </select>
 <label for="waht_framework_name" class="description"><?php _e('Select the framework you want to use', 'waht'); ?></label>
@@ -168,7 +174,7 @@ function waht_framework_names() {
 			'value' => 'foundation',
 			'label' => __('Foundation 3', 'waht')
 		),
-		'none'  => array(
+		'none'        => array(
 			'value' => 'none',
 			'label' => __('Don\'t use any framework', 'waht')
 		)
@@ -192,11 +198,8 @@ function waht_settings_field_sidebar_position() {
 	$sidebar_position_options = waht_sidebar_positions();?>
 <select name="waht_theme_options[sidebar_position]" id="waht_sidebar_position">
 	<?php foreach ($sidebar_position_options as $option) :
-	$label    = $option['label'];
-	$value    = $option['value'];
-	$selected = ($selected_position == $value) ? ' selected="selected"' : '';
 	?>
-    <option value="<?php echo $value ?>"<?php echo $selected?>><?php echo $label; ?></option>
+    <option value="<?php echo $option['value'] ?>"<?php echo selected($selected_position, $option['value'])?>><?php echo $option['label']; ?></option>
 	<?php endforeach ?>
 </select>
 <label for="waht_sidebar_position" class="description"><?php _e('Select on which side you want to display your sidebar', 'waht'); ?></label>
@@ -251,6 +254,16 @@ function waht_settings_section_responsive() {
 	echo '<p class="description">' . __('Settings for the responsive behavior', 'waht') . '</p>';
 }
 
+function waht_settings_field_responsive() {
+	$waht_options = waht_get_theme_options();
+	?>
+<input type="checkbox" id="waht_use_responsive" name="waht_theme_options[responsive]" value="true" <?php checked(true,
+	$waht_options['responsive'])?>>
+<label for="waht_use_responsive"
+       class="description"><?php _e('Check this box if you want to make your theme responsive', 'waht'); ?></label>
+<?php
+}
+
 /**
  * Renders a text field to enter the apple icons folder's path
  */
@@ -282,6 +295,11 @@ function waht_theme_options_validate($input) {
 	if (isset($input['sidebar_position']) && array_key_exists($input['sidebar_position'], waht_sidebar_positions()))
 		$output['sidebar_position'] = $input['sidebar_position'];
 
+	// The responsive option is a boolean
+	if (isset($input['responsive']) && is_bool($input['responsive']))
+		$output['responsive'] = $input['responsive'];
+	// TODO (a.h) Debug responsivity!
+
 	// The framework name must be in our array of framework option
 	if (isset($input['framework_name']) && array_key_exists($input['framework_name'], waht_framework_names()))
 		$output['framework_name'] = $input['framework_name'];
@@ -299,7 +317,8 @@ function waht_get_default_theme_options() {
 		'google_analytics_id' => '',
 		'apple_icons_path'    => get_template_directory_uri() . '/assets/img/ios/',
 		'sidebar_position'    => 'right',
-		'framework_name'      => 'bootstrap'
+		'framework_name'      => 'bootstrap',
+		'responsive'          => true
 	);
 	if (is_rtl())
 		$default_theme_options['sidebar_position'] = 'left';

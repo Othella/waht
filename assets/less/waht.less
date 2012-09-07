@@ -32,7 +32,11 @@ body { //font-family: Verdana, Helvetica, Arial, sans-serif;
 	font-weight: 200;
 }
 
-a { font-weight: 400; }
+a {
+	font-weight: 400;
+	color:       @waht_blue;
+	&:hover { color: @waht_orange; }
+}
 
 h1, h2, h3, h4, h5, h6 {
 	text-shadow: 0 -1px 0 #ddd, 0 1px 0 #fff; // Letterpress effect
