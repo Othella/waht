@@ -14,7 +14,7 @@
 
 <?php waht_page_footer_before(); ?>
 <footer id="page-footer">
-    <div class="<?php waht_container_class(); ?>">
+    <div class="<?php echo waht_container_classes(); ?>">
         <?php waht_page_footer_inside_before(); ?>
         <section class="footer-sidebars row-fluid">
             <section class="sidebar-footer-left span4">

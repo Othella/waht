@@ -55,7 +55,7 @@
     <?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
     <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
         <div class="navbar-inner">
-            <div class="<?php echo CONTAINER_CLASSES; ?>">
+            <div class="<?php echo waht_container_classes(); ?>">
                 <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
                 <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
                     <span class="icon-bar"></span>
@@ -77,12 +77,12 @@
     <?php
 } else { // use a simple menu
     ?>
-    <nav role="navigation" class="main-navigation <?php waht_container_class(); ?>">
+    <nav role="navigation" class="main-navigation <?php echo waht_container_classes(); ?>">
         <?php waht_main_nav_menu(); ?>
     </nav>
     <?php } ?>
 
-    <div class="<?php waht_container_class(); ?>">
+    <div class="<?php echo waht_container_classes(); ?>">
         <div class="row-fluid">
             <!-- Site logo, name, description, etc. -->
             <div class="span4">
@@ -106,7 +106,7 @@
         <!-- TODO: Find a way to collapse too long items! -->
         <?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="subnav">
-            <div class="<?php echo CONTAINER_CLASSES; ?>">
+            <div class="<?php echo waht_container_classes(); ?>">
                 <?php waht_additional_nav_menu(); ?>
             </div>
         </nav>
@@ -126,4 +126,4 @@
 <?php waht_page_wrap_before(); ?>
 <div id="page-wrap" role="document">
     <?php waht_page_wrap_inside_before(); ?>
-    <div class="<?php waht_container_class(); ?>">
+    <div class="<?php echo waht_container_classes(); ?>">

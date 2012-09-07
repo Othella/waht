@@ -24,13 +24,6 @@ function waht_credentials() {
 }
 
 /**
- * Get the container class name
- */
-function waht_container_class() {
-	echo (WAHT_FLUID_LAYOUT ? 'container-fluid' : 'container');
-}
-
-/**
  * Display a dynamic title tag
  *
  * @link http://css-tricks.com/snippets/wordpress/dynamic-title-tag/

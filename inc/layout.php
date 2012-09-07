@@ -79,9 +79,18 @@ function waht_has_main_sidebar() {
 
 /**
  * Returns the classes of the main section
+ *
+ * @return string
  */
 function waht_main_section_classes() {
-	$main_classes = waht_has_main_sidebar() ? MAIN_CLASSES : FULLWIDTH_CLASSES;
+	$main_classes = '';
+	if (waht_use_bootstrap_framework()) :
+		$main_classes .= waht_has_main_sidebar() ? 'span8' : 'span12';
+	elseif (waht_use_h5bp_framework()) :
+		$main_classes .= waht_has_main_sidebar() ? 'span8' : 'span12';
+	elseif (waht_use_foundation_framework()) :
+		$main_classes .= waht_has_main_sidebar() ? 'eight columns' : 'twelve columns';
+	endif;
 	if (waht_has_left_main_sidebar())
 		$main_classes .= ' pull-right';
 	elseif (waht_has_right_main_sidebar())
@@ -91,14 +100,60 @@ function waht_main_section_classes() {
 
 /**
  * Returns the classes of the main sidebar
+ *
+ * @return string
  */
 function waht_sidebar_classes() {
-	$sidebar_classes = SIDEBAR_CLASSES;
+	$sidebar_classes = '';
+	if (waht_use_bootstrap_framework()) :
+		$sidebar_classes .= 'span4';
+	elseif (waht_use_h5bp_framework()) :
+		$sidebar_classes .= 'span4';
+	elseif (waht_use_foundation_framework()) :
+		$sidebar_classes .= 'four columns';
+	endif;
 	if (waht_has_left_main_sidebar())
 		$sidebar_classes .= ' pull-left';
 	elseif (waht_has_right_main_sidebar())
 		$sidebar_classes .= ' pull-right';
 	echo $sidebar_classes;
+}
+
+/**
+ * Returns the class of the main wrapper
+ *
+ * @return string
+ */
+function waht_wrapper_classes() { // TODO (a.h) Code waht_wrapper_classes()
+	$wrapper_classes = '';
+	if (waht_use_bootstrap_framework()) :
+		$wrapper_classes .= 'container';
+	elseif (waht_use_h5bp_framework()) :
+		$wrapper_classes .= '';
+	elseif (waht_use_foundation_framework()) :
+		$wrapper_classes .= 'row';
+	endif;
+	return $wrapper_classes;
+}
+
+/**
+ * Returns the class of the containers
+ *
+ * @return string
+ */
+function waht_container_classes() { // TODO (a.h) Code waht_container_classes()
+	$container_classes = '';
+	if (waht_use_bootstrap_framework()) :
+		if (waht_use_fluid_layout())
+			$container_classes .= 'row-fluid';
+		else
+			$container_classes .= 'row';
+	elseif (waht_use_h5bp_framework()) :
+		$container_classes .= 'row';
+	elseif (waht_use_foundation_framework()) :
+		$container_classes .= 'row';
+	endif;
+	return $container_classes;
 }
 
 /**
@@ -184,4 +239,14 @@ function waht_get_framework() {
 function waht_is_responsive() {
 	$waht_options = waht_get_theme_options();
 	return $waht_options['responsive'];
+}
+
+/**
+ * Returns true if teh layout has to be fluid
+ *
+ * @return bool
+ */
+function waht_use_fluid_layout() {
+	$waht_options = waht_get_theme_options();
+	return $waht_options['fluid'];
 }

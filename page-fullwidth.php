@@ -8,7 +8,7 @@
  */
 ?>
 <?php get_header(); ?>
-<div id="content" class="<?php echo CONTAINER_CLASSES; ?>">
+<div id="content" class="<?php echo waht_container_classes(); ?>">
     <?php waht_main_before(); ?>
     <section id="main" role="main" class="<?php waht_main_section_classes(); ?>">
         <?php get_template_part('loop', 'page'); ?>

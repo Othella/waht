@@ -52,6 +52,14 @@ function waht_theme_options_init() {
 		'layout'
 	);
 
+	add_settings_field(
+		'fluid',
+		__('Fluid Layout', 'waht'),
+		'waht_settings_field_fluid',
+		'theme_options',
+		'layout'
+	);
+
 	// Register the SEO options field group
 	add_settings_section(
 		'seo', // Section unique identifier
@@ -229,6 +237,21 @@ function waht_sidebar_positions() {
 	return apply_filters('waht_sidebar_positions', $sidebar_position_options);
 }
 
+
+function waht_settings_field_fluid() {
+	$waht_options = waht_get_theme_options();
+	?>
+<input type="radio" id="waht_use_fluid" name="waht_theme_options[fluid]" value="1" <?php checked(true,
+	$waht_options['fluid'])?>>
+<label for="waht_use_fluid"
+       class="description"><?php _e('Use a fuld layout', 'waht'); ?></label><br/>
+<input type="radio" id="waht_use_fluid_no" name="waht_theme_options[fluid]" value="0" <?php checked(false,
+	$waht_options['fluid'])?>>
+<label for="waht_use_fluid_no"
+       class="description"><?php _e('Do not use a fluid layout', 'waht'); ?></label>
+<?php
+}
+
 /**
  * Renders the SEO options section
  */
@@ -257,10 +280,14 @@ function waht_settings_section_responsive() {
 function waht_settings_field_responsive() {
 	$waht_options = waht_get_theme_options();
 	?>
-<input type="checkbox" id="waht_use_responsive" name="waht_theme_options[responsive]" value="true" <?php checked(true,
+<input type="radio" id="waht_use_responsive" name="waht_theme_options[responsive]" value="1" <?php checked(true,
 	$waht_options['responsive'])?>>
 <label for="waht_use_responsive"
-       class="description"><?php _e('Check this box if you want to make your theme responsive', 'waht'); ?></label>
+       class="description"><?php _e('Use a responsive layout', 'waht'); ?></label><br/>
+<input type="radio" id="waht_use_responsive_no" name="waht_theme_options[responsive]" value="0" <?php checked(false,
+	$waht_options['responsive'])?>>
+<label for="waht_use_responsive_no"
+       class="description"><?php _e('Do not use a responsive layout', 'waht'); ?></label>
 <?php
 }
 
@@ -295,10 +322,13 @@ function waht_theme_options_validate($input) {
 	if (isset($input['sidebar_position']) && array_key_exists($input['sidebar_position'], waht_sidebar_positions()))
 		$output['sidebar_position'] = $input['sidebar_position'];
 
-	// The responsive option is a boolean
-	if (isset($input['responsive']) && is_bool($input['responsive']))
-		$output['responsive'] = $input['responsive'];
-	// TODO (a.h) Debug responsivity!
+	// The responsive option is either 0 or 1
+	if (isset($input['responsive']))
+		$output['responsive'] = ($input['responsive'] == 1) ? true : false;
+
+	// The fluid option is either 0 or 1
+	if (isset($input['fluid']))
+		$output['fluid'] = ($input['fluid'] == 1) ? true : false;
 
 	// The framework name must be in our array of framework option
 	if (isset($input['framework_name']) && array_key_exists($input['framework_name'], waht_framework_names()))
@@ -318,7 +348,8 @@ function waht_get_default_theme_options() {
 		'apple_icons_path'    => get_template_directory_uri() . '/assets/img/ios/',
 		'sidebar_position'    => 'right',
 		'framework_name'      => 'bootstrap',
-		'responsive'          => true
+		'responsive'          => true,
+		'fluid'               => true
 	);
 	if (is_rtl())
 		$default_theme_options['sidebar_position'] = 'left';

@@ -24,11 +24,6 @@ define('WAHT_FLUID_LAYOUT', false); 	// Fluid (true) ir fixed (false) layout
 define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework
 
 /* Classes */
-define('WRAP_CLASSES', 		'container'); 	// Class(es) for the wrapper
-define('CONTAINER_CLASSES', 'row-fluid'); 	// Class(es) for the container divs
-define('MAIN_CLASSES', 		'span8'); 		// Class(es) for the main content area
-define('SIDEBAR_CLASSES', 	'span4'); 		// Class(es) for the sidebar area (if allowed)
-define('FULLWIDTH_CLASSES', 'span12'); 		// Class(es) for full-width main content area
 
 /* Navigation and menus */
 define('WAHT_NAVBAR', 							true); 	// Use a navbar for the navigation menus
