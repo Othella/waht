@@ -18,7 +18,7 @@
     <link rel="shortcut icon" href="<?php get_template_directory_uri(); ?>/favicon.ico">
 
     <title><?php waht_dynamic_title(); ?></title>
-	<!-- TODO (a.h) Add SEO friendy meta tags (description, keywords, etc -->
+    <!-- TODO (a.h) Add SEO friendy meta tags (description, keywords, etc -->
 
     <!-- Dublin Core Metadata : http://dublincore.org/ -->
     <meta name="dcterms.title" content="<?php bloginfo('name'); ?> ?>">
@@ -27,63 +27,62 @@
     <meta name="dcterms.rights" content="Copyright <?php echo WAHT_AUTHOR_NAME ?> <?php date('Y'); ?>. All rights
     reserved">
 
-    <?php if (waht_is_responsive()) { ?>
+	<?php if (waht_is_responsive()) { ?>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"><?php } ?>
 
     <link rel="profile" href="http://gmpg.org/xfn/11"/>
     <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>"/>
 
-    <?php waht_head(); ?>
-    <?php wp_head(); ?>
+	<?php waht_head(); ?>
+	<?php wp_head(); ?>
 </head>
 <body <?php body_class(); ?>>
 
 <!--[if lt IE 7]>
 <div class="alert">
-    <p><a href="http://www.whatbrowser.org/" title="Meet your browser" target="_blank">Your browser</a> is
-        <em>ancient!</em> <a href="http://browsehappy.com/" title="Upgrade your browser" target="_blank">Upgrade to a
-            modern browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true"
-                                     title="Install Google Chrome Frame" target="_blank">install Google Chrome Frame</a>
-        to experience this site.</p>
+	<p><a href="http://www.whatbrowser.org/" title="Meet your browser" target="_blank">Your browser</a> is
+		<em>ancient!</em> <a href="http://browsehappy.com/" title="Upgrade your browser" target="_blank">Upgrade to a
+			modern browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true"
+									 title="Install Google Chrome Frame" target="_blank">install Google Chrome Frame</a>
+		to experience this site.</p>
 </div><![endif]-->
 
 <?php waht_page_header_before(); ?>
 <header id="page-header" role="banner">
-    <?php waht_page_header_inside_before(); ?>
+	<?php waht_page_header_inside_before(); ?>
 
     <!-- Main navigation -->
-    <?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
+	<?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
     <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
         <div class="navbar-inner">
-            <div class="<?php echo waht_container_classes(); ?>">
-                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="<?php echo home_url(); ?>/">
-                    <?php bloginfo('name'); ?>
-                </a>
+            <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </a>
+            <a class="brand" href="<?php echo home_url(); ?>/">
+				<?php bloginfo('name'); ?>
+            </a>
 
-                <!-- Everything you want hidden at 940px or less, place within here -->
-                <nav id="nav-main" class="nav-collapse" role="navigation">
-                    <?php waht_main_nav_menu(); ?>
-                    <!-- .nav, .navbar-search, .navbar-form, etc -->
-                </nav>
-            </div>
+            <!-- Everything you want hidden at 940px or less, place within here -->
+            <nav id="nav-main" class="nav-collapse" role="navigation">
+				<?php waht_main_nav_menu(); ?>
+                <!-- .nav, .navbar-search, .navbar-form, etc -->
+            </nav>
         </div>
     </nav>
-    <?php
-} else { // use a simple menu
-    ?>
+	<?php
+}
+else { // use a simple menu
+	?>
     <nav role="navigation" class="main-navigation <?php echo waht_container_classes(); ?>">
-        <?php waht_main_nav_menu(); ?>
+		<?php waht_main_nav_menu(); ?>
     </nav>
-    <?php } ?>
+	<?php } ?>
 
-    <div class="<?php echo waht_container_classes(); ?>">
-        <div class="row-fluid">
+    <div class="<?php echo waht_wrapper_classes(); ?>">
+        <div class="<?php echo waht_container_classes(); ?>">
             <!-- Site logo, name, description, etc. -->
             <div class="span4">
                 <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>" class="logo">
@@ -104,26 +103,27 @@
 
         <!-- Second navigation -->
         <!-- TODO: Find a way to collapse too long items! -->
-        <?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
+		<?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="subnav">
             <div class="<?php echo waht_container_classes(); ?>">
-                <?php waht_additional_nav_menu(); ?>
+				<?php waht_additional_nav_menu(); ?>
             </div>
         </nav>
-        <?php
-    } else { // use a simple menu
-        ?>
+		<?php
+	}
+	else { // use a simple menu
+		?>
         <nav role="navigation" class="additional-navigation">
-            <?php waht_additional_nav_menu(); ?>
+			<?php waht_additional_nav_menu(); ?>
         </nav>
-        <?php } ?>
+		<?php } ?>
     </div>
 
-    <?php waht_page_header_inside_after(); ?>
+	<?php waht_page_header_inside_after(); ?>
 </header><!-- #page-header -->
 <?php waht_page_header_after(); ?>
 
 <?php waht_page_wrap_before(); ?>
 <div id="page-wrap" role="document">
-    <?php waht_page_wrap_inside_before(); ?>
-    <div class="<?php echo waht_container_classes(); ?>">
+	<?php waht_page_wrap_inside_before(); ?>
+    <div class="<?php echo waht_wrapper_classes(); ?>">

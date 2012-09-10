@@ -91,10 +91,6 @@ function waht_main_section_classes() {
 	elseif (waht_use_foundation_framework()) :
 		$main_classes .= waht_has_main_sidebar() ? 'eight columns' : 'twelve columns';
 	endif;
-	if (waht_has_left_main_sidebar())
-		$main_classes .= ' pull-right';
-	elseif (waht_has_right_main_sidebar())
-		$main_classes .= ' pull-left';
 	echo $main_classes;
 }
 
@@ -103,7 +99,7 @@ function waht_main_section_classes() {
  *
  * @return string
  */
-function waht_sidebar_classes() {
+function waht_main_sidebar_classes() {
 	$sidebar_classes = '';
 	if (waht_use_bootstrap_framework()) :
 		$sidebar_classes .= 'span4';
@@ -112,10 +108,23 @@ function waht_sidebar_classes() {
 	elseif (waht_use_foundation_framework()) :
 		$sidebar_classes .= 'four columns';
 	endif;
-	if (waht_has_left_main_sidebar())
-		$sidebar_classes .= ' pull-left';
-	elseif (waht_has_right_main_sidebar())
-		$sidebar_classes .= ' pull-right';
+	echo $sidebar_classes;
+}
+
+/**
+ * Returns the classes of the footer sidebars
+ *
+ * @return string
+ */
+function waht_footer_sidebar_classes() {
+	$sidebar_classes = '';
+	if (waht_use_bootstrap_framework()) :
+		$sidebar_classes .= 'span4';
+	elseif (waht_use_h5bp_framework()) :
+		$sidebar_classes .= 'span4';
+	elseif (waht_use_foundation_framework()) :
+		$sidebar_classes .= 'four columns';
+	endif;
 	echo $sidebar_classes;
 }
 
@@ -127,13 +136,16 @@ function waht_sidebar_classes() {
 function waht_wrapper_classes() { // TODO (a.h) Code waht_wrapper_classes()
 	$wrapper_classes = '';
 	if (waht_use_bootstrap_framework()) :
-		$wrapper_classes .= 'container';
+		if (waht_use_fluid_layout())
+			$wrapper_classes .= 'container-fluid';
+		else
+			$wrapper_classes .= 'container';
 	elseif (waht_use_h5bp_framework()) :
 		$wrapper_classes .= '';
 	elseif (waht_use_foundation_framework()) :
 		$wrapper_classes .= 'row';
 	endif;
-	return $wrapper_classes;
+	return $wrapper_classes; // TODO (a.h) Debug (wrong usage... :( )
 }
 
 /**
