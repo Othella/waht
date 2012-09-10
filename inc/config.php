@@ -20,7 +20,6 @@ add_theme_support('use-relative-urls');				// Enable relative URLs
 add_theme_support('og-facebook'); 					// Enable OpenGraph Facebook
 
 /* Layout Options */
-define('WAHT_FLUID_LAYOUT', false); 	// Fluid (true) ir fixed (false) layout
 define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework
 
 /* Classes */
@@ -43,4 +42,4 @@ define('WAHT_APPLE_ICONS', true);
 define('POST_EXCERPT_LENGTH', 40);
 
 /* Define content width */
-if ( ! isset( $content_width ) ) $content_width = 900;
+if ( ! isset( $content_width ) ) $content_width = 960;
