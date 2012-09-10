@@ -244,7 +244,7 @@ function waht_settings_field_fluid() {
 <input type="radio" id="waht_use_fluid" name="waht_theme_options[fluid]" value="1" <?php checked(true,
 	$waht_options['fluid'])?>>
 <label for="waht_use_fluid"
-       class="description"><?php _e('Use a fuld layout', 'waht'); ?></label><br/>
+       class="description"><?php _e('Use a fluid layout', 'waht'); ?></label><br/>
 <input type="radio" id="waht_use_fluid_no" name="waht_theme_options[fluid]" value="0" <?php checked(false,
 	$waht_options['fluid'])?>>
 <label for="waht_use_fluid_no"
