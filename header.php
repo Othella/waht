@@ -52,8 +52,8 @@
 	<?php waht_page_header_inside_before(); ?>
 
     <!-- Main navigation -->
-	<?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
-    <nav role="navigation" class="navbar<?php if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR) echo ' navbar-fixed-top';?>">
+	<?php if (waht_use_navbar() && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
+    <nav role="navigation" class="navbar<?php if (waht_use_top_fixed_nav()) echo ' navbar-fixed-top';?>">
         <div class="navbar-inner">
             <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
             <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
@@ -103,7 +103,7 @@ else { // use a simple menu
 
         <!-- Second navigation -->
         <!-- TODO: Find a way to collapse too long items! -->
-		<?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
+		<?php if (waht_use_navbar() && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="subnav">
 			<?php waht_additional_nav_menu(); ?>
         </nav>

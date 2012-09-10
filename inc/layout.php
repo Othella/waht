@@ -141,11 +141,11 @@ function waht_wrapper_classes() { // TODO (a.h) Code waht_wrapper_classes()
 		else
 			$wrapper_classes .= 'container';
 	elseif (waht_use_h5bp_framework()) :
-		$wrapper_classes .= '';
+		$wrapper_classes .= 'container';
 	elseif (waht_use_foundation_framework()) :
 		$wrapper_classes .= 'row';
 	endif;
-	return $wrapper_classes; // TODO (a.h) Debug (wrong usage... :( )
+	return $wrapper_classes;
 }
 
 /**
@@ -254,11 +254,31 @@ function waht_is_responsive() {
 }
 
 /**
- * Returns true if teh layout has to be fluid
+ * Returns true if the layout has to be fluid
  *
  * @return bool
  */
 function waht_use_fluid_layout() {
 	$waht_options = waht_get_theme_options();
 	return $waht_options['fluid'];
+}
+
+/**
+ * Returns true if the layout has use navbars
+ *
+ * @return bool
+ */
+function waht_use_navbar() {
+	$waht_options = waht_get_theme_options();
+	return $waht_options['navbar'];
+}
+
+/**
+ * Returns true if the layout has use a top-fixed main navigation
+ *
+ * @return bool
+ */
+function waht_use_top_fixed_nav() {
+	$waht_options = waht_get_theme_options();
+	return $waht_options['top_fixed_nav'];
 }

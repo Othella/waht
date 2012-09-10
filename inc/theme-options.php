@@ -52,10 +52,29 @@ function waht_theme_options_init() {
 		'layout'
 	);
 
+	// Register the fluid layout setting field
 	add_settings_field(
 		'fluid',
 		__('Fluid Layout', 'waht'),
 		'waht_settings_field_fluid',
+		'theme_options',
+		'layout'
+	);
+
+	// Register the use of navbar settings field
+	add_settings_field(
+		'navbar',
+		__('Navigation', 'waht'),
+		'waht_settings_field_navbar',
+		'theme_options',
+		'layout'
+	);
+
+	// Register the use of a top-fixed navigation settings field
+	add_settings_field(
+		'top_fixed_nav',
+		__('Main navigation', 'waht'),
+		'waht_settings_field_top_fixed_nav',
 		'theme_options',
 		'layout'
 	);
@@ -102,6 +121,32 @@ function waht_theme_options_init() {
 		'theme_options',
 		'responsive'
 	);
+
+	// Register the social settings groups
+	add_settings_section(
+		'social',
+		__('Social Networks', 'waht'),
+		'waht_settings_section_social',
+		'theme_options'
+	);
+
+	// Register the Facebook Open Graph settings field
+	add_settings_field(
+		'facebook_og',
+		__('Facebook Open Graph', 'waht'),
+		'waht_settings_field_facebook_og',
+		'theme_options',
+		'social'
+	);
+
+	// Register the Twitter Cards settings field
+	add_settings_field(
+		'twitter_cards',
+		__('Twitter Cards', 'waht'),
+		'waht_settings_field_twitter_cards',
+		'theme_options',
+		'social'
+	);
 }
 
 add_action('admin_init', 'waht_theme_options_init');
@@ -145,10 +190,16 @@ function waht_theme_options_render_page() {
 <?php
 }
 
+/**
+ * Renders the framework settings section
+ */
 function waht_settings_section_framework() {
 	echo '<p class="description">' . __('Settings for the framework to use', 'waht') . '</p>';
 }
 
+/**
+ * Renders the framework name settings field
+ */
 function waht_settings_field_framework_name() {
 	$waht_options           = waht_get_theme_options();
 	$selected_framework     = $waht_options['framework_name'];
@@ -237,7 +288,9 @@ function waht_sidebar_positions() {
 	return apply_filters('waht_sidebar_positions', $sidebar_position_options);
 }
 
-
+/**
+ * Renders the fluid layout settings field
+ */
 function waht_settings_field_fluid() {
 	$waht_options = waht_get_theme_options();
 	?>
@@ -249,6 +302,40 @@ function waht_settings_field_fluid() {
 	$waht_options['fluid'])?>>
 <label for="waht_use_fluid_no"
        class="description"><?php _e('Do not use a fluid layout', 'waht'); ?></label>
+<?php
+}
+
+/**
+ * Renders the use of navbar settings field
+ */
+function waht_settings_field_navbar() {
+	$waht_options = waht_get_theme_options();
+	?>
+<input type="radio" id="waht_use_navbar" name="waht_theme_options[navbar]" value="1" <?php checked(true,
+	$waht_options['navbar'])?>>
+<label for="waht_use_navbar"
+       class="description"><?php _e('Use a navbar for the navigation', 'waht'); ?></label><br/>
+<input type="radio" id="waht_use_navbar_no" name="waht_theme_options[navbar]" value="0" <?php checked(false,
+	$waht_options['navbar'])?>>
+<label for="waht_use_navbar_no"
+       class="description"><?php _e('Do not use any navbar', 'waht'); ?></label>
+<?php
+}
+
+/**
+ * Renders the use of a top-fixed navbar settings field
+ */
+function waht_settings_field_top_fixed_nav() {
+	$waht_options = waht_get_theme_options();
+	?>
+<input type="radio" id="waht_use_top_fixed_nav" name="waht_theme_options[top_fixed_nav]"
+       value="1" <?php checked(true, $waht_options['top_fixed_nav'])?>>
+<label for="waht_use_top_fixed_nav"
+       class="description"><?php _e('Use a a top-fixed main navigation', 'waht'); ?></label><br/>
+<input type="radio" id="waht_use_top_fixed_nav_no" name="waht_theme_options[top_fixed_nav]"
+       value="0" <?php checked(false, $waht_options['top_fixed_nav'])?>>
+<label for="waht_use_top_fixed_nav_no"
+       class="description"><?php _e('Do not use a top-fixed main navigation', 'waht'); ?></label>
 <?php
 }
 
@@ -330,6 +417,14 @@ function waht_theme_options_validate($input) {
 	if (isset($input['fluid']))
 		$output['fluid'] = ($input['fluid'] == 1) ? true : false;
 
+	// The navbar option is either 0 or 1
+	if (isset($input['navbar']))
+		$output['navbar'] = ($input['navbar'] == 1) ? true : false;
+
+	// The top-fixed nav option is either 0 or 1
+	if (isset($input['top_fixed_nav']))
+		$output['top_fixed_nav'] = ($input['top_fixed_nav'] == 1) ? true : false;
+
 	// The framework name must be in our array of framework option
 	if (isset($input['framework_name']) && array_key_exists($input['framework_name'], waht_framework_names()))
 		$output['framework_name'] = $input['framework_name'];
@@ -349,7 +444,9 @@ function waht_get_default_theme_options() {
 		'sidebar_position'    => 'right',
 		'framework_name'      => 'bootstrap',
 		'responsive'          => true,
-		'fluid'               => true
+		'fluid'               => true,
+		'navbar'              => true,
+		'top_fixed_nav'       => true
 	);
 	if (is_rtl())
 		$default_theme_options['sidebar_position'] = 'left';
