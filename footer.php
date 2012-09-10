@@ -33,7 +33,7 @@
                 <?php endif; ?>
             </section>
         </section>
-        <section class="copyright <?php echo waht_container_classes(); ?>">
+        <section class="copyright">
             <?php echo waht_credentials(); ?>
         </section>
         <?php waht_page_footer_inside_after(); ?>
