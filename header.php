@@ -105,9 +105,7 @@ else { // use a simple menu
         <!-- TODO: Find a way to collapse too long items! -->
 		<?php if (WAHT_NAVBAR && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
         <nav role="navigation" class="subnav">
-            <div class="<?php echo waht_container_classes(); ?>">
-				<?php waht_additional_nav_menu(); ?>
-            </div>
+			<?php waht_additional_nav_menu(); ?>
         </nav>
 		<?php
 	}
