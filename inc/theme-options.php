@@ -93,7 +93,8 @@ function waht_theme_options_menu() {
 		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The text of the menu in the administrator's sidebar
 		'edit_theme_options', // What roles are able to access the menu
 		'waht_theme_options', // The ID used to bind submenu items to this menu
-		'waht_theme_options_display' // The callback function used to render this menu
+		'waht_theme_options_display', // The callback function used to render this menu
+		waht_get_assets_uri() . '/img/logo-icon.png'// The menu icon's URL
 	);
 
 	$options = waht_get_enabled_theme_options();
@@ -174,16 +175,14 @@ function waht_theme_options_help() {
 }
 
 /**
- * Enqueue own stylesheet and script file for the heme options page
- *
- * @param $hook_suffix
+ * Enqueue own stylesheet and script file for the theme options page
  */
-function waht_admin_enqueue_scripts($hook_suffix) {
+function waht_admin_enqueue_scripts() {
 	wp_enqueue_style('waht-theme-options', get_template_directory_uri() . '/assets/css/theme-options.css');
 	wp_enqueue_script('waht-theme-options', get_template_directory_uri() . '/assets/js/theme-options.min.js');
 }
 
-add_action('admin_print_styles-appearance_page_theme_options', 'waht_admin_enqueue_scripts');
+add_action("admin_enqueue_scripts", 'waht_admin_enqueue_scripts');
 
 /**
  * Displays credential on admin footer
