@@ -110,14 +110,7 @@ function waht_theme_options_display($active_tab = '') {
 
 	<?php settings_errors(); // Make a call to the WordPress function for rendering errors when settings are saved. ?>
 
-	<?php
-	if (isset($_GET['tab'])) $active_tab = $_GET['tab'];
-	elseif ($active_tab == 'layout') $active_tab = 'layout';
-	elseif ($active_tab == 'responsive') $active_tab = 'responsive';
-	elseif ($active_tab == 'seo') $active_tab = 'seo';
-	elseif ($active_tab == 'social') $active_tab = 'social';
-	else  $active_tab = 'framework';
-	?>
+	<?php $active_tab = waht_theme_options_active_tab($active_tab); ?>
 
     <h2 class="nav-tab-wrapper">
         <a href="?page=waht_theme_options&tab=framework"
@@ -172,6 +165,23 @@ function waht_theme_options_display($active_tab = '') {
     </div>
 </div>
 <?php
+}
+
+/**
+ * Retrieve the active tab of our options page
+ *
+ * @param $active_tab
+ *
+ * @return string
+ */
+function waht_theme_options_active_tab($active_tab) {
+	if (isset($_GET['tab'])) $active_tab = $_GET['tab'];
+	elseif ($active_tab == 'layout') $active_tab = 'layout';
+	elseif ($active_tab == 'responsive') $active_tab = 'responsive';
+	elseif ($active_tab == 'seo') $active_tab = 'seo';
+	elseif ($active_tab == 'social') $active_tab = 'social';
+	else  $active_tab = 'framework';
+	return $active_tab;
 }
 
 /**
