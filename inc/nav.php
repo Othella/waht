@@ -29,7 +29,7 @@ add_action('after_setup_theme', 'waht_register_nav_menus');
  */
 function waht_main_nav_menu() {
 	// select the walker depending on framework
-	$walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() :
+	$walker = waht_use_navbar() ? new Waht_NavBar_Walker_Nav_Menu() :
 		(WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
 	wp_nav_menu(
 		array(
@@ -53,7 +53,7 @@ function waht_main_nav_menu() {
  * Additional Nav Menu
  */
 function waht_additional_nav_menu() {
-	$walker = WAHT_NAVBAR ? new Waht_NavBar_Walker_Nav_Menu() :
+	$walker = waht_use_navbar() ? new Waht_NavBar_Walker_Nav_Menu() :
 		(WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
 	wp_nav_menu(
 		array(

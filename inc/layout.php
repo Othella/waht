@@ -70,8 +70,8 @@ add_action('widgets_init', 'waht_widgets_init');
  * @return bool
  */
 function waht_has_main_sidebar() {
-	$waht_options = waht_get_theme_options();
-	if ($waht_options['sidebar_position'] == 'none' || is_page_template('page-fullwidth.php'))
+	$waht_layout_options = waht_get_layout_options();
+	if ($waht_layout_options['sidebar_position'] == 'none' || is_page_template('page-fullwidth.php'))
 		return false;
 	else
 		return true;
@@ -174,8 +174,8 @@ function waht_container_classes() { // TODO (a.h) Code waht_container_classes()
  * @return bool
  */
 function waht_has_left_main_sidebar() {
-	$waht_options = waht_get_theme_options();
-	return ($waht_options['sidebar_position'] == 'left');
+	$waht_layout_options = waht_get_layout_options();
+	return ($waht_layout_options['sidebar_position'] == 'left');
 }
 
 
@@ -185,8 +185,8 @@ function waht_has_left_main_sidebar() {
  * @return bool
  */
 function waht_has_right_main_sidebar() {
-	$waht_options = waht_get_theme_options();
-	return ($waht_options['sidebar_position'] == 'right');
+	$waht_layout_options = waht_get_layout_options();
+	return ($waht_layout_options['sidebar_position'] == 'right');
 }
 
 /**
@@ -195,8 +195,8 @@ function waht_has_right_main_sidebar() {
  * @return bool
  */
 function waht_use_framework() {
-	$waht_options = waht_get_theme_options();
-	return ($waht_options['framework_name'] != 'none');
+	$waht_framework_options = waht_get_framework_options();
+	return ($waht_framework_options['framework_name'] != 'none');
 }
 
 /**
@@ -205,8 +205,8 @@ function waht_use_framework() {
  * @return bool
  */
 function waht_use_bootstrap_framework() {
-	$waht_options = waht_get_theme_options();
-	return ($waht_options['framework_name'] == 'bootstrap');
+	$waht_framework_options = waht_get_framework_options();
+	return ($waht_framework_options['framework_name'] == 'bootstrap');
 }
 
 /**
@@ -215,8 +215,8 @@ function waht_use_bootstrap_framework() {
  * @return bool
  */
 function waht_use_h5bp_framework() {
-	$waht_options = waht_get_theme_options();
-	return ($waht_options['framework_name'] == 'h5bp');
+	$waht_framework_options = waht_get_framework_options();
+	return ($waht_framework_options['framework_name'] == 'h5bp');
 }
 
 /**
@@ -225,8 +225,8 @@ function waht_use_h5bp_framework() {
  * @return bool
  */
 function waht_use_foundation_framework() {
-	$waht_options = waht_get_theme_options();
-	return ($waht_options['framework_name'] == 'foundation');
+	$waht_framework_options = waht_get_framework_options();
+	return ($waht_framework_options['framework_name'] == 'foundation');
 }
 
 /**
@@ -238,8 +238,8 @@ function waht_get_framework() {
 	if (!waht_use_framework()) :
 		return '';
 	else :
-		$waht_options = waht_get_theme_options();
-		return $waht_options['framework_name'];
+		$waht_framework_options = waht_get_framework_options();
+		return $waht_framework_options['framework_name'];
 	endif;
 }
 
@@ -249,8 +249,8 @@ function waht_get_framework() {
  * @return bool
  */
 function waht_is_responsive() {
-	$waht_options = waht_get_theme_options();
-	return $waht_options['responsive'];
+	$waht_responsive_options = waht_get_responsive_options();
+	return $waht_responsive_options['responsive'];
 }
 
 /**
@@ -259,8 +259,8 @@ function waht_is_responsive() {
  * @return bool
  */
 function waht_use_fluid_layout() {
-	$waht_options = waht_get_theme_options();
-	return $waht_options['fluid'];
+	$waht_layout_options = waht_get_layout_options();
+	return $waht_layout_options['fluid'];
 }
 
 /**
@@ -269,8 +269,8 @@ function waht_use_fluid_layout() {
  * @return bool
  */
 function waht_use_navbar() {
-	$waht_options = waht_get_theme_options();
-	return $waht_options['navbar'];
+	$waht_layout_options = waht_get_layout_options();
+	return $waht_layout_options['navbar'];
 }
 
 /**
@@ -279,6 +279,6 @@ function waht_use_navbar() {
  * @return bool
  */
 function waht_use_top_fixed_nav() {
-	$waht_options = waht_get_theme_options();
-	return $waht_options['top_fixed_nav'];
+	$waht_layout_options = waht_get_layout_options();
+	return $waht_layout_options['top_fixed_nav'];
 }

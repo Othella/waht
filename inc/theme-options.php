@@ -7,146 +7,22 @@
  * @uri        : https://github.com/Othella/waht
  */
 
+require_once('theme-options/layout-options.php');
+require_once('theme-options/framework-options.php');
+require_once('theme-options/responsive-options.php');
+require_once('theme-options/seo-options.php');
+require_once('theme-options/social-options.php');
+
 /**
  * Register the form settings for our waht_options array
  */
 function waht_theme_options_init() {
-	// Register the waht theme options settings
-	register_setting(
-		'waht_options',
-		'waht_theme_options',
-		'waht_theme_options_validate'
-	);
 
-	// Register the framework options field group
-	add_settings_section(
-		'framework',
-		__('Framework', 'waht'),
-		'waht_settings_section_framework',
-		'theme_options'
-	);
-
-	// Register the sidebar position settings field
-	add_settings_field(
-		'framework_name',
-		__('Framework Name', 'waht'),
-		'waht_settings_field_framework_name',
-		'theme_options',
-		'framework'
-	);
-
-	// Register the layout options field group
-	add_settings_section(
-		'layout',
-		__('Layout', 'waht'),
-		'waht_settings_section_layout',
-		'theme_options'
-	);
-
-	// Register the sidebar position settings field
-	add_settings_field(
-		'sidebar_position',
-		__('Sidebar Position', 'waht'),
-		'waht_settings_field_sidebar_position',
-		'theme_options',
-		'layout'
-	);
-
-	// Register the fluid layout setting field
-	add_settings_field(
-		'fluid',
-		__('Fluid Layout', 'waht'),
-		'waht_settings_field_fluid',
-		'theme_options',
-		'layout'
-	);
-
-	// Register the use of navbar settings field
-	add_settings_field(
-		'navbar',
-		__('Navigation', 'waht'),
-		'waht_settings_field_navbar',
-		'theme_options',
-		'layout'
-	);
-
-	// Register the use of a top-fixed navigation settings field
-	add_settings_field(
-		'top_fixed_nav',
-		__('Main navigation', 'waht'),
-		'waht_settings_field_top_fixed_nav',
-		'theme_options',
-		'layout'
-	);
-
-	// Register the SEO options field group
-	add_settings_section(
-		'seo', // Section unique identifier
-		__('SEO (Search Engines Optimization)', 'waht'),
-		'waht_settings_section_seo',
-		'theme_options'
-	);
-
-	// Register Google Analytics settings field
-	add_settings_field(
-		'google_analytics_id',
-		__('Google Analytics ID', 'waht'),
-		'waht_settings_field_google_analytics_id',
-		'theme_options',
-		'seo'
-	);
-
-	// Register the responsive options field group
-	add_settings_section(
-		'responsive',
-		__('Responsive Options', 'waht'),
-		'waht_settings_section_responsive',
-		'theme_options'
-	);
-
-	// Register using responsive layout settings field
-	add_settings_field(
-		'responsive',
-		__('Use Responsive', 'waht'),
-		'waht_settings_field_responsive',
-		'theme_options',
-		'responsive'
-	);
-
-	// Register Apple icons settings field
-	add_settings_field(
-		'apple_icons',
-		__('Apple Icons', 'waht'),
-		'waht_settings_field_apple_icons',
-		'theme_options',
-		'responsive'
-	);
-
-	// Register the social settings groups
-	add_settings_section(
-		'social',
-		__('Social Networks', 'waht'),
-		'waht_settings_section_social',
-		'theme_options'
-	);
-
-	// Register the Facebook Open Graph settings field
-	add_settings_field(
-		'facebook_og',
-		__('Facebook Open Graph', 'waht'),
-		'waht_settings_field_facebook_og',
-		'theme_options',
-		'social'
-	);
-
-	// Register the Twitter Cards settings field
-	add_settings_field(
-		'twitter_cards',
-		__('Twitter Cards', 'waht'),
-		'waht_settings_field_twitter_cards',
-		'theme_options',
-		'social'
-	);
+	waht_layout_options_init(); // Layout options
+	waht_framework_options_init(); // Framework options
+	waht_seo_options_init(); // SEO options
+	waht_responsive_options_init(); // Responsive options
+	waht_social_options_init(); // Social options
 }
 
 add_action('admin_init', 'waht_theme_options_init');
@@ -154,312 +30,148 @@ add_action('admin_init', 'waht_theme_options_init');
 /**
  * Add the theme options page to the admin menu, including some help documentation.
  */
-function waht_theme_options_add_page() {
+function waht_theme_options_menu() {
 	$theme_page = add_theme_page(
-		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // Name of the theme options' page
-		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // Label in menu
-		'edit_theme_options', // Capability required
-		'theme_options', // Menu slug
-		'waht_theme_options_render_page' // Function rendering options page
+		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The title to be displayed in the browser window for this page.
+		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The text to be displayed for this menu item
+		'edit_theme_options', // Which type of users can see this menu item
+		'waht_theme_options', // The unique ID - that is, the slug - for this menu item
+		'waht_theme_options_display' // The name of the function to call when rendering this menu's page
 	);
 	if (!$theme_page) return;
 	add_action("load-$theme_page", 'waht_theme_options_help');
+
+	add_menu_page(
+		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The value used to populate the browser's title bar when the menu page is active
+		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The text of the menu in the administrator's sidebar
+		'edit_theme_options', // What roles are able to access the menu
+		'waht_theme_options', // The ID used to bind submenu items to this menu
+		'waht_theme_options_display' // The callback function used to render this menu
+	);
+
+	add_submenu_page(
+		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
+		__('Framework', 'waht'), // The value used to populate the browser's title bar when the menu page is active
+		__('Framework', 'waht'), // The label of this submenu item displayed in the menu
+		'edit_theme_options', // What roles are able to access this submenu item
+		'waht_theme_framework_options', // The ID used to represent this submenu item
+		'waht_theme_options_display' // The callback function used to render the options for this submenu item
+	);
+
+	add_submenu_page(
+		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
+		__('Layout', 'waht'), // The value used to populate the browser's title bar when the menu page is active
+		__('Layout', 'waht'), // The label of this submenu item displayed in the menu
+		'edit_theme_options', // What roles are able to access this submenu item
+		'waht_theme_layout_options', // The ID used to represent this submenu item
+		create_function(null, 'waht_theme_options_display("layout");') // The callback function used to render the options for this submenu item
+	);
+
+	add_submenu_page(
+		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
+		__('Responsive', 'waht'), // The value used to populate the browser's title bar when the menu page is active
+		__('Responsive', 'waht'), // The label of this submenu item displayed in the menu
+		'edit_theme_options', // What roles are able to access this submenu item
+		'waht_theme_responsive_options', // The ID used to represent this submenu item
+		create_function(null, 'waht_theme_options_display("responsive");') // The callback function used to render the options for this submenu item
+	);
+
+	add_submenu_page(
+		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
+		__('SEO', 'waht'), // The value used to populate the browser's title bar when the menu page is active
+		__('SEO', 'waht'), // The label of this submenu item displayed in the menu
+		'edit_theme_options', // What roles are able to access this submenu item
+		'waht_theme_seo_options', // The ID used to represent this submenu item
+		create_function(null, 'waht_theme_options_display("seo");') // The callback function used to render the options for this submenu item
+	);
+
+	add_submenu_page(
+		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
+		__('Social', 'waht'), // The value used to populate the browser's title bar when the menu page is active
+		__('Social', 'waht'), // The label of this submenu item displayed in the menu
+		'edit_theme_options', // What roles are able to access this submenu item
+		'waht_theme_social_options', // The ID used to represent this submenu item
+		create_function(null, 'waht_theme_options_display("social");') // The callback function used to render the options for this submenu item
+	);
+
 }
 
-add_action('admin_menu', 'waht_theme_options_add_page');
+add_action('admin_menu', 'waht_theme_options_menu');
 
 /**
  * Renders the theme options page
  */
-function waht_theme_options_render_page() {
+function waht_theme_options_display($active_tab = '') {
 	?>
-<div class="wrap">
-	<?php screen_icon(); // Displays screen icon ?>
+<div class="wrap"><?php // Create a header in the default WordPress 'wrap' container ?>
+
+    <div id="icon-themes" class="icon32"></div><?php // Displays screen icon ?>
     <h2><?php printf(__('%s Theme Options', 'waht'), waht_get_theme_name()); ?></h2>
-	<?php settings_errors(); ?>
+
+	<?php settings_errors(); // Make a call to the WordPress function for rendering errors when settings are saved. ?>
+
+	<?php
+	if (isset($_GET['tab'])) $active_tab = $_GET['tab'];
+	elseif ($active_tab == 'layout') $active_tab = 'layout';
+	elseif ($active_tab == 'responsive') $active_tab = 'responsive';
+	elseif ($active_tab == 'seo') $active_tab = 'seo';
+	elseif ($active_tab == 'social') $active_tab = 'social';
+	else  $active_tab = 'framework';
+	?>
+
+    <h2 class="nav-tab-wrapper">
+        <a href="?page=waht_theme_options&tab=framework"
+           class="nav-tab <?php echo $active_tab == 'framework' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('Framework', 'waht'); ?></a>
+        <a href="?page=waht_theme_options&tab=layout"
+           class="nav-tab <?php echo $active_tab == 'layout' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('Layout', 'waht'); ?></a>
+        <a href="?page=waht_theme_options&tab=responsive"
+           class="nav-tab <?php echo $active_tab == 'responsive' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('Responsive', 'waht'); ?></a>
+        <a href="?page=waht_theme_options&tab=seo"
+           class="nav-tab <?php echo $active_tab == 'seo' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('SEO', 'waht'); ?></a>
+        <a href="?page=waht_theme_options&tab=social"
+           class="nav-tab <?php echo $active_tab == 'social' ? 'nav-tab-active' : ''; ?>">
+			<?php _e('Social', 'waht'); ?></a>
+    </h2>
+
     <div class="waht-theme-options">
-        <form method="post" action="options.php">
+        <form method="post" action="options.php"><?php // Create the form that will be used to render our options ?>
 			<?php
-			settings_fields('waht_options');
-			do_settings_sections('theme_options');
-			submit_button();
-			?>
+
+			if ($active_tab == 'framework') :
+				// Display the Framework Options tab
+				settings_fields('waht_framework_options');
+				do_settings_sections('waht_framework_options');
+
+			elseif ($active_tab == 'layout') :
+				// Display the Layout Options tab
+				settings_fields('waht_layout_options');
+				do_settings_sections('waht_layout_options');
+
+			elseif ($active_tab == 'responsive') :
+				// Display the Responsive Options tab
+				settings_fields('waht_responsive_options');
+				do_settings_sections('waht_responsive_options');
+
+			elseif ($active_tab == 'seo') :
+				// Display the SEO Options tab
+				settings_fields('waht_seo_options');
+				do_settings_sections('waht_seo_options');
+
+			elseif ($active_tab == 'social') :
+				// Display the Social Options tab
+				settings_fields('waht_social_options');
+				do_settings_sections('waht_social_options');
+			endif;
+
+			submit_button(); ?>
         </form>
     </div>
 </div>
 <?php
-}
-
-/**
- * Renders the framework settings section
- */
-function waht_settings_section_framework() {
-	echo '<p class="description">' . __('Settings for the framework to use', 'waht') . '</p>';
-}
-
-/**
- * Renders the framework name settings field
- */
-function waht_settings_field_framework_name() {
-	$waht_options           = waht_get_theme_options();
-	$selected_framework     = $waht_options['framework_name'];
-	$framework_name_options = waht_framework_names();?>
-<select name="waht_theme_options[framework_name]" id="waht_framework_name">
-	<?php foreach ($framework_name_options as $option) :
-	?>
-    <option value="<?php echo $option['value'] ?>"<?php selected($selected_framework, $option['value']); ?>><?php echo $option['label']; ?></option>
-	<?php endforeach ?>
-</select>
-<label for="waht_framework_name" class="description"><?php _e('Select the framework you want to use', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Returns an array of framework names options registered for waht
- *
- * @return mixed|void
- */
-function waht_framework_names() {
-	$framework_name_options = array(
-		'bootstrap'   => array(
-			'value' => 'bootstrap',
-			'label' => __('Twitter Bootstrap', 'waht')
-		),
-		'h5bp'        => array(
-			'value' => 'h5bp',
-			'label' => __('HTML5 Boilerplate', 'waht')
-		),
-		'foundation'  => array(
-			'value' => 'foundation',
-			'label' => __('Foundation 3', 'waht')
-		),
-		'none'        => array(
-			'value' => 'none',
-			'label' => __('Don\'t use any framework', 'waht')
-		)
-	);
-	return apply_filters('waht_framework_names', $framework_name_options);
-}
-
-/**
- * Renders the layout options section
- */
-function waht_settings_section_layout() {
-	echo '<p class="description">' . __('Settings for the theme layout', 'waht') . '</p>';
-}
-
-/**
- * Renders the sidebar position select option field
- */
-function waht_settings_field_sidebar_position() {
-	$waht_options             = waht_get_theme_options();
-	$selected_position        = $waht_options['sidebar_position'];
-	$sidebar_position_options = waht_sidebar_positions();?>
-<select name="waht_theme_options[sidebar_position]" id="waht_sidebar_position">
-	<?php foreach ($sidebar_position_options as $option) :
-	?>
-    <option value="<?php echo $option['value'] ?>"<?php echo selected($selected_position, $option['value'])?>><?php echo $option['label']; ?></option>
-	<?php endforeach ?>
-</select>
-<label for="waht_sidebar_position" class="description"><?php _e('Select on which side you want to display your sidebar', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Returns an array of sidebar position options registered for waht
- *
- * @return mixed|void
- */
-function waht_sidebar_positions() {
-	$sidebar_position_options = array(
-		'right' => array(
-			'value' => 'right',
-			'label' => __('On the right', 'waht')
-		),
-		'left'  => array(
-			'value' => 'left',
-			'label' => __('On the left', 'waht')
-		),
-		'none'  => array(
-			'value' => 'none',
-			'label' => __('No sidebar', 'waht')
-		)
-	);
-	return apply_filters('waht_sidebar_positions', $sidebar_position_options);
-}
-
-/**
- * Renders the fluid layout settings field
- */
-function waht_settings_field_fluid() {
-	$waht_options = waht_get_theme_options();
-	?>
-<input type="radio" id="waht_use_fluid" name="waht_theme_options[fluid]" value="1" <?php checked(true,
-	$waht_options['fluid'])?>>
-<label for="waht_use_fluid"
-       class="description"><?php _e('Use a fluid layout', 'waht'); ?></label><br/>
-<input type="radio" id="waht_use_fluid_no" name="waht_theme_options[fluid]" value="0" <?php checked(false,
-	$waht_options['fluid'])?>>
-<label for="waht_use_fluid_no"
-       class="description"><?php _e('Do not use a fluid layout', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Renders the use of navbar settings field
- */
-function waht_settings_field_navbar() {
-	$waht_options = waht_get_theme_options();
-	?>
-<input type="radio" id="waht_use_navbar" name="waht_theme_options[navbar]" value="1" <?php checked(true,
-	$waht_options['navbar'])?>>
-<label for="waht_use_navbar"
-       class="description"><?php _e('Use a navbar for the navigation', 'waht'); ?></label><br/>
-<input type="radio" id="waht_use_navbar_no" name="waht_theme_options[navbar]" value="0" <?php checked(false,
-	$waht_options['navbar'])?>>
-<label for="waht_use_navbar_no"
-       class="description"><?php _e('Do not use any navbar', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Renders the use of a top-fixed navbar settings field
- */
-function waht_settings_field_top_fixed_nav() {
-	$waht_options = waht_get_theme_options();
-	?>
-<input type="radio" id="waht_use_top_fixed_nav" name="waht_theme_options[top_fixed_nav]"
-       value="1" <?php checked(true, $waht_options['top_fixed_nav'])?>>
-<label for="waht_use_top_fixed_nav"
-       class="description"><?php _e('Use a a top-fixed main navigation', 'waht'); ?></label><br/>
-<input type="radio" id="waht_use_top_fixed_nav_no" name="waht_theme_options[top_fixed_nav]"
-       value="0" <?php checked(false, $waht_options['top_fixed_nav'])?>>
-<label for="waht_use_top_fixed_nav_no"
-       class="description"><?php _e('Do not use a top-fixed main navigation', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Renders the SEO options section
- */
-function waht_settings_section_seo() {
-	echo '<p class="description">' . __('Settings for a better SEO', 'waht') . '</p>';
-}
-
-/**
- * Renders a text field to enter the Google Analytics ID
- */
-function waht_settings_field_google_analytics_id() {
-	$waht_options = waht_get_theme_options(); ?>
-<input type="text" name="waht_theme_options[google_analytics_id]" id="waht_google_analytics_id"
-       value="<?php echo esc_attr($waht_options['google_analytics_id']); ?>" placeholder="UA-XXX-Y">
-<label for="waht_google_analytics_id" class="description"><?php _e('Give your Google Analytics ID', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Renders the responsive options section
- */
-function waht_settings_section_responsive() {
-	echo '<p class="description">' . __('Settings for the responsive behavior', 'waht') . '</p>';
-}
-
-function waht_settings_field_responsive() {
-	$waht_options = waht_get_theme_options();
-	?>
-<input type="radio" id="waht_use_responsive" name="waht_theme_options[responsive]" value="1" <?php checked(true,
-	$waht_options['responsive'])?>>
-<label for="waht_use_responsive"
-       class="description"><?php _e('Use a responsive layout', 'waht'); ?></label><br/>
-<input type="radio" id="waht_use_responsive_no" name="waht_theme_options[responsive]" value="0" <?php checked(false,
-	$waht_options['responsive'])?>>
-<label for="waht_use_responsive_no"
-       class="description"><?php _e('Do not use a responsive layout', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Renders a text field to enter the apple icons folder's path
- */
-function waht_settings_field_apple_icons() {
-	$waht_options = waht_get_theme_options();
-	?>
-<input type="text" name="waht_theme_options[apple_icons_path]" id="waht_apple_icons_path"
-       value="<?php echo esc_attr($waht_options['apple_icons_path']); ?>">
-<label for="waht_apple_icons_path"
-       class="description"><?php _e('Enter the path to the folder containing for images for Apple icons', 'waht'); ?></label>
-<?php
-}
-
-/**
- * Sanitize and validate input. Accepts an array, return a sanitized array.
- */
-function waht_theme_options_validate($input) {
-	$output = $defaults = waht_get_default_theme_options();
-
-	// TODO (a.h) The Google Analytics ID must be valid (begins wuth "UA-"
-	if (isset($input['google_analytics_id']) && strpos($input['google_analytics_id'], 'UA-') == 0)
-		$output['google_analytics_id'] = $input['google_analytics_id'];
-
-	// TODO (a.h) The Apple icons folder's path
-	if (isset($input['apple_icons_path']))
-		$output['apple_icons_path'] = $input['apple_icons_path'];
-
-	// The sidebar position must be in our array of theme layout option
-	if (isset($input['sidebar_position']) && array_key_exists($input['sidebar_position'], waht_sidebar_positions()))
-		$output['sidebar_position'] = $input['sidebar_position'];
-
-	// The responsive option is either 0 or 1
-	if (isset($input['responsive']))
-		$output['responsive'] = ($input['responsive'] == 1) ? true : false;
-
-	// The fluid option is either 0 or 1
-	if (isset($input['fluid']))
-		$output['fluid'] = ($input['fluid'] == 1) ? true : false;
-
-	// The navbar option is either 0 or 1
-	if (isset($input['navbar']))
-		$output['navbar'] = ($input['navbar'] == 1) ? true : false;
-
-	// The top-fixed nav option is either 0 or 1
-	if (isset($input['top_fixed_nav']))
-		$output['top_fixed_nav'] = ($input['top_fixed_nav'] == 1) ? true : false;
-
-	// The framework name must be in our array of framework option
-	if (isset($input['framework_name']) && array_key_exists($input['framework_name'], waht_framework_names()))
-		$output['framework_name'] = $input['framework_name'];
-
-	return apply_filters('waht_theme_options_validate', $output, $input, $defaults);
-}
-
-/**
- * Returns the default theme options
- *
- * @return mixed|void
- */
-function waht_get_default_theme_options() {
-	$default_theme_options = array(
-		'google_analytics_id' => '',
-		'apple_icons_path'    => get_template_directory_uri() . '/assets/img/ios/',
-		'sidebar_position'    => 'right',
-		'framework_name'      => 'bootstrap',
-		'responsive'          => true,
-		'fluid'               => true,
-		'navbar'              => true,
-		'top_fixed_nav'       => true
-	);
-	if (is_rtl())
-		$default_theme_options['sidebar_position'] = 'left';
-	return apply_filters('waht_default_theme_options', $default_theme_options);
-}
-
-/**
- * Returns the options array
- *
- * @return mixed|void
- */
-function waht_get_theme_options() {
-	return get_option('waht_theme_options', waht_get_default_theme_options());
 }
 
 /**

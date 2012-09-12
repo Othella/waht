@@ -18,7 +18,7 @@ function waht_body_class($classes) {
 	if (waht_get_framework() != '') {
 		// Set the framework name as class to body tag if using one
 		$classes[] = waht_get_framework();
-		if (WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR)
+		if (waht_use_top_fixed_nav())
 			// Add 'waht-navbar-fixed-top' class to body tag if using Bootstrap's top-fixed navbar
 			$classes[] = 'waht-navbar-fixed-top';
 	}

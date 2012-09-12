@@ -25,8 +25,6 @@ define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework
 /* Classes */
 
 /* Navigation and menus */
-define('WAHT_NAVBAR', 							true); 	// Use a navbar for the navigation menus
-define('WAHT_USE_BOOTSTRAP_FIXED_TOP_NAVBAR', 	true); 	// Use the top-fixed Bootstrap's navbar for the main navbar. Only relevant if WAHT_BOOTSTRAP and WAHT_NAVBAR set to true.
 define('WAHT_CLEANED_MENU', 					true); 	// Use cleanup functions menu's walkers
 
 /* Development to use non minified-script (easier for debugging) */
