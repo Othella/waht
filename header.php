@@ -99,22 +99,22 @@ else { // use a simple menu
                     <span><?php bloginfo('description'); ?></span>
                 </h2>
             </hgroup>
-        </div>
 
-        <!-- Second navigation -->
-        <!-- TODO: Find a way to collapse too long items! -->
-		<?php if (waht_use_navbar() && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
-        <nav role="navigation" class="subnav">
-			<?php waht_additional_nav_menu(); ?>
-        </nav>
-		<?php
-	}
-	else { // use a simple menu
-		?>
-        <nav role="navigation" class="additional-navigation">
-			<?php waht_additional_nav_menu(); ?>
-        </nav>
-		<?php } ?>
+            <!-- Second navigation -->
+            <!-- TODO: Find a way to collapse too long items! -->
+			<?php if (waht_use_navbar() && waht_use_bootstrap_framework()) { // Use a bootstrap navbar ?>
+            <nav role="navigation" class="subnav">
+				<?php waht_additional_nav_menu(); ?>
+            </nav>
+			<?php
+		}
+		else { // use a simple menu
+			?>
+            <nav role="navigation" class="additional-navigation">
+				<?php waht_additional_nav_menu(); ?>
+            </nav>
+			<?php } ?>
+        </div>
     </div>
 
 	<?php waht_page_header_inside_after(); ?>

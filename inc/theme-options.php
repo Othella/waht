@@ -161,7 +161,9 @@ function waht_theme_options_display($active_tab = '') {
 					do_settings_sections('waht_' . $option['tab_name'] . '_options');
 				endif;
 			endforeach;
-			submit_button(); ?>
+			submit_button();
+			submit_button(__('Reset to default values', 'waht'), 'delete', 'reset');
+			?>
         </form>
     </div>
 </div>

@@ -78,20 +78,33 @@ function waht_has_main_sidebar() {
 }
 
 /**
+ * Returns the class of the main wrapper
+ *
+ * @return string
+ */
+function waht_wrapper_classes() {
+	$waht_framework_options = waht_get_framework_options();
+	return $waht_framework_options['wrapper_classes'];
+}
+
+/**
+ * Returns the class of the containers
+ *
+ * @return string
+ */
+function waht_container_classes() {
+	$waht_framework_options = waht_get_framework_options();
+	return $waht_framework_options['container_classes'];
+}
+
+/**
  * Returns the classes of the main section
  *
  * @return string
  */
 function waht_main_section_classes() {
-	$main_classes = '';
-	if (waht_use_bootstrap_framework()) :
-		$main_classes .= waht_has_main_sidebar() ? 'span8' : 'span12';
-	elseif (waht_use_h5bp_framework()) :
-		$main_classes .= waht_has_main_sidebar() ? 'span8' : 'span12';
-	elseif (waht_use_foundation_framework()) :
-		$main_classes .= waht_has_main_sidebar() ? 'eight columns' : 'twelve columns';
-	endif;
-	echo $main_classes;
+	$waht_framework_options = waht_get_framework_options();
+	return $waht_framework_options['main_section_classes'];
 }
 
 /**
@@ -100,15 +113,8 @@ function waht_main_section_classes() {
  * @return string
  */
 function waht_main_sidebar_classes() {
-	$sidebar_classes = '';
-	if (waht_use_bootstrap_framework()) :
-		$sidebar_classes .= 'span4';
-	elseif (waht_use_h5bp_framework()) :
-		$sidebar_classes .= 'span4';
-	elseif (waht_use_foundation_framework()) :
-		$sidebar_classes .= 'four columns';
-	endif;
-	echo $sidebar_classes;
+	$waht_framework_options = waht_get_framework_options();
+	return $waht_framework_options['main_sidebar_classes'];
 }
 
 /**
@@ -117,55 +123,8 @@ function waht_main_sidebar_classes() {
  * @return string
  */
 function waht_footer_sidebar_classes() {
-	$sidebar_classes = '';
-	if (waht_use_bootstrap_framework()) :
-		$sidebar_classes .= 'span4';
-	elseif (waht_use_h5bp_framework()) :
-		$sidebar_classes .= 'span4';
-	elseif (waht_use_foundation_framework()) :
-		$sidebar_classes .= 'four columns';
-	endif;
-	echo $sidebar_classes;
-}
-
-/**
- * Returns the class of the main wrapper
- *
- * @return string
- */
-function waht_wrapper_classes() { // TODO (a.h) Code waht_wrapper_classes()
-	$wrapper_classes = '';
-	if (waht_use_bootstrap_framework()) :
-		if (waht_use_fluid_layout())
-			$wrapper_classes .= 'container-fluid';
-		else
-			$wrapper_classes .= 'container';
-	elseif (waht_use_h5bp_framework()) :
-		$wrapper_classes .= 'container';
-	elseif (waht_use_foundation_framework()) :
-		$wrapper_classes .= 'row';
-	endif;
-	return $wrapper_classes;
-}
-
-/**
- * Returns the class of the containers
- *
- * @return string
- */
-function waht_container_classes() { // TODO (a.h) Code waht_container_classes()
-	$container_classes = '';
-	if (waht_use_bootstrap_framework()) :
-		if (waht_use_fluid_layout())
-			$container_classes .= 'row-fluid';
-		else
-			$container_classes .= 'row';
-	elseif (waht_use_h5bp_framework()) :
-		$container_classes .= 'row';
-	elseif (waht_use_foundation_framework()) :
-		$container_classes .= 'row';
-	endif;
-	return $container_classes;
+	$waht_framework_options = waht_get_framework_options();
+	return $waht_framework_options['footer_sidebar_classes'];
 }
 
 /**

@@ -92,14 +92,17 @@ function waht_change_apple_icons_path_callback($args) {
 function waht_sanitize_responsive_options($input) {
 	$output = $defaults = waht_get_default_responsive_options();
 
-	// The responsive option is either true or false
-	if (!isset($input['responsive'])) $input['responsive'] = null;
-	$output['responsive'] = ($input['responsive'] == '1') ? true : false;
+	if (!isset($_GET['reset'])) :
 
-	// Sanitize input
-	// TODO (a.h) Check if folder exists
-	if (isset($input['apple_icons_path']))
-		$output['apple_icons_path'] = esc_url_raw(strip_tags(stripslashes($input['apple_icons_path'])));
+		// The responsive option is either true or false
+		if (!isset($input['responsive'])) $input['responsive'] = null;
+		$output['responsive'] = ($input['responsive'] == '1') ? true : false;
+
+		// Sanitize input
+		// TODO (a.h) Check if folder exists
+		if (isset($input['apple_icons_path']))
+			$output['apple_icons_path'] = esc_url_raw(strip_tags(stripslashes($input['apple_icons_path'])));
+	endif;
 
 	return apply_filters('waht_sanitize_responsive_options', $output, $input, $defaults);
 }
