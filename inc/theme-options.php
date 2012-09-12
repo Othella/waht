@@ -94,7 +94,8 @@ function waht_theme_options_menu() {
 		'edit_theme_options', // What roles are able to access the menu
 		'waht_theme_options', // The ID used to bind submenu items to this menu
 		'waht_theme_options_display', // The callback function used to render this menu
-		waht_get_assets_uri() . '/img/logo-icon.png'// The menu icon's URL
+		waht_get_assets_uri() . '/img/logo-icon.png', // The url to the icon to be used for this menu
+		61//The position in the menu order this one should appear
 	);
 
 	$options = waht_get_enabled_theme_options();
