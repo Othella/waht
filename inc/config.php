@@ -19,6 +19,12 @@ add_theme_support('rewrite-urls');					// Enable URLs rewriting
 add_theme_support('use-relative-urls');				// Enable relative URLs
 add_theme_support('og-facebook'); 					// Enable OpenGraph Facebook
 
+add_theme_support('waht-framework-options');	// Enable the layout settings in our theme options page
+add_theme_support('waht-layout-options');	// Enable the layout settings in our theme options page
+add_theme_support('waht-responsive-options');	// Enable the layout settings in our theme options page
+add_theme_support('waht-seo-options');	// Enable the layout settings in our theme options page
+add_theme_support('waht-social-options');	// Enable the layout settings in our theme options page
+
 /* Layout Options */
 define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework
 

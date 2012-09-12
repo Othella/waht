@@ -14,15 +14,62 @@ require_once('theme-options/seo-options.php');
 require_once('theme-options/social-options.php');
 
 /**
+ * Retrieve theme options enabled in inc/config.php
+ *
+ * @return array
+ */
+function waht_get_enabled_theme_options() {
+	$options_enabled = array();
+
+	if (get_theme_support('waht-framework-options'))
+		$options_enabled['framework'] = array(
+			'tab_name' => 'framework',
+			'title'    => __('Framework', 'waht')
+		);
+
+	if (get_theme_support('waht-layout-options'))
+		$options_enabled['layout'] = array(
+			'tab_name' => 'layout',
+			'title'    => __('Layout', 'waht')
+		);
+
+	if (get_theme_support('waht-responsive-options'))
+		$options_enabled['responsive'] = array(
+			'tab_name' => 'responsive',
+			'title'    => __('Responsive', 'waht')
+		);
+
+	if (get_theme_support('waht-seo-options'))
+		$options_enabled['seo'] = array(
+			'tab_name' => 'seo',
+			'title'    => __('SEO', 'waht')
+		);
+
+	if (get_theme_support('waht-social-options'))
+		$options_enabled['social'] = array(
+			'tab_name' => 'social',
+			'title'    => __('Social', 'waht')
+		);
+
+	return $options_enabled;
+}
+
+/**
  * Register the form settings for our waht_options array
  */
 function waht_theme_options_init() {
 
-	waht_layout_options_init(); // Layout options
-	waht_framework_options_init(); // Framework options
-	waht_seo_options_init(); // SEO options
-	waht_responsive_options_init(); // Responsive options
-	waht_social_options_init(); // Social options
+	$options = waht_get_enabled_theme_options();
+	if (array_key_exists('framework', $options))
+		waht_framework_options_init(); // Framework options
+	if (array_key_exists('layout', $options))
+		waht_layout_options_init(); // Layout options
+	if (array_key_exists('responsive', $options))
+		waht_responsive_options_init(); // Responsive options
+	if (array_key_exists('seo', $options))
+		waht_seo_options_init(); // SEO options
+	if (array_key_exists('social', $options))
+		waht_social_options_init(); // Social options
 }
 
 add_action('admin_init', 'waht_theme_options_init');
@@ -49,50 +96,18 @@ function waht_theme_options_menu() {
 		'waht_theme_options_display' // The callback function used to render this menu
 	);
 
-	add_submenu_page(
-		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
-		__('Framework', 'waht'), // The value used to populate the browser's title bar when the menu page is active
-		__('Framework', 'waht'), // The label of this submenu item displayed in the menu
-		'edit_theme_options', // What roles are able to access this submenu item
-		'waht_theme_framework_options', // The ID used to represent this submenu item
-		'waht_theme_options_display' // The callback function used to render the options for this submenu item
-	);
-
-	add_submenu_page(
-		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
-		__('Layout', 'waht'), // The value used to populate the browser's title bar when the menu page is active
-		__('Layout', 'waht'), // The label of this submenu item displayed in the menu
-		'edit_theme_options', // What roles are able to access this submenu item
-		'waht_theme_layout_options', // The ID used to represent this submenu item
-		create_function(null, 'waht_theme_options_display("layout");') // The callback function used to render the options for this submenu item
-	);
-
-	add_submenu_page(
-		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
-		__('Responsive', 'waht'), // The value used to populate the browser's title bar when the menu page is active
-		__('Responsive', 'waht'), // The label of this submenu item displayed in the menu
-		'edit_theme_options', // What roles are able to access this submenu item
-		'waht_theme_responsive_options', // The ID used to represent this submenu item
-		create_function(null, 'waht_theme_options_display("responsive");') // The callback function used to render the options for this submenu item
-	);
-
-	add_submenu_page(
-		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
-		__('SEO', 'waht'), // The value used to populate the browser's title bar when the menu page is active
-		__('SEO', 'waht'), // The label of this submenu item displayed in the menu
-		'edit_theme_options', // What roles are able to access this submenu item
-		'waht_theme_seo_options', // The ID used to represent this submenu item
-		create_function(null, 'waht_theme_options_display("seo");') // The callback function used to render the options for this submenu item
-	);
-
-	add_submenu_page(
-		'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
-		__('Social', 'waht'), // The value used to populate the browser's title bar when the menu page is active
-		__('Social', 'waht'), // The label of this submenu item displayed in the menu
-		'edit_theme_options', // What roles are able to access this submenu item
-		'waht_theme_social_options', // The ID used to represent this submenu item
-		create_function(null, 'waht_theme_options_display("social");') // The callback function used to render the options for this submenu item
-	);
+	$options = waht_get_enabled_theme_options();
+	foreach ($options as $option) :
+		add_submenu_page(
+			'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
+			$option['title'], // The value used to populate the browser's title bar when the menu page is active
+			$option['title'], // The label of this submenu item displayed in the menu
+			'edit_theme_options', // What roles are able to access this submenu item
+			'waht_theme_' . $option['tab_name'] . '_options', // The ID used to represent this submenu item
+			create_function(null, 'waht_theme_options_display("' . $option['tab_name'] .
+				'");') // The callback function used to render the options for this submenu item
+		);
+	endforeach;
 
 }
 
@@ -102,6 +117,8 @@ add_action('admin_menu', 'waht_theme_options_menu');
  * Renders the theme options page
  */
 function waht_theme_options_display($active_tab = '') {
+	$options = waht_get_enabled_theme_options();
+	if ($active_tab == '') $active_tab = reset($options)['tab_name']; // If no active tab was given, then it to the first tab available
 	?>
 <div class="wrap"><?php // Create a header in the default WordPress 'wrap' container ?>
 
@@ -110,78 +127,43 @@ function waht_theme_options_display($active_tab = '') {
 
 	<?php settings_errors(); // Make a call to the WordPress function for rendering errors when settings are saved. ?>
 
-	<?php $active_tab = waht_theme_options_active_tab($active_tab); ?>
+	<?php
+
+	if (isset($_GET['tab'])) $active_tab = $_GET['tab'];
+	else
+		foreach ($options as $option) :
+			if ($active_tab == $option['tab_name']) $active_tab = $option['tab_name'];
+		endforeach;
+	?>
 
     <h2 class="nav-tab-wrapper">
-        <a href="?page=waht_theme_options&tab=framework"
-           class="nav-tab <?php echo $active_tab == 'framework' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('Framework', 'waht'); ?></a>
-        <a href="?page=waht_theme_options&tab=layout"
-           class="nav-tab <?php echo $active_tab == 'layout' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('Layout', 'waht'); ?></a>
-        <a href="?page=waht_theme_options&tab=responsive"
-           class="nav-tab <?php echo $active_tab == 'responsive' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('Responsive', 'waht'); ?></a>
-        <a href="?page=waht_theme_options&tab=seo"
-           class="nav-tab <?php echo $active_tab == 'seo' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('SEO', 'waht'); ?></a>
-        <a href="?page=waht_theme_options&tab=social"
-           class="nav-tab <?php echo $active_tab == 'social' ? 'nav-tab-active' : ''; ?>">
-			<?php _e('Social', 'waht'); ?></a>
+		<?php
+		foreach ($options as $option) :
+			$tab_class = 'nav-tab';
+			$tab_class .= ($active_tab == $option['tab_name']) ? ' nav-tab-active' : '';
+			$tab = '<a href="?page=waht_theme_options&tab=' . $option['tab_name'] . '" ';
+			$tab .= 'class="' . $tab_class . '">';
+			$tab .= $option['title'];
+			$tab .= '</a>';
+			echo $tab;
+		endforeach;
+		?>
     </h2>
 
     <div class="waht-theme-options">
         <form method="post" action="options.php"><?php // Create the form that will be used to render our options ?>
 			<?php
-
-			if ($active_tab == 'framework') :
-				// Display the Framework Options tab
-				settings_fields('waht_framework_options');
-				do_settings_sections('waht_framework_options');
-
-			elseif ($active_tab == 'layout') :
-				// Display the Layout Options tab
-				settings_fields('waht_layout_options');
-				do_settings_sections('waht_layout_options');
-
-			elseif ($active_tab == 'responsive') :
-				// Display the Responsive Options tab
-				settings_fields('waht_responsive_options');
-				do_settings_sections('waht_responsive_options');
-
-			elseif ($active_tab == 'seo') :
-				// Display the SEO Options tab
-				settings_fields('waht_seo_options');
-				do_settings_sections('waht_seo_options');
-
-			elseif ($active_tab == 'social') :
-				// Display the Social Options tab
-				settings_fields('waht_social_options');
-				do_settings_sections('waht_social_options');
-			endif;
-
+			foreach ($options as $option) :
+				if ($active_tab == $option['tab_name']) :
+					settings_fields('waht_' . $option['tab_name'] . '_options');
+					do_settings_sections('waht_' . $option['tab_name'] . '_options');
+				endif;
+			endforeach;
 			submit_button(); ?>
         </form>
     </div>
 </div>
 <?php
-}
-
-/**
- * Retrieve the active tab of our options page
- *
- * @param $active_tab
- *
- * @return string
- */
-function waht_theme_options_active_tab($active_tab) {
-	if (isset($_GET['tab'])) $active_tab = $_GET['tab'];
-	elseif ($active_tab == 'layout') $active_tab = 'layout';
-	elseif ($active_tab == 'responsive') $active_tab = 'responsive';
-	elseif ($active_tab == 'seo') $active_tab = 'seo';
-	elseif ($active_tab == 'social') $active_tab = 'social';
-	else  $active_tab = 'framework';
-	return $active_tab;
 }
 
 /**
