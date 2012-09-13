@@ -6,8 +6,7 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  *
- * @see http://wp.tutsplus.com/tutorials/theme-development/create-a-settings-page-for-your-wordpress-theme/
- * @see http://wp.tutsplus.com/series/the-complete-guide-to-the-wordpress-settings-api/
+ * @see        http://wp.tutsplus.com/series/the-complete-guide-to-the-wordpress-settings-api/
  */
 
 require_once('theme-options/layout-options.php');
@@ -21,40 +20,31 @@ require_once('theme-options/social-options.php');
  *
  * @return array
  */
-function waht_get_enabled_theme_options() {
-	$options_enabled = array();
+function waht_theme_options_pages() {
+	$options_pages = array();
 
-	if (get_theme_support('waht-framework-options'))
-		$options_enabled['framework'] = array(
-			'tab_name' => 'framework',
-			'title'    => __('Framework', 'waht')
-		);
-
-	if (get_theme_support('waht-layout-options'))
-		$options_enabled['layout'] = array(
-			'tab_name' => 'layout',
-			'title'    => __('Layout', 'waht')
-		);
-
-	if (get_theme_support('waht-responsive-options'))
-		$options_enabled['responsive'] = array(
-			'tab_name' => 'responsive',
-			'title'    => __('Responsive', 'waht')
+	if (get_theme_support('waht-framework-options') ||
+		get_theme_support('waht-layout-options') ||
+		get_theme_support('waht-responsive-options')
+	)
+		$options_pages['display'] = array(
+			'tab_name' => 'display',
+			'title'    => __('Display', 'waht')
 		);
 
 	if (get_theme_support('waht-seo-options'))
-		$options_enabled['seo'] = array(
+		$options_pages['seo'] = array(
 			'tab_name' => 'seo',
 			'title'    => __('SEO', 'waht')
 		);
 
 	if (get_theme_support('waht-social-options'))
-		$options_enabled['social'] = array(
+		$options_pages['social'] = array(
 			'tab_name' => 'social',
 			'title'    => __('Social', 'waht')
 		);
 
-	return $options_enabled;
+	return $options_pages;
 }
 
 /**
@@ -62,16 +52,18 @@ function waht_get_enabled_theme_options() {
  */
 function waht_theme_options_init() {
 
-	$options = waht_get_enabled_theme_options();
-	if (array_key_exists('framework', $options))
-		waht_framework_options_init(); // Framework options
-	if (array_key_exists('layout', $options))
-		waht_layout_options_init(); // Layout options
-	if (array_key_exists('responsive', $options))
-		waht_responsive_options_init(); // Responsive options
-	if (array_key_exists('seo', $options))
+	$options_pages = waht_theme_options_pages();
+	if (array_key_exists('display', $options_pages)) :
+		if (get_theme_support('waht-framework-options'))
+			waht_framework_options_init(); // Framework options
+		if (get_theme_support('waht-layout-options'))
+			waht_layout_options_init(); // Layout options
+		if (get_theme_support('waht-responsive-options'))
+			waht_responsive_options_init(); // Responsive options
+	endif;
+	if (array_key_exists('seo', $options_pages))
 		waht_seo_options_init(); // SEO options
-	if (array_key_exists('social', $options))
+	if (array_key_exists('social', $options_pages))
 		waht_social_options_init(); // Social options
 }
 
@@ -101,15 +93,15 @@ function waht_theme_options_menu() {
 		61//The position in the menu order this one should appear
 	);
 
-	$options = waht_get_enabled_theme_options();
-	foreach ($options as $option) :
+	$options_pages = waht_theme_options_pages();
+	foreach ($options_pages as $options_page) :
 		add_submenu_page(
 			'waht_theme_options', // The ID of the top-level menu page to which this submenu item belongs
-			$option['title'], // The value used to populate the browser's title bar when the menu page is active
-			$option['title'], // The label of this submenu item displayed in the menu
+			$options_page['title'], // The value used to populate the browser's title bar when the menu page is active
+			$options_page['title'], // The label of this submenu item displayed in the menu
 			'edit_theme_options', // What roles are able to access this submenu item
-			'waht_theme_' . $option['tab_name'] . '_options', // The ID used to represent this submenu item
-			create_function(null, 'waht_theme_options_display("' . $option['tab_name'] .
+			'waht_theme_' . $options_page['tab_name'] . '_options', // The ID used to represent this submenu item
+			create_function(null, 'waht_theme_options_display("' . $options_page['tab_name'] .
 				'");') // The callback function used to render the options for this submenu item
 		);
 	endforeach;
@@ -122,8 +114,8 @@ add_action('admin_menu', 'waht_theme_options_menu');
  * Renders the theme options page
  */
 function waht_theme_options_display($active_tab = '') {
-	$options = waht_get_enabled_theme_options();
-	if ($active_tab == '') $active_tab = reset($options)['tab_name']; // If no active tab was given, then it to the first tab available
+	$options_pages = waht_theme_options_pages();
+	if ($active_tab == '') $active_tab = reset($options_pages)['tab_name']; // If no active tab was given, then it to the first tab available
 	?>
 <div class="wrap"><?php // Create a header in the default WordPress 'wrap' container ?>
 
@@ -136,19 +128,19 @@ function waht_theme_options_display($active_tab = '') {
 
 	if (isset($_GET['tab'])) $active_tab = $_GET['tab'];
 	else
-		foreach ($options as $option) :
-			if ($active_tab == $option['tab_name']) $active_tab = $option['tab_name'];
+		foreach ($options_pages as $options_page) :
+			if ($active_tab == $options_page['tab_name']) $active_tab = $options_page['tab_name'];
 		endforeach;
 	?>
 
     <h2 class="nav-tab-wrapper">
 		<?php
-		foreach ($options as $option) :
+		foreach ($options_pages as $options_page) :
 			$tab_class = 'nav-tab';
-			$tab_class .= ($active_tab == $option['tab_name']) ? ' nav-tab-active' : '';
-			$tab = '<a href="?page=waht_theme_options&tab=' . $option['tab_name'] . '" ';
+			$tab_class .= ($active_tab == $options_page['tab_name']) ? ' nav-tab-active' : '';
+			$tab = '<a href="?page=waht_theme_options&tab=' . $options_page['tab_name'] . '" ';
 			$tab .= 'class="' . $tab_class . '">';
-			$tab .= $option['title'];
+			$tab .= $options_page['title'];
 			$tab .= '</a>';
 			echo $tab;
 		endforeach;
@@ -158,10 +150,10 @@ function waht_theme_options_display($active_tab = '') {
     <div class="waht-theme-options">
         <form method="post" action="options.php"><?php // Create the form that will be used to render our options ?>
 			<?php
-			foreach ($options as $option) :
-				if ($active_tab == $option['tab_name']) :
-					settings_fields('waht_' . $option['tab_name'] . '_options');
-					do_settings_sections('waht_' . $option['tab_name'] . '_options');
+			foreach ($options_pages as $options_page) :
+				if ($active_tab == $options_page['tab_name']) :
+					settings_fields('waht_' . $options_page['tab_name'] . '_options');
+					do_settings_sections('waht_' . $options_page['tab_name'] . '_options');
 				endif;
 			endforeach;
 			submit_button();

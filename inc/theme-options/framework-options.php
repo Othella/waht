@@ -15,10 +15,10 @@ function waht_framework_options_init() {
 		add_option('waht_framework_options');
 	}
 
-	// Register the $waht_array for our options
+	// Register the $waht_framework_options array for our options
 	register_setting(
-		'waht_framework_options', // Options name
-		'waht_framework_options', // Option group
+		'waht_display_options', // Options group
+		'waht_framework_options', // Option name
 		'waht_sanitize_framework_options' //Sanitize callback TODO (a.h)
 	);
 
@@ -27,7 +27,7 @@ function waht_framework_options_init() {
 		'framework_section', // ID used to identify this section and with which to register options
 		__('Framework Settings', 'waht'), // Title to be displayed on the administration page
 		'waht_framework_section_callback', // Callback used to render the description of the section
-		'waht_framework_options'// Page on which to add this section of options
+		'waht_display_options'// Page on which to add this section of options
 	);
 
 	// Register the sidebar position settings field
@@ -35,7 +35,7 @@ function waht_framework_options_init() {
 		'framework_name',
 		__('Framework Name', 'waht'),
 		'waht_change_framework_name_callback',
-		'waht_framework_options',
+		'waht_display_options',
 		'framework_section',
 		array(
 			'description' => __('Select the framework you want to use', 'waht')
@@ -47,7 +47,7 @@ function waht_framework_options_init() {
 		'wrapper_classes',
 		__('Wrapper Class(es)', 'waht'),
 		'waht_change_wrapper_classes_callback',
-		'waht_framework_options',
+		'waht_display_options',
 		'framework_section',
 		array(
 			'description' => __('Enter the class(es) your want to use for the global wrapper')
@@ -59,7 +59,7 @@ function waht_framework_options_init() {
 		'container_classes',
 		__('Containers Class(es)', 'waht'),
 		'waht_change_container_classes_callback',
-		'waht_framework_options',
+		'waht_display_options',
 		'framework_section',
 		array(
 			'description' => __('Enter the class(es) your want to use for the containers')
@@ -71,7 +71,7 @@ function waht_framework_options_init() {
 		'main_section_classes',
 		__('Main Section Class(es)', 'waht'),
 		'waht_change_main_section_classes_callback',
-		'waht_framework_options',
+		'waht_display_options',
 		'framework_section',
 		array(
 			'description' => __('Enter the class(es) your want to use for the main content section')
@@ -84,7 +84,7 @@ function waht_framework_options_init() {
 			'main_sidebar_classes',
 			__('Main Sidebar Class(es)', 'waht'),
 			'waht_change_main_sidebar_classes_callback',
-			'waht_framework_options',
+			'waht_display_options',
 			'framework_section',
 			array(
 				'description' => __('Enter the class(es) your want to use for the main sidebar')
@@ -97,7 +97,7 @@ function waht_framework_options_init() {
 		'footer_sidebar_classes',
 		__('Footer Sidebars Class(es)', 'waht'),
 		'waht_change_footer_sidebar_classes_callback',
-		'waht_framework_options',
+		'waht_display_options',
 		'framework_section',
 		array(
 			'description' => __('Enter the class(es) your want to use for the footer sidebars')
@@ -177,13 +177,13 @@ function waht_framework_names() {
 			'value' => 'bootstrap',
 			'label' => __('Twitter Bootstrap', 'waht')
 		),
-		'h5bp'        => array(
-			'value' => 'h5bp',
-			'label' => __('HTML5 Boilerplate', 'waht')
-		),
 		'foundation'  => array(
 			'value' => 'foundation',
 			'label' => __('Foundation 3', 'waht')
+		),
+		'h5bp'        => array(
+			'value' => 'h5bp',
+			'label' => __('HTML5 Boilerplate', 'waht')
 		),
 		'none'        => array(
 			'value' => 'none',
@@ -265,6 +265,8 @@ function waht_change_footer_sidebar_classes_callback($args) {
 /**
  * Returns the default class of the main wrapper
  *
+ * @param string $framework
+ *
  * @return string
  */
 function waht_default_wrapper_class($framework = '') {
@@ -274,6 +276,8 @@ function waht_default_wrapper_class($framework = '') {
 
 /**
  * Returns default classes of the containers
+ *
+ * @param string $framework
  *
  * @return string
  */
@@ -288,6 +292,8 @@ function waht_default_container_class($framework = '') {
 /**
  * Returns the default class of the main section
  *
+ * @param string $framework
+ *
  * @return string
  */
 function waht_default_main_section_class($framework = '') {
@@ -300,6 +306,8 @@ function waht_default_main_section_class($framework = '') {
 /**
  * Returns the default class of the main sidebar
  *
+ * @param string $framework
+ *
  * @return string
  */
 function waht_default_main_sidebar_class($framework = '') {
@@ -311,6 +319,8 @@ function waht_default_main_sidebar_class($framework = '') {
 
 /**
  * Returns the default class of the footer sidebars
+ *
+ * @param string $framework
  *
  * @return string
  */

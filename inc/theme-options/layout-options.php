@@ -15,30 +15,30 @@ function waht_layout_options_init() {
 		add_option('waht_layout_options');
 	}
 
-	// Register the $waht_array for our options
+	// Register the $waht_layout_options array for our options
 	register_setting(
-		'waht_layout_options', // Options name
-		'waht_layout_options', // Option group
-		'waht_sanitize_layout_options' //Sanitize callback TODO (a.h)
+		'waht_display_options', // Options group
+		'waht_layout_options', // Option name
+		'waht_sanitize_layout_options' //Sanitize callback
 	);
 
 	// Register the layout options field group
 	add_settings_section(
-		'layout_section',
-		__('Layout Settings', 'waht'),
-		'waht_layout_options_section_callback',
-		'waht_layout_options'
+		'layout_section', // ID
+		__('Layout Settings', 'waht'), // Title
+		'waht_layout_options_section_callback', // Callback
+		'waht_display_options' // Page
 	);
 
 	// Register the sidebar position settings field
 	add_settings_field(
-		'sidebar_position',
-		__('Sidebar Position', 'waht'),
-		'waht_change_sidebar_position_callback',
-		'waht_layout_options',
-		'layout_section',
+		'sidebar_position', // ID
+		__('Sidebar Position', 'waht'), // Title
+		'waht_change_sidebar_position_callback', // Callback
+		'waht_display_options', // Page
+		'layout_section', // Section on page
 		array(
-			'description' => __('Select on which side you want to display your sidebar', 'waht')
+			'description' => __('Select on which side you want to display your sidebar', 'waht') // Final user help string
 		)
 	);
 
@@ -47,7 +47,7 @@ function waht_layout_options_init() {
 		'fluid',
 		__('Fluid Layout', 'waht'),
 		'waht_toggle_fluid_callback',
-		'waht_layout_options',
+		'waht_display_options',
 		'layout_section',
 		array(
 			'description' => __('Use a fluid layout', 'waht')
@@ -59,7 +59,7 @@ function waht_layout_options_init() {
 		'navbar',
 		__('Navigation', 'waht'),
 		'waht_toggle_navbar_callback',
-		'waht_layout_options',
+		'waht_display_options',
 		'layout_section',
 		array(
 			'description' => __('Use navbars for the navigation', 'waht')
@@ -71,7 +71,7 @@ function waht_layout_options_init() {
 		'top_fixed_nav',
 		__('Main navigation', 'waht'),
 		'waht_toggle_top_fixed_nav_callback',
-		'waht_layout_options',
+		'waht_display_options',
 		'layout_section',
 		array(
 			'description' => __('Use a top-fixed main navigation', 'waht')
@@ -169,21 +169,25 @@ function waht_toggle_top_fixed_nav_callback($args) {
 function waht_sanitize_layout_options($input) {
 	$output = $defaults = waht_get_default_layout_options();
 
-	// The sidebar position must be in our array of theme layout option
-	if (isset($input['sidebar_position']) && array_key_exists($input['sidebar_position'], waht_sidebar_positions()))
-		$output['sidebar_position'] = $input['sidebar_position'];
+	if (!isset($_POST['reset'])) :
 
-	// The fluid option is either true or false
-	if (!isset($input['fluid'])) $input['fluid'] = null;
-	$output['fluid'] = ($input['fluid'] == '1') ? true : false;
+		// The sidebar position must be in our array of theme layout option
+		if (isset($input['sidebar_position']) && array_key_exists($input['sidebar_position'], waht_sidebar_positions()))
+			$output['sidebar_position'] = $input['sidebar_position'];
 
-	// The navbar option is either true or false
-	if (!isset($input['navbar'])) $input['navbar'] = null;
-	$output['navbar'] = ($input['navbar'] == '1') ? true : false;
+		// The fluid option is either true or false
+		if (!isset($input['fluid'])) $input['fluid'] = null;
+		$output['fluid'] = ($input['fluid'] == '1') ? true : false;
 
-	// The top-fixed nav option is either true or false
-	if (!isset($input['top_fixed_nav'])) $input['top_fixed_nav'] = null;
-	$output['top_fixed_nav'] = ($input['top_fixed_nav'] == '1') ? true : false;
+		// The navbar option is either true or false
+		if (!isset($input['navbar'])) $input['navbar'] = null;
+		$output['navbar'] = ($input['navbar'] == '1') ? true : false;
+
+		// The top-fixed nav option is either true or false
+		if (!isset($input['top_fixed_nav'])) $input['top_fixed_nav'] = null;
+		$output['top_fixed_nav'] = ($input['top_fixed_nav'] == '1') ? true : false;
+
+	endif;
 
 	return apply_filters('waht_sanitize_layout_options', $output, $input, $defaults);
 }

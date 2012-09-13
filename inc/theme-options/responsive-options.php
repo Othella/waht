@@ -15,28 +15,28 @@ function waht_responsive_options_init() {
 		add_option('waht_responsive_options');
 	}
 
-	// Register the $waht_array for our options
+	// Register the $waht_responsive_options array for our options
 	register_setting(
-		'waht_responsive_options', // Options name
-		'waht_responsive_options', // Option group
-		'waht_sanitize_responsive_options' //Sanitize callback TODO (a.h)
+		'waht_display_options', // Options group
+		'waht_responsive_options', // Option name
+		'waht_sanitize_responsive_options' //Sanitize callback
 	);
 
 	// Register the responsive options field group
 	add_settings_section(
-		'responsive_section',
-		__('Responsive Settings', 'waht'),
-		'waht_responsive_options_section_callback',
-		'waht_responsive_options'
+		'responsive_section', // ID
+		__('Responsive Settings', 'waht'), // Title
+		'waht_responsive_options_section_callback', // Callback
+		'waht_display_options' // Page
 	);
 
 	// Register using responsive layout settings field
 	add_settings_field(
-		'responsive',
-		__('Use Responsive', 'waht'),
-		'waht_toggle_responsive_callback',
-		'waht_responsive_options',
-		'responsive_section',
+		'responsive', // ID
+		__('Use Responsive', 'waht'), // Title
+		'waht_toggle_responsive_callback', // Callback
+		'waht_display_options', // Page
+		'responsive_section', // Section
 		array(
 			'description' => __('Set the theme as responsive', 'waht')
 		)
@@ -47,7 +47,7 @@ function waht_responsive_options_init() {
 		'apple_icons_path',
 		__('Apple Icons', 'waht'),
 		'waht_change_apple_icons_path_callback',
-		'waht_responsive_options',
+		'waht_display_options',
 		'responsive_section',
 		array(
 			'description' => __('Set the path to the Apple icons folder', 'waht')
