@@ -9,23 +9,23 @@
 jQuery(function ($) {
     var $win = $(window),
         $adminBar = $('#wpadminbar'),
-        $navbarFixedTop = $('nav.navbar-fixed-top'),
-        $subNav = $('.subnav'),
+        $navbarFixedTop = $('nav.main-navigation.navbar-fixed-top'),
+        $subNav = $('nav.additional-navigation'),
         navTop = $subNav.length && $subNav.offset().top - ($navbarFixedTop.height() + $adminBar.height()),
         isFixed = false;
 
     /**
-     * Fix subnav on scroll
+     * Fix the additional navbar under the main navbar on scroll
      */
     function wahtSubNavScroll() {
         var scrollTop = $win.scrollTop();
         if ((scrollTop >= navTop) && !isFixed) {
             isFixed = true;
-            $subNav.addClass('subnav-fixed');
+            $subNav.addClass('additional-navigation-fixed');
             $subNav.css('top', $navbarFixedTop.height() + $adminBar.height());
         } else if ((scrollTop < navTop) && isFixed) {
             isFixed = false;
-            $subNav.removeClass('subnav-fixed');
+            $subNav.removeClass('additional-navigation-fixed');
         }
     }
 

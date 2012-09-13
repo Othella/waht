@@ -1,7 +1,18 @@
 /*  =============================================================================
     Base stylesheet
     ========================================================================== */
-
+.navbar-fixed-top {
+	top:      0;
+	position: fixed;
+	left:     0;
+	width:    100%;
+	margin:   0;
+	z-index:  1000;
+	& > *, & > * > .nav {
+		margin-top:    0;
+		margin-bottom: 0;
+	}
+}
 body.admin-bar .navbar-fixed-top {
 	top: 28px; /* Equals admin bar height */
 }
@@ -16,4 +27,34 @@ body.admin-bar .navbar-fixed-top {
 
 .pull-right {
 	float: right;
+}
+
+body {
+	&.bootstrap {
+	/* Properties used when using Twitter Bootstrap framework */
+	}
+
+	&.foundation {
+	/* Properties used when using Foundation 3 framework */
+	}
+
+	&.h5bp {
+	/* Properties used when using HTML5 Boilerplate framework */
+	}
+
+	&.none {
+	/* Properties used when not using any framework */
+	}
+
+	&.fluid-layout {
+	/* Properties used when using a fluid layout */
+	}
+
+	&.fixed-layout {
+	/* Properties used when using a fixed layout */
+	}
+
+	&.has-top-fixed-navbar {
+	/* Properties used when using a top-fixed navbar */
+	}
 }

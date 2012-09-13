@@ -4,71 +4,63 @@
     ========================================================================== */
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width : 320px)
-and (max-device-width : 480px) {
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 /* Styles */
 }
 
 /* Smartphones (landscape) ----------- */
-@media only screen
-and (min-width : 321px) {
+@media only screen and (min-width : 321px) {
 /* Styles */
 }
 
 /* Smartphones (portrait) ----------- */
-@media only screen
-and (max-width : 320px) {
+@media only screen and (max-width : 320px) {
 /* Styles */
 }
 
 /* iPads (portrait and landscape) ----------- */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px) {
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px) {
 /* Styles */
 }
 
 /* iPads (landscape) ----------- */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
 and (orientation : landscape) {
 /* Styles */
 }
 
 /* iPads (portrait) ----------- */
-@media only screen
-and (min-device-width : 768px)
-and (max-device-width : 1024px)
+@media only screen and (min-device-width : 768px) and (max-device-width : 1024px)
 and (orientation : portrait) {
 /* Styles */
 }
 
 /* Desktops and laptops ----------- */
-@media only screen
-and (min-width : 1224px) {
+@media only screen and (min-width : 1224px) {
 /* Styles */
 }
 
 /* Large screens ----------- */
-@media only screen
-and (min-width : 1824px) {
+@media only screen and (min-width : 1824px) {
 /* Styles */
 }
 
-/* iPhone 4 ----------- */
-@media
-only screen and (-webkit-min-device-pixel-ratio : 1.5),
-only screen and (min-device-pixel-ratio : 1.5) {
+/* Retina Display----------- */
+@media only screen and (-webkit-min-device-pixel-ratio : 1.5), only screen and (min-device-pixel-ratio : 1.5) {
 /* Styles */
 }
 
-/* Bootstrap */
+@media (max-width: 767px) {
+/* Top-Fixed Navigation */
+	.foundation {
+		.navbar-fixed-top { position: static; }
+	}
+}
+
 @media (min-width: 980px) {
-/* Fixed Topbar Navigation */
-    body.waht-navbar-fixed-top {
-        padding-top: 40px; /* navbar height */
-        position:    relative;
-    }
+	/* Top-Fixed Navigation */
+	body.has-top-fixed-navbar {
+		padding-top: 40px; /* navbar height */
+		position:    relative;
+	}
 }
