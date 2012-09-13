@@ -93,146 +93,234 @@
 /* alignment */
 .alignnone { }
 .aligncenter {
-  clear:        both;
-  display:      block;
-  margin-left:  auto;
-  margin-right: auto;
+	clear:        both;
+	display:      block;
+	margin-left:  auto;
+	margin-right: auto;
 }
 .alignleft {
-  display: inline;
-  float:   left;
+	display: inline;
+	float:   left;
 }
 .alignright {
-  display: inline;
-  float:   right;
+	display: inline;
+	float:   right;
 }
 
 /* images */
 a img {
-  &.alignright { }
-  &.alignnone { }
-  &.alignleft { }
-  &.aligncenter { }
+	&.alignright { }
+	&.alignnone { }
+	&.alignleft { }
+	&.aligncenter { }
 }
 .wp-caption {
-  &.alignnone { }
-  &.alignleft { }
-  &.alignright { }
-  img { }
-  p.wp-caption-text { }
+	&.alignnone { }
+	&.alignleft { }
+	&.alignright { }
+	img { }
+	p.wp-caption-text { }
 }
 img {
-  &.size-full { }
-  &.size-large { }
+	&.size-full { }
+	&.size-large { }
 }
 
 /* links widget */
 .widget_links {
-  ul {
-	li {
-	  a { }
+	ul {
+		li {
+			a { }
+		}
 	}
-  }
 }
 
 /* meta widget */
 .widget_meta {
-  ul {
-	li {
-	  a { }
+	ul {
+		li {
+			a { }
+		}
 	}
-  }
 }
 
 /* pages widget */
 .widget_pages {
-  ul {
-	li {
-	  a { }
+	ul {
+		li {
+			a { }
+		}
 	}
-  }
 }
 
 /* recent-posts widget */
 .widget_recent_entries {
-  ul {
-	li {
-	  a { }
+	ul {
+		li {
+			a { }
+		}
 	}
-  }
 }
 
 /* archives widget */
 .widget_archive {
-  ul {
-	li {
-	  a { }
+	ul {
+		li {
+			a { }
+		}
 	}
-  }
-  select { }
-  option { }
+	select { }
+	option { }
 }
 
 /* tag-cloud widget */
 .widget_links {
-  li {
-	&:after { }
-	&:before { }
-  }
+	li {
+		&:after { }
+		&:before { }
+	}
 }
 .widget_tag_cloud {
-  a {
-	&:after { }
-	&:before { }
-  }
+	a {
+		&:after { }
+		&:before { }
+	}
 }
 
 /* calendar widget */
 .widget_calendar { }
 #calendar_wrap {
-  th { }
-  td { }
+	th { }
+	td { }
 }
 #wp-calendar {
-  tr td { }
-  caption { }
-  a { }
-  #today { }
-  #prev {
+	tr td { }
+	caption { }
 	a { }
-  }
-  #next {
-	a { }
-  }
+	#today { }
+	#prev {
+		a { }
+	}
+	#next {
+		a { }
+	}
 }
 
 /* category widget */
 .widget_categories {
-  ul {
-	li {
+	ul {
+		li {
+		}
+		ul.children { }
 	}
-	ul.children { }
-  }
-  a { }
-  select {
-	&#cat { }
-	&.postform { }
-  }
-  option { }
-  .level-0 { }
-  .level-1 { }
-  .level-2 { }
-  .level-3 { }
+	a { }
+	select {
+		&#cat { }
+		&.postform { }
+	}
+	option { }
+	.level-0 { }
+	.level-1 { }
+	.level-2 { }
+	.level-3 { }
 }
 
 /* recent-comments widget */
 .recentcomments { }
 #recentcomments {
-  li {
-	a { }
-  }
+	li {
+		a { }
+	}
 }
 .widget_recent_comments { }
+
+/* comment lists */
+/* Source: http://css-tricks.com/snippets/wordpress/base-threaded-comments-styling/ */
+ol.commentlist {
+	list-style:  none;
+	margin:      0 0 1em;
+	padding:     0;
+	text-indent: 0;
+	li {
+		&.alt { }
+		&.bypostauthor { }
+		&.byuser { }
+		&.comment-author-admin { }
+		&.comment {
+			border-bottom: 1px dotted #666;
+			padding:       1em;
+			.comment-author { }
+			.vcard {
+				font: normal 16px georgia, times, serif;
+				cite.fn {
+					font-style: normal;
+					a.url { }
+				}
+				img {
+					&.avatar {
+						border: 5px solid #ccc;
+						float:  right;
+						margin: 0 0 1em 1em;
+					}
+					&.avatar-32 { }
+					&.photo { }
+				}
+				span.says { }
+			}
+			.comment-content { margin: 1em 0; }
+			.commentmetadata { }
+			.comment-meta {
+				font-size: 9px;
+				a { color: #ccc; }
+			}
+			.reply {
+				font-size: 11px;
+				a { font-weight: bold; }
+			}
+			p {
+				font-size: 11px;
+				margin:    0 0 1em;
+			}
+			ul {
+				font-size:  11px;
+				list-style: square;
+				margin:     0 0 1em 2em;
+				&.children {
+					list-style:  none;
+					margin:      1em 0 0;
+					text-indent: 0;
+					li {
+						&.alt { }
+						&.bypostauthor { }
+						&.byuser { }
+						&.comment { }
+						&.comment-author-admin { }
+						&.depth-2 {
+							border-left: 5px solid #555;
+							margin:      0 0 .25em .25em;
+						}
+						&.depth-3 {
+							border-left: 5px solid #999;
+							margin:      0 0 .25em .25em;
+						}
+						&.depth-4 {
+							border-left: 5px solid #bbb;
+							margin:      0 0 .25em .25em;
+						}
+						&.depth-5 { }
+						&.odd { }
+					}
+				}
+			}
+		}
+		&.even { background: #fff; }
+		&.odd { background: #f6f6f6; }
+		&.parent { border-left: 5px solid #111; }
+		&.thread-alt { }
+		&.thread-even { }
+		&.thread-odd { }
+	}
+}
 
 /* comments added by post author */
 .bypostauthor { }
@@ -244,6 +332,6 @@ img {
 
 /* text widget */
 .textwidget {
-  p { }
+	p { }
 }
 .widget_text { }

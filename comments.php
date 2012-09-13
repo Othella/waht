@@ -33,7 +33,7 @@ function waht_comments($comment, $args, $depth) {
         </div>
         <?php endif; ?>
 
-        <section class="comment">
+        <section class="comment-content">
             <?php comment_text(); ?>
         </section>
 
@@ -80,8 +80,8 @@ function waht_comments($comment, $args, $depth) {
             <div class="next"><?php next_comments_link(__('Newer comments &rarr;', 'waht'));?></div>
         </nav>
     </header>
-    <section class="comments-list">
-        <ol>
+    <section>
+        <ol class="commentlist">
             <?php wp_list_comments(array(
             'reverse_top_level' => true,
             'callback'          => 'waht_comments'
