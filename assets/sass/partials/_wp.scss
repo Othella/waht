@@ -1,0 +1,249 @@
+/*  =============================================================================
+    Stylesheet for WordPress generated classes
+    See http://codex.wordpress.org/CSS#WordPress_Generated_Classes
+    ========================================================================== */
+
+/* body classes */
+.rtl { }
+
+/* home page */
+.home { }
+
+/* blog page */
+.blog { }
+
+/* archive page */
+.archive { }
+
+/* date archive page */
+.date { }
+/* replace the number to the corresponding page number */
+.date-paged-1 { }
+
+/* search page */
+.search { }
+/* search result page */
+.search-results { }
+/* no results search page */
+.search-no-results { }
+/* individual paged search (i.e. body.search-paged-3) */
+.search-paged-1 { }
+
+/* 404 page */
+.error404 { }
+
+/* single post page */
+.single { }
+/* individual post page by id (i.e. body.postid-73) */
+.postid-1 { }
+/* individual paged single (i.e. body.single-paged-3) */
+.single-paged-1 { }
+
+/* attatchment page */
+.attachment { }
+/* individual attatchment page (i.e. body.attachmentid-763) */
+.attachmentid-1 { }
+/* style mime type pages */
+.attachment-mime-type { }
+
+/* author page */
+.author { }
+/* user nicename (i.e. body.author-samueladams) */
+.author-nicename { }
+/* paged author archives (i.e. body.author-paged-4) for page 4 */
+.author-paged-1 { }
+
+/* category page */
+.category { }
+/* individual category page (i.e. body.category-6) */
+.category-1 { }
+/* replace the number to the corresponding page number */
+.category-paged-1 { }
+
+/* tag page */
+.tag { }
+/* individual tag page (i.e. body.tag-news) */
+.tag-slug { }
+/* replace the number to the corresponding page number */
+.tag-paged-1 { }
+
+/* custom page template page */
+.page-template { }
+/* individual page template (i.e. body.page-template-contact-php */
+.page-template-page-php { }
+
+/* replace the number to the corresponding page number */
+.page-paged-1 { }
+.page-parent { }
+.page-child { }
+/* replace the number to the corresponding page number */
+.parent-pageid-1 { }
+
+/* if user is logged in */
+.logged-in { }
+
+/* paged items like search results or archives */
+.paged { }
+/* individual paged (i.e. body.paged-3) */
+.paged-1 { }
+
+/* sticky posts */
+.sticky { }
+
+/* alignment */
+.alignnone { }
+.aligncenter {
+  clear:        both;
+  display:      block;
+  margin-left:  auto;
+  margin-right: auto;
+}
+.alignleft {
+  display: inline;
+  float:   left;
+}
+.alignright {
+  display: inline;
+  float:   right;
+}
+
+/* images */
+a img {
+  &.alignright { }
+  &.alignnone { }
+  &.alignleft { }
+  &.aligncenter { }
+}
+.wp-caption {
+  &.alignnone { }
+  &.alignleft { }
+  &.alignright { }
+  img { }
+  p.wp-caption-text { }
+}
+img {
+  &.size-full { }
+  &.size-large { }
+}
+
+/* links widget */
+.widget_links {
+  ul {
+    li {
+      a { }
+    }
+  }
+}
+
+/* meta widget */
+.widget_meta {
+  ul {
+    li {
+      a { }
+    }
+  }
+}
+
+/* pages widget */
+.widget_pages {
+  ul {
+    li {
+      a { }
+    }
+  }
+}
+
+/* recent-posts widget */
+.widget_recent_entries {
+  ul {
+    li {
+      a { }
+    }
+  }
+}
+
+/* archives widget */
+.widget_archive {
+  ul {
+    li {
+      a { }
+    }
+  }
+  select { }
+  option { }
+}
+
+/* tag-cloud widget */
+.widget_links {
+  li {
+    &:after { }
+    &:before { }
+  }
+}
+.widget_tag_cloud {
+  a {
+    &:after { }
+    &:before { }
+  }
+}
+
+/* calendar widget */
+.widget_calendar { }
+#calendar_wrap {
+  th { }
+  td { }
+}
+#wp-calendar {
+  tr td { }
+  caption { }
+  a { }
+  #today { }
+  #prev {
+    a { }
+  }
+  #next {
+    a { }
+  }
+}
+
+/* category widget */
+.widget_categories {
+  ul {
+    li {
+    }
+    ul.children { }
+  }
+  a { }
+  select {
+    &#cat { }
+    &.postform { }
+  }
+  option { }
+  .level-0 { }
+  .level-1 { }
+  .level-2 { }
+  .level-3 { }
+}
+
+/* recent-comments widget */
+.recentcomments { }
+#recentcomments {
+  li {
+    a { }
+  }
+}
+.widget_recent_comments { }
+
+/* comments added by post author */
+.bypostauthor { }
+
+/* search widget */
+#searchform { }
+.widget_search { }
+.screen-reader-text { }
+
+/* text widget */
+.textwidget {
+  p { }
+}
+.widget_text { }

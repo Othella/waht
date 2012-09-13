@@ -88,23 +88,18 @@
 .paged-1 { }
 
 /* sticky posts */
-.sticky { }
+.sticky {}
 
 /* alignment */
 .alignnone { }
 .aligncenter {
-	clear:        both;
-	display:      block;
-	margin-left:  auto;
-	margin-right: auto;
+  clear:        both;
+  display:      block;
+  margin-left:  auto;
+  margin-right: auto;
 }
-.alignleft {
-	display: inline;
-	float:   left; }
-.alignright {
-	display: inline;
-	float:   right;
-}
+.alignleft { display: inline; float: left; }
+.alignright { display: inline; float: right; }
 
 /* images */
 a img.alignright { }
@@ -198,7 +193,7 @@ img.size-large { }
 .widget_recent_comments { }
 
 /* comments added by post author */
-.bypostauthor { }
+.bypostauthor {}
 
 /* search widget */
 #searchform { }
