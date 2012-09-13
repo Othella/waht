@@ -15,28 +15,28 @@
 <?php waht_page_footer_before(); ?>
 <footer id="page-footer">
     <div class="<?php echo waht_wrapper_classes(); ?>">
-        <?php waht_page_footer_inside_before(); ?>
+		<?php waht_page_footer_inside_before(); ?>
         <section class="footer-sidebars <?php echo waht_container_classes(); ?>">
-            <section class="sidebar-footer-left <?php echo waht_footer_sidebar_classes() ?>">
-                <?php if (is_dynamic_sidebar('sidebar-footer-left')) : ?>
-                <?php dynamic_sidebar('sidebar-footer-left'); ?>
-                <?php endif; ?>
+            <section class="sidebar-footer-left <?php echo waht_footer_sidebar_classes(); ?>">
+				<?php if (is_dynamic_sidebar('sidebar-footer-left')) : ?>
+				<?php dynamic_sidebar('sidebar-footer-left'); ?>
+				<?php endif; ?>
             </section>
-            <section class="sidebar-footer-center <?php echo waht_footer_sidebar_classes() ?>">
-                <?php if (is_dynamic_sidebar('sidebar-footer-center')) : ?>
-                <?php dynamic_sidebar('sidebar-footer-center'); ?>
-                <?php endif; ?>
+            <section class="sidebar-footer-center <?php echo waht_footer_sidebar_classes(); ?>">
+				<?php if (is_dynamic_sidebar('sidebar-footer-center')) : ?>
+				<?php dynamic_sidebar('sidebar-footer-center'); ?>
+				<?php endif; ?>
             </section>
-            <section class="sidebar-footer-right <?php echo waht_footer_sidebar_classes() ?>">
-                <?php if (is_dynamic_sidebar('sidebar-footer-right')) : ?>
-                <?php dynamic_sidebar('sidebar-footer-right'); ?>
-                <?php endif; ?>
+            <section class="sidebar-footer-right <?php echo waht_footer_sidebar_classes(); ?>">
+				<?php if (is_dynamic_sidebar('sidebar-footer-right')) : ?>
+				<?php dynamic_sidebar('sidebar-footer-right'); ?>
+				<?php endif; ?>
             </section>
         </section>
         <section class="copyright">
-            <?php echo waht_credentials(); ?>
+			<?php echo waht_credentials(); ?>
         </section>
-        <?php waht_page_footer_inside_after(); ?>
+		<?php waht_page_footer_inside_after(); ?>
     </div>
 </footer><!-- #page-footer -->
 <?php waht_page_footer_after(); ?>

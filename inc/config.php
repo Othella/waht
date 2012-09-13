@@ -25,11 +25,6 @@ add_theme_support('waht-responsive-options');	// Enable the layout settings in o
 add_theme_support('waht-seo-options');	// Enable the layout settings in our theme options page
 add_theme_support('waht-social-options');	// Enable the layout settings in our theme options page
 
-/* Layout Options */
-define('WAHT_GRID', 		false); 	// TODO (a.h) Use a grid framework
-
-/* Classes */
-
 /* Navigation and menus */
 define('WAHT_CLEANED_MENU', 					true); 	// Use cleanup functions menu's walkers
 

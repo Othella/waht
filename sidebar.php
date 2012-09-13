@@ -10,7 +10,7 @@
 if (waht_has_main_sidebar()) : // Only display if sidebar is allowed
 	?>
 <?php waht_sidebar_before(); ?>
-<aside id="complementary" class="<?php waht_main_sidebar_classes(); ?>">
+<aside id="complementary" class="<?php echo waht_main_sidebar_classes(); ?>">
 	<?php waht_sidebar_inside_before(); ?>
 	<?php if (is_active_sidebar('sidebar-main')) : ?>
 	<?php dynamic_sidebar('sidebar-main'); ?>
