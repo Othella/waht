@@ -59,7 +59,7 @@ function waht_enqueue_scripts() {
 
 	// Add To Home Screen
 	if (WAHT_USE_ADD2HOME)
-		wp_register_script('add2home', waht_get_assets_uri() . '/js/lib/add2home.min.js', array(), null, true);
+		wp_register_script('add2home', waht_get_assets_uri() . '/js/libs/add2home.min.js', array(), null, true);
 	wp_enqueue_script('add2home');
 }
 
@@ -106,18 +106,18 @@ function waht_enqueue_bootstrap_framework_scripts() {
  */
 function waht_enqueue_h5bp_framework_scripts() {
 	wp_register_style('waht-h5bp-normalize',
-		get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/css/normalize.css', array(), null, 'all');
+		get_template_directory_uri() . '/frameworks/h5bp/css/normalize.css', array(), null, 'all');
 	wp_enqueue_style('waht-h5bp-normalize');
 
 	wp_register_style('waht-h5bp',
-		get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/css/main.css', array('waht-h5bp-normalize'), null, 'all');
+		get_template_directory_uri() . '/frameworks/h5bp/css/main.css', array('waht-h5bp-normalize'), null, 'all');
 	wp_enqueue_style('waht-h5bp');
 
 	wp_register_script('waht-h5bp-modernizr',
-		get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/js/vendor/modernizr-2.6.1.min.js', array(), '2.6.1', false);
+		get_template_directory_uri() . '/frameworks/h5bp/js/vendor/modernizr-2.6.1.min.js', array(), '2.6.1', false);
 	wp_enqueue_script('waht-h5bp-modernizr');
 
-	wp_register_script('waht-h5bp', get_template_directory_uri() . '/frameworks/h5bp-html5-boilerplate/js/plugins.js', array('waht-h5bp-modernizr',
+	wp_register_script('waht-h5bp', get_template_directory_uri() . '/frameworks/h5bp/js/plugins.js', array('waht-h5bp-modernizr',
 		'jquery'), null, true);
 	wp_enqueue_script('waht-h5bp');
 }
@@ -127,11 +127,11 @@ function waht_enqueue_h5bp_framework_scripts() {
  */
 function waht_enqueue_foundation_framework_scripts() {
 	wp_register_style('waht-foundation',
-		get_template_directory_uri() . '/frameworks/foundation-3/stylesheets/foundation.min.css', array(), null, 'all');
+		get_template_directory_uri() . '/frameworks/foundation/stylesheets/foundation.min.css', array(), null, 'all');
 	wp_enqueue_style('waht-foundation');
 
 	wp_register_script('waht-foundation',
-		get_template_directory_uri() . '/frameworks/foundation-3/javascripts/foundation.min.js', array('jquery'), null, true);
+		get_template_directory_uri() . '/frameworks/foundation/javascripts/foundation.min.js', array('jquery'), null, true);
 	wp_enqueue_script('waht-foundation');
 }
 

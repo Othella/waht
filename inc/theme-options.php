@@ -5,6 +5,9 @@
  * @package    : waht
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
+ *
+ * @see http://wp.tutsplus.com/tutorials/theme-development/create-a-settings-page-for-your-wordpress-theme/
+ * @see http://wp.tutsplus.com/series/the-complete-guide-to-the-wordpress-settings-api/
  */
 
 require_once('theme-options/layout-options.php');
