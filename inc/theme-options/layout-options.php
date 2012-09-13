@@ -130,10 +130,53 @@ function waht_sidebar_positions() {
 function waht_toggle_fluid_callback($args) {
 	$waht_layout_options = waht_get_layout_options();
 	?>
-<input type="checkbox" id="waht_layout_options[fluid]" name="waht_layout_options[fluid]"
-       value="1"<?php checked(true, $waht_layout_options['fluid']); ?> />
-<label for="waht_layout_options[fluid]"
+<input type="checkbox" id="waht_layout_options_fluid" name="waht_layout_options[fluid]"
+       value="1"<?php checked(true, $waht_layout_options['fluid']); ?> onchange="actualizeFluidClasses()"/>
+<label for="waht_layout_options_fluid"
        class="description"><?php echo $args['description']; ?></label>
+
+<script type="text/javascript">
+    /**
+     * Actualize values in inputs for classes depending on selected framework and fluidity behavior
+	 */
+    function actualizeFluidClasses() {
+        var $cb_fluid = jQuery('#waht_layout_options_fluid');
+        var use_fluid = ($cb_fluid.length > 0) ? ($cb_fluid.attr('checked') == 'checked') : null;
+		if (use_fluid == null) return;
+        var $selected_framework = jQuery('#waht_framework_options_framework_name').val();
+        var $container = jQuery('#waht_framework_options_container_classes');
+        var $wrapper = jQuery('#waht_framework_options_wrapper_classes');
+        if (use_fluid == true) {
+            if ($selected_framework == 'bootstrap') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('bootstrap', true); ?>');
+                $container.val('<?php echo waht_default_container_class('bootstrap', true); ?>');
+            } else if ($selected_framework == 'h5bp') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('h5bp', true); ?>');
+                $container.val('<?php echo waht_default_container_class('h5bp', true); ?>');
+            } else if ($selected_framework == 'foundation') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('foundation', true); ?>');
+                $container.val('<?php echo waht_default_container_class('foundation', true); ?>');
+            } else {
+                $wrapper.val('<?php echo waht_default_wrapper_class('', true); ?>');
+                $container.val('<?php echo waht_default_container_class('', true); ?>');
+            }
+        } else if (use_fluid == false) {
+            if ($selected_framework == 'bootstrap') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('bootstrap', false); ?>');
+                $container.val('<?php echo waht_default_container_class('bootstrap', false); ?>');
+            } else if ($selected_framework == 'h5bp') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('h5bp', false); ?>');
+                $container.val('<?php echo waht_default_container_class('h5bp', false); ?>');
+            } else if ($selected_framework == 'foundation') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('foundation', false); ?>');
+                $container.val('<?php echo waht_default_container_class('foundation', false); ?>');
+            } else {
+                $wrapper.val('<?php echo waht_default_wrapper_class('', false); ?>');
+                $container.val('<?php echo waht_default_container_class('', false); ?>');
+            }
+        }
+    }
+</script>
 <?php
 }
 

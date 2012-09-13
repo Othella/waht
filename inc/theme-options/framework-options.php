@@ -129,37 +129,77 @@ function waht_change_framework_name_callback($args) {
 <label for="waht_framework_options_framework_name" class="description"><?php echo $args['description']; ?></label>
 
 <script type="text/javascript">
+    /**
+     * Actualize values in inputs for classes depending on selected framework and fluidity behavior
+     */
     function actualizeClasses() {
         var $selected_framework = jQuery('#waht_framework_options_framework_name').val();
-        var $wrapper = jQuery('#waht_framework_options_wrapper_classes');
-        var $container = jQuery('#waht_framework_options_container_classes');
         var $main_section = jQuery('#waht_framework_options_main_section_classes');
         var $main_sidebar = jQuery('#waht_framework_options_main_sidebar_classes');
         var $footer_sidebar = jQuery('#waht_framework_options_footer_sidebar_classes');
         if ($selected_framework == 'bootstrap') {
-            $wrapper.val('<?php echo waht_default_wrapper_class('bootstrap'); ?>');
-            $container.val('<?php echo  waht_default_container_class('bootstrap'); ?>');
             $main_section.val('<?php echo waht_default_main_section_class('bootstrap'); ?>');
             $main_sidebar.val('<?php echo waht_default_main_sidebar_class('bootstrap'); ?>');
             $footer_sidebar.val('<?php echo waht_default_footer_sidebar_class('bootstrap'); ?>');
         } else if ($selected_framework == 'h5bp') {
-            $wrapper.val('<?php echo waht_default_wrapper_class('h5bp'); ?>');
-            $container.val('<?php echo waht_default_container_class('h5bp'); ?>');
             $main_section.val('<?php echo waht_default_main_section_class('h5bp'); ?>');
             $main_sidebar.val('<?php echo waht_default_main_sidebar_class('h5bp'); ?>');
             $footer_sidebar.val('<?php echo waht_default_footer_sidebar_class('h5bp'); ?>');
         } else if ($selected_framework == 'foundation') {
-            $wrapper.val('<?php echo waht_default_wrapper_class('foundation'); ?>');
-            $container.val('<?php echo waht_default_container_class('foundation'); ?>');
             $main_section.val('<?php echo waht_default_main_section_class('foundation'); ?>');
             $main_sidebar.val('<?php echo waht_default_main_sidebar_class('foundation'); ?>');
             $footer_sidebar.val('<?php echo waht_default_footer_sidebar_class('foundation'); ?>');
         } else {
-            $wrapper.val('<?php echo waht_default_wrapper_class(); ?>');
-            $container.val('<?php echo waht_default_container_class(); ?>');
             $main_section.val('<?php echo waht_default_main_section_class(); ?>');
             $main_sidebar.val('<?php echo waht_default_main_sidebar_class(); ?>');
             $footer_sidebar.val('<?php echo waht_default_footer_sidebar_class(); ?>');
+        }
+        var $cb_fluid = jQuery('#waht_layout_options_fluid');
+        var $wrapper = jQuery('#waht_framework_options_wrapper_classes');
+        var $container = jQuery('#waht_framework_options_container_classes');
+        var use_fluid = ($cb_fluid.length > 0) ? ($cb_fluid.attr('checked') == 'checked') : null;
+        if (use_fluid == true) {
+            if ($selected_framework == 'bootstrap') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('bootstrap', true); ?>');
+                $container.val('<?php echo waht_default_container_class('bootstrap', true); ?>');
+            } else if ($selected_framework == 'h5bp') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('h5bp', true); ?>');
+                $container.val('<?php echo waht_default_container_class('h5bp', true); ?>');
+            } else if ($selected_framework == 'foundation') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('foundation', true); ?>');
+                $container.val('<?php echo waht_default_container_class('foundation', true); ?>');
+            } else {
+                $wrapper.val('<?php echo waht_default_wrapper_class('', true); ?>');
+                $container.val('<?php echo waht_default_container_class('', true); ?>');
+            }
+        } else if (use_fluid == false) {
+            if ($selected_framework == 'bootstrap') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('bootstrap', false); ?>');
+                $container.val('<?php echo waht_default_container_class('bootstrap', false); ?>');
+            } else if ($selected_framework == 'h5bp') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('h5bp', false); ?>');
+                $container.val('<?php echo waht_default_container_class('h5bp', false); ?>');
+            } else if ($selected_framework == 'foundation') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('foundation', false); ?>');
+                $container.val('<?php echo waht_default_container_class('foundation', false); ?>');
+            } else {
+                $wrapper.val('<?php echo waht_default_wrapper_class('', false); ?>');
+                $container.val('<?php echo waht_default_container_class('', false); ?>');
+            }
+        } else {
+            if ($selected_framework == 'bootstrap') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('bootstrap'); ?>');
+                $container.val('<?php echo waht_default_container_class('bootstrap'); ?>');
+            } else if ($selected_framework == 'h5bp') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('h5bp'); ?>');
+                $container.val('<?php echo waht_default_container_class('h5bp'); ?>');
+            } else if ($selected_framework == 'foundation') {
+                $wrapper.val('<?php echo waht_default_wrapper_class('foundation'); ?>');
+                $container.val('<?php echo waht_default_container_class('foundation'); ?>');
+            } else {
+                $wrapper.val('<?php echo waht_default_wrapper_class(''); ?>');
+                $container.val('<?php echo waht_default_container_class(''); ?>');
+            }
         }
     }
 </script>
@@ -267,11 +307,13 @@ function waht_change_footer_sidebar_classes_callback($args) {
  *
  * @param string $framework
  *
+ * @param bool   $fluid (Optional) Force fluid layout
+ *
  * @return string
  */
-function waht_default_wrapper_class($framework = '') {
-	if (waht_use_fluid_layout()) return 'container-fluid';
-	else return 'container';
+function waht_default_wrapper_class($framework = '', $fluid = null) {
+	if (!isset($fluid)) $fluid = waht_use_fluid_layout();
+	return ($fluid == true) ? 'container-fluid' : 'container';
 }
 
 /**
@@ -279,13 +321,13 @@ function waht_default_wrapper_class($framework = '') {
  *
  * @param string $framework
  *
+ * @param bool   $fluid (Optional) Force fluid layout
+ *
  * @return string
  */
-function waht_default_container_class($framework = '') {
-	if ($framework == 'bootstrap' && waht_use_fluid_layout())
-		return 'row-fluid';
-	else
-		return 'row';
+function waht_default_container_class($framework = '', $fluid = null) {
+	if (!isset($fluid)) $fluid = waht_use_fluid_layout();
+	return ($framework == 'bootstrap' && $fluid == true) ? 'row-fluid' : 'row';
 }
 
 
@@ -297,10 +339,9 @@ function waht_default_container_class($framework = '') {
  * @return string
  */
 function waht_default_main_section_class($framework = '') {
-	if ($framework == 'foundation')
-		return waht_has_main_sidebar() ? 'eight columns' : 'twelve columns';
-	else
-		return waht_has_main_sidebar() ? 'span8' : 'span12';
+	return ($framework == 'foundation') ?
+		(waht_has_main_sidebar() ? 'eight columns' : 'twelve columns') :
+		(waht_has_main_sidebar() ? 'span8' : 'span12');
 }
 
 /**
@@ -311,10 +352,7 @@ function waht_default_main_section_class($framework = '') {
  * @return string
  */
 function waht_default_main_sidebar_class($framework = '') {
-	if ($framework == 'foundation')
-		return 'four columns';
-	else
-		return 'span4';
+	return ($framework == 'foundation') ? 'four columns' : 'span4';
 }
 
 /**
@@ -325,10 +363,7 @@ function waht_default_main_sidebar_class($framework = '') {
  * @return string
  */
 function waht_default_footer_sidebar_class($framework = '') {
-	if ($framework == 'foundation')
-		return 'four columns';
-	else
-		return 'span4';
+	return ($framework == 'foundation') ? 'four columns' : 'span4';
 }
 
 
