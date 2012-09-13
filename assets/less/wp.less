@@ -88,112 +88,154 @@
 .paged-1 { }
 
 /* sticky posts */
-.sticky {}
+.sticky { }
 
 /* alignment */
 .alignnone { }
 .aligncenter {
-	clear:        both;
-	display:      block;
-	margin-left:  auto;
-	margin-right: auto;
+  clear:        both;
+  display:      block;
+  margin-left:  auto;
+  margin-right: auto;
 }
-.alignleft { display: inline; float: left; }
-.alignright { display: inline; float: right; }
+.alignleft {
+  display: inline;
+  float:   left;
+}
+.alignright {
+  display: inline;
+  float:   right;
+}
 
 /* images */
-a img.alignright { }
-a img.alignnone { }
-a img.alignleft { }
-a img.aligncenter { }
-.wp-caption { }
-.wp-caption.alignnone { }
-.wp-caption.alignleft { }
-.wp-caption.alignright { }
-.wp-caption img { }
-.wp-caption p.wp-caption-text { }
-img.size-full { }
-img.size-large { }
+a img {
+  &.alignright { }
+  &.alignnone { }
+  &.alignleft { }
+  &.aligncenter { }
+}
+.wp-caption {
+  &.alignnone { }
+  &.alignleft { }
+  &.alignright { }
+  img { }
+  p.wp-caption-text { }
+}
+img {
+  &.size-full { }
+  &.size-large { }
+}
 
 /* links widget */
-.widget_links { }
-.widget_links ul { }
-.widget_links ul li { }
-.widget_links ul li a { }
+.widget_links {
+  ul {
+	li {
+	  a { }
+	}
+  }
+}
 
 /* meta widget */
-.widget_meta { }
-.widget_meta ul { }
-.widget_meta ul li { }
-.widget_meta ul li a { }
+.widget_meta {
+  ul {
+	li {
+	  a { }
+	}
+  }
+}
 
 /* pages widget */
-.widget_pages { }
-.widget_pages ul { }
-.widget_pages ul li { }
-.widget_pages ul li a { }
+.widget_pages {
+  ul {
+	li {
+	  a { }
+	}
+  }
+}
 
 /* recent-posts widget */
-.widget_recent_entries { }
-.widget_recent_entries ul { }
-.widget_recent_entries ul li { }
-.widget_recent_entries ul li a { }
+.widget_recent_entries {
+  ul {
+	li {
+	  a { }
+	}
+  }
+}
 
 /* archives widget */
-.widget_archive { }
-.widget_archive ul { }
-.widget_archive ul li { }
-.widget_archive ul li a { }
-.widget_archive select { }
-.widget_archive option { }
+.widget_archive {
+  ul {
+	li {
+	  a { }
+	}
+  }
+  select { }
+  option { }
+}
 
 /* tag-cloud widget */
-.widget_links { }
-.widget_links li:after { }
-.widget_links li:before { }
-.widget_tag_cloud { }
-.widget_tag_cloud a { }
-.widget_tag_cloud a:after { }
-.widget_tag_cloud a:before { }
+.widget_links {
+  li {
+	&:after { }
+	&:before { }
+  }
+}
+.widget_tag_cloud {
+  a {
+	&:after { }
+	&:before { }
+  }
+}
 
 /* calendar widget */
 .widget_calendar { }
-#calendar_wrap { }
-#calendar_wrap th { }
-#calendar_wrap td { }
-#wp-calendar tr td { }
-#wp-calendar caption { }
-#wp-calendar a { }
-#wp-calendar #today { }
-#wp-calendar #prev { }
-#wp-calendar #next { }
-#wp-calendar #next a { }
-#wp-calendar #prev a { }
+#calendar_wrap {
+  th { }
+  td { }
+}
+#wp-calendar {
+  tr td { }
+  caption { }
+  a { }
+  #today { }
+  #prev {
+	a { }
+  }
+  #next {
+	a { }
+  }
+}
 
 /* category widget */
-.widget_categories { }
-.widget_categories ul { }
-.widget_categories ul li { }
-.widget_categories ul ul.children { }
-.widget_categories a { }
-.widget_categories select { }
-.widget_categories select#cat { }
-.widget_categories select.postform { }
-.widget_categories option { }
-.widget_categories .level-0 { }
-.widget_categories .level-1 { }
-.widget_categories .level-2 { }
-.widget_categories .level-3 { }
+.widget_categories {
+  ul {
+	li {
+	}
+	ul.children { }
+  }
+  a { }
+  select {
+	&#cat { }
+	&.postform { }
+  }
+  option { }
+  .level-0 { }
+  .level-1 { }
+  .level-2 { }
+  .level-3 { }
+}
 
 /* recent-comments widget */
 .recentcomments { }
-#recentcomments { }
-#recentcomments li { }
-#recentcomments li a { }
+#recentcomments {
+  li {
+	a { }
+  }
+}
 .widget_recent_comments { }
 
 /* comments added by post author */
-.bypostauthor {}
+.bypostauthor { }
 
 /* search widget */
 #searchform { }
@@ -201,6 +243,7 @@ img.size-large { }
 .screen-reader-text { }
 
 /* text widget */
-.textwidget { }
+.textwidget {
+  p { }
+}
 .widget_text { }
-.textwidget p { }
