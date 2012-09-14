@@ -54,6 +54,8 @@ function waht_layout_options_init() {
 		)
 	);
 
+	// Register setting for the max-width when
+
 	// Register the use of navbar settings field
 	add_settings_field(
 		'navbar',

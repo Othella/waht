@@ -15,13 +15,21 @@
  * @return array
  */
 function waht_body_class($classes) {
-	if (waht_get_framework() != '') {
-		// Set the framework name as class to body tag if using one
+
+	// Set the framework name as class to body tag if using one
+	if (waht_get_framework() != '')
 		$classes[] = waht_get_framework();
-		if (waht_use_top_fixed_nav())
-			// Add 'waht-navbar-fixed-top' class to body tag if using Bootstrap's top-fixed navbar
-			$classes[] = 'waht-navbar-fixed-top';
-	}
+
+	// Add 'has-top-fixed-navbar' class to body tag if using a top-fixed navbar
+	if (waht_use_top_fixed_nav())
+		$classes[] = 'has-top-fixed-navbar';
+
+	// Add a class depending on fluidity behavior
+	if (waht_use_fluid_layout())
+		$classes[] = 'fluid-layout';
+	else
+		$classes[] = 'fixed-layout';
+
 	return $classes;
 }
 

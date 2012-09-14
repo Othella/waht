@@ -10,6 +10,7 @@
 
 /**
  * Register our navigation menus
+ *
  * @require WP 3+
  */
 function waht_register_nav_menus() {
@@ -28,15 +29,21 @@ add_action('after_setup_theme', 'waht_register_nav_menus');
  * Main Man Menu
  */
 function waht_main_nav_menu() {
+
 	// select the walker depending on framework
 	$walker = waht_use_navbar() ? new Waht_NavBar_Walker_Nav_Menu() :
 		(WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+
+	$menu_class = 'clearfix nav';
+	if (waht_use_bootstrap_framework()) $menu_class .= '';
+	if (waht_use_foundation_framework()) $menu_class .= ' nav-bar';
+
 	wp_nav_menu(
 		array(
 			'container'       => false, // remove nav container
 			'container_class' => 'menu clearfix', // class of container (should you choose to use it)
 			'menu'            => 'main_nav_menu', // nav name
-			'menu_class'      => 'nav top-nav clearfix', // adding custom nav class
+			'menu_class'      => $menu_class, // adding custom nav class
 			'theme_location'  => 'main_nav_menu', // where it's located in the theme
 			'walker'          => $walker, // our cleaner walker
 			'before'          => '', // before the menu
@@ -53,14 +60,20 @@ function waht_main_nav_menu() {
  * Additional Nav Menu
  */
 function waht_additional_nav_menu() {
+
 	$walker = waht_use_navbar() ? new Waht_NavBar_Walker_Nav_Menu() :
 		(WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+
+	$menu_class = 'clearfix nav';
+	if (waht_use_bootstrap_framework()) $menu_class .= ' nav-pills';
+	if (waht_use_foundation_framework()) $menu_class .= ' nav-bar';
+
 	wp_nav_menu(
 		array(
 			'container'       => false, // remove nav container
 			'container_class' => 'additional-nav-menu clearfix', // class of container (should you choose to use it)
 			'menu'            => 'additional_nav_menu', // nav name
-			'menu_class'      => 'nav nav-pills additional-nav clearfix', // adding custom nav class
+			'menu_class'      => $menu_class, // adding custom nav class
 			'theme_location'  => 'additional_nav_menu', // where it's located in the theme
 			'walker'          => $walker, // our cleaner walker
 			'before'          => '', // before the menu
@@ -113,6 +126,7 @@ add_filter('wp_nav_menu', 'waht_wp_nav_menu');
 
 /**
  * Cleaner Walker displaying only the slug in the class name
+ *
  * @uses Walker_Nav_Menu
  */
 class Waht_Walker_Nav_Menu extends Walker_Nav_Menu {
@@ -130,6 +144,7 @@ class Waht_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 	/**
 	 * Start the element output (list item <li>)
+	 *
 	 * @see /wp-includes/class-wp-walker.php
 	 * @see wp-includes/nav-menu-template.php
 	 *
@@ -183,6 +198,7 @@ class Waht_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 /**
  * Cleaner Walker optimized for the Bootstrap NavBar
+ *
  * @uses Walker_Nav_Menu
  */
 class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
@@ -194,12 +210,13 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 * @return int
 	 */
 	function check_current($classes) {
-		// search for occurrences of "current", "active" or "dropdown"
-		return preg_match('/(current[-_])|active|dropdown/', $classes);
+		// search for occurrences of "current", "active", "dropdown" or "has-flyout"
+		return preg_match('/(current[-_])|active|dropdown|has-flyout/', $classes);
 	}
 
 	/**
 	 * Starts the list before the elements are added. (list <ul>)
+	 *
 	 * @see /wp-includes/class-wp-walker.php
 	 * @see wp-includes/nav-menu-template.php
 	 *
@@ -208,13 +225,15 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 	 * @param array  $args
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
-		$indent = str_repeat("\t", $depth);
-		// set class to "dropdown-menu" instead of "sub-menu"
-		$output .= "\n" . $indent . "<ul class=\"dropdown-menu\">\n";
+		$indent     = str_repeat("\t", $depth);
+		$menu_class = (waht_use_foundation_framework()) ? 'flyout' : 'dropdown-menu';
+		// set class to "dropdown-menu" or "flyout" instead of "sub-menu"
+		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
 	}
 
 	/**
 	 * Start the element output (list item <li>)
+	 *
 	 * @see      /wp-includes/class-wp-walker.php
 	 * @see      /wp-includes/nav-menu-template.php
 	 *
@@ -237,10 +256,14 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$classes = empty($item->classes) ? array() : (array)$item->classes;
 
 		// dropdown
-		if ($args->has_children) {
-			$classes[] = 'dropdown';
-			$li_attributes .= ' data-dropdown="dropdown"';
-		}
+		if ($args->has_children) :
+			if (waht_use_foundation_framework()) :
+				$classes[] = 'has-flyout';
+			else:
+				$classes[] = 'dropdown';
+				$li_attributes .= ' data-dropdown="dropdown"';
+			endif;
+		endif;
 
 		$classes = array_filter($classes, array(&$this, 'check_current'));
 
@@ -261,12 +284,24 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
 		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
 		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
-		$attributes .= ($args->has_children) ? ' class="dropdown-toggle" data-toggle="dropdown"' : ''; // dropdown
+		if ($args->has_children) : // dropdown
+			if (waht_use_foundation_framework()) :
+				$attributes .= '';
+			else:
+				$attributes .= ' class="dropdown-toggle" data-toggle="dropdown"';
+			endif;
+		endif;
 
 		$item_output = $args->before;
 		$item_output .= '<a' . $attributes . '>';
 		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
-		$item_output .= ($args->has_children) ? ' <b class="caret"></b>' : ''; // caret
+		if ($args->has_children) : // dropdown
+			if (waht_use_foundation_framework()) :
+				$item_output .= '</a><a href="#" class="flyout-toggle"><span>&nbsp;</span>';
+			else:
+				$item_output .= ' <b class="caret"></b>';
+			endif;
+		endif;
 		$item_output .= '</a>';
 		$item_output .= $args->after;
 
@@ -275,6 +310,7 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 	/**
 	 * Traverse elements to create list from elements.
+	 *
 	 * @see /wp-includes/class-wp-walker.php
 	 *
 	 * @param object $element           Data object
@@ -336,16 +372,25 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
  * See http://bacsoftwareconsulting.com/blog/index.php/wordpress-cat/adding-wordpress-breadcrumbs-without-a-plugin/
  */
 function waht_breadcrumb() {
+
 	//Variable and can be styled separately.
-	//Use / for different level categories (parent / child / grandchild)
-	$delimiter = '<span class="divider">&nbsp;>&nbsp;</span>';
-	//Use bullets for same level categories ( parent . parent )
-	$subdelimiter = '<span class="subdivider">&nbsp;&bull;&nbsp;</span>';
+	$breadcrumb_class = (waht_use_foundation_framework()) ? 'breadcrumbs' : 'breadcrumb';
+	$delimiter        = $subdelimiter = '';
+	if (!waht_use_foundation_framework()) :
+		//Use > for different level categories (parent / child / grandchild)
+		$delimiter = '<span class="divider">&nbsp;>&nbsp;</span>';
+		//Use bullets for same level categories ( parent . parent )
+		$subdelimiter = '<span class="subdivider">&nbsp;&bull;&nbsp;</span>';
+	endif;
+	$open_active_li  = (waht_use_foundation_framework()) ? '<li class="current"><a href="#">' : '<li class="active">';
+	$close_active_li = (waht_use_foundation_framework()) ? '</a></li>' : '</li>';
 
 	//text link for the 'Home' page
 	$main = __('Home', 'waht');
 	//Display only the first 30 characters of the post title.
 	$maxLength = 30;
+
+	$arc_day = $arc_day_full = $arc_year = $arc_month = $url_month = $url_year = '';
 
 	if (!is_404()) :
 		//variable for archived year
@@ -372,13 +417,14 @@ function waht_breadcrumb() {
 	if (!is_front_page()) {
 		//If Breadcrump exists, wrap it up in a div container for styling.
 		//You need to define the breadcrumb class in CSS file.
-		echo '<ul class="breadcrumb">';
+		echo '<ul class="' . $breadcrumb_class . '">';
 
 		//global WordPress variable $post. Needed to display multi-page navigations.
 		global $post, $cat;
 		//A safe way of getting values for a named option from the options database table.
 		$homeLink = home_url(); //same as: $homeLink = get_option('home')  or get_bloginfo('url');
 		echo '<li><a href="' . $homeLink . '">' . $main . '</a>' . $delimiter . '</li>';
+
 
 		if (!is_page()) {
 			if (!is_home()) {
@@ -389,7 +435,7 @@ function waht_breadcrumb() {
 
 			}
 			else {
-				echo '<li class="active">' . get_the_title(get_option('page_for_posts', true)) . '</li>';
+				echo $open_active_li . get_the_title(get_option('page_for_posts', true)) . $close_active_li;
 			}
 		}
 
@@ -407,7 +453,7 @@ function waht_breadcrumb() {
 			{
 				echo '<li>' . get_category_parents($category[0], true, $delimiter) . '</li>';
 				//Display the full post title.
-				echo '<li class="active">' . get_the_title() . '</li>';
+				echo $open_active_li . get_the_title() . $close_active_li;
 			} //then the post is listed in more than 1 category.
 			else {
 				echo '<li>';
@@ -416,43 +462,41 @@ function waht_breadcrumb() {
 				echo $delimiter . '</li>';
 				//Display partial post title, in order to save space.
 				if (strlen(get_the_title()) >= $maxLength) { //If the title is long, then don't display it all.
-					echo '<li class="active">' . trim(substr(get_the_title(), 0, $maxLength)) . ' ...</li>';
+					echo $open_active_li . trim(substr(get_the_title(), 0, $maxLength)) . ' ...' . $close_active_li;
 				}
 				else { //the title is short, display all post title.
-					echo '<li class="active">' . get_the_title() . '</li>';
+					echo $open_active_li . get_the_title() . $close_active_li;
 				}
 			}
 		} //Display breadcrumb for category and sub-category archive
 		elseif (is_category()) { //Check if Category archive page is being displayed.
 			//returns the category title for the current page.
 			echo
-				'<li class="active">' . sprintf(__('<span>%s</span> Archive', 'waht'), single_cat_title('', false)) . '</li>';
+				$open_active_li . sprintf(__('<span>%s</span> Archive', 'waht'), single_cat_title('', false)) . $close_active_li;
 		} //Display breadcrumb for tag archive
 		elseif (is_tag()) { //Check if a Tag archive page is being displayed.
 			//returns the current tag title for the current page.
-			echo'<li class="active">' . __('Tag Archive for', 'waht') . ' &laquo;' . single_tag_title("", false) .
-				'&raquo;</li>';
+			echo $open_active_li . __('Tag Archive for', 'waht') . ' &laquo;' . single_tag_title("", false) .
+				'&raquo;' . $close_active_li;
 		} //Display breadcrumb for calendar (day, month, year) archive
 		elseif (is_day()) { //Check if the page is a date (day) based archive page.
 			echo '<li><a href="' . $url_year . '">' . $arc_year . '</a>' . $delimiter . '</li>';
 			echo '<li><a href="' . $url_month . '">' . $arc_month . '</a>' . $delimiter . '</li>';
-			echo '<li class="active">' . $arc_day . ' (' . $arc_day_full .
-				')';
-			echo '</li>';
+			echo $open_active_li . $arc_day . ' (' . $arc_day_full . ')' . $close_active_li;
 		}
 		elseif (is_month()) { //Check if the page is a date (month) based archive page.
 			echo'<li><a href="' . $url_year . '">' . $arc_year . '</a>' . $delimiter . '</li>';
-			echo '<li class="active">' . $arc_month . ' ' . __('Monthly Archive', 'waht') . '</li>';
+			echo $open_active_li . $arc_month . ' ' . __('Monthly Archive', 'waht') . $close_active_li;
 		}
 		elseif (is_year()) { //Check if the page is a date (year) based archive page.
-			echo '<li class="active">' . $arc_year . ' ' . __('Yearly Archive', 'waht') . '</li>';
+			echo $open_active_li . $arc_year . ' ' . __('Yearly Archive', 'waht') . $close_active_li;
 		} //Display breadcrumb for search result page
 		elseif (is_search()) { //Check if search result page archive is being displayed.
-			echo'<li class="active">' . __('Search Results for', 'waht') . ' &laquo;' . get_search_query() .
-				'&raquo;</li>';
+			echo $open_active_li . __('Search Results for', 'waht') . ' &laquo;' . get_search_query() .
+				'&raquo;' . $close_active_li;
 		} //Display breadcrumb for top-level pages (top-level menu)
 		elseif (is_page() && !$post->post_parent) { //Check if this is a top Level page being displayed.
-			echo '<li class="active">' . get_the_title() . '</li>';
+			echo $open_active_li . get_the_title() . $close_active_li;
 		} //Display breadcrumb trail for multi-level subpages (multi-level submenus)
 		elseif (is_page() && $post->post_parent) { //Check if this is a subpage (submenu) being displayed.
 			//get the ancestor of the current page/post_id, with the numeric ID
@@ -474,16 +518,16 @@ function waht_breadcrumb() {
 				echo'<li><a href="' . get_permalink($post_ids) . '">' . $title . '</a>' . $delimiter .
 					'</li>';
 			}
-			echo '<li class="active">' . the_title() . '</li>'; //returns the title of the current page.
+			echo $open_active_li . the_title() . $close_active_li; //returns the title of the current page.
 		} //Display breadcrumb for author archive
 		elseif (is_author()) { //Check if an Author archive page is being displayed.
 			global $author;
 			//returns the user's data, where it can be retrieved using member variables.
 			$user_info = get_userdata($author);
-			echo'<li class="active">' . $user_info->display_name . ' ' . __('Archive', 'waht') . '</li>';
+			echo $open_active_li . $user_info->display_name . ' ' . __('Archive', 'waht') . $close_active_li;
 		} //Display breadcrumb for 404 Error
 		elseif (is_404()) { //checks if 404 error is being displayed
-			echo  '<li class="active"' > __('Error 404 - Not Found.', 'waht') . '</li>';
+			echo $open_active_li . __('Error 404 - Not Found.', 'waht') . $close_active_li;
 		}
 		else {
 			//All other cases that I missed. No Breadcrumb trail.
