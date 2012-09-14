@@ -85,7 +85,7 @@
     <div class="<?php echo waht_wrapper_classes(); ?>">
         <div class="<?php echo waht_container_classes(); ?>">
             <!-- Site logo, name, description, etc. -->
-            <div class="<?php echo waht_use_foundation_framework() ? 'four columns' : 'span8'; ?>">
+            <div class="<?php echo waht_use_foundation_framework() ? 'four columns' : 'span4'; ?>">
                 <a href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>" class="logo">
                     <img src="<?php header_image(); ?>" alt="<?php bloginfo('name');?>">
                 </a>
@@ -100,9 +100,11 @@
                     <span><?php bloginfo('description'); ?></span>
                 </h2>
             </hgroup>
+        </div>
 
+        <div class="<?php echo waht_container_classes(); ?>">
             <!-- Second navigation -->
-            <nav role="navigation" class="additional-navigation">
+            <nav role="navigation" class="additional-navigation <?php echo waht_use_foundation_framework() ? 'twelve columns' : 'span12'; ?>">
 				<?php waht_additional_nav_menu(); ?>
             </nav>
         </div>
