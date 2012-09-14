@@ -26,12 +26,26 @@ jQuery(function ($) {
         } else if ((scrollTop < navTop) && isFixed) {
             isFixed = false;
             $subNav.removeClass('additional-navigation-fixed');
+            $subNav.css('top', '0');
         }
     }
 
     // TODO (a.h) Dynamically set padding-top of body
 
-    $('document').ready(function () {
+    function wahtEnableFoundationScripts() {
+
+        if (!$('body').hasClass('foundation')) {
+            return; // We only need the following script if we use the Foundation framework!
+        }
+        $(document).foundationNavigation(); // Enables the navigation
+        $(document).foundationAlerts(); // Enables alert boxes
+        $(document).foundationTabs(); // Enables tabs
+        $(document).tooltips(); // Enables tooltips
+        $(document).tooltips(); // Enables accordions
+    }
+
+    $(document).ready(function () {
+        wahtEnableFoundationScripts();
 
     });
 
