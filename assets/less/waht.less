@@ -271,8 +271,15 @@ textarea {
 	.entry-footer {
 		clear:      both;
 		margin-top: 1em;
-		.page-nav { margin-top: 30px;
-			.pagination { margin-top: -30px;
+		.page-nav {
+			position: relative;
+			top: -20px; // Equals pagination top margin
+			div.pagination {
+				display: inline-block;
+				top:     15px;
+				left:    15px;
+				position: relative;
+				margin: 20px 0;
 				li:not(.active) { font-weight: bold; }
 			}
 		}

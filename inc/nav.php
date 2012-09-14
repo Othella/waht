@@ -547,7 +547,7 @@ add_action('waht_loop_before', 'waht_breadcrumb');
  * @return string
  */
 function waht_link_pages($args = array()) {
-	if (waht_use_bootstrap_framework()) :
+	if (waht_use_bootstrap_framework() || waht_use_foundation_framework()) :
 		$defaults = array(
 			'before'           => '<nav class="page-nav">' . __('Pages:', 'waht'),
 			'after'            => '</nav>',
@@ -567,22 +567,27 @@ function waht_link_pages($args = array()) {
 		global $page, $numpages, $multipage, $more;
 
 		$output = '';
+
+		$active_class = (waht_use_foundation_framework()) ? 'current' : 'active';
+		$opening_tag  = '<div class="pagination">';
+		$opening_tag .= (waht_use_foundation_framework()) ? '<ul class="pagination">' : '<ul>';
+
 		if ($multipage) {
 			if ('number' == $next_or_number) {
-				$output .= $before . '<div class="pagination pagination-centered"><ul>';
+				$output .= $before . $opening_tag;
 				for ($i = 1; $i < ($numpages + 1); $i = $i + 1) {
 					$j = str_replace('%', $i, $pagelink);
 					if ($i != $page || ((!$more) && ($page == 1))) :
 						$output .= '<li>';
 						$output .= _wp_link_page($i);
 					else :
-						$output .= '<li class="active">';
+						$output .= '<li class="' . $active_class . '">';
 						$output .= '<a href="#" title="' . __('Current page', 'waht') . '">';
 					endif;
 					$output .= $text_before . $j . $text_after;
 					$output .= '</a></li>';
 				}
-				$output .= '</ul>' . $after;
+				$output .= '</div></ul>' . $after;
 			}
 			else {
 				if ($more) {
@@ -608,6 +613,6 @@ function waht_link_pages($args = array()) {
 
 		return $output;
 	else:
-		wp_link_pages($args);
+		return wp_link_pages($args);
 	endif;
 }

@@ -55,7 +55,7 @@ textarea{resize:vertical;}
 .hentry .entry-header .comments-link{float:right;}
 .hentry .entry-content h2{font-size:26px;line-height:1.2;}
 .hentry .entry-content h3{font-size:1em;letter-spacing:0.1em;line-height:2.6em;text-transform:uppercase;margin:0;clear:both;}
-.hentry .entry-footer{clear:both;margin-top:1em;}.hentry .entry-footer .page-nav{margin-top:30px;}.hentry .entry-footer .page-nav .pagination{margin-top:-30px;}.hentry .entry-footer .page-nav .pagination li:not(.active){font-weight:bold;}
+.hentry .entry-footer{clear:both;margin-top:1em;}.hentry .entry-footer .page-nav{position:relative;top:-20px;}.hentry .entry-footer .page-nav div.pagination{display:inline-block;top:15px;left:15px;position:relative;margin:20px 0;}.hentry .entry-footer .page-nav div.pagination li:not(.active){font-weight:bold;}
 .hentry .entry-footer .updated,.hentry .entry-footer .author,.hentry .entry-footer .categories{color:#666;font-size:.9em;}.hentry .entry-footer .updated a,.hentry .entry-footer .author a,.hentry .entry-footer .categories a{font-weight:bold;}
 .hentry .entry-footer .comments-link{float:right;}
 .hentry ol.commentlist li.comment p{font-size:0.9em;}

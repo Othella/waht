@@ -20,7 +20,7 @@
         <?php get_template_part( 'content', get_post_format() ); ?>
     </section>
     <footer class="entry-footer">
-        <?php wp_link_pages(array('before' => '<nav class="pagination">', 'after' => '</nav>')); ?>
+        <?php waht_link_pages(); ?>
     </footer>
     <?php comments_template(); ?>
     <?php waht_post_inside_after(); ?>
