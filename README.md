@@ -4,7 +4,12 @@ WordPress a.h Theme
 # DESCRIPTION
 
 waht (WordPress a.h Theme) is a blank WordPress theme built using HTML5, CSS3 and jQuery.
-It aims to be responsive and easily customizable.
+
+It can be based on a framework of your choice: Twitter Bootstrap, Foundation or HTML5 Boilerplate.
+
+It aims to be responsive (but only if you want it) and easily customizable throw theme options available on admin.
+
+Theme authors can easily build their own theme using waht with a lot of possible configurations.
 
 Documentation:
     https://github.com/Othella/waht/wiki
@@ -27,11 +32,14 @@ PhpStorm:
 
 ## Frameworks
 
-HTML5 Boilerplate:
-    https://github.com/h5bp/html5-boilerplate
-
 Twitter Bootstrap:
     http://twitter.github.com/bootstrap/
+
+Foundation:
+    http://foundation.zurb.com
+
+HTML5 Boilerplate:
+    https://github.com/h5bp/html5-boilerplate
 
 ## Fonts
 
