@@ -20,9 +20,9 @@
                 <h1 class="entry-title"><?php _e('Page not found!', 'waht'); ?></h1>
             </header>
             <section class="entry-content">
-                <div class="alert alert-block fade in">
-                    <a class="close" data-dismiss="alert">&times;</a>
-                    <p><?php _e('The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.', 'waht'); ?></p>
+                <div class="<?php echo waht_alert_classes('error'); ?>">
+                    <a href="#" class="close" data-dismiss="alert">&times;</a>
+                    <span><?php _e('The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.', 'waht'); ?></span>
                 </div>
 
                 <p><?php _e('Please try the following:', 'waht'); ?></p>

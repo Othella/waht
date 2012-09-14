@@ -56,9 +56,18 @@ and (orientation : portrait) {
 		.navbar-fixed-top { position: static; }
 	}
 }
-
+@media (max-width: 768px) {
+	.bootstrap {
+		.navbar-fixed-top .navbar-inner { margin-left: -20px; margin-right: -20px; }
+	}
+}
+@media (max-width: 979px) {
+	.bootstrap {
+		.navbar-fixed-top { position: static; }
+	}
+}
 @media (min-width: 980px) {
-	/* Top-Fixed Navigation */
+/* Top-Fixed Navigation */
 	body.has-top-fixed-navbar {
 		padding-top: 40px; /* navbar height */
 		position:    relative;

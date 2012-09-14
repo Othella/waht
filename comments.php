@@ -27,9 +27,9 @@ function waht_comments($comment, $args, $depth) {
         </header>
 
         <?php if ($comment->comment_approved == '0') : ?>
-        <div class="alert alert-block fade in">
-            <a class="close" data-dismiss="alert">&times;</a>
-            <p><?php _e('Your comment is awaiting moderation.', 'waht'); ?></p>
+        <div class="<?php echo waht_alert_classes(); ?>">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <span><?php _e('Your comment is awaiting moderation.', 'waht'); ?></span>
         </div>
         <?php endif; ?>
 
@@ -51,9 +51,9 @@ function waht_comments($comment, $args, $depth) {
 
 <?php if (post_password_required()) : ?>
 <section id="post-comments">
-    <div class="alert alert-block fade in">
-        <a class="close" data-dismiss="alert">&times;</a>
-        <p><?php _e('This post is password protected. Please enter the password to view comments.', 'waht'); ?></p>
+    <div class="<?php echo waht_alert_classes(); ?>">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <span><?php _e('This post is password protected. Please enter the password to view comments.', 'waht'); ?></span>
     </div>
 </section>
 <?php return; ?>
@@ -61,9 +61,9 @@ function waht_comments($comment, $args, $depth) {
 
 <?php if (!have_comments() && !comments_open() && !is_page() && post_type_supports(get_post_type(), 'comments')) : ?>
 <section id="post-comments">
-    <div class="alert alert-block fade in">
-        <a class="close" data-dismiss="alert">&times;</a>
-        <p><?php _e('Comments are closed', 'waht'); ?></p>
+    <div class="<?php echo waht_alert_classes(); ?>">
+        <a href="#" class="close" data-dismiss="alert">&times;</a>
+        <span><?php _e('Comments are closed', 'waht'); ?></span>
     </div>
     <?php return; ?>
 </section>
@@ -101,9 +101,9 @@ function waht_comments($comment, $args, $depth) {
     <p><?php _e('Be the first to leave a comment!', 'waht'); ?></p>
     <?php else : ?>
     <section id="post-comments">
-        <div class="alert alert-block fade in">
-            <a class="close" data-dismiss="alert">&times;</a>
-            <p><?php _e('Comments are closed', 'waht'); ?></p>
+        <div class="<?php echo waht_alert_classes(); ?>">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <span><?php _e('Comments are closed', 'waht'); ?></span>
         </div>
     </section>
     <?php endif; ?>
@@ -120,10 +120,10 @@ function waht_comments($comment, $args, $depth) {
 
         </p>
         <?php if (get_option('comment_registration') && !is_user_logged_in()) : ?>
-        <div class="alert alert-block fade in">
-            <a class="close" data-dismiss="alert">&times;</a>
-            <p><?php printf(__('You must be %1$slogged in%2$s to post a comment.', 'waht'),
-                '<a href="' . wp_login_url(get_permalink()) . '">', '</a>'); ?></p>
+        <div class="<?php echo waht_alert_classes(); ?>">
+            <a href="#" class="close" data-dismiss="alert">&times;</a>
+            <span><?php printf(__('You must be %1$slogged in%2$s to post a comment.', 'waht'),
+                '<a href="' . wp_login_url(get_permalink()) . '">', '</a>'); ?></span>
         </div>
         <?php else : ?>
         <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform"

@@ -105,6 +105,7 @@ function waht_get_theme_name() {
 
 /**
  * Return the current theme path
+ *
  * @return string
  */
 function waht_get_theme_path() {
@@ -129,13 +130,16 @@ function waht_get_theme_version() {
 function waht_get_assets_uri() {
 	global $is_apache;
 	$waht_assets_uri = get_template_directory_uri();
-	if (is_admin() || !$is_apache || is_multisite() || is_child_theme() || !get_option('permalink_structure') || !current_theme_supports('rewrite-urls'))
+	if (is_admin() || !$is_apache || is_multisite() || is_child_theme() || !get_option('permalink_structure') ||
+		!current_theme_supports('rewrite-urls')
+	)
 		$waht_assets_uri .= '/assets';
 	return $waht_assets_uri;
 }
 
 /**
  * Return the path to the current theme assets
+ *
  * @return string
  */
 function waht_get_assets_path() {
@@ -144,14 +148,16 @@ function waht_get_assets_path() {
 
 /**
  * Return the relative path to the plugins folder
+ *
  * @return mixed
  */
 function waht_get_relative_plugin_path() {
-	return  str_replace(site_url() . '/', '', plugins_url());
+	return str_replace(site_url() . '/', '', plugins_url());
 }
 
 /**
  * Return the complete relative path to the plugin folder
+ *
  * @return string
  */
 function waht_get_full_relative_plugin_path() {
@@ -161,8 +167,20 @@ function waht_get_full_relative_plugin_path() {
 
 /**
  * Return the relative path to content
+ *
  * @return mixed
  */
 function waht_get_relative_content_path() {
 	return str_replace(site_url() . '/', '', content_url());
+}
+
+/**
+ * Display a div with an alert and a search form when no posts were found
+ */
+function waht_no_posts_div() {
+	echo '<div class="' . waht_alert_classes() . '">';
+	echo '<a href="#" class="close" data-dismiss="alert" >&times;</a>';
+	echo '<span>' . __('Sorry, no results match with your request! Maybe you could use the following search form?', 'waht') . '</span>';
+	echo '</div>';
+	get_search_form();
 }

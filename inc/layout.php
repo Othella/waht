@@ -241,3 +241,32 @@ function waht_use_top_fixed_nav() {
 	$waht_layout_options = waht_get_layout_options();
 	return $waht_layout_options['top_fixed_nav'];
 }
+
+/**
+ * Returns the classes of an alert box
+ *
+ * @param string $alert_level (Optional)
+ *
+ * @return string
+ */
+function waht_alert_classes($alert_level = '') {
+	$alert_classes = (waht_use_foundation_framework()) ? 'alert-box' :
+		(waht_use_bootstrap_framework() ? 'alert fade in' : 'alert');
+	switch ($alert_level) :
+		case 'error' :
+			$alert_classes .= waht_use_bootstrap_framework() ? ' alert-error' : ' alert';
+			break;
+		case 'success' :
+			$alert_classes .= waht_use_bootstrap_framework() ? ' alert-success' : ' success';
+			break;
+		case 'info' :
+			$alert_classes .= waht_use_bootstrap_framework() ? ' alert-info' : '';
+			break;
+		case 'secondary' :
+			$alert_classes .= waht_use_foundation_framework() ? ' secondary' : '';
+			break;
+		default :
+			break;
+	endswitch;
+	return $alert_classes;
+}

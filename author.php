@@ -68,11 +68,7 @@
         </footer>
 		<?php waht_post_after(); ?>
 		<?php else : ?>
-        <div class="alert alert-block fade in">
-            <a class="close" data-dismiss="alert">&times;</a>
-            <p><?php _e('Sorry, no results match with your request! Maybe you could use the following search form?', 'waht'); ?></p>
-        </div>
-		<?php get_search_form(); ?>
+		<?php waht_no_posts_div() ?>
 		<?php endif; ?>
 		<?php waht_loop_after(); ?>
     </section>
