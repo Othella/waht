@@ -32,6 +32,7 @@ ol.commentlist li.parent{border-left:5px solid #111;}
 body.tag .page-title span:before,body.search .page-title span:before{content:"«";}
 body.tag .page-title span:after,body.search .page-title span:after{content:"»";}
 a{font-weight:400;color:#007aa0;}a:hover{color:#e56045;}
+a>.label:hover,a:hover>.label{text-decoration:none;}
 h1,h2,h3,h4,h5,h6{text-shadow:0 -1px 0 #dddddd,0 1px 0 #ffffff;font-family:Baskerville,Georgia,"Times New Roman",sans-serif;}h1 a,h2 a,h3 a,h4 a,h5 a,h6 a{color:#333;font-weight:800;}
 textarea{resize:vertical;}
 .alert,.alert-box{line-height:1.5;}
