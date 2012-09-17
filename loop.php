@@ -39,13 +39,7 @@
 			<?php endif; ?>
         </section>
         <footer class="entry-footer">
-            <span class="entry-classes"><?php _e('Posted in', 'waht') ?> <?php the_category(' | '); ?></span>
-			<?php if (comments_open()) : ?>
-            <span class="comments-link"><?php comments_popup_link(
-				'<span class="leave-comment">' . __('Comment', 'waht') .
-					'</span>', __('<b>1</b> Comment', 'waht'), __('<b>%</b> Comments', 'waht')); ?></span>
-			<?php endif; ?>
-			<?php edit_post_link(__('Edit', 'waht'), '<span class="edit-link">', '</span>'); ?>
+			<?php waht_meta_compact(get_the_ID()); ?>
         </footer>
 		<?php waht_post_inside_after(); ?>
     </article>

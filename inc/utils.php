@@ -72,15 +72,32 @@ function waht_add_clearfix_div() {
  * Display post meta info
  */
 function waht_meta() {
-	$icon_cal   = waht_use_bootstrap_framework() ? '<i class="icon-calendar"></i> ' : '';
-	$icon_user  = waht_use_bootstrap_framework() ? '<i class="icon-user"></i> ' : '';
-	$cats       = waht_use_bootstrap_framework() ? waht_get_the_category_list('label label-info', ' | ') : get_the_category_list(' | ');
-	$time       = '<time class="updated" datetime="' . get_the_date('c') . '" pubdate>' . $icon_cal .
+	$time       = '<time class="updated" datetime="' . get_the_date('c') . '" pubdate>' .
 		sprintf(__('Posted on %s at %s.', 'waht'), get_the_date(), get_the_time()) . '</time>';
-	$author     = '<p class="author vcard">' . $icon_user . __('Written by', 'waht') . ' <a href="' .
+	$author     = '<p class="author vcard">' . __('Written by', 'waht') . ' <a href="' .
 		get_author_posts_url(get_the_author_meta('ID')) . '" rel="author" class="fn">' . get_the_author() . '</a></p>';
-	$categories = '<p class="categories">' . __('Posted in', 'waht') . ' ' . $cats . '</p>';
+	$categories = '<p class="categories">' . __('Posted in', 'waht') . ' ' . get_the_category_list(' | ') . '</p>';
 	echo $time . $author . $categories;
+}
+
+/**
+ * Displays post meta info in a compact
+ *
+ * @param $post_ID int The ID of the post
+ */
+function waht_meta_compact($post_ID = null) {
+	$categories = waht_get_the_category_list('label label-info', ' ');
+	$edit_url   = get_edit_post_link($post_ID);
+	$meta       = '<p class="post-meta compact">';
+	echo '<time class="updated" datetime="' . get_the_date('c') . '" pubdate><i class="icon-calendar"></i> ' . get_the_date() . '</time>';
+	echo ' | <span class="author vcard"><i class="icon-user"></i> <a href="' .
+		get_author_posts_url(get_the_author_meta('ID')) . '" rel="author" class="fn">' . get_the_author() . '</a></span>';
+	echo ($categories != '') ? (' | ' . $categories) : '';
+	if (comments_open($post_ID) && !post_password_required($post_ID)) :
+		echo ' | <i class="icon-comment"></i> ';
+		comments_popup_link(__('No Comment', 'waht'), _x('1 Comment', 'comments number', 'waht'), _x('% Comments', 'comments number', 'waht'));
+	endif;
+	echo ($edit_url != '') ? (' | <i class="icon-pencil"></i> <a href="' . $edit_url . '">' . __('Edit', 'waht') . '</a>') : '';
 }
 
 /**
@@ -192,9 +209,9 @@ function waht_no_posts_div() {
  * Retrieve category list in either HTML list or custom format.
  *
  * @param string   $label_class Optional, default is empty string. Class for label wrapping categories
- * @param string   $separator Optional, default is empty string. Separator for between the categories.
- * @param string   $parents   Optional. How to display the parents.
- * @param bool|int $post_id   Optional. Post ID to retrieve categories.
+ * @param string   $separator   Optional, default is empty string. Separator for between the categories.
+ * @param string   $parents     Optional. How to display the parents.
+ * @param bool|int $post_id     Optional. Post ID to retrieve categories.
  *
  * @return string
  */
@@ -219,7 +236,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 					if ($category->parent)
 						$thelist .= get_category_parents($category->parent, true, $separator);
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' . $category->name . '</span></a></li>';
+						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						$category->name . '</span></a></li>';
 					break;
 				case 'single':
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
@@ -231,7 +249,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 				case '':
 				default:
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' . $category->name . '</span></a></li>';
+						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						$category->name . '</span></a></li>';
 			}
 		}
 		$thelist .= '</ul>';
@@ -246,7 +265,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 					if ($category->parent)
 						$thelist .= get_category_parents($category->parent, true, $separator);
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' . $category->name . '</span></a>';
+						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						$category->name . '</span></a>';
 					break;
 				case 'single':
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
@@ -258,7 +278,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 				case '':
 				default:
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' . $category->name . '</span></a>';
+						esc_attr(sprintf(__("View all posts in %s"), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						$category->name . '</span></a>';
 			}
 			++$i;
 		}
