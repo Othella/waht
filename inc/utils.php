@@ -208,7 +208,7 @@ function waht_no_posts_div() {
 /**
  * Retrieve category list in either HTML list or custom format.
  *
- * @param string   $label_class Optional, default is empty string. Class for label wrapping categories
+ * @param string   $label_class Optional, default is empty string. Class for label wrapping a category string.
  * @param string   $separator   Optional, default is empty string. Separator for between the categories.
  * @param string   $parents     Optional. How to display the parents.
  * @param bool|int $post_id     Optional. Post ID to retrieve categories.
@@ -225,6 +225,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 		return apply_filters('the_category', __('Uncategorized'), $separator, $parents);
 
 	$rel = (is_object($wp_rewrite) && $wp_rewrite->using_permalinks()) ? 'rel="category tag"' : 'rel="category"';
+
+	if (waht_use_foundation_framework()) $label_class .= ' radius';
 
 	$thelist = '';
 	if ('' == $separator) {
