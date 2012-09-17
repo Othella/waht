@@ -96,7 +96,7 @@
                     <span><?php bloginfo('name'); ?></span>
                 </h1>
 
-                <h2 class="subtitle">
+                <h2 class="subtitle <?php if (waht_use_foundation_framework()) echo 'subheader'; ?>">
                     <span><?php bloginfo('description'); ?></span>
                 </h2>
             </hgroup>
