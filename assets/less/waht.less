@@ -30,13 +30,7 @@
 
 body {
 	font-weight: 200;
-
-/* Top Fixed Navbar */
-	&.has-top-fixed-navbar {
-		.bootstrap {
-			padding-top: 58px; /* More than 40px (navbar height) */
-		}
-	}
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 
 	&.tag, &.search {
 		.page-title {
@@ -45,6 +39,9 @@ body {
 				&:after { content: "»"; }
 			}
 		}
+	}
+
+	&.has-top-fixed-navbar {
 	}
 }
 
@@ -74,18 +71,11 @@ textarea {
     ========================================================================== */
 
 #page-header {
-	.navbar {
-		.brand {
-			float:       right;
-			color:       @waht_lbeige; // TODO (a.h) line-height: 1.2;
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
-		}
-		.nav > li > a {
-			text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
-		}
+	.main-navigation {
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
 	}
-	.logo, .title { display: block; margin-top: 20px; }
-	.title {
+	.logo, h1.title { display: block; margin-top: 20px; }
+	h1.title {
 		a {
 			color:       #333;
 			text-shadow: 0 -2px 0 #ddd, 0 2px 3px #fff; // Letterpress effect
@@ -96,7 +86,7 @@ textarea {
 			img { display: block; }
 		}
 	}
-	.subtitle {
+	h2.subtitle {
 		span {
 			color:       #555555;
 			font-weight: normal;
@@ -397,6 +387,54 @@ img {
 }
 
 /*  =============================================================================
+	Twitter Bootstrap only
+	========================================================================== */
+
+body.bootstrap {
+	.navbar-fixed-top > .navbar { padding-bottom: 0; }
+	.brand {
+		float:       right;
+		color:       @waht_lbeige;
+		text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
+		&:hover { background: transparent; }
+	}
+}
+/*  =============================================================================
+    Foundation only
+    ========================================================================== */
+
+body.foundation {
+	.top-bar {
+		background: @waht_blue;
+		color:      @waht_lbeige;
+		ul > li {
+			&:not(.name):hover, &.active { background: darken(@waht_blue, 15%);
+				a { color: #fff; }
+			}
+			&.has-dropdown .dropdown { background: darken(@waht_blue, 15%);
+				li { background: darken(@waht_blue, 15%);
+					&:hover { background: darken(@waht_blue, 15%);
+						& > a { background: @waht_blue; }
+					}
+				}
+			}
+			&.name {
+				background: @waht_blue;
+				&:hover { background: transparent; }
+				h1 { font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+					text-shadow:  0 -1px 0 rgba(0, 0, 0, 0.25); // Letterpress effect
+				}
+			}
+			&.title > h5, &.title > h5 > a {
+				text-shadow: none;
+				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+				color:       @waht_lbeige;
+			}
+			a { color: @waht_lbeige; }
+		}
+	}
+}
+/*  =============================================================================
     Media Queries
     ========================================================================== */
 
@@ -435,7 +473,11 @@ img {
 		}
 	}
 }
-
+@media (max-width: 979px) {
+	body.bootstrap.has-top-fixed-navbar {
+		padding-top: 0;
+	}
+}
 @media (min-width: 980px) {
 
 /* Fixed subnav on scroll, but only for 980px and up */
@@ -461,8 +503,8 @@ img {
 		}
 	}
 
-	body.admin-bar .subnav-fixed {
-		&.bootstrap { top: 68px; /* Equals admin + main navbar bar heights */ }
+	body.bootstrap.admin-bar .additional-navigation-fixed {
+		top: 68px; /* Equals admin + main navbar bar heights */
 	}
 
 	.subnav .nav > li:first-child > a,

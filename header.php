@@ -52,35 +52,13 @@
 	<?php waht_page_header_inside_before(); ?>
 
     <!-- Main navigation -->
-    <nav role="navigation" class="main-navigation <?php if (waht_use_top_fixed_nav()) echo ' navbar-fixed-top';?>">
-		<?php if (waht_use_navbar()) : /* Use a navbar for the main navigation */ ?>
-                    <div class="navbar">
-				<?php if (waht_use_bootstrap_framework()) : /* Use a bootstrap navbar */ ?>
-            <div class="navbar-inner">
-                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="<?php echo home_url(); ?>/">
-					<?php bloginfo('name'); ?>
-                </a>
-
-                <!-- Everything you want hidden at 940px or less, place within here -->
-                <nav id="nav-main" class="nav-collapse" role="navigation">
-					<?php waht_main_nav_menu(); ?>
-                    <!-- .nav, .navbar-search, .navbar-form, etc -->
-                </nav>
-            </div>
-			<?php elseif (waht_use_foundation_framework()) : ?>
-			<?php waht_main_nav_menu(); ?>
-			<?php endif; ?>
-		<?php else : /* use a simple menu */ ?>
+	<?php if (waht_use_navbar()) : /* Use a navbar for the main navigation */ ?>
+	<?php waht_top_navbar(); ?>
+	<?php else : /* use a simple menu */ ?>
+    <nav role="navigation" class="main-navigation<?php if (waht_use_top_fixed_nav()) echo ' fixed';?>">
 		<?php waht_main_nav_menu(); ?>
-		<?php endif; ?>
-    </div>
     </nav>
+	<?php endif; ?>
 
     <div class="<?php echo waht_wrapper_classes(); ?>">
         <div class="<?php echo waht_container_classes(); ?>">

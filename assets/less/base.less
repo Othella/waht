@@ -1,7 +1,14 @@
 /*  =============================================================================
     Base stylesheet
     ========================================================================== */
-.navbar-fixed-top {
+
+/* Top-Fixed Navigation */
+body.has-top-fixed-navbar {
+	padding-top: 40px; /* common navbar height */
+	position:    relative;
+}
+
+.main-navigation.fixed-top {
 	top:      0;
 	position: fixed;
 	left:     0;
@@ -13,7 +20,7 @@
 		margin-bottom: 0;
 	}
 }
-body.admin-bar .navbar-fixed-top {
+body.admin-bar.has-top-fixed-navbar .main-navigation {
 	top: 28px; /* Equals admin bar height */
 }
 

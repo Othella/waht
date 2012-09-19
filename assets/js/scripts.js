@@ -9,7 +9,7 @@
 jQuery(function ($) {
     var $win = $(window),
         $adminBar = $('#wpadminbar'),
-        $navbarFixedTop = $('nav.main-navigation.navbar-fixed-top'),
+        $navbarFixedTop = $('body.has-top-fixed-navbar nav.main-navigation'),
         $subNav = $('nav.additional-navigation'),
         navTop = $subNav.length && $subNav.offset().top - ($navbarFixedTop.height() + $adminBar.height()),
         isFixed = false;
@@ -37,11 +37,12 @@ jQuery(function ($) {
         if (!$('body').hasClass('foundation')) {
             return; // We only need the following script if we use the Foundation framework!
         }
-        $(document).foundationNavigation(); // Enables the navigation
+        $(document).foundationAccordion(); // Enables accordions
         $(document).foundationAlerts(); // Enables alert boxes
+        $(document).foundationNavigation(); // Enables the navigation
         $(document).foundationTabs(); // Enables tabs
-        $(document).tooltips(); // Enables tooltips
-        $(document).tooltips(); // Enables accordions
+        $(document).foundationTooltips(); // Enables tooltips
+        $(document).foundationTopBar(); // Enables top bar
     }
 
     $(document).ready(function () {

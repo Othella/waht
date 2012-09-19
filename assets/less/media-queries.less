@@ -50,26 +50,8 @@ and (orientation : portrait) {
 /* Styles */
 }
 
-@media (max-width: 767px) {
-/* Top-Fixed Navigation */
-	.foundation {
-		.navbar-fixed-top { position: static; }
-	}
-}
-@media (max-width: 768px) {
-	.bootstrap {
-		.navbar-fixed-top .navbar-inner { margin-left: -20px; margin-right: -20px; }
-	}
-}
 @media (max-width: 979px) {
-	.bootstrap {
-		.navbar-fixed-top { position: static; }
-	}
-}
-@media (min-width: 980px) {
-/* Top-Fixed Navigation */
-	body.has-top-fixed-navbar {
-		padding-top: 40px; /* navbar height */
-		position:    relative;
+	body.bootstrap.has-top-fixed-navbar {
+		padding-top: 0; // Because Twitter Bootstrap use a static positioned navbar for small devices, we need to remove the top padding
 	}
 }

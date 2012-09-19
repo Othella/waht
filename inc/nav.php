@@ -24,19 +24,75 @@ function waht_register_nav_menus() {
 
 add_action('after_setup_theme', 'waht_register_nav_menus');
 
+/**
+ * Builds a top navbar depending on the framework used
+ */
+function waht_top_navbar() {
+	if (waht_use_bootstrap_framework()) :
+		?>
+    <nav role="navigation" class="main-navigation <?php if (waht_use_top_fixed_nav()) echo ' navbar-fixed-top';?>">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="<?php echo home_url(); ?>/">
+					<?php bloginfo('name'); ?>
+                </a>
+
+                <!-- Everything you want hidden at 940px or less, place within here -->
+                <nav id="nav-main" class="nav-collapse" role="navigation">
+					<?php waht_main_nav_menu(); ?>
+                    <!-- .nav, .navbar-search, .navbar-form, etc -->
+                </nav>
+            </div>
+        </div>
+    </nav>
+	<?php elseif (waht_use_foundation_framework()) : ?>
+    <nav role="navigation" class="main-navigation top-bar<?php if (waht_use_top_fixed_nav()) echo ' fixed'; ?>">
+        <ul>
+            <li class="name">
+                <h1><a href="#"><?php bloginfo('name'); ?></a></h1>
+            </li>
+            <li class="toggle-topbar">
+				<a href="#"></a>
+			</li>
+        </ul>
+        <section>
+			<?php waht_main_nav_menu(); ?>
+        </section>
+    </nav>
+	<?php
+	else : ?>
+    <nav role="navigation" class="main-navigation<?php if (waht_use_top_fixed_nav()) echo ' fixed-top'; ?>">
+		<?php waht_main_nav_menu(); ?>
+    </nav>
+	<?php endif; ?>
+<?php
+}
 
 /**
- * Main Man Menu
+ * Main Nav Menu
  */
 function waht_main_nav_menu() {
 
 	// select the walker depending on framework
-	$walker = waht_use_navbar() ? new Waht_NavBar_Walker_Nav_Menu() :
-		(WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+	if (waht_use_navbar()) :
+		if (waht_use_bootstrap_framework()) :
+			$walker = new Waht_Bootstrap_NavBar_Walker_Nav_Menu();
+		elseif (waht_use_foundation_framework()) :
+			$walker = new Waht_Foundation_TopBar_Walker_Nav_Menu();
+		else :
+			$walker = new Waht_Walker_Nav_Menu();
+		endif;
+	else :
+		$walker = (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+	endif;
 
 	$menu_class = 'clearfix nav';
-	if (waht_use_bootstrap_framework()) $menu_class .= '';
-	if (waht_use_foundation_framework()) $menu_class .= ' nav-bar';
 
 	wp_nav_menu(
 		array(
@@ -61,8 +117,18 @@ function waht_main_nav_menu() {
  */
 function waht_additional_nav_menu() {
 
-	$walker = waht_use_navbar() ? new Waht_NavBar_Walker_Nav_Menu() :
-		(WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+	// select the walker depending on framework
+	if (waht_use_navbar()) :
+		if (waht_use_bootstrap_framework()) :
+			$walker = new Waht_Bootstrap_NavBar_Walker_Nav_Menu();
+		elseif (waht_use_foundation_framework()) :
+			$walker = new Waht_Foundation_NavBar_Walker_Nav_Menu();
+		else :
+			$walker = new Waht_Walker_Nav_Menu();
+		endif;
+	else :
+		$walker = (WAHT_CLEANED_MENU ? new Waht_Walker_Nav_Menu() : new Walker_Nav_Menu());
+	endif;
 
 	$menu_class = 'clearfix nav';
 	if (waht_use_bootstrap_framework()) $menu_class .= ' nav-pills';
@@ -182,13 +248,10 @@ class Waht_Walker_Nav_Menu extends Walker_Nav_Menu {
 		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
 		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
 
-		/** @noinspection PhpUndefinedFieldInspection */
 		$item_output = $args->before;
 		$item_output .= '<a' . $attributes . '>';
-		/** @noinspection PhpUndefinedFieldInspection */
 		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
 		$item_output .= '</a>';
-		/** @noinspection PhpUndefinedFieldInspection */
 		$item_output .= $args->after;
 
 		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
@@ -197,116 +260,9 @@ class Waht_Walker_Nav_Menu extends Walker_Nav_Menu {
 }
 
 /**
- * Cleaner Walker optimized for the Bootstrap NavBar
- *
- * @uses Walker_Nav_Menu
+ * Cleaner Walker to be used in nav bars
  */
-class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
-	/**
-	 * Check if the classes contain info about current state
-	 *
-	 * @param $classes
-	 *
-	 * @return int
-	 */
-	function check_current($classes) {
-		// search for occurrences of "current", "active", "dropdown" or "has-flyout"
-		return preg_match('/(current[-_])|active|dropdown|has-flyout/', $classes);
-	}
-
-	/**
-	 * Starts the list before the elements are added. (list <ul>)
-	 *
-	 * @see /wp-includes/class-wp-walker.php
-	 * @see wp-includes/nav-menu-template.php
-	 *
-	 * @param string $output
-	 * @param int    $depth
-	 * @param array  $args
-	 */
-	function start_lvl(&$output, $depth = 0, $args = array()) {
-		$indent     = str_repeat("\t", $depth);
-		$menu_class = (waht_use_foundation_framework()) ? 'flyout' : 'dropdown-menu';
-		// set class to "dropdown-menu" or "flyout" instead of "sub-menu"
-		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
-	}
-
-	/**
-	 * Start the element output (list item <li>)
-	 *
-	 * @see      /wp-includes/class-wp-walker.php
-	 * @see      /wp-includes/nav-menu-template.php
-	 *
-	 * @param string       $output       Passed by reference. Used to append additional content.
-	 * @param object       $item         Menu item data object.
-	 * @param int          $depth        Depth of menu item. Used for padding.
-	 * @param array        $args         Arguments
-	 * @param int          $id
-	 *
-	 * @return void
-	 * @internal param int $current_page Menu item ID.
-	 */
-	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
-		$indent = ($depth) ? str_repeat("\t", $depth) : '';
-
-		$slug          = sanitize_title($item->title);
-		$menu_name     = 'menu-' . $slug;
-		$li_attributes = '';
-
-		$classes = empty($item->classes) ? array() : (array)$item->classes;
-
-		// dropdown
-		if ($args->has_children) :
-			if (waht_use_foundation_framework()) :
-				$classes[] = 'has-flyout';
-			else:
-				$classes[] = 'dropdown';
-				$li_attributes .= ' data-dropdown="dropdown"';
-			endif;
-		endif;
-
-		$classes = array_filter($classes, array(&$this, 'check_current'));
-
-		// custom classes
-		if ($custom_classes = get_post_meta($item->ID, '_menu_item_classes', true)) {
-			foreach ($custom_classes as $custom_class) {
-				$classes[] = $custom_class;
-			}
-		}
-
-		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
-		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
-			' class="' . $menu_name . '"'; // menu name in classes
-
-		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
-
-		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
-		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
-		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
-		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
-		if ($args->has_children) : // dropdown
-			if (waht_use_foundation_framework()) :
-				$attributes .= '';
-			else:
-				$attributes .= ' class="dropdown-toggle" data-toggle="dropdown"';
-			endif;
-		endif;
-
-		$item_output = $args->before;
-		$item_output .= '<a' . $attributes . '>';
-		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
-		if ($args->has_children) : // dropdown
-			if (waht_use_foundation_framework()) :
-				$item_output .= '</a><a href="#" class="flyout-toggle"><span>&nbsp;</span>';
-			else:
-				$item_output .= ' <b class="caret"></b>';
-			endif;
-		endif;
-		$item_output .= '</a>';
-		$item_output .= $args->after;
-
-		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
-	}
+class Waht_Bar_Walker_Nav_Menu extends Walker_Nav_Menu {
 
 	/**
 	 * Traverse elements to create list from elements.
@@ -365,6 +321,305 @@ class Waht_NavBar_Walker_Nav_Menu extends Walker_Nav_Menu {
 		call_user_func_array(array(&$this, 'end_el'), $cb_args);
 	}
 
+}
+
+/**
+ * Cleaner Walker optimized for the Bootstrap NavBar
+ *
+ * @uses Waht_Bar_Walker_Nav_Menu
+ */
+class Waht_Bootstrap_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
+	/**
+	 * Check if the classes contain info about current state
+	 *
+	 * @param $classes
+	 *
+	 * @return int
+	 */
+	function check_current($classes) {
+		// search for occurrences of "current", "active" or "dropdown"
+		return preg_match('/(current[-_])|active|dropdown/', $classes);
+	}
+
+	/**
+	 * Starts the list before the elements are added. (list <ul>)
+	 *
+	 * @see /wp-includes/class-wp-walker.php
+	 * @see wp-includes/nav-menu-template.php
+	 *
+	 * @param string $output
+	 * @param int    $depth
+	 * @param array  $args
+	 */
+	function start_lvl(&$output, $depth = 0, $args = array()) {
+		$indent     = str_repeat("\t", $depth);
+		$menu_class = 'dropdown-menu';
+		// set class to "dropdown-menu" or "flyout" instead of "sub-menu"
+		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
+	}
+
+	/**
+	 * Start the element output (list item <li>)
+	 *
+	 * @see      /wp-includes/class-wp-walker.php
+	 * @see      /wp-includes/nav-menu-template.php
+	 *
+	 * @param string       $output       Passed by reference. Used to append additional content.
+	 * @param object       $item         Menu item data object.
+	 * @param int          $depth        Depth of menu item. Used for padding.
+	 * @param array        $args         Arguments
+	 * @param int          $id
+	 *
+	 * @return void
+	 * @internal param int $current_page Menu item ID.
+	 */
+	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+		$indent = ($depth) ? str_repeat("\t", $depth) : '';
+
+		$slug          = sanitize_title($item->title);
+		$menu_name     = 'menu-' . $slug;
+		$li_attributes = '';
+
+		$classes = empty($item->classes) ? array() : (array)$item->classes;
+
+		// dropdown
+		if ($args->has_children) :
+			$classes[] = 'dropdown';
+			$li_attributes .= ' data-dropdown="dropdown"';
+		endif;
+
+		$classes = array_filter($classes, array(&$this, 'check_current'));
+
+		// custom classes
+		if ($custom_classes = get_post_meta($item->ID, '_menu_item_classes', true)) {
+			foreach ($custom_classes as $custom_class) {
+				$classes[] = $custom_class;
+			}
+		}
+
+		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
+			' class="' . $menu_name . '"'; // menu name in classes
+
+		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
+
+		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+		if ($args->has_children) : // dropdown
+			$attributes .= ' class="dropdown-toggle" data-toggle="dropdown"';
+		endif;
+
+		$item_output = $args->before;
+		$item_output .= '<a' . $attributes . '>';
+		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
+		if ($args->has_children) : // dropdown
+			$item_output .= ' <b class="caret"></b>';
+		endif;
+		$item_output .= '</a>';
+		$item_output .= $args->after;
+
+		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+	}
+
+}
+
+/**
+ * Cleaner Walker optimized for the Foundation Top-Bar
+ *
+ * @uses Waht_Bar_Walker_Nav_Menu
+ */
+class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
+	/**
+	 * Check if the classes contain info about current state
+	 *
+	 * @param $classes
+	 *
+	 * @return int
+	 */
+	function check_current($classes) {
+		// search for occurrences of "current", "active", "dropdown" or "has-dropdown"
+		return preg_match('/(current[-_])|active|dropdown|has-dropdown/', $classes);
+	}
+
+	/**
+	 * Starts the list before the elements are added. (list <ul>)
+	 *
+	 * @see /wp-includes/class-wp-walker.php
+	 * @see wp-includes/nav-menu-template.php
+	 *
+	 * @param string $output
+	 * @param int    $depth
+	 * @param array  $args
+	 */
+	function start_lvl(&$output, $depth = 0, $args = array()) {
+		$indent     = str_repeat("\t", $depth);
+		$menu_class = 'dropdown';
+		// set class to "flyout" instead of "sub-menu"
+		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
+	}
+
+	/**
+	 * Start the element output (list item <li>)
+	 *
+	 * @see      /wp-includes/class-wp-walker.php
+	 * @see      /wp-includes/nav-menu-template.php
+	 *
+	 * @param string       $output       Passed by reference. Used to append additional content.
+	 * @param object       $item         Menu item data object.
+	 * @param int          $depth        Depth of menu item. Used for padding.
+	 * @param array        $args         Arguments
+	 * @param int          $id
+	 *
+	 * @return void
+	 * @internal param int $current_page Menu item ID.
+	 */
+	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+		$indent = ($depth) ? str_repeat("\t", $depth) : '';
+
+		$slug          = sanitize_title($item->title);
+		$menu_name     = 'menu-' . $slug;
+		$li_attributes = '';
+
+		$classes = empty($item->classes) ? array() : (array)$item->classes;
+
+		// dropdown
+		if ($args->has_children) :
+			$classes[] = 'has-dropdown';
+		endif;
+
+		$classes = array_filter($classes, array(&$this, 'check_current'));
+
+		// custom classes
+		if ($custom_classes = get_post_meta($item->ID, '_menu_item_classes', true)) {
+			foreach ($custom_classes as $custom_class) {
+				$classes[] = $custom_class;
+			}
+		}
+
+		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
+			' class="' . $menu_name . '"'; // menu name in classes
+
+		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
+
+		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+		if ($args->has_children) : // dropdown
+			$attributes .= '';
+		endif;
+
+		$item_output = $args->before;
+		$item_output .= '<a' . $attributes . '>';
+		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
+		$item_output .= '</a>';
+		$item_output .= $args->after;
+
+		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+	}
+}
+
+/**
+ * Cleaner Walker optimized for the Foundation Nav-Bar
+ *
+ * @uses Waht_Bar_Walker_Nav_Menu
+ */
+class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
+	/**
+	 * Check if the classes contain info about current state
+	 *
+	 * @param $classes
+	 *
+	 * @return int
+	 */
+	function check_current($classes) {
+		// search for occurrences of "current", "active", "dropdown" or "has-flyout"
+		return preg_match('/(current[-_])|active|dropdown|has-flyout/', $classes);
+	}
+
+	/**
+	 * Starts the list before the elements are added. (list <ul>)
+	 *
+	 * @see /wp-includes/class-wp-walker.php
+	 * @see wp-includes/nav-menu-template.php
+	 *
+	 * @param string $output
+	 * @param int    $depth
+	 * @param array  $args
+	 */
+	function start_lvl(&$output, $depth = 0, $args = array()) {
+		$indent     = str_repeat("\t", $depth);
+		$menu_class = 'flyout';
+		// set class to "flyout" instead of "sub-menu"
+		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
+	}
+
+	/**
+	 * Start the element output (list item <li>)
+	 *
+	 * @see      /wp-includes/class-wp-walker.php
+	 * @see      /wp-includes/nav-menu-template.php
+	 *
+	 * @param string       $output       Passed by reference. Used to append additional content.
+	 * @param object       $item         Menu item data object.
+	 * @param int          $depth        Depth of menu item. Used for padding.
+	 * @param array        $args         Arguments
+	 * @param int          $id
+	 *
+	 * @return void
+	 * @internal param int $current_page Menu item ID.
+	 */
+	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
+		$indent = ($depth) ? str_repeat("\t", $depth) : '';
+
+		$slug          = sanitize_title($item->title);
+		$menu_name     = 'menu-' . $slug;
+		$li_attributes = '';
+
+		$classes = empty($item->classes) ? array() : (array)$item->classes;
+
+		// dropdown
+		if ($args->has_children) :
+			$classes[] = 'has-flyout';
+		endif;
+
+		$classes = array_filter($classes, array(&$this, 'check_current'));
+
+		// custom classes
+		if ($custom_classes = get_post_meta($item->ID, '_menu_item_classes', true)) {
+			foreach ($custom_classes as $custom_class) {
+				$classes[] = $custom_class;
+			}
+		}
+
+		$class_names = join(' ', apply_filters('nav_menu_css_class', array_filter($classes), $item, $args));
+		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
+			' class="' . $menu_name . '"'; // menu name in classes
+
+		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
+
+		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
+		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
+		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
+		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
+		if ($args->has_children) : // dropdown
+			$attributes .= '';
+		endif;
+
+		$item_output = $args->before;
+		$item_output .= '<a' . $attributes . '>';
+		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
+		if ($args->has_children) : // dropdown
+			$item_output .= '</a><a href="#" class="flyout-toggle"><span>&nbsp;</span>';
+		endif;
+		$item_output .= '</a>';
+		$item_output .= $args->after;
+
+		$output .= apply_filters('walker_nav_menu_start_el', $item_output, $item, $depth, $args);
+	}
 }
 
 /**
@@ -539,7 +794,7 @@ function waht_breadcrumb() {
 add_action('waht_loop_before', 'waht_breadcrumb');
 
 /**
- * Build custom navigation for pages inside posts
+ * Builds custom navigation for pages inside posts
  * See http://bavotasan.com/2012/a-better-wp_link_pages-for-wordpress/
  *
  * @param array $args
