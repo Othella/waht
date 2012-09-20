@@ -411,10 +411,12 @@ body.foundation {
 			&:not(.name):hover, &.active { background: darken(@waht_blue, 15%);
 				a { color: #fff; }
 			}
-			&.has-dropdown .dropdown { background: darken(@waht_blue, 15%);
-				li { background: darken(@waht_blue, 15%);
-					&:hover { background: darken(@waht_blue, 15%);
-						& > a { background: @waht_blue; }
+			&.has-dropdown {
+				.dropdown { background: darken(@waht_blue, 15%);
+					li { background: darken(@waht_blue, 15%);
+						&:hover { background: darken(@waht_blue, 15%);
+							& > a { background: @waht_blue; }
+						}
 					}
 				}
 			}
@@ -430,8 +432,8 @@ body.foundation {
 				font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 				color:       @waht_lbeige;
 			}
-			a { color: @waht_lbeige; }
 		}
+		&.fixed { z-index: 1030; }
 	}
 }
 /*  =============================================================================
@@ -505,6 +507,10 @@ body.foundation {
 
 	body.bootstrap.admin-bar .additional-navigation-fixed {
 		top: 68px; /* Equals admin + main navbar bar heights */
+	}
+
+	body.foundation.admin-bar .additional-navigation-fixed {
+		top: 73px; /* Equals admin + main navbar bar heights */
 	}
 
 	.subnav .nav > li:first-child > a,

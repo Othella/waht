@@ -111,7 +111,6 @@ function waht_main_nav_menu() {
 		));
 }
 
-
 /**
  * Additional Nav Menu
  */
@@ -132,7 +131,7 @@ function waht_additional_nav_menu() {
 
 	$menu_class = 'clearfix nav';
 	if (waht_use_bootstrap_framework()) $menu_class .= ' nav-pills';
-	if (waht_use_foundation_framework()) $menu_class .= ' nav-bar';
+	if (waht_use_foundation_framework()) $menu_class .= waht_use_navbar() ? ' nav-bar' : '';
 
 	wp_nav_menu(
 		array(
@@ -353,9 +352,8 @@ class Waht_Bootstrap_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
 		$indent     = str_repeat("\t", $depth);
-		$menu_class = 'dropdown-menu';
-		// set class to "dropdown-menu" or "flyout" instead of "sub-menu"
-		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
+		// set class to "dropdown-menu" instead of "sub-menu"
+		$output .= "\n" . $indent . "<ul class=\"dropdown-menu\">\n";
 	}
 
 	/**
@@ -439,8 +437,8 @@ class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 * @return int
 	 */
 	function check_current($classes) {
-		// search for occurrences of "current", "active", "dropdown" or "has-dropdown"
-		return preg_match('/(current[-_])|active|dropdown|has-dropdown/', $classes);
+		// search for occurrences of "current", "active" or "has-dropdown"
+		return preg_match('/(current[-_])|active|has-dropdown/', $classes);
 	}
 
 	/**
@@ -455,9 +453,8 @@ class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
 		$indent     = str_repeat("\t", $depth);
-		$menu_class = 'dropdown';
-		// set class to "flyout" instead of "sub-menu"
-		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
+		// set class to "dropdown" instead of "sub-menu"
+		$output .= "\n" . $indent . "<ul class=\"dropdown\">\n";
 	}
 
 	/**
@@ -480,7 +477,6 @@ class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 
 		$slug          = sanitize_title($item->title);
 		$menu_name     = 'menu-' . $slug;
-		$li_attributes = '';
 
 		$classes = empty($item->classes) ? array() : (array)$item->classes;
 
@@ -502,7 +498,7 @@ class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
 			' class="' . $menu_name . '"'; // menu name in classes
 
-		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
+		$output .= $indent . '<li' . $class_names . '>';
 
 		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
 		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
@@ -536,8 +532,8 @@ class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 * @return int
 	 */
 	function check_current($classes) {
-		// search for occurrences of "current", "active", "dropdown" or "has-flyout"
-		return preg_match('/(current[-_])|active|dropdown|has-flyout/', $classes);
+		// search for occurrences of "current", "active" or "has-flyout"
+		return preg_match('/(current[-_])|active|has-flyout/', $classes);
 	}
 
 	/**
@@ -552,9 +548,8 @@ class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
 		$indent     = str_repeat("\t", $depth);
-		$menu_class = 'flyout';
 		// set class to "flyout" instead of "sub-menu"
-		$output .= "\n" . $indent . "<ul class=\"$menu_class\">\n";
+		$output .= "\n" . $indent . "<ul class=\"flyout\">\n";
 	}
 
 	/**
@@ -577,7 +572,6 @@ class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 
 		$slug          = sanitize_title($item->title);
 		$menu_name     = 'menu-' . $slug;
-		$li_attributes = '';
 
 		$classes = empty($item->classes) ? array() : (array)$item->classes;
 
@@ -599,7 +593,7 @@ class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
 			' class="' . $menu_name . '"'; // menu name in classes
 
-		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
+		$output .= $indent . '<li' . $class_names . '>';
 
 		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
 		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';

@@ -79,6 +79,17 @@ function waht_layout_options_init() {
 			'description' => __('Use a top-fixed main navigation', 'waht')
 		)
 	);
+
+	add_settings_field(
+		'sticky_additional_nav',
+		__('Additional navigation', 'waht'),
+		'waht_toggle_sticky_additional_nav_callback',
+		'waht_display_options',
+		'layout_section',
+		array(
+			'description' => __('Use a sticking to top when scrolling additional navigation', 'waht')
+		)
+	);
 }
 
 /**
@@ -90,6 +101,8 @@ function waht_layout_options_section_callback() {
 
 /**
  * Renders the sidebar position select option field
+ *
+ * @param array $args (optional) Array of arguments
  */
 function waht_change_sidebar_position_callback($args) {
 	$waht_layout_options      = waht_get_layout_options();
@@ -128,6 +141,8 @@ function waht_sidebar_positions() {
 
 /**
  * Renders the fluid layout settings field
+ *
+ * @param array $args (optional) Array of arguments
  */
 function waht_toggle_fluid_callback($args) {
 	$waht_layout_options = waht_get_layout_options();
@@ -140,11 +155,11 @@ function waht_toggle_fluid_callback($args) {
 <script type="text/javascript">
     /**
      * Actualize values in inputs for classes depending on selected framework and fluidity behavior
-	 */
+     */
     function actualizeFluidClasses() {
         var $cb_fluid = jQuery('#waht_layout_options_fluid');
         var use_fluid = ($cb_fluid.length > 0) ? ($cb_fluid.attr('checked') == 'checked') : null;
-		if (use_fluid == null) return;
+        if (use_fluid == null) return;
         var $selected_framework = jQuery('#waht_framework_options_framework_name').val();
         var $container = jQuery('#waht_framework_options_container_classes');
         var $wrapper = jQuery('#waht_framework_options_wrapper_classes');
@@ -184,6 +199,8 @@ function waht_toggle_fluid_callback($args) {
 
 /**
  * Renders the use of navbar settings field
+ *
+ * @param array $args (optional) Array of arguments
  */
 function waht_toggle_navbar_callback($args) {
 	$waht_layout_options = waht_get_layout_options();
@@ -197,6 +214,8 @@ function waht_toggle_navbar_callback($args) {
 
 /**
  * Renders the use of a top-fixed navbar settings field
+ *
+ * @param array $args (optional) Array of arguments
  */
 function waht_toggle_top_fixed_nav_callback($args) {
 	$waht_layout_options = waht_get_layout_options();
@@ -209,7 +228,27 @@ function waht_toggle_top_fixed_nav_callback($args) {
 }
 
 /**
- * Sanitize and validate input. Accepts an array, return a sanitized array.
+ * Renders the use of a sticky to top when scrolling additional nav settings field
+ *
+ * @param array $args (optional) Array of arguments
+ */
+function waht_toggle_sticky_additional_nav_callback($args) {
+	$waht_layout_options = waht_get_layout_options();
+	?>
+<input type="checkbox" id="waht_layout_options[sticky_additional_nav]" name="waht_layout_options[sticky_additional_nav]"
+       value="1"<?php checked(true, $waht_layout_options['sticky_additional_nav']); ?> />
+<label for="waht_layout_options[sticky_additional_nav]"
+       class="description"><?php echo $args['description']; ?></label>
+<?php
+}
+
+
+/**
+ * Sanitize and validate input.
+ *
+ * @param array $input
+ *
+ * @return array Sanitized array
  */
 function waht_sanitize_layout_options($input) {
 	$output = $defaults = waht_get_default_layout_options();
@@ -232,6 +271,10 @@ function waht_sanitize_layout_options($input) {
 		if (!isset($input['top_fixed_nav'])) $input['top_fixed_nav'] = null;
 		$output['top_fixed_nav'] = ($input['top_fixed_nav'] == '1') ? true : false;
 
+		// The sticky nav option is either true or false
+		if (!isset($input['sticky_additional_nav'])) $input['sticky_additional_nav'] = null;
+		$output['sticky_additional_nav'] = ($input['sticky_additional_nav'] == '1') ? true : false;
+
 	endif;
 
 	return apply_filters('waht_sanitize_layout_options', $output, $input, $defaults);
@@ -244,10 +287,11 @@ function waht_sanitize_layout_options($input) {
  */
 function waht_get_default_layout_options() {
 	$default_layout_options = array(
-		'sidebar_position'    => 'right',
-		'fluid'               => true, // true = enabled, false = not enabled
-		'navbar'              => true, // true = enabled, false = not enabled
-		'top_fixed_nav'       => true // true = enabled, false = not enabled
+		'sidebar_position'      => 'right',
+		'fluid'                 => true, // true = enabled, false = not enabled
+		'navbar'                => true, // true = enabled, false = not enabled
+		'top_fixed_nav'         => true, // true = enabled, false = not enabled
+		'sticky_additional_nav' => true // true = enabled, false = not enabled
 	);
 	if (is_rtl())
 		$default_layout_options['sidebar_position'] = 'left';

@@ -10,8 +10,8 @@ jQuery(function ($) {
     var $win = $(window),
         $adminBar = $('#wpadminbar'),
         $navbarFixedTop = $('body.has-top-fixed-navbar nav.main-navigation'),
-        $subNav = $('nav.additional-navigation'),
-        navTop = $subNav.length && $subNav.offset().top - ($navbarFixedTop.height() + $adminBar.height()),
+        $stickyAdditionalNav = $('nav.additional-navigation.sticky'),
+        navTop = $stickyAdditionalNav.length && $stickyAdditionalNav.offset().top - ($navbarFixedTop.height() + $adminBar.height()),
         isFixed = false;
 
     /**
@@ -21,12 +21,12 @@ jQuery(function ($) {
         var scrollTop = $win.scrollTop();
         if ((scrollTop >= navTop) && !isFixed) {
             isFixed = true;
-            $subNav.addClass('additional-navigation-fixed');
-            $subNav.css('top', $navbarFixedTop.height() + $adminBar.height());
+            $stickyAdditionalNav.addClass('additional-navigation-fixed');
+            $stickyAdditionalNav.css('top', $navbarFixedTop.height() + $adminBar.height());
         } else if ((scrollTop < navTop) && isFixed) {
             isFixed = false;
-            $subNav.removeClass('additional-navigation-fixed');
-            $subNav.css('top', '0');
+            $stickyAdditionalNav.removeClass('additional-navigation-fixed');
+            $stickyAdditionalNav.css('top', '0');
         }
     }
 
@@ -42,7 +42,7 @@ jQuery(function ($) {
         $(document).foundationNavigation(); // Enables the navigation
         $(document).foundationTabs(); // Enables tabs
         $(document).foundationTooltips(); // Enables tooltips
-        $(document).foundationTopBar(); // Enables top bar
+        $(document).foundationTopBar(); // Enables top bar. TODO: Add a breakpoint for the responsive version: $(document).foundationTopBar( {breakPoint: [width]} );
     }
 
     $(document).ready(function () {

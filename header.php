@@ -82,7 +82,7 @@
 
         <div class="<?php echo waht_container_classes(); ?>">
             <!-- Second navigation -->
-            <nav role="navigation" class="additional-navigation <?php echo waht_use_foundation_framework() ? 'twelve columns' : 'span12'; ?>">
+            <nav role="navigation" class="additional-navigation<?php if (waht_use_sticky_additional_nav()) echo ' sticky'; ?><?php echo waht_use_foundation_framework() ? ' twelve columns' : ' span12'; ?>">
 				<?php waht_additional_nav_menu(); ?>
             </nav>
         </div>

@@ -233,13 +233,23 @@ function waht_use_navbar() {
 }
 
 /**
- * Returns true if the layout has use a top-fixed main navigation
+ * Returns true if the layout uses a top-fixed main navigation
  *
  * @return bool
  */
 function waht_use_top_fixed_nav() {
 	$waht_layout_options = waht_get_layout_options();
 	return $waht_layout_options['top_fixed_nav'];
+}
+
+/**
+ * Returns true if the layout uses a sticky additional nav
+ *
+ * @return bool
+ */
+function waht_use_sticky_additional_nav() {
+	$waht_layout_options = waht_get_layout_options();
+	return $waht_layout_options['sticky_additional_nav'];
 }
 
 /**
