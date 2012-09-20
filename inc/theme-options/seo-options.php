@@ -12,7 +12,7 @@ function waht_seo_options_init() {
 
 	// If the options don't exist, create them.
 	if (false == get_option('waht_seo_options')) {
-		add_option('waht_seo_options');
+		add_option('waht_seo_options', waht_get_default_seo_options());
 	}
 
 	// Register the $waht_array for our options

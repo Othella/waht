@@ -12,7 +12,7 @@ function waht_framework_options_init() {
 
 	// If the options don't exist, create them.
 	if (false == get_option('waht_framework_options')) {
-		add_option('waht_framework_options');
+		add_option('waht_framework_options', waht_get_default_framework_options());
 	}
 
 	// Register the $waht_framework_options array for our options
@@ -50,7 +50,7 @@ function waht_framework_options_init() {
 		'waht_display_options',
 		'framework_section',
 		array(
-			'description' => __('Enter the class(es) your want to use for the global wrapper')
+			'description' => __('Enter the class(es) your want to use for the global wrapper', 'waht')
 		)
 	);
 
@@ -62,7 +62,7 @@ function waht_framework_options_init() {
 		'waht_display_options',
 		'framework_section',
 		array(
-			'description' => __('Enter the class(es) your want to use for the containers')
+			'description' => __('Enter the class(es) your want to use for the containers', 'waht')
 		)
 	);
 
@@ -74,7 +74,7 @@ function waht_framework_options_init() {
 		'waht_display_options',
 		'framework_section',
 		array(
-			'description' => __('Enter the class(es) your want to use for the main content section')
+			'description' => __('Enter the class(es) your want to use for the main content section', 'waht')
 		)
 	);
 
@@ -87,7 +87,7 @@ function waht_framework_options_init() {
 			'waht_display_options',
 			'framework_section',
 			array(
-				'description' => __('Enter the class(es) your want to use for the main sidebar')
+				'description' => __('Enter the class(es) your want to use for the main sidebar', 'waht')
 			)
 		);
 	endif;
@@ -100,7 +100,7 @@ function waht_framework_options_init() {
 		'waht_display_options',
 		'framework_section',
 		array(
-			'description' => __('Enter the class(es) your want to use for the footer sidebars')
+			'description' => __('Enter the class(es) your want to use for the footer sidebars', 'waht')
 		)
 	);
 }

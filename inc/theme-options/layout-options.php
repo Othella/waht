@@ -12,7 +12,7 @@ function waht_layout_options_init() {
 
 	// If the options don't exist, create them.
 	if (false == get_option('waht_layout_options')) {
-		add_option('waht_layout_options');
+		add_option('waht_layout_options', waht_get_default_layout_options());
 	}
 
 	// Register the $waht_layout_options array for our options

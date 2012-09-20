@@ -82,7 +82,7 @@ function waht_theme_options_menu() {
 	);
 	if (!$theme_page) return;
 	add_action("load-$theme_page", 'waht_theme_options_help');
-
+/*
 	add_menu_page(
 		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The value used to populate the browser's title bar when the menu page is active
 		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The text of the menu in the administrator's sidebar
@@ -92,7 +92,6 @@ function waht_theme_options_menu() {
 		waht_get_assets_uri() . '/img/logo-icon.png', // The url to the icon to be used for this menu
 		61//The position in the menu order this one should appear
 	);
-
 	$options_pages = waht_theme_options_pages();
 	foreach ($options_pages as $options_page) :
 		add_submenu_page(
@@ -105,6 +104,7 @@ function waht_theme_options_menu() {
 				'");') // The callback function used to render the options for this submenu item
 		);
 	endforeach;
+	*/
 
 }
 
@@ -115,8 +115,7 @@ add_action('admin_menu', 'waht_theme_options_menu');
  */
 function waht_theme_options_display($active_tab = '') {
 	$options_pages = waht_theme_options_pages();
-	if ($active_tab == '') $active_tab = reset($options_pages)['tab_name']; // If no active tab was given, then it to the first tab available
-	?>
+	if ($active_tab == '') $active_tab = 'display'; // If no active tab was given, then set it to 'display' ?>
 <div class="wrap"><?php // Create a header in the default WordPress 'wrap' container ?>
 
     <div id="icon-themes" class="icon32"></div><?php // Displays screen icon ?>

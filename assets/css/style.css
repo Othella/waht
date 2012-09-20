@@ -12,6 +12,7 @@ body.none{}
 body.fluid-layout{}
 body.fixed-layout{}
 body.has-top-fixed-navbar{}
+.sticky{}
 .aligncenter{clear:both;display:block;margin-left:auto;margin-right:auto;}
 .alignleft{display:inline;float:left;}
 .alignright{display:inline;float:right;}
@@ -30,6 +31,7 @@ ol.commentlist li.comment ul.children li.depth-4{border-left:5px solid #bbb;marg
 ol.commentlist li.even{background:#fff;}
 ol.commentlist li.odd{background:#f6f6f6;}
 ol.commentlist li.parent{border-left:5px solid #111;}
+.bypostauthor{}
 @media only screen and (min-device-width:320px) and (max-device-width:480px){}@media only screen and (min-width:321px){}@media only screen and (max-width:320px){}@media only screen and (min-device-width:768px) and (max-device-width:1024px){}@media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:landscape){}@media only screen and (min-device-width:768px) and (max-device-width:1024px) and (orientation:portrait){}@media only screen and (min-width:1224px){}@media only screen and (min-width:1824px){}@media only screen and (-webkit-min-device-pixel-ratio:1.5),only screen and (min-device-pixel-ratio:1.5){}@media (max-width:979px){body.bootstrap.has-top-fixed-navbar{padding-top:0;}}body{font-weight:200;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;}body.tag .page-title span:before,body.search .page-title span:before{content:"«";}
 body.tag .page-title span:after,body.search .page-title span:after{content:"»";}
 a{font-weight:400;color:#007aa0;}a:hover{color:#e56045;}
