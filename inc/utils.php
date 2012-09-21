@@ -139,11 +139,11 @@ function waht_wp_base_dir() {
 }
 
 /**
- * Return the current theme path
+ * Return the current theme relative path
  *
  * @return string
  */
-function waht_get_theme_path() {
+function waht_get_relative_theme_path() {
 	return waht_get_relative_content_path() . '/themes/' . waht_get_theme_name();
 }
 
@@ -178,7 +178,7 @@ function waht_get_assets_uri() {
  * @return string
  */
 function waht_get_assets_path() {
-	return waht_get_theme_path() . '/assets';
+	return waht_get_relative_theme_path() . '/assets';
 }
 
 /**

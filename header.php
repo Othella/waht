@@ -15,7 +15,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" <?php language_attributes(); ?>> <!--<![endif]-->
 <head>
     <meta charset="<?php bloginfo('charset'); ?>">
-    <link rel="shortcut icon" href="<?php get_template_directory_uri(); ?>/favicon.ico">
+    <link rel="shortcut icon" href="<?php echo waht_get_assets_uri(); ?>/img/favicon.ico">
 
     <title><?php waht_dynamic_title(); ?></title>
     <!-- TODO (a.h) Add SEO friendy meta tags (description, keywords, etc -->

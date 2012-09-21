@@ -151,7 +151,7 @@ if (current_theme_supports('rewrite-urls')) :
 			'js/(.*)'             => waht_get_assets_path() . '/js/$1',
 			'img/(.*)'            => waht_get_assets_path() . '/img/$1',
 			'fonts/(.*)'          => waht_get_assets_path() . '/fonts/$1',
-			'frameworks/(.*)'     => waht_get_theme_path() . '/frameworks/$1',
+			'frameworks/(.*)'     => waht_get_relative_theme_path() . '/frameworks/$1',
 			'plugins/(.*)'        => waht_get_relative_plugin_path() . '/$1'
 		);
 		$wp_rewrite->non_wp_rules = array_merge($wp_rewrite->non_wp_rules, $waht_non_wp_rules);
@@ -172,7 +172,7 @@ if (current_theme_supports('rewrite-urls')) :
 		if (strpos($content, waht_get_full_relative_plugin_path()) === 0) :
 			return str_replace(waht_get_full_relative_plugin_path(), waht_wp_base_dir() . '/plugins', $content);
 		else :
-			return str_replace('/' . waht_get_theme_path(), '', $content);
+			return str_replace('/' . waht_get_relative_theme_path(), '', $content);
 		endif;
 	}
 

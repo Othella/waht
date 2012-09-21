@@ -16,7 +16,7 @@ if (waht_has_main_sidebar()) : // Only display if sidebar is allowed
 	<?php dynamic_sidebar('sidebar-main'); ?>
 	<?php else : ?>
     <p class="help">
-		<?php _e('Activate some widgets!', 'waht'); ?>
+		<?php _e('Activate some widgets in the Main Sidebar!', 'waht'); ?>
     </p>
 	<?php endif; ?>
 	<?php waht_sidebar_inside_after(); ?>
