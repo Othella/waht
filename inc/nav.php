@@ -33,21 +33,23 @@ function waht_top_navbar() {
     <nav role="navigation" class="main-navigation <?php if (waht_use_top_fixed_nav()) echo ' navbar-fixed-top';?>">
         <div class="navbar">
             <div class="navbar-inner">
-                <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
-                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </a>
-                <a class="brand" href="<?php echo home_url(); ?>/">
-					<?php bloginfo('name'); ?>
-                </a>
+                <div class="<?php echo waht_wrapper_classes(); ?>">
+                    <!-- .btn-navbar is used as the toggle for collapsed navbar content -->
+                    <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </a>
+                    <a class="brand" href="<?php echo home_url(); ?>/">
+						<?php bloginfo('name'); ?>
+                    </a>
 
-                <!-- Everything you want hidden at 940px or less, place within here -->
-                <nav id="nav-main" class="nav-collapse" role="navigation">
-					<?php waht_main_nav_menu(); ?>
-                    <!-- .nav, .navbar-search, .navbar-form, etc -->
-                </nav>
+                    <!-- Everything you want hidden at 940px or less, place within here -->
+                    <nav id="nav-main" class="nav-collapse" role="navigation">
+						<?php waht_main_nav_menu(); ?>
+                        <!-- .nav, .navbar-search, .navbar-form, etc -->
+                    </nav>
+                </div>
             </div>
         </div>
     </nav>
@@ -57,13 +59,13 @@ function waht_top_navbar() {
             <li class="name">
                 <h1><a href="#">
                     <!-- TODO: Include a small logo if you'd like -->
-					<img src="<?php echo waht_get_assets_uri() . '/img/logo-icon.png'; ?>"/>
+                    <img src="<?php echo waht_get_assets_uri() . '/img/logo-icon.png'; ?>"/>
 					<?php bloginfo('name'); ?>
-				</a></h1>
+                </a></h1>
             </li>
             <li class="toggle-topbar">
-				<a href="#"></a>
-			</li>
+                <a href="#"></a>
+            </li>
         </ul>
         <section>
 			<?php waht_main_nav_menu(); ?>
@@ -99,6 +101,8 @@ function waht_main_nav_menu() {
 	$menu_class = 'clearfix nav';
 	if (waht_use_foundation_framework()) $menu_class .= ' left'; // TODO Set it to 'left' or 'right' depending on where the menu has to be placed, but don't remove this (it would break the responsive behavior)
 
+	$menu_depth = (waht_use_bootstrap_framework()) ? 2 : 0; // because the Twitter Bootstrap navbar only displays with 1 dropdown level
+
 	wp_nav_menu(
 		array(
 			'container'       => false, // remove nav container
@@ -111,7 +115,7 @@ function waht_main_nav_menu() {
 			'after'           => '', // after the menu
 			'link_before'     => '', // before each link
 			'link_after'      => '', // after each link
-			'depth'           => 0, // limit the depth of the nav
+			'depth'           => $menu_depth, // limit the depth of the nav
 			'fallback_cb'     => 'waht_main_nav_menu_fallback' // fallback function
 		));
 }
@@ -357,9 +361,9 @@ class Waht_Bootstrap_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 * @param array  $args
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
-		$indent     = str_repeat("\t", $depth);
+		$indent = str_repeat("\t", $depth);
 		// set class to "dropdown-menu" instead of "sub-menu"
-		$output .= "\n" . $indent . "<ul class=\"dropdown-menu\">\n";
+		$output .= "\n" . $indent . "<ul class=\"dropdown-menu\" role=\"menu\">\n";
 	}
 
 	/**
@@ -380,16 +384,14 @@ class Waht_Bootstrap_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
 		$indent = ($depth) ? str_repeat("\t", $depth) : '';
 
-		$slug          = sanitize_title($item->title);
-		$menu_name     = 'menu-' . $slug;
-		$li_attributes = '';
+		$slug      = sanitize_title($item->title);
+		$menu_name = 'menu-' . $slug;
 
 		$classes = empty($item->classes) ? array() : (array)$item->classes;
 
 		// dropdown
 		if ($args->has_children) :
 			$classes[] = 'dropdown';
-			$li_attributes .= ' data-dropdown="dropdown"';
 		endif;
 
 		$classes = array_filter($classes, array(&$this, 'check_current'));
@@ -405,20 +407,20 @@ class Waht_Bootstrap_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 		$class_names = $class_names ? ' class="' . $menu_name . ' ' . esc_attr($class_names) . '"' :
 			' class="' . $menu_name . '"'; // menu name in classes
 
-		$output .= $indent . '<li' . $class_names . $li_attributes . '>';
+		$output .= $indent . '<li' . $class_names . '>';
 
 		$attributes = !empty($item->attr_title) ? ' title="' . esc_attr($item->attr_title) . '"' : '';
 		$attributes .= !empty($item->target) ? ' target="' . esc_attr($item->target) . '"' : '';
 		$attributes .= !empty($item->xfn) ? ' rel="' . esc_attr($item->xfn) . '"' : '';
 		$attributes .= !empty($item->url) ? ' href="' . esc_attr($item->url) . '"' : '';
-		if ($args->has_children) : // dropdown
+		if ($args->has_children && $depth < 1) : // dropdown
 			$attributes .= ' class="dropdown-toggle" data-toggle="dropdown"';
 		endif;
 
 		$item_output = $args->before;
 		$item_output .= '<a' . $attributes . '>';
 		$item_output .= $args->link_before . apply_filters('the_title', $item->title, $item->ID) . $args->link_after;
-		if ($args->has_children) : // dropdown
+		if ($args->has_children && $depth < 1) : // dropdown for top level
 			$item_output .= ' <b class="caret"></b>';
 		endif;
 		$item_output .= '</a>';
@@ -458,7 +460,7 @@ class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 * @param array  $args
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
-		$indent     = str_repeat("\t", $depth);
+		$indent = str_repeat("\t", $depth);
 		// set class to "dropdown" instead of "sub-menu"
 		$output .= "\n" . $indent . "<ul class=\"dropdown\">\n";
 	}
@@ -481,8 +483,8 @@ class Waht_Foundation_TopBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
 		$indent = ($depth) ? str_repeat("\t", $depth) : '';
 
-		$slug          = sanitize_title($item->title);
-		$menu_name     = 'menu-' . $slug;
+		$slug      = sanitize_title($item->title);
+		$menu_name = 'menu-' . $slug;
 
 		$classes = empty($item->classes) ? array() : (array)$item->classes;
 
@@ -553,7 +555,7 @@ class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	 * @param array  $args
 	 */
 	function start_lvl(&$output, $depth = 0, $args = array()) {
-		$indent     = str_repeat("\t", $depth);
+		$indent = str_repeat("\t", $depth);
 		// set class to "flyout" instead of "sub-menu"
 		$output .= "\n" . $indent . "<ul class=\"flyout\">\n";
 	}
@@ -576,8 +578,8 @@ class Waht_Foundation_NavBar_Walker_Nav_Menu extends Waht_Bar_Walker_Nav_Menu {
 	function start_el(&$output, $item, $depth = 0, $args = array(), $id = 0) {
 		$indent = ($depth) ? str_repeat("\t", $depth) : '';
 
-		$slug          = sanitize_title($item->title);
-		$menu_name     = 'menu-' . $slug;
+		$slug      = sanitize_title($item->title);
+		$menu_name = 'menu-' . $slug;
 
 		$classes = empty($item->classes) ? array() : (array)$item->classes;
 
