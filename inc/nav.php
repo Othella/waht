@@ -55,7 +55,11 @@ function waht_top_navbar() {
     <nav role="navigation" class="main-navigation top-bar<?php if (waht_use_top_fixed_nav()) echo ' fixed'; ?>">
         <ul>
             <li class="name">
-                <h1><a href="#"><?php bloginfo('name'); ?></a></h1>
+                <h1><a href="#">
+                    <!-- TODO: Include a small logo if you'd like -->
+					<img src="<?php echo waht_get_assets_uri() . '/img/logo-icon.png'; ?>"/>
+					<?php bloginfo('name'); ?>
+				</a></h1>
             </li>
             <li class="toggle-topbar">
 				<a href="#"></a>
@@ -93,6 +97,7 @@ function waht_main_nav_menu() {
 	endif;
 
 	$menu_class = 'clearfix nav';
+	if (waht_use_foundation_framework()) $menu_class .= ' left'; // TODO Set it to 'left' or 'right' depending on where the menu has to be placed, but don't remove this (it would break the responsive behavior)
 
 	wp_nav_menu(
 		array(
@@ -130,6 +135,7 @@ function waht_additional_nav_menu() {
 	endif;
 
 	$menu_class = 'clearfix nav';
+	if (waht_use_sticky_additional_nav()) $menu_class .= ' sticky';
 	if (waht_use_bootstrap_framework()) $menu_class .= ' nav-pills';
 	if (waht_use_foundation_framework()) $menu_class .= waht_use_navbar() ? ' nav-bar' : '';
 

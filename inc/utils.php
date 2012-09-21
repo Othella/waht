@@ -124,6 +124,21 @@ function waht_get_theme_name() {
 }
 
 /**
+ * Returns the WordPress subdirectory
+ *
+ * @return string
+ */
+function waht_wp_base_dir() {
+	preg_match('!(https?://[^/|"]+)([^"]+)?!', site_url(), $matches);
+	if (count($matches) === 3) {
+		return end($matches);
+	}
+	else {
+		return '';
+	}
+}
+
+/**
  * Return the current theme path
  *
  * @return string
@@ -238,12 +253,14 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 					if ($category->parent)
 						$thelist .= get_category_parents($category->parent, true, $separator);
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class .
+						'">' .
 						$category->name . '</span></a></li>';
 					break;
 				case 'single':
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">';
+						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class .
+						'">';
 					if ($category->parent)
 						$thelist .= get_category_parents($category->parent, false, $separator);
 					$thelist .= $category->name . '</span></a></li>';
@@ -251,7 +268,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 				case '':
 				default:
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class .
+						'">' .
 						$category->name . '</span></a></li>';
 			}
 		}
@@ -267,12 +285,14 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 					if ($category->parent)
 						$thelist .= get_category_parents($category->parent, true, $separator);
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class .
+						'">' .
 						$category->name . '</span></a>';
 					break;
 				case 'single':
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">';
+						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class .
+						'">';
 					if ($category->parent)
 						$thelist .= get_category_parents($category->parent, false, $separator);
 					$thelist .= "$category->name</span></a>";
@@ -280,7 +300,8 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 				case '':
 				default:
 					$thelist .= '<a href="' . esc_url(get_category_link($category->term_id)) . '" title="' .
-						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class . '">' .
+						esc_attr(sprintf(__("View all posts in %s", 'waht'), $category->name)) . '" ' . $rel . '><span class="' . $label_class .
+						'">' .
 						$category->name . '</span></a>';
 			}
 			++$i;
@@ -288,3 +309,4 @@ function waht_get_the_category_list($label_class = '', $separator = '', $parents
 	}
 	return apply_filters('the_category', $thelist, $separator, $parents);
 }
+

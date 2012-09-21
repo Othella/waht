@@ -39,6 +39,9 @@ jQuery(function ($) {
         }
         $(document).foundationAccordion(); // Enables accordions
         $(document).foundationAlerts(); // Enables alert boxes
+        $(document).foundationButtons(); // Enables dropdown buttons
+        $(document).foundationCustomForms(); // Enables custom form elements
+        $(document).foundationMediaQueryViewer(); // Adds the ability to show which media query you are currently viewing
         $(document).foundationNavigation(); // Enables the navigation
         $(document).foundationTabs(); // Enables tabs
         $(document).foundationTooltips(); // Enables tooltips

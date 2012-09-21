@@ -73,7 +73,7 @@ if (version_compare($wp_version, '3.0', '>='))
 
 if (WAHT_APPLE_ICONS) :
 	$waht_responsive_options = waht_get_responsive_options();
-	$waht_apple_icons_path = $waht_responsive_options['apple_icons_path'];
+	$waht_apple_icons_path   = $waht_responsive_options['apple_icons_path'];
 	add_theme_support('apple-touch-icons', array(
 		'default'     => $waht_apple_icons_path . 'apple-touch-icon.png',
 		'precomposed' => $waht_apple_icons_path . 'apple-touch-icon-precomposed.png',
@@ -170,7 +170,7 @@ if (current_theme_supports('rewrite-urls')) :
 	 */
 	function waht_clean_urls($content) {
 		if (strpos($content, waht_get_full_relative_plugin_path()) === 0) :
-			return str_replace(waht_get_full_relative_plugin_path(), WP_BASE . '/plugins', $content);
+			return str_replace(waht_get_full_relative_plugin_path(), waht_wp_base_dir() . '/plugins', $content);
 		else :
 			return str_replace('/' . waht_get_theme_path(), '', $content);
 		endif;
@@ -187,6 +187,22 @@ if (current_theme_supports('rewrite-urls')) :
 		);
 		waht_add_filters($urls, 'waht_clean_urls');
 	}
+endif;
+
+if (current_theme_supports('html5-boilerplate-htaccess') || current_theme_supports('rewrite-urls')) :
+
+	// Show an admin notice if .htaccess isn't writable
+	function waht_htaccess_writable() {
+		if (!is_writable(get_home_path() . '.htaccess')) {
+			if (current_user_can('administrator')) {
+				add_action('admin_notices', create_function('', "echo '<div class=\"error\"><p>" .
+					sprintf(__('Please make sure your <a href="%s">.htaccess</a> file is writable ', 'waht'), admin_url('options-permalink.php')) .
+					"</p></div>';"));
+			}
+		}
+	}
+
+	add_action('admin_init', 'waht_htaccess_writable');
 endif;
 
 // TODO (a.h) Code Theme support for relative URLs

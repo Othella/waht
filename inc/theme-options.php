@@ -82,7 +82,9 @@ function waht_theme_options_menu() {
 	);
 	if (!$theme_page) return;
 	add_action("load-$theme_page", 'waht_theme_options_help');
+
 /*
+	 // TODO Enable this if you want a separate admin menu
 	add_menu_page(
 		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The value used to populate the browser's title bar when the menu page is active
 		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The text of the menu in the administrator's sidebar

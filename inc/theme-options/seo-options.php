@@ -57,7 +57,7 @@ function waht_seo_options_section_callback() {
 function waht_change_google_analytics_id_callback($args) {
 	$waht_seo_options = waht_get_seo_options(); ?>
 <input type="text" name="waht_seo_options[google_analytics_id]" id="waht_seo_options[google_analytics_id]"
-       value="<?php echo sanitize_text_field($waht_seo_options['google_analytics_id']); ?>" placeholder="UA-XXX-Y">
+       value="<?php echo $waht_seo_options['google_analytics_id']; ?>" placeholder="UA-XXX-Y">
 <label for="waht_seo_options[google_analytics_id]" class="description"><?php echo $args['description'] ?></label>
 <?php
 }
@@ -68,9 +68,11 @@ function waht_change_google_analytics_id_callback($args) {
 function waht_sanitize_seo_options($input) {
 	$output = $defaults = waht_get_default_seo_options();
 
-	// TODO (a.h) The Google Analytics ID must be valid (begins wuth "UA-"
-	if (isset($input['google_analytics_id']))// && strpos($input['google_analytics_id'], 'UA-') == 0)
-		$output['google_analytics_id'] = $input['google_analytics_id'];
+	if (!isset($_GET['reset'])) :
+		// TODO (a.h) The Google Analytics ID must be valid (begins wuth "UA-")
+		if (isset($input['google_analytics_id'])) // && strpos($input['google_analytics_id'], 'UA-') == 0)
+			$output['google_analytics_id'] = sanitize_text_field($input['google_analytics_id']);
+	endif;
 
 	return apply_filters('waht_sanitize_seo_options', $output, $input, $defaults);
 }
