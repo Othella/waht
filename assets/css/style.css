@@ -79,6 +79,7 @@ img.size-full,img.size-large{width:auto;}
 .alignright{margin-left:1.625em;}
 .alignleft,.alignright,.aligncenter{margin-bottom:1.625em;}
 #page-footer{margin-top:1em;}#page-footer>.container{margin:1em auto;}
+body.bootstrap .navbar .dropdown a{text-shadow:none !important;}
 body.bootstrap .navbar-fixed-top>.navbar{padding-bottom:0;}
 body.bootstrap .brand{float:right;color:#efdfce;text-shadow:0 -1px 0 rgba(0, 0, 0, 0.25);}body.bootstrap .brand:hover{background:transparent;}
 body.foundation .top-bar{background:#007aa0;color:#efdfce;}body.foundation .top-bar ul>li:not(.name):hover,body.foundation .top-bar ul>li.active{background:#004054;}body.foundation .top-bar ul>li:not(.name):hover a,body.foundation .top-bar ul>li.active a{color:#fff;}
