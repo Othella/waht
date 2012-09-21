@@ -83,7 +83,7 @@ function waht_theme_options_menu() {
 	if (!$theme_page) return;
 	add_action("load-$theme_page", 'waht_theme_options_help');
 
-/*
+	/*
 	 // TODO Enable this if you want a separate admin menu
 	add_menu_page(
 		sprintf(__('%s Theme Options', 'waht'), waht_get_theme_name()), // The value used to populate the browser's title bar when the menu page is active
@@ -117,7 +117,8 @@ add_action('admin_menu', 'waht_theme_options_menu');
  */
 function waht_theme_options_display($active_tab = '') {
 	$options_pages = waht_theme_options_pages();
-	if ($active_tab == '') $active_tab = 'display'; // If no active tab was given, then set it to 'display' ?>
+	if ($active_tab == '') $active_tab = 'display'; // If no active tab was given, then set it to 'display'
+	?>
 <div class="wrap"><?php // Create a header in the default WordPress 'wrap' container ?>
 
     <div id="icon-themes" class="icon32"></div><?php // Displays screen icon ?>
@@ -193,3 +194,12 @@ function waht_admin_footer() {
 }
 
 add_filter('admin_footer_text', 'waht_admin_footer');
+
+/**
+ * Displays own favicon on admin pages
+ */
+function waht_admin_favicon() {
+	echo '<link rel="shortcut icon" href="' . waht_get_assets_uri() . '/img/favicon.ico">';
+}
+
+add_action('admin_head', 'waht_admin_favicon');
