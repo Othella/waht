@@ -10,40 +10,40 @@ global $user_identity, $comment_author, $comment_author_email, $comment_author_u
 $req = get_option('require_name_email');
 
 /**
- * Comments layout
+ * Template for a comment item
  */
 function waht_comments($comment, $args, $depth) {
-    $GLOBALS['comment'] = $comment; ?>
+	$GLOBALS['comment'] = $comment; ?>
 <li <?php comment_class(); ?>>
     <article id="comment-<?php comment_ID(); ?>">
         <header class="comment-author vcard">
-            <?php $avatar_size = ('0' != $comment->comment_parent) ? 32 : 48; ?>
-            <?php echo get_avatar($comment, $avatar_size); ?>
-            <?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
+			<?php $avatar_size = ('0' != $comment->comment_parent) ? 32 : 48; ?>
+			<?php echo get_avatar($comment, $avatar_size); ?>
+			<?php printf('<cite class="fn">%s</cite>', get_comment_author_link()); ?>
             <time pubdate datetime="<?php comment_date('c'); ?>"><a href="<?php comment_link($comment->comment_ID); ?>"
                                                                     title="<?php _e('Open comment', 'waht'); ?>"><?php printf('%1$s', get_comment_date(), get_comment_time()); ?></a>
             </time>
-            <?php edit_comment_link(__('Edit', 'waht'), '<span class="btn"><i class="icon-edit"></i> ', '</span>'); ?>
+			<?php edit_comment_link(__('Edit', 'waht'), '<span class="btn"><i class="icon-edit"></i> ', '</span>'); ?>
         </header>
 
-        <?php if ($comment->comment_approved == '0') : ?>
+		<?php if ($comment->comment_approved == '0') : ?>
         <div class="<?php echo waht_alert_classes(); ?>">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <span><?php _e('Your comment is awaiting moderation.', 'waht'); ?></span>
         </div>
-        <?php endif; ?>
+		<?php endif; ?>
 
         <section class="comment-content">
-            <?php comment_text(); ?>
+			<?php comment_text(); ?>
         </section>
 
         <footer>
-            <?php comment_reply_link(array_merge($args, array(
-            'before'     => '<span class="btn"><i class="icon-share-alt"></i> ',
-            'after'      => '</span>',
-            'reply_text' => __('Reply to ', 'waht') . get_comment_author(),
-            'depth'      => $depth,
-            'max_depth'  => $args['max_depth']))); ?>
+			<?php comment_reply_link(array_merge($args, array(
+			'before'     => '<span class="btn"><i class="icon-share-alt"></i> ',
+			'after'      => '</span>',
+			'reply_text' => __('Reply to ', 'waht') . get_comment_author(),
+			'depth'      => $depth,
+			'max_depth'  => $args['max_depth']))); ?>
         </footer>
     </article>
 </li>
@@ -65,8 +65,8 @@ function waht_comments($comment, $args, $depth) {
         <a href="#" class="close" data-dismiss="alert">&times;</a>
         <span><?php _e('Comments are closed', 'waht'); ?></span>
     </div>
-    <?php return; ?>
 </section>
+<?php return; ?>
 <?php endif; ?>
 
 <?php if (have_comments()) : ?>
@@ -82,10 +82,10 @@ function waht_comments($comment, $args, $depth) {
     </header>
     <section>
         <ol class="commentlist">
-            <?php wp_list_comments(array(
-            'reverse_top_level' => true,
-            'callback'          => 'waht_comments'
-        )); ?>
+			<?php wp_list_comments(array(
+			'reverse_top_level' => true,
+			'callback'          => 'waht_comments'
+		)); ?>
         </ol>
     </section>
     <footer>
@@ -99,14 +99,7 @@ function waht_comments($comment, $args, $depth) {
 <?php else : ?>
 <?php if (comments_open()) : ?>
     <p><?php _e('Be the first to leave a comment!', 'waht'); ?></p>
-    <?php else : ?>
-    <section id="post-comments">
-        <div class="<?php echo waht_alert_classes(); ?>">
-            <a href="#" class="close" data-dismiss="alert">&times;</a>
-            <span><?php _e('Comments are closed', 'waht'); ?></span>
-        </div>
-    </section>
-    <?php endif; ?>
+	<?php endif; ?>
 <?php endif; ?>
 
 <?php if (comments_open()) : ?>
@@ -115,29 +108,29 @@ function waht_comments($comment, $args, $depth) {
     <header>
         <h3><?php comment_form_title(__('Leave a comment', 'waht'), __('Reply to %s', 'waht')); ?></h3>
         <p class="cancel-comment-reply">
-            <?php cancel_comment_reply_link('<span class="btn">
+			<?php cancel_comment_reply_link('<span class="btn">
                 <i class="icon-remove"></i> ' . __('Cancel comment', 'waht') . '</span>'); ?>
 
         </p>
-        <?php if (get_option('comment_registration') && !is_user_logged_in()) : ?>
+		<?php if (get_option('comment_registration') && !is_user_logged_in()) : ?>
         <div class="<?php echo waht_alert_classes(); ?>">
             <a href="#" class="close" data-dismiss="alert">&times;</a>
             <span><?php printf(__('You must be %1$slogged in%2$s to post a comment.', 'waht'),
-                '<a href="' . wp_login_url(get_permalink()) . '">', '</a>'); ?></span>
+				'<a href="' . wp_login_url(get_permalink()) . '">', '</a>'); ?></span>
         </div>
-        <?php else : ?>
+		<?php else : ?>
         <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform"
               class="form-horizontal">
-            <?php if (is_user_logged_in()) : ?>
+			<?php if (is_user_logged_in()) : ?>
             <p class="comments-logged-in-as">
-                <?php _e('Logged in as', 'waht')?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"
+				<?php _e('Logged in as', 'waht')?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"
                                                       title="<?php _e('Go to profile', 'waht'); ?>"><?php echo $user_identity; ?></a>.
                 <span class="btn">
                     <i class="icon-off"></i> <a href="<?php echo wp_logout_url(get_permalink()); ?>"
                                                 title="<?php _e('Log out', 'waht'); ?>"><?php _e('Log out', 'waht'); ?></a>
                 </span>
             </p>
-            <?php else : ?>
+			<?php else : ?>
             <fieldset>
                 <div class="control-group">
                     <label class="control-label"
@@ -147,9 +140,9 @@ function waht_comments($comment, $args, $depth) {
                                value="<?php echo esc_attr($comment_author); ?>"
                                tabindex="1" <?php if ($req) echo 'aria-required="true"' ?>
                                placeholder="<?php _e('Eg.: John Doe', 'waht'); ?>">
-                        <?php if ($req) : ?>
+						<?php if ($req) : ?>
                         <p class="help-inline"><?php _e('(required)', 'waht'); ?></p>
-                        <?php endif; ?>
+						<?php endif; ?>
                     </div>
                 </div>
                 <div class="control-group">
@@ -160,9 +153,9 @@ function waht_comments($comment, $args, $depth) {
                                value="<?php echo esc_attr($comment_author_email); ?>"
                                tabindex="2" <?php if ($req) echo 'aria-required="true"' ?>
                                placeholder="<?php _e('Eg.: name@your-company.com', 'waht'); ?>">
-                        <?php if ($req) : ?>
+						<?php if ($req) : ?>
                         <p class="help-inline"><?php _e('(required)', 'waht'); ?></p>
-                        <?php endif; ?>
+						<?php endif; ?>
                         <p class="help-block"><?php _e('(Your email will not be published)', 'waht'); ?></p>
                     </div>
                 </div>
@@ -174,13 +167,13 @@ function waht_comments($comment, $args, $depth) {
                                value="<?php echo esc_attr($comment_author_url); ?>"
                                tabindex="3" <?php if ($req) echo 'aria-required="true"' ?>
                                placeholder="<?php _e('Eg. : http://www.my-company.com', 'waht'); ?>">
-                        <?php if ($req) : ?>
+						<?php if ($req) : ?>
                         <p class="help-inline"><?php _e('(required)', 'waht'); ?></p>
-                        <?php endif; ?>
+						<?php endif; ?>
                     </div>
                 </div>
             </fieldset>
-            <?php endif; ?>
+			<?php endif; ?>
             <div class="control-group">
                 <label class="control-label" for="comment"><?php _e('Comment', 'waht'); ?></label>
                 <div class="controls">
@@ -192,10 +185,10 @@ function waht_comments($comment, $args, $depth) {
                 <input type="submit" class="btn btn-primary" id="submit" tabindex="5"
                        value="<?php _e('Submit Comment', 'waht'); ?>">
             </div>
-            <?php comment_id_fields(); ?>
-            <?php do_action('comemnt_form', $post->ID); ?>
+			<?php comment_id_fields(); ?>
+			<?php do_action('comment_form', $post->ID); ?>
         </form>
-        <?php endif; ?>
+		<?php endif; ?>
     </header>
     <section>
 
