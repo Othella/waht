@@ -77,27 +77,37 @@ function waht_meta() {
 	$author     = '<p class="author vcard">' . __('Written by', 'waht') . ' <a href="' .
 		get_author_posts_url(get_the_author_meta('ID')) . '" rel="author" class="fn">' . get_the_author() . '</a></p>';
 	$categories = '<p class="categories">' . __('Posted in', 'waht') . ' ' . get_the_category_list(' | ') . '</p>';
-	echo $time . $author . $categories;
+	$tags = '<p class="tags">' . get_the_tag_list(__('Tagged as ', 'waht'), ', ') . '</p>';
+	echo $time . $author . $categories . $tags;
 }
 
 /**
- * Displays post meta info in a compact
+ * Displays post meta info in a single row
  *
  * @param $post_ID int The ID of the post
  */
 function waht_meta_compact($post_ID = null) {
 	$categories = waht_get_the_category_list('label label-info', ' ');
+	$tags       = get_the_tag_list(' | <i class="icon-tags"></i> ', ' ');
 	$edit_url   = get_edit_post_link($post_ID);
-	$meta       = '<p class="post-meta compact">';
+	echo '<p class="post-meta compact">';
 	echo '<time class="updated" datetime="' . get_the_date('c') . '" pubdate><i class="icon-calendar"></i> ' . get_the_date() . '</time>';
 	echo ' | <span class="author vcard"><i class="icon-user"></i> <a href="' .
 		get_author_posts_url(get_the_author_meta('ID')) . '" rel="author" class="fn">' . get_the_author() . '</a></span>';
-	echo ($categories != '') ? (' | ' . $categories) : '';
+	if ($tags != '') :
+		echo $tags;
+	endif;
+	if ($categories != '') :
+		echo ' | ' . $categories;
+	endif;
 	if (comments_open($post_ID) && !post_password_required($post_ID)) :
 		echo ' | <i class="icon-comment"></i> ';
 		comments_popup_link(__('No Comment', 'waht'), _x('1 Comment', 'comments number', 'waht'), _x('% Comments', 'comments number', 'waht'));
 	endif;
-	echo ($edit_url != '') ? (' | <i class="icon-pencil"></i> <a href="' . $edit_url . '">' . __('Edit', 'waht') . '</a>') : '';
+	if ($edit_url != '') :
+		echo ' | <i class="icon-pencil"></i> <a href="' . $edit_url . '">' . __('Edit', 'waht') . '</a>';
+	endif;
+	echo '</p>';
 }
 
 /**
