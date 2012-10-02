@@ -280,3 +280,81 @@ function waht_alert_classes($alert_level = '') {
 	endswitch;
 	return $alert_classes;
 }
+
+/**
+ * Returns classes of a button
+ *
+ * @param string $size  (Optional) Size of the button ('tiny', 'small', 'medium', 'large' or 'block')
+ * @param string $type  (Optional) Type (color) of a button ('primary', 'info', 'success', 'warning',
+ * 'danger', 'inverse', 'link' or 'secondary')
+ * @param string $style (Optional) Style of a button; square, slightly rounded, and completely rounded ('radius' or
+ * 'round')
+ *
+ * @return string
+ */
+function waht_button_classes($size = '', $type = '', $style = '') {
+	$button_classes = waht_use_bootstrap_framework() ? 'btn' : 'button';
+
+	switch ($size) :
+		case 'tiny':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-mini' : ' tiny';
+			break;
+		case 'small':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-small' : ' small';
+			break;
+		case 'medium':
+			$button_classes .= waht_use_bootstrap_framework() ? '' : ' medium';
+			break;
+		case 'large':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-large' : ' large';
+			break;
+		case 'block':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-block' : '';
+			break;
+		default :
+			break;
+	endswitch;
+
+	switch ($type) :
+		case 'primary':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-primary' : ' primary';
+			break;
+		case 'info':
+			$button_classes .= waht_use_bootstrap_framework() ? 'btn-info' : ' info';
+			break;
+		case 'success':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-success' : ' success';
+			break;
+		case 'warning':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-warning' : ' warning';
+			break;
+		case 'danger':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-danger' :
+				waht_use_foundation_framework()? ' alert' : ' danger';
+			break;
+		case 'inverse':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-inverse' : ' inverse';
+			break;
+		case 'link':
+			$button_classes .= waht_use_bootstrap_framework() ? ' btn-warning' : ' link';
+			break;
+		case 'secondary':
+			$button_classes .= waht_use_bootstrap_framework() ? '' : ' secondary';
+			break;
+		default :
+			break;
+	endswitch;
+
+	switch ($style) :
+		case 'radius':
+			$button_classes .= waht_use_foundation_framework() ? ' radius' : '';
+			break;
+		case 'round':
+			$button_classes .= waht_use_foundation_framework() ? ' round' : '';
+			break;
+		default :
+			break;
+	endswitch;
+
+	return $button_classes;
+}

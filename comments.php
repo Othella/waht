@@ -6,8 +6,15 @@
  * @author     : Amélie Husson (http://ameliehusson.com)
  * @uri        : https://github.com/Othella/waht
  */
-global $user_identity, $comment_author, $comment_author_email, $comment_author_url, $post;
-$req = get_option('require_name_email');
+global $post;
+
+$commenter     = wp_get_current_commenter();
+$user          = wp_get_current_user();
+$user_identity = $user->exists() ? $user->display_name : '';
+
+$req      = get_option('require_name_email');
+$aria_req = ($req ? ' aria-required="true"' : '');
+$help_req = ($req ? '<p class="help-inline">' . __('(required)', 'waht') . '</p>' : '');
 
 /**
  * Template for a comment item
@@ -39,7 +46,7 @@ function waht_comments($comment, $args, $depth) {
 
         <footer>
 			<?php comment_reply_link(array_merge($args, array(
-			'before'     => '<span class="btn"><i class="icon-share-alt"></i> ',
+			'before'     => '<span class="' . waht_button_classes('small') . '"><i class="icon-share-alt"></i> ',
 			'after'      => '</span>',
 			'reply_text' => __('Reply to ', 'waht') . get_comment_author(),
 			'depth'      => $depth,
@@ -104,6 +111,7 @@ function waht_comments($comment, $args, $depth) {
 
 <?php if (comments_open()) : ?>
 <?php waht_comment_form_before(); ?>
+<?php do_action('comment_form_before'); ?>
 <section id="respond" class="post-respond">
     <header>
         <h3><?php comment_form_title(__('Leave a comment', 'waht'), __('Reply to %s', 'waht')); ?></h3>
@@ -118,9 +126,11 @@ function waht_comments($comment, $args, $depth) {
             <span><?php printf(__('You must be %1$slogged in%2$s to post a comment.', 'waht'),
 				'<a href="' . wp_login_url(get_permalink()) . '">', '</a>'); ?></span>
         </div>
+		<?php do_action('comment_form_must_log_in_after'); ?>
 		<?php else : ?>
         <form action="<?php echo get_option('siteurl'); ?>/wp-comments-post.php" method="post" id="commentform"
               class="form-horizontal">
+			<?php do_action('comment_form_top'); ?>
 			<?php if (is_user_logged_in()) : ?>
             <p class="comments-logged-in-as">
 				<?php _e('Logged in as', 'waht')?> <a href="<?php echo get_option('siteurl'); ?>/wp-admin/profile.php"
@@ -130,19 +140,19 @@ function waht_comments($comment, $args, $depth) {
                                                 title="<?php _e('Log out', 'waht'); ?>"><?php _e('Log out', 'waht'); ?></a>
                 </span>
             </p>
+			<?php do_action('comment_form_logged_in_after', $commenter, $user_identity); ?>
 			<?php else : ?>
+			<?php do_action('comment_form_before_fields'); ?>
             <fieldset>
                 <div class="control-group">
                     <label class="control-label"
                            for="author"><?php _e('Name', 'waht'); ?></label>
                     <div class="controls">
                         <input type="text" class="text input-xlarge" name="author" id="author"
-                               value="<?php echo esc_attr($comment_author); ?>"
-                               tabindex="1" <?php if ($req) echo 'aria-required="true"' ?>
-                               placeholder="<?php _e('Eg.: John Doe', 'waht'); ?>">
-						<?php if ($req) : ?>
-                        <p class="help-inline"><?php _e('(required)', 'waht'); ?></p>
-						<?php endif; ?>
+                               value="<?php echo esc_attr($commenter['comment_author']); ?>"
+                               tabindex="1" <?php echo $aria_req; ?>
+                               placeholder="<?php _e('Eg .: John Doe', 'waht'); ?>">
+						<?php echo $help_req; ?>
                     </div>
                 </div>
                 <div class="control-group">
@@ -150,12 +160,10 @@ function waht_comments($comment, $args, $depth) {
                            for="email"><?php _e('Email', 'waht'); ?></label>
                     <div class="controls">
                         <input type="email" class="text input-xlarge" name="email" id="email"
-                               value="<?php echo esc_attr($comment_author_email); ?>"
-                               tabindex="2" <?php if ($req) echo 'aria-required="true"' ?>
-                               placeholder="<?php _e('Eg.: name@your-company.com', 'waht'); ?>">
-						<?php if ($req) : ?>
-                        <p class="help-inline"><?php _e('(required)', 'waht'); ?></p>
-						<?php endif; ?>
+                               value="<?php echo esc_attr($commenter['comment_author_email']); ?>"
+                               tabindex="2" <?php echo $aria_req; ?>
+                               placeholder="<?php _e('Eg .: name@your-company.com', 'waht'); ?>">
+						<?php echo $help_req; ?>
                         <p class="help-block"><?php _e('(Your email will not be published)', 'waht'); ?></p>
                     </div>
                 </div>
@@ -164,30 +172,34 @@ function waht_comments($comment, $args, $depth) {
                            for="url"><?php _e('Website', 'waht'); ?></label>
                     <div class="controls">
                         <input type="url" class="text input-xlarge" name="url" id="url"
-                               value="<?php echo esc_attr($comment_author_url); ?>"
-                               tabindex="3" <?php if ($req) echo 'aria-required="true"' ?>
-                               placeholder="<?php _e('Eg. : http://www.my-company.com', 'waht'); ?>">
-						<?php if ($req) : ?>
-                        <p class="help-inline"><?php _e('(required)', 'waht'); ?></p>
-						<?php endif; ?>
+                               value="<?php echo esc_attr($commenter['comment_author_url']); ?>"
+                               tabindex="3" <?php echo $aria_req; ?>
+                               placeholder="<?php _e('Eg . : http://www.my-company.com', 'waht'); ?>">
+						<?php echo $help_req; ?>
                     </div>
                 </div>
             </fieldset>
+			<?php do_action('comment_form_after_fields'); ?>
 			<?php endif; ?>
             <div class="control-group">
                 <label class="control-label" for="comment"><?php _e('Comment', 'waht'); ?></label>
                 <div class="controls">
                     <textarea name="comment" id="comment" class="input-xlarge" tabindex="4"
                               placeholder="<?php _e('Eg.: This post rocks!', 'waht'); ?>"></textarea>
+                    <p class="help-inline">
+						<?php echo sprintf(__('You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s'),
+						' <code>' . allowed_tags() . '</code>'); ?>
+                    </p>
                 </div>
             </div>
             <div class="form-actions">
-                <input type="submit" class="btn btn-primary" id="submit" tabindex="5"
-                       value="<?php _e('Submit Comment', 'waht'); ?>">
+                <input type="submit" class="<?php echo waht_button_classes('medium', 'primary'); ?>"
+                       id="submit" tabindex="5" value="<?php _e('Submit Comment', 'waht'); ?>">
             </div>
 			<?php comment_id_fields(); ?>
 			<?php do_action('comment_form', $post->ID); ?>
         </form>
+		<?php do_action('comment_form_after'); ?>
 		<?php endif; ?>
     </header>
     <section>
