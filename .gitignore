@@ -40,3 +40,4 @@ nbproject
 .CVS
 .idea
 node_modules
+.sass-cache
